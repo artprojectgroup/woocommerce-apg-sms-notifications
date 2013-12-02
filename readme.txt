@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: woocommerce, commerce, e-commerce, commerce, shipping, weight, zip, postcode, state, country, tax, shop, virtual shop
 Requires at least: 3.5
 Tested up to: 3.7.1
-Stable tag: 0.2
+Stable tag: 0.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,8 @@ Por último se debe indicar si queremos, o no, recibir notificaciones SMS por ca
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 0.3.1 =
+Arreglo de pequeño error en el código.
 = 0.3 =
 Añadido el envío de notas al cliente.
 = 0.2 =
@@ -72,6 +74,8 @@ Mejorado el código que comprueba el código internacional.
 Versión inicial.
 
 == Upgrade Notice ==
+= 0.3.1 =
+Arreglo de pequeño error en el código.
 = 0.3 =
 Añadido el envío de notas al cliente.
 = 0.2 =
