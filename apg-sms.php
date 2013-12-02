@@ -130,8 +130,6 @@ add_action('woocommerce_new_customer_note', 'apg_sms_procesa_notas', 10);
 
 //Envía el mensaje SMS
 function apg_sms_envia_sms($apg_sms_settings, $telefono, $mensaje, $mensaje_notificacion, $internacional, $estado, $nota = false) {
-	mail('info@artprojectgroup.com','SMS',$mensaje);
-	/*
 	if ($apg_sms_settings['servicio'] == "solutions_infini")
 	{
 		if (!$internacional || $apg_sms_settings['internacional']) curl("http://alerts.sinfini.com/api/web2sms.php?workingkey=" . $apg_sms_settings['clave_solutions_infini'] . "&to=" . $telefono . "&sender=" .$apg_sms_settings['identificador_solutions_infini'] . "&message=" . urlencode($mensaje));
@@ -154,7 +152,6 @@ function apg_sms_envia_sms($apg_sms_settings, $telefono, $mensaje, $mensaje_noti
 		if (!$internacional || $apg_sms_settings['internacional']) curl("https://api.clockworksms.com/http/send.aspx?key=" .$apg_sms_settings['identificador_clockwork'] . "&to=" . $telefono . "&content=" . urlencode($mensaje));
 		if ($apg_sms_settings['notificacion'] && $estado == 'on-hold' && !$nota) curl("https://api.clockworksms.com/http/send.aspx?key=" .$apg_sms_settings['identificador_clockwork'] . "&to=" . $apg_sms_settings['telefono'] . "&content=" . urlencode($mensaje_notificacion));
 	}
-	*/
 }
 
 //Lee páginas externas al sitio web
