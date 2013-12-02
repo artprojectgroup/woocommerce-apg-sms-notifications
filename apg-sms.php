@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 0.1
+Version: 0.3
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -75,8 +75,8 @@ function apg_sms_registra_opciones() {
 }
 add_action('admin_init', 'apg_sms_registra_opciones');
 
-//Envía el SMS
-function apg_sms_envia_sms($pedido) {
+//Procesa el SMS
+function apg_sms_procesa_estados($pedido) {
 	global $woocommerce;
 
 	$pedido = new WC_Order($pedido);
@@ -86,52 +86,76 @@ function apg_sms_envia_sms($pedido) {
 	
 	$telefono = $pedido->billing_phone;
 	
-	//Prefijo de país
 	$internacional = false;
-	if ($woocommerce->countries->get_base_country() != $pedido->billing_country)
-	{
-		$prefijo = dame_prefijo_pais($pedido->billing_country);
-		$telefono = $prefijo['dial_code'] . $telefono;
-		$internacional = true;
-	}
+	$telefono = apg_sms_procesa_el_telefono($pedido, $pedido->billing_phone);
+	if ($telefono != $pedido->billing_phone) $internacional = true;
 	
-	$mensaje = __(sprintf('Thank you for shopphing with us. Your order No. %s is now: ', $pedido->id), 'apg_sms') . $estado;
-	$mensaje_notificacion = __(sprintf("There's a new order No. %s on ", $pedido->id), 'apg_sms') . get_bloginfo('name');
+	$mensaje = sprintf(__('Thank you for shopphing with us. Your order No. %s is now: ', 'apg_sms'), $pedido->id) . $estado;
+	$mensaje_notificacion = sprintf(__("There's a new order No. %s on ", 'apg_sms'), $pedido->id) . get_bloginfo('name');
+
+	apg_sms_envia_sms($apg_sms_settings, $telefono, $mensaje, $mensaje_notificacion, $internacional, $estado);
+}
+add_action('woocommerce_order_status_completed', 'apg_sms_procesa_estados', 10);//Funciona cuando el pedido es marcado como completo
+add_action('woocommerce_order_status_processing', 'apg_sms_procesa_estados', 10);//Funciona cuando el pedido es marcado como procesando
+add_action('woocommerce_order_status_pending', 'apg_sms_procesa_estados', 10);//Funciona cuando el pedido es marcado como pendiente
+add_action('woocommerce_order_status_cancelled', 'apg_sms_procesa_estados', 10);//Funciona cuando el pedido es marcado como cancelado
+add_action('woocommerce_order_status_failed', 'apg_sms_procesa_estados', 10);//Funciona cuando el pedido es marcado como fallo
+add_action('woocommerce_order_status_refunded', 'apg_sms_procesa_estados', 10);//Funciona cuando el pedido es marcado como devuelto
+
+//Controlan los cambios de los pedidos
+add_action('woocommerce_order_status_pending_to_processing_notification', 'apg_sms_procesa_estados', 10);
+add_action('woocommerce_order_status_pending_to_on-hold_notification', 'apg_sms_procesa_estados', 10);
+add_action('woocommerce_order_status_pending_to_completed_notification', 'apg_sms_procesa_estados', 10);
+
+//Envía las notas de cliente por SMS
+function apg_sms_procesa_notas($datos) {
+	global $woocommerce;
 	
+	$apg_sms_settings = get_option('apg_sms_settings');
+	
+	$pedido = new WC_Order($datos['order_id']);
+	
+	$internacional = false;
+	$telefono = apg_sms_procesa_el_telefono($pedido, $pedido->billing_phone);
+	if ($telefono != $pedido->billing_phone) $internacional = true;
+
+	$estado = $pedido->status;
+	
+	$mensaje = sprintf(__('A note has just been added to your order No. %s: ', 'apg_sms'), $pedido->id) . wptexturize($datos['customer_note']);
+	$mensaje_notificacion = '';
+	
+	apg_sms_envia_sms($apg_sms_settings, $telefono, $mensaje, $mensaje_notificacion, $internacional, $estado, true);
+}
+add_action('woocommerce_new_customer_note', 'apg_sms_procesa_notas', 10);
+
+//Envía el mensaje SMS
+function apg_sms_envia_sms($apg_sms_settings, $telefono, $mensaje, $mensaje_notificacion, $internacional, $estado, $nota = false) {
+	mail('info@artprojectgroup.com','SMS',$mensaje);
+	/*
 	if ($apg_sms_settings['servicio'] == "solutions_infini")
 	{
 		if (!$internacional || $apg_sms_settings['internacional']) curl("http://alerts.sinfini.com/api/web2sms.php?workingkey=" . $apg_sms_settings['clave_solutions_infini'] . "&to=" . $telefono . "&sender=" .$apg_sms_settings['identificador_solutions_infini'] . "&message=" . urlencode($mensaje));
-		if ($apg_sms_settings['notificacion'] && $estado == 'on-hold') curl("http://alerts.sinfini.com/api/web2sms.php?workingkey=" . $apg_sms_settings['clave_solutions_infini'] . "&to=" . $apg_sms_settings['telefono'] . "&sender=" .$apg_sms_settings['identificador_solutions_infini'] . "&message=" . urlencode($mensaje_notificacion));
+		if ($apg_sms_settings['notificacion'] && $estado == 'on-hold' && !$nota) curl("http://alerts.sinfini.com/api/web2sms.php?workingkey=" . $apg_sms_settings['clave_solutions_infini'] . "&to=" . $apg_sms_settings['telefono'] . "&sender=" .$apg_sms_settings['identificador_solutions_infini'] . "&message=" . urlencode($mensaje_notificacion));
 	}
 	else if ($apg_sms_settings['servicio'] == "twillio")
 	{
 		require("lib/twilio.php");
 		$twillio = new Services_Twilio($apg_sms_settings['clave_twillio'], $apg_sms_settings['identificador_twillio']);
 		if (!$internacional || $apg_sms_settings['internacional']) $twillio->account->messages->sendMessage($apg_sms_settings['telefono'], $telefono, $mensaje);
-		if ($apg_sms_settings['notificacion'] && $estado == 'on-hold') $twillio->account->messages->sendMessage($apg_sms_settings['telefono'], $apg_sms_settings['telefono'], $mensaje_notificacion);
+		if ($apg_sms_settings['notificacion'] && $estado == 'on-hold' && !$nota) $twillio->account->messages->sendMessage($apg_sms_settings['telefono'], $apg_sms_settings['telefono'], $mensaje_notificacion);
 	}
 	else if ($apg_sms_settings['servicio'] == "clickatell")
 	{
 		if (!$internacional || $apg_sms_settings['internacional']) curl("http://api.clickatell.com/http/sendmsg?api_id=" . $apg_sms_settings['identificador_clickatell'] . "&user=" .$apg_sms_settings['usuario_clickatell'] . "&password=" .$apg_sms_settings['contrasena_clickatell'] . "&to=" . $telefono . "&text=" . urlencode($mensaje));
-		if ($apg_sms_settings['notificacion'] && $estado == 'on-hold') curl("http://api.clickatell.com/http/sendmsg?api_id=" . $apg_sms_settings['identificador_clickatell'] . "&user=" .$apg_sms_settings['usuario_clickatell'] . "&password=" .$apg_sms_settings['contrasena_clickatell'] . "&to=" . $apg_sms_settings['telefono'] . "&text=" . urlencode($mensaje_notificacion));
+		if ($apg_sms_settings['notificacion'] && $estado == 'on-hold' && !$nota) curl("http://api.clickatell.com/http/sendmsg?api_id=" . $apg_sms_settings['identificador_clickatell'] . "&user=" .$apg_sms_settings['usuario_clickatell'] . "&password=" .$apg_sms_settings['contrasena_clickatell'] . "&to=" . $apg_sms_settings['telefono'] . "&text=" . urlencode($mensaje_notificacion));
 	}
 	else if ($apg_sms_settings['servicio'] == "clockwork")
 	{
 		if (!$internacional || $apg_sms_settings['internacional']) curl("https://api.clockworksms.com/http/send.aspx?key=" .$apg_sms_settings['identificador_clockwork'] . "&to=" . $telefono . "&content=" . urlencode($mensaje));
-		if ($apg_sms_settings['notificacion'] && $estado == 'on-hold') curl("https://api.clockworksms.com/http/send.aspx?key=" .$apg_sms_settings['identificador_clockwork'] . "&to=" . $apg_sms_settings['telefono'] . "&content=" . urlencode($mensaje_notificacion));
+		if ($apg_sms_settings['notificacion'] && $estado == 'on-hold' && !$nota) curl("https://api.clockworksms.com/http/send.aspx?key=" .$apg_sms_settings['identificador_clockwork'] . "&to=" . $apg_sms_settings['telefono'] . "&content=" . urlencode($mensaje_notificacion));
 	}
+	*/
 }
-add_action('woocommerce_order_status_completed', 'apg_sms_envia_sms', 10);//Funciona cuando el pedido es marcado como completo
-add_action('woocommerce_order_status_processing', 'apg_sms_envia_sms', 10);//Funciona cuando el pedido es marcado como procesando
-add_action('woocommerce_order_status_pending', 'apg_sms_envia_sms', 10);//Funciona cuando el pedido es marcado como pendiente
-add_action('woocommerce_order_status_cancelled', 'apg_sms_envia_sms', 10);//Funciona cuando el pedido es marcado como cancelado
-add_action('woocommerce_order_status_failed', 'apg_sms_envia_sms', 10);//Funciona cuando el pedido es marcado como fallo
-add_action('woocommerce_order_status_refunded', 'apg_sms_envia_sms', 10);//Funciona cuando el pedido es marcado como devuelto
-
-//Controlan los cambios de los pedidos
-add_action('woocommerce_order_status_pending_to_processing_notification', 'apg_sms_envia_sms', 10);
-add_action('woocommerce_order_status_pending_to_on-hold_notification', 'apg_sms_envia_sms', 10);
-add_action('woocommerce_order_status_pending_to_completed_notification', 'apg_sms_envia_sms', 10);
 
 //Lee páginas externas al sitio web
 function curl($url) 
@@ -145,6 +169,21 @@ function curl($url)
 	curl_close($ch);
 		
 	return utf8_encode($resultado); 
+}
+
+//Procesa el teléfono y le añade, si lo necesita, el prefijo
+function apg_sms_procesa_el_telefono($pedido, $telefono) {
+	global $woocommerce;
+	
+	$telefono = str_replace(array('+','-'), '', filter_var($telefono, FILTER_SANITIZE_NUMBER_INT));
+	if ($woocommerce->countries->get_base_country() != $pedido->billing_country)
+	{
+		$prefijo = dame_prefijo_pais($pedido->billing_country);
+		preg_match("/(\d{1,4})[0-9.\- ]+/", $telefono, $prefijo);
+		if (strpos($prefijo[1], $prefijo['dial_code']) === false) $telefono = $prefijo['dial_code'] . $telefono;
+	}
+	
+	return $telefono;
 }
 
 //Devuelve el código de prefijo del país

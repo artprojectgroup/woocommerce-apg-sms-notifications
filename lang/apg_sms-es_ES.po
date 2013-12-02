@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce - APG SMS Notifications v0.1\n"
+"Project-Id-Version: WooCommerce - APG SMS Notifications v0.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-12-02 14:42:27+0000\n"
+"PO-Revision-Date: 2013-12-02 20:54:37+0000\n"
 "Last-Translator: artprojectgroup <info@herves-vida.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -63,12 +63,6 @@ msgstr ""
 #: apg-sms.php:0
 #@ apg_sms
 msgid "http://wordpress.org/plugins/woocommerce-apg-sms-notifications/"
-msgstr ""
-
-#. translators: plugin header field 'Version'
-#: apg-sms.php:0
-#@ apg_sms
-msgid "0.1"
 msgstr ""
 
 #: apg-sms.php:58
@@ -213,4 +207,28 @@ msgstr "Habilítalo si quieres recibir un mensaje SMS cuando haya un nuevo pedid
 #@ apg_sms
 msgid "The mobile number registered in your SMS gateway account and where you receive the SMS messages"
 msgstr "Número de móvil registrado en su cuenta de su proveedor SMS y donde se recibirán los mensajes SMS"
+
+#. translators: plugin header field 'Version'
+#: apg-sms.php:0
+#@ apg_sms
+msgid "0.3"
+msgstr ""
+
+#: apg-sms.php:124
+#, php-format
+#@ apg_sms
+msgid "A note has just been added to your order No. %s: "
+msgstr "Una nota acaba de ser añadida a su pedido nº %s: "
+
+#: apg-sms.php:93
+#, php-format
+#@ apg_sms
+msgid "Thank you for shopphing with us. Your order No. %s is now: "
+msgstr "Gracias por comprar con nosotros. Su pedido nº %s está ahora: "
+
+#: apg-sms.php:94
+#, php-format
+#@ apg_sms
+msgid "There's a new order No. %s on "
+msgstr "Hay un nuevo pedido nº %s en "
 
