@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce - APG SMS Notifications v0.3.1\n"
+"Project-Id-Version: WooCommerce - APG SMS Notifications v0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-12-03 08:34:56+0000\n"
+"PO-Revision-Date: 2013-12-03 09:05:43+0000\n"
 "Last-Translator: artprojectgroup <info@herves-vida.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -97,22 +97,22 @@ msgstr "Clave:"
 msgid "Sender ID:"
 msgstr "Identificador:"
 
-#: formulario.php:169
+#: formulario.php:183
 #@ apg_sms
 msgid "Your mobile number:"
 msgstr "Tu teléfono móvil:"
 
-#: formulario.php:176
+#: formulario.php:190
 #@ apg_sms
 msgid "New order notification:"
 msgstr "Notificación de nuevo pedido:"
 
-#: formulario.php:185
+#: formulario.php:199
 #@ apg_sms
 msgid "Check if you want to send international SMS messages"
 msgstr "Habilítalo si quieres enviar mensajes SMS internacionales"
 
-#: formulario.php:190
+#: formulario.php:204
 #@ apg_sms
 msgid "Save &raquo;"
 msgstr "Guardar &raquo;"
@@ -128,7 +128,7 @@ msgstr "Proveedor <abbr title=\"Short Message Service\" lang=\"en\">SMS</abbr>:"
 msgid "Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number."
 msgstr "Añade a WooCommerce notificaciones SMS a tus clientes cuando cambie el estado del pedido. Podrás recibir un mensaje SMS cuando la tienda tenga un nuevo pedido y seleccionar si quieres enviar mensajes SMS internacionales. El plugin añade automáticamente el código internacional al número de teléfono del cliente."
 
-#: formulario.php:183
+#: formulario.php:197
 #@ apg_sms
 msgid "Send international <abbr title=\"Short Message Service\" lang=\"en\">SMS</abbr>?:"
 msgstr "¿Enviar <abbr title=\"Short Message Service\" lang=\"en\">SMS</abbr> internacionales?:"
@@ -144,11 +144,13 @@ msgid "Auth Token:"
 msgstr "Token de autenticación:"
 
 #: formulario.php:148
+#: formulario.php:169
 #@ apg_sms
 msgid "Username:"
 msgstr "Nombre de usuario:"
 
 #: formulario.php:155
+#: formulario.php:176
 #@ apg_sms
 msgid "Password:"
 msgstr "Contraseña:"
@@ -161,6 +163,8 @@ msgstr "Contraseña:"
 #: formulario.php:150
 #: formulario.php:157
 #: formulario.php:164
+#: formulario.php:171
+#: formulario.php:178
 #, php-format
 #@ apg_sms
 msgid "The %s for your account in %s"
@@ -189,21 +193,23 @@ msgid "auth token"
 msgstr "token de autenticación"
 
 #: formulario.php:150
+#: formulario.php:171
 #@ apg_sms
 msgid "username"
 msgstr "nombre de usuario"
 
 #: formulario.php:157
+#: formulario.php:178
 #@ apg_sms
 msgid "password"
 msgstr "contraseña"
 
-#: formulario.php:178
+#: formulario.php:192
 #@ apg_sms
 msgid "Check if you want to receive a SMS message when there's a new order"
 msgstr "Habilítalo si quieres recibir un mensaje SMS cuando haya un nuevo pedido"
 
-#: formulario.php:171
+#: formulario.php:185
 #@ apg_sms
 msgid "The mobile number registered in your SMS gateway account and where you receive the SMS messages"
 msgstr "Número de móvil registrado en su cuenta de su proveedor SMS y donde se recibirán los mensajes SMS"
@@ -213,12 +219,6 @@ msgstr "Número de móvil registrado en su cuenta de su proveedor SMS y donde se
 #@ apg_sms
 msgid "A note has just been added to your order No. %s: "
 msgstr "Una nota acaba de ser añadida a su pedido nº %s: "
-
-#. translators: plugin header field 'Version'
-#: apg-sms.php:0
-#@ apg_sms
-msgid "0.3.1"
-msgstr ""
 
 #: apg-sms.php:98
 #, php-format
@@ -252,4 +252,10 @@ msgstr "Procesándose"
 #@ apg_sms
 msgid "Completed"
 msgstr "Completado"
+
+#. translators: plugin header field 'Version'
+#: apg-sms.php:0
+#@ apg_sms
+msgid "0.5"
+msgstr ""
 
