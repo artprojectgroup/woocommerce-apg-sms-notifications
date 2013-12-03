@@ -26,6 +26,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 * Inserta de forma automática el código telefónico internacional, si es necesario, al número de teléfono del cliente.
 * También notifica por SMS las notas a los clientes.
 * Todos los mensajes son personalizables.
+* Soporta gran cantidad de variables para personalizar nuestros mensajes: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_subtotal%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %shop_name% y %note%.
 * Una vez configurado es totalmente automático.
 
 = Origen =
@@ -64,6 +65,9 @@ Además hay que añadir el número de teléfono móvil que esté vinculado con l
 Se debe indicar si queremos, o no, recibir notificaciones SMS por cada nuevo pedido en la tienda y si queremos, o no, enviar SMS internacionales.
 
 Por último hay que personalizar, si se desea, los mensajes que se enviarán por SMS.
+
+= How to configure? =
+[Chirag Vora](http://profiles.wordpress.org/chirag740) had made a translation in english on [Big Kahuna](http://bigkahuna.in/woocommerce-apg-sms-notifications).
 
 == Screenshots ==
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
