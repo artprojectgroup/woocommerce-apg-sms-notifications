@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: woocommerce, commerce, e-commerce, commerce, shipping, weight, zip, postcode, state, country, tax, shop, virtual shop
 Requires at least: 3.5
 Tested up to: 3.7.1
-Stable tag: 0.5
+Stable tag: 0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,6 +24,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 * Posibilidad de enviar, o no, SMS internacionales.
 * Inserta de forma automática el código telefónico internacional, si es necesario, al número de teléfono del cliente.
 * También notifica por SMS las notas a los clientes.
+* Todos los mensajes son personalizables.
 * Una vez configurado es totalmente automático.
 
 = Origen =
@@ -59,12 +60,16 @@ Para configurar el plugin sólo hay que añadir los datos proporcionados por cad
 
 Además hay que añadir el número de teléfono móvil que esté vinculado con la cuenta. 
 
-Por último se debe indicar si queremos, o no, recibir notificaciones SMS por cada nuevo pedido en la tienda y si queremos, o no, enviar SMS internacionales.
+Se debe indicar si queremos, o no, recibir notificaciones SMS por cada nuevo pedido en la tienda y si queremos, o no, enviar SMS internacionales.
+
+Por último hay que personalizar, si se desea, los mensajes que se enviarán por SMS.
 
 == Screenshots ==
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 0.6 =
+Añadida la personalización de los mensajes.
 = 0.5 =
 Añadido soporte para BulkSMS.
 = 0.4 =
@@ -80,6 +85,8 @@ Mejorado el código que comprueba el código internacional.
 Versión inicial.
 
 == Upgrade Notice ==
+= 0.6 =
+Añadida la personalización de los mensajes. 
 = 0.5 =
 Añadido soporte para BulkSMS.
 = 0.4 =

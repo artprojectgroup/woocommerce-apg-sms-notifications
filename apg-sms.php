@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 0.5
+Version: 0.6
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -81,7 +81,7 @@ function apg_sms_procesa_estados($pedido) {
 
 	$pedido = new WC_Order($pedido);
 	$estado = $pedido->status;
-	$nombres_de_estado = array('on-hold' => 'on-hold', 'pending' => __('Pending', 'apg_sms'), 'processing' => __('Processing', 'apg_sms'), 'completed' => __('Completed', 'apg_sms'));
+	$nombres_de_estado = array('on-hold' => 'Recibido', 'processing' => __('Processing', 'apg_sms'), 'completed' => __('Completed', 'apg_sms'));
 	foreach ($nombres_de_estado as $nombre_de_estado => $traduccion) if ($estado == $nombre_de_estado) $estado = $traduccion;
 
 	$apg_sms_settings = get_option('apg_sms_settings'); //Recoge las opciones de configuración
@@ -92,18 +92,18 @@ function apg_sms_procesa_estados($pedido) {
 	$telefono = apg_sms_procesa_el_telefono($pedido, $pedido->billing_phone);
 	if ($telefono != $pedido->billing_phone) $internacional = true;
 	
-	if ($estado == 'on-hold')
+	if ($estado == 'Recibido')
 	{
-		$mensaje = sprintf(__('Your order No. %s is received on %s. Thank you for shoping with us!', 'apg_sms'), $pedido->id, get_bloginfo('name') . ".");
-		apg_sms_envia_sms($apg_sms_settings, $apg_sms_settings['telefono'], sprintf(__("Order No. %s received on ", 'apg_sms'), $pedido->id) . get_bloginfo('name') . "."); //Mensaje para el propietario
+		apg_sms_envia_sms($apg_sms_settings, $apg_sms_settings['telefono'], apg_sms_procesa_variables($apg_sms_settings['mensaje_pedido'], $pedido)); //Mensaje para el propietario
+		$mensaje = apg_sms_procesa_variables($apg_sms_settings['mensaje_recibido'], $pedido);
 	}
-	else $mensaje = sprintf(__('Thank you for shoping with us! Your order No. %s is now: ', 'apg_sms'), $pedido->id) . $estado . ".";
+	else if ($estado == __('Processing', 'apg_sms')) $mensaje = apg_sms_procesa_variables($apg_sms_settings['mensaje_procesando'], $pedido);
+	else if ($estado == __('Completed', 'apg_sms')) $mensaje = apg_sms_procesa_variables($apg_sms_settings['mensaje_completado'], $pedido);
 
 	if (!$internacional || $apg_sms_settings['internacional']) apg_sms_envia_sms($apg_sms_settings, $telefono, $mensaje);
 }
 add_action('woocommerce_order_status_completed', 'apg_sms_procesa_estados', 10);//Funciona cuando el pedido es marcado como completo
 add_action('woocommerce_order_status_processing', 'apg_sms_procesa_estados', 10);//Funciona cuando el pedido es marcado como procesando
-add_action('woocommerce_order_status_pending', 'apg_sms_procesa_estados', 10);//Funciona cuando el pedido es marcado como pendiente
 
 //Controlan los cambios de los pedidos
 add_action('woocommerce_order_status_pending_to_processing_notification', 'apg_sms_procesa_estados', 10);
@@ -122,7 +122,7 @@ function apg_sms_procesa_notas($datos) {
 	$telefono = apg_sms_procesa_el_telefono($pedido, $pedido->billing_phone);
 	if ($telefono != $pedido->billing_phone) $internacional = true;
 	
-	if (!$internacional || $apg_sms_settings['internacional']) apg_sms_envia_sms($apg_sms_settings, $telefono, sprintf(__('A note has just been added to your order No. %s: ', 'apg_sms'), $pedido->id) . wptexturize($datos['customer_note']));
+	if (!$internacional || $apg_sms_settings['internacional']) apg_sms_envia_sms($apg_sms_settings, $telefono, apg_sms_procesa_variables($apg_sms_settings['mensaje_nota'], $pedido, wptexturize($datos['customer_note'])));
 }
 add_action('woocommerce_new_customer_note', 'apg_sms_procesa_notas', 10);
 
@@ -168,6 +168,26 @@ function apg_sms_procesa_el_telefono($pedido, $telefono) {
 	}
 	
 	return $telefono;
+}
+
+//Procesa las variables
+function apg_sms_procesa_variables($mensaje, $pedido, $nota = '') {
+	$variables = array("id", "order_key", "billing_first_name", "billing_last_name", "billing_company", "billing_address_1", "billing_address_2", "billing_city", "billing_postcode", "billing_country", "billing_state", "billing_email", "billing_phone", "shipping_first_name", "shipping_last_name", "shipping_company", "shipping_address_1", "shipping_address_2", "shipping_city", "shipping_postcode", "shipping_country", "shipping_state", "shipping_method", "shipping_method_title", "payment_method", "payment_method_title", "order_subtotal", "order_discount", "cart_discount", "order_tax", "order_shipping", "order_shipping_tax", "order_total", "status", "shop_name", "note"); 
+
+	preg_match_all("/%(.*?)%/", $mensaje, $busqueda);
+	
+	foreach ($busqueda[1] as $variable) 
+	{ 
+    	$variable = strtolower($variable);
+
+    	if (!in_array($variable, $variables)) continue; 
+
+    	if ($variable != "shop_name" && $variable != "note") $mensaje = str_replace("%" . $variable . "%", $pedido->$variable, $mensaje);
+		else if ($variable == "shop_name") $mensaje = str_replace("%" . $variable . "%", get_bloginfo('name'), $mensaje);
+		else if ($variable == "note") $mensaje = str_replace("%" . $variable . "%", $nota, $mensaje);
+	}
+	
+	return $mensaje;
 }
 
 //Devuelve el código de prefijo del país

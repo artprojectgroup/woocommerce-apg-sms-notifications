@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce - APG SMS Notifications v0.5\n"
+"Project-Id-Version: WooCommerce - APG SMS Notifications v0.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-12-03 09:05:43+0000\n"
+"PO-Revision-Date: 2013-12-03 11:17:51+0000\n"
 "Last-Translator: artprojectgroup <info@herves-vida.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -112,7 +112,7 @@ msgstr "Notificación de nuevo pedido:"
 msgid "Check if you want to send international SMS messages"
 msgstr "Habilítalo si quieres enviar mensajes SMS internacionales"
 
-#: formulario.php:204
+#: formulario.php:239
 #@ apg_sms
 msgid "Save &raquo;"
 msgstr "Guardar &raquo;"
@@ -214,48 +214,83 @@ msgstr "Habilítalo si quieres recibir un mensaje SMS cuando haya un nuevo pedid
 msgid "The mobile number registered in your SMS gateway account and where you receive the SMS messages"
 msgstr "Número de móvil registrado en su cuenta de su proveedor SMS y donde se recibirán los mensajes SMS"
 
-#: apg-sms.php:125
+#: formulario.php:235
 #, php-format
 #@ apg_sms
 msgid "A note has just been added to your order No. %s: "
 msgstr "Una nota acaba de ser añadida a su pedido nº %s: "
 
-#: apg-sms.php:98
+#: formulario.php:207
 #, php-format
 #@ apg_sms
 msgid "Order No. %s received on "
 msgstr "Se ha recibido el pedido nº %s en "
 
-#: apg-sms.php:97
-#, php-format
-#@ apg_sms
-msgid "Your order No. %s is received on %s. Thank you for shoping with us!"
-msgstr "Su pedido nº %s ha sido recibido en %s. ¡Gracias por comprar con nosotros!"
-
+#: apg-sms.php:84
 #: apg-sms.php:100
-#, php-format
-#@ apg_sms
-msgid "Thank you for shoping with us! Your order No. %s is now: "
-msgstr "¡Gracias por comprar con nosotros! Su pedido nº %s está ahora: "
-
-#: apg-sms.php:84
-#@ apg_sms
-msgid "Pending"
-msgstr "Pendiente"
-
-#: apg-sms.php:84
+#: formulario.php:221
 #@ apg_sms
 msgid "Processing"
 msgstr "Procesándose"
 
 #: apg-sms.php:84
+#: apg-sms.php:101
+#: formulario.php:228
 #@ apg_sms
 msgid "Completed"
 msgstr "Completado"
 
+#: formulario.php:214
+#, php-format
+#@ apg_sms
+msgid "Your order No. %s is received on %s. Thank you for shopping with us!"
+msgstr "Su pedido nº %s ha sido recibido en %s. ¡Gracias por comprar con nosotros!"
+
+#: formulario.php:221
+#: formulario.php:228
+#, php-format
+#@ apg_sms
+msgid "Thank you for shopping with us! Your order No. %s is now: "
+msgstr "¡Gracias por comprar con nosotros! Su pedido nº %s está ahora: "
+
+#: formulario.php:211
+#@ apg_sms
+msgid "Order received custom message:"
+msgstr "Mensaje para pedido recibido:"
+
+#: formulario.php:218
+#@ apg_sms
+msgid "Order processing custom message:"
+msgstr "Mensaje para pedido procesándose:"
+
+#: formulario.php:225
+#@ apg_sms
+msgid "Order completed custom message:"
+msgstr "Mensaje para pedido completado:"
+
 #. translators: plugin header field 'Version'
 #: apg-sms.php:0
 #@ apg_sms
-msgid "0.5"
+msgid "0.6"
 msgstr ""
+
+#: formulario.php:204
+#@ apg_sms
+msgid "Owner custom message:"
+msgstr "Mensaje para el propietario:"
+
+#: formulario.php:206
+#: formulario.php:213
+#: formulario.php:220
+#: formulario.php:227
+#: formulario.php:234
+#, php-format
+#@ apg_sms
+msgid "You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_subtotal%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %shop_name% and %note%."
+msgstr "Puedes personalizar el mensaje. Recuerda que puedes utilizar estas variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_subtotal%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %shop_name% and %note%."
+
+#: formulario.php:232
+#@ apg_sms
+msgid "Notes custom message:"
+msgstr "Mensaje para las notas:"
 
