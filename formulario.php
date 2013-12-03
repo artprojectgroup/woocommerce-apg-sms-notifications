@@ -98,7 +98,7 @@ input[type="submit"]:focus, input[type="submit"]:hover {
           <img class="help_tip" data-tip="<?php _e('Select your SMS gateway', 'apg_sms'); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><select id="apg_sms_settings[servicio]" name="apg_sms_settings[servicio]" tabindex="<?php echo $tab++; ?>">
             <?php
-            $proveedores = array("solutions_infini" => "Solutions Infini", "twillio" => "Twillio", "clickatell" => "Clickatell", "clockwork" => "Clockwork", "bulksms" => "BulkSMS");
+            $proveedores = array("solutions_infini" => "Solutions Infini", "twillio" => "Twillio", "clickatell" => "Clickatell", "clockwork" => "Clockwork", "bulksms" => "BulkSMS", "open_dnd" => "OPEN DND");
             foreach ($proveedores as $valor => $proveedor) 
             {
 				$chequea = '';
@@ -177,6 +177,27 @@ input[type="submit"]:focus, input[type="submit"]:hover {
           </label>
           <img class="help_tip" data-tip="<?php echo sprintf(__('The %s for your account in %s', 'apg_sms'), __('password', 'apg_sms'), "BulkSMS"); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[contrasena_bulksms]" name="apg_sms_settings[contrasena_bulksms]" size="50" value="<?php echo (isset($apg_sms_settings['contrasena_bulksms']) ? $apg_sms_settings['contrasena_bulksms'] : ''); ?>" tabindex="<?php echo $tab++; ?>" /></td>
+      </tr>
+      <tr valign="top" class="open_dnd"><!-- OPEN DND -->
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[identificador_open_dnd]">
+            <?php _e('Sender ID:', 'apg_sms'); ?>
+          </label>
+          <img class="help_tip" data-tip="<?php echo sprintf(__('The %s for your account in %s', 'apg_sms'), __('sender ID', 'apg_sms'), "OPEN DND"); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
+        <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[identificador_open_dnd]" name="apg_sms_settings[identificador_open_dnd]" size="50" value="<?php echo (isset($apg_sms_settings['identificador_open_dnd']) ? $apg_sms_settings['identificador_open_dnd'] : ''); ?>" tabindex="<?php echo $tab++; ?>" /></td>
+      </tr>
+      <tr valign="top" class="open_dnd"><!-- OPEN DND -->
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[usuario_open_dnd]">
+            <?php _e('Username:', 'apg_sms'); ?>
+          </label>
+          <img class="help_tip" data-tip="<?php echo sprintf(__('The %s for your account in %s', 'apg_sms'), __('username', 'apg_sms'), "OPEN DND"); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
+        <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[usuario_open_dnd]" name="apg_sms_settings[usuario_open_dnd]" size="50" value="<?php echo (isset($apg_sms_settings['usuario_open_dnd']) ? $apg_sms_settings['usuario_open_dnd'] : ''); ?>" tabindex="<?php echo $tab++; ?>" /></td>
+      </tr>
+      <tr valign="top" class="open_dnd"><!-- OPEN DND -->
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[contrasena_open_dnd]">
+            <?php _e('Password:', 'apg_sms'); ?>
+          </label>
+          <img class="help_tip" data-tip="<?php echo sprintf(__('The %s for your account in %s', 'apg_sms'), __('password', 'apg_sms'), "OPEN DND"); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
+        <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[contrasena_open_dnd]" name="apg_sms_settings[contrasena_open_dnd]" size="50" value="<?php echo (isset($apg_sms_settings['contrasena_open_dnd']) ? $apg_sms_settings['contrasena_open_dnd'] : ''); ?>" tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[telefono]">

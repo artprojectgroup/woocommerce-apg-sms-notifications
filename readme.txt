@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: woocommerce, commerce, e-commerce, commerce, shipping, weight, zip, postcode, state, country, tax, shop, virtual shop
 Requires at least: 3.5
 Tested up to: 3.7.1
-Stable tag: 0.6
+Stable tag: 0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,6 +20,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * Clickatell.
  * Clockwork.
  * BulkSMS.
+ * OPEN DND.
 * Posibilidad de informar al propietario de la tienda sobre nuevos pedidos.
 * Posibilidad de enviar, o no, SMS internacionales.
 * Inserta de forma automática el código telefónico internacional, si es necesario, al número de teléfono del cliente.
@@ -68,6 +69,8 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 0.7 =
+Añadido soporte para OPEN DND.
 = 0.6 =
 Añadida la personalización de los mensajes.
 = 0.5 =
@@ -85,6 +88,8 @@ Mejorado el código que comprueba el código internacional.
 Versión inicial.
 
 == Upgrade Notice ==
+= 0.7 =
+Añadido soporte para OPEN DND.
 = 0.6 =
 Añadida la personalización de los mensajes. 
 = 0.5 =

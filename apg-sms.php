@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 0.6
+Version: 0.7
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -138,7 +138,8 @@ function apg_sms_envia_sms($apg_sms_settings, $telefono, $mensaje) {
 	}
 	else if ($apg_sms_settings['servicio'] == "clickatell") curl("http://api.clickatell.com/http/sendmsg?api_id=" . $apg_sms_settings['identificador_clickatell'] . "&user=" .$apg_sms_settings['usuario_clickatell'] . "&password=" .$apg_sms_settings['contrasena_clickatell'] . "&to=" . $telefono . "&text=" . urlencode($mensaje));
 	else if ($apg_sms_settings['servicio'] == "clockwork") curl("https://api.clockworksms.com/http/send.aspx?key=" .$apg_sms_settings['identificador_clockwork'] . "&to=" . $telefono . "&content=" . urlencode($mensaje));
-	else if ($apg_sms_settings['servicio'] == "bulksms") curl("http://bulksms.vsms.net:5567/eapi/submission/send_sms/2/2.0?username=" .$apg_sms_settings['usuario_bulksms'] . "&password=" .$apg_sms_settings['contrasena_bulksms'] . "&message=" . urlencode($mensaje)) . "&msisdn=" . $telefono;
+	else if ($apg_sms_settings['servicio'] == "bulksms") curl("http://bulksms.vsms.net:5567/eapi/submission/send_sms/2/2.0?username=" .$apg_sms_settings['usuario_bulksms'] . "&password=" .$apg_sms_settings['contrasena_bulksms'] . "&message=" . urlencode($mensaje) . "&msisdn=" . $telefono);
+	else if ($apg_sms_settings['servicio'] == "open_dnd") curl("http://txn.opendnd.in/pushsms.php?username=" .$apg_sms_settings['usuario_open_dnd'] . "&password=" .$apg_sms_settings['contrasena_open_dnd'] . "&message=" . urlencode($mensaje) . "&sender=" .$apg_sms_settings['identificador_open_dnd'] . "&numbers=" . $telefono);
 }
 
 //Lee páginas externas al sitio web
