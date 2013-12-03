@@ -1,7 +1,7 @@
 === WooCommerce - APG SMS Notifications ===
 Contributors: artprojectgroup
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J3RA5W3U43JTE
-Tags: woocommerce, commerce, e-commerce, commerce, shipping, weight, zip, postcode, state, country, tax, shop, virtual shop
+Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, solutions infini, twilio, clickatell, clockwork, bulksms, open end
 Requires at least: 3.5
 Tested up to: 3.7.1
 Stable tag: 0.7
