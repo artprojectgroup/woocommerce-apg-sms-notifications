@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce - APG SMS Notifications v0.3\n"
+"Project-Id-Version: WooCommerce - APG SMS Notifications v0.3.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-12-02 20:54:37+0000\n"
+"PO-Revision-Date: 2013-12-03 08:34:56+0000\n"
 "Last-Translator: artprojectgroup <info@herves-vida.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -208,27 +208,48 @@ msgstr "Habilítalo si quieres recibir un mensaje SMS cuando haya un nuevo pedid
 msgid "The mobile number registered in your SMS gateway account and where you receive the SMS messages"
 msgstr "Número de móvil registrado en su cuenta de su proveedor SMS y donde se recibirán los mensajes SMS"
 
-#. translators: plugin header field 'Version'
-#: apg-sms.php:0
-#@ apg_sms
-msgid "0.3"
-msgstr ""
-
-#: apg-sms.php:124
+#: apg-sms.php:125
 #, php-format
 #@ apg_sms
 msgid "A note has just been added to your order No. %s: "
 msgstr "Una nota acaba de ser añadida a su pedido nº %s: "
 
-#: apg-sms.php:93
-#, php-format
+#. translators: plugin header field 'Version'
+#: apg-sms.php:0
 #@ apg_sms
-msgid "Thank you for shopphing with us. Your order No. %s is now: "
-msgstr "Gracias por comprar con nosotros. Su pedido nº %s está ahora: "
+msgid "0.3.1"
+msgstr ""
 
-#: apg-sms.php:94
+#: apg-sms.php:98
 #, php-format
 #@ apg_sms
-msgid "There's a new order No. %s on "
-msgstr "Hay un nuevo pedido nº %s en "
+msgid "Order No. %s received on "
+msgstr "Se ha recibido el pedido nº %s en "
+
+#: apg-sms.php:97
+#, php-format
+#@ apg_sms
+msgid "Your order No. %s is received on %s. Thank you for shoping with us!"
+msgstr "Su pedido nº %s ha sido recibido en %s. ¡Gracias por comprar con nosotros!"
+
+#: apg-sms.php:100
+#, php-format
+#@ apg_sms
+msgid "Thank you for shoping with us! Your order No. %s is now: "
+msgstr "¡Gracias por comprar con nosotros! Su pedido nº %s está ahora: "
+
+#: apg-sms.php:84
+#@ apg_sms
+msgid "Pending"
+msgstr "Pendiente"
+
+#: apg-sms.php:84
+#@ apg_sms
+msgid "Processing"
+msgstr "Procesándose"
+
+#: apg-sms.php:84
+#@ apg_sms
+msgid "Completed"
+msgstr "Completado"
 
