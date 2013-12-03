@@ -29,7 +29,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 * Una vez configurado es totalmente automático.
 
 = Origen =
-**WooCommerce - APG SMS Notifications** ha sido programado a partir de la petición de [Chirag Vora](https://plus.google.com/+ChiragVora) para añadir a WooCommerce la posibilidad de enviar notificaciones sobre el estado de los pedidos a través de mensajes SMS.
+**WooCommerce - APG SMS Notifications** ha sido programado a partir de la petición de [Chirag Vora](http://profiles.wordpress.org/chirag740) para añadir a WooCommerce la posibilidad de enviar notificaciones sobre el estado de los pedidos a través de mensajes SMS.
 
 = Más información =
 En nuestro sitio web oficial puede obtener más información sobre [**WooCommerce - APG SMS Notifications**](http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-sms-notifications). 
@@ -120,7 +120,7 @@ Esperamos que os guste nuestra iniciativa.
 ¿Te ha gustado y te ha resultado útil **WooCommerce - APG SMS Notifications** en tu sitio web? Te agradeceríamos una [pequeña donación](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J3RA5W3U43JTE) que nos ayudará a seguir mejorando este plugin y a crear más plugins totalmente gratuitos para toda la comunidad WordPress.
 
 == Gracias ==
-* A [Chirag Vora](https://plus.google.com/+ChiragVora) por habernos inspirado para crear **WooCommerce - APG SMS Notifications**.
+* A [Chirag Vora](http://profiles.wordpress.org/chirag740) por habernos inspirado para crear **WooCommerce - APG SMS Notifications**.
 * A todos los que lo usáis.
 * A todos los que ayudáis a mejorarlo.
 * A todos los que realizáis donaciones.
