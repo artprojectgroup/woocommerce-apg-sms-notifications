@@ -85,11 +85,11 @@ input[type="submit"]:focus, input[type="submit"]:hover {
   ?>
   <div class="donacion">
     <?php _e('If you enjoyed and find helpful this plugin, please make a donation.', 'apg_sms'); ?>
-    <div><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J3RA5W3U43JTE" target="_blank" title="PayPal"><img alt="CrossPress 2" border="0" src="<?php _e('https://www.paypalobjects.com/en_GB/i/btn/btn_donate_LG.gif', 'apg_sms'); ?>" width="92" height="26"></a></div>
+    <div><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J3RA5W3U43JTE" target="_blank" title="PayPal"><img alt="WooCommerce - APG SMS Notifications" border="0" src="<?php _e('https://www.paypalobjects.com/en_GB/i/btn/btn_donate_LG.gif', 'apg_sms'); ?>" width="92" height="26"></a></div>
   </div>
   <form method="post" action="options.php">
     <?php settings_fields('apg_sms_settings_group'); ?>
-    <div class="cabecera"> <a href="http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-sms-notifications" title="CrossPress 2"><img src="http://www.artprojectgroup.es/wp-content/artprojectgroup/woocommerce-apg-sms-notifications-582x139.jpg" width="582" height="139" /></a> </div>
+    <div class="cabecera"> <a href="http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-sms-notifications" title="WooCommerce - APG SMS Notifications"><img src="http://www.artprojectgroup.es/wp-content/artprojectgroup/woocommerce-apg-sms-notifications-582x139.jpg" width="582" height="139" /></a> </div>
     <table class="form-table">
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[servicio]">
