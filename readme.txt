@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, solutions infini, twilio, clickatell, clockwork, bulksms, open end
 Requires at least: 3.5
 Tested up to: 3.7.1
-Stable tag: 0.7
+Stable tag: 0.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,39 +73,50 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 0.7.1 =
+* Control de la existencia de los parámetros de configuración.
+* Modificación de la pantalla de configuración.
+* Modificación de los enlaces del plugin.
+* Actualización de la captura de pantalla.
+* Añadidos nuevos enlaces.
 = 0.7 =
-Añadido soporte para OPEN DND.
+* Añadido soporte para OPEN DND.
 = 0.6 =
-Añadida la personalización de los mensajes.
+* Añadida la personalización de los mensajes. 
 = 0.5 =
-Añadido soporte para BulkSMS.
+* Añadido soporte para BulkSMS.
 = 0.4 =
-* Pequeñas mejoras en el código.
-* Arreglo de erratas en las traducciones.
+* Pequeñas mejoras en el código y arreglo de erratas en las traducciones.
 = 0.3.1 =
-Arreglo de pequeño error en el código.
+* Arreglo de pequeño error en el código.
 = 0.3 =
-Añadido el envío de notas al cliente.
+* Añadido el envío de notas al cliente.
 = 0.2 =
-Mejorado el código que comprueba el código internacional.
+* Mejorado el código que comprueba el código internacional.
 = 0.1 =
-Versión inicial.
+* Versión inicial.
 
 == Upgrade Notice ==
+= 0.7.1 =
+* Control de la existencia de los parámetros de configuración.
+* Modificación de la pantalla de configuración.
+* Modificación de los enlaces del plugin.
+* Actualización de la captura de pantalla.
+* Añadidos nuevos enlaces.
 = 0.7 =
-Añadido soporte para OPEN DND.
+* Añadido soporte para OPEN DND.
 = 0.6 =
-Añadida la personalización de los mensajes. 
+* Añadida la personalización de los mensajes. 
 = 0.5 =
-Añadido soporte para BulkSMS.
+* Añadido soporte para BulkSMS.
 = 0.4 =
-Pequeñas mejoras en el código y arreglo de erratas en las traducciones.
+* Pequeñas mejoras en el código y arreglo de erratas en las traducciones.
 = 0.3.1 =
-Arreglo de pequeño error en el código.
+* Arreglo de pequeño error en el código.
 = 0.3 =
-Añadido el envío de notas al cliente.
+* Añadido el envío de notas al cliente.
 = 0.2 =
-Mejorado el código que comprueba el código internacional.
+* Mejorado el código que comprueba el código internacional.
 
 ==Traducciones ==
 * *English*: by **Art Project Group** (default language).

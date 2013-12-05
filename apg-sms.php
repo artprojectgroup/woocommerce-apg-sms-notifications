@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 0.7
+Version: 0.7.1
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -30,8 +30,11 @@ function apg_sms_enlaces($enlaces, $archivo) {
 
 	if ($archivo == $plugin) 
 	{
-		$enlaces[] = '<a href="http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-sms-notifications" target="_blank" title="Art Project Group">' . __('Visit the official plugin website', 'apg_sms') . '</a>';
-		$enlaces[] = '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J3RA5W3U43JTE" target="_blank" title="PayPal"><img alt="WooCommerce - APG SMS Notifications" src="' . __('https://www.paypalobjects.com/en_GB/i/btn/btn_donate_LG.gif', 'apg_sms') . '" width="53" height="15" style="vertical-align:text-bottom;"></a>';
+		$enlaces[] = '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J3RA5W3U43JTE" target="_blank" title="' . __('Make a donation by ', 'apg_sms') . 'PayPal"><span class="icon-paypal"></span></a>';
+		$enlaces[] = '<a href="http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-sms-notifications" target="_blank" title="WooCommerce - APG SMS Notifications"><strong class="artprojectgroup">APG</strong></a>';
+		$enlaces[] = '<a href="https://www.facebook.com/artprojectgroup" title="' . __('Follow us on ', 'apg_sms') . 'Facebook" target="_blank"><span class="icon-facebook6"></span></a> <a href="https://twitter.com/artprojectgroup" title="' . __('Follow us on ', 'apg_sms') . 'Twitter" target="_blank"><span class="icon-social19"></span></a> <a href="https://plus.google.com/+ArtProjectGroupES" title="' . __('Follow us on ', 'apg_sms') . 'Google+" target="_blank"><span class="icon-google16"></span></a> <a href="http://es.linkedin.com/in/artprojectgroup" title="' . __('Follow us on ', 'apg_sms') . 'LinkedIn" target="_blank"><span class="icon-logo"></span></a>';
+		$enlaces[] = '<a href="http://profiles.wordpress.org/artprojectgroup/" title="' . __('More plugins on ', 'apg_sms') . 'WordPress" target="_blank"><span class="icon-wordpress2"></span></a>';
+		$enlaces[] = '<a href="mailto:info@artprojectgroup.es" title="' . __('Contact with us by ', 'apg_sms') . 'e-mail"><span class="icon-open21"></span></a> <a href="skype:artprojectgroup" title="' . __('Contact with us by ', 'apg_sms') . 'Skype"><span class="icon-social6"></span></a>';
 	}
 	
 	return $enlaces;
@@ -40,7 +43,7 @@ add_filter('plugin_row_meta', 'apg_sms_enlaces', 10, 2);
 
 //Añade el botón de configuración
 function apg_sms_enlace_de_ajustes($enlaces) { 
-	$enlace_de_ajustes = '<a href="admin.php?page=apg_sms_notifications" title="' . __('Settings', 'apg_sms') . '">' . __('Settings', 'apg_sms') . '</a>'; 
+	$enlace_de_ajustes = '<a href="admin.php?page=apg_sms" title="' . __('Settings of ', 'apg_sms') . 'WooCommerce - APG SMS Notifications">' . __('Settings', 'apg_sms') . '</a>'; 
 	array_unshift($enlaces, $enlace_de_ajustes); 
 	
 	return $enlaces; 
@@ -50,12 +53,13 @@ add_filter("plugin_action_links_$plugin", 'apg_sms_enlace_de_ajustes');
 
 //Pinta el formulario de configuración
 function apg_sms_tab() {
+	wp_enqueue_style( 'apg_sms_hoja_de_estilo' ); //Carga la hoja de estilo
 	include('formulario.php');
 }
 
 //Añade en el menú a WooCommerce
 function apg_sms_admin_menu() {
-	add_submenu_page('woocommerce', __('APG SMS Notifications', 'apg_sms'),  __('SMS Notifications', 'apg_sms') , 'manage_woocommerce', 'apg_sms_notifications', 'apg_sms_tab');
+	add_submenu_page('woocommerce', __('APG SMS Notifications', 'apg_sms'),  __('SMS Notifications', 'apg_sms') , 'manage_woocommerce', 'apg_sms', 'apg_sms_tab');
 }
 add_action('admin_menu', 'apg_sms_admin_menu', 15);
 
@@ -63,7 +67,7 @@ add_action('admin_menu', 'apg_sms_admin_menu', 15);
 function apg_sms_screen_id($woocommerce_screen_ids) {
 	global $woocommerce;
 
-	$woocommerce_screen_ids[] = 'woocommerce_page_apg_sms_notifications';
+	$woocommerce_screen_ids[] = 'woocommerce_page_apg_sms';
 
 	return $woocommerce_screen_ids;
 }
@@ -1117,5 +1121,20 @@ function dame_prefijo_pais($pais = '') {
 	);
 
 	return ($pais == '') ? $paises : (isset($paises[$pais]) ? $paises[$pais] : '');
+}
+
+//Comprueba si hay que mostrar el mensaje de configuración
+function apg_sms_muestra_mensaje() {
+	wp_register_style( 'apg_sms_hoja_de_estilo', plugins_url('style.css', __FILE__) ); //Carga la hoja de estilo
+	wp_register_style( 'apg_sms_fuentes', plugins_url('fonts/stylesheet.css', __FILE__) ); //Carga la hoja de estilo global
+	wp_enqueue_style( 'apg_sms_fuentes' ); //Carga la hoja de estilo global
+	
+	$configuracion = get_option('apg_sms_settings');
+	if (!isset($configuracion['mensaje_pedido']) || !isset($configuracion['mensaje_nota'])) add_action('admin_notices', 'apg_sms_actualizacion');
+}
+add_action( 'admin_init', 'apg_sms_muestra_mensaje' );
+
+function apg_sms_actualizacion() {
+    echo '<div class="error fade" id="message"><h3>WooCommerce - APG SMS Notifications</h3><h4>' . sprintf(__("Please, update your %s. It's very important!", 'apg_sms'), '<a href="admin.php?page=apg_sms" title="' . __('Settings', 'apg_sms') . '">' . __('settings', 'apg_sms') . '</a>') . '</h4></div>';
 }
 ?>
