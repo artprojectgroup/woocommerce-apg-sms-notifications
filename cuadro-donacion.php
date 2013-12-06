@@ -1,3 +1,4 @@
+<?php $plugin = apg_sms_plugin(URI); ?>
 <div class="donacion">
   <p>
     <?php _e('If you enjoyed and find helpful this plugin, please make a donation:', IDIOMA); ?>
@@ -34,7 +35,7 @@
   <div>
     <p> <?php echo sprintf(__('Please, rate %s:', IDIOMA), PLUGIN); ?> </p>
     <div class="star-holder rate">
-      <div style="width: 100px;" class="star-rating"></div>
+      <div style="width: <?php echo esc_attr(str_replace(',', '.', $plugin['rating'])); ?>px;" class="star-rating"></div>
       <div class="star-rate"> <a title="<?php _e('***** Fantastic!', IDIOMA); ?>" href="<?php echo PUNTUACION; ?>?rate=5#postform"><span></span></a> <a title="<?php _e('**** Great', IDIOMA); ?>" href="<?php echo PUNTUACION; ?>?rate=4#postform"><span></span></a> <a title="<?php _e('*** Good', IDIOMA); ?>" href="<?php echo PUNTUACION; ?>?rate=3#postform"><span></span></a> <a title="<?php _e('** Works', IDIOMA); ?>" href="<?php echo PUNTUACION; ?>?rate=2#postform"><span></span></a> <a title="<?php _e('* Poor', IDIOMA); ?>" href="<?php echo PUNTUACION; ?>?rate=1#postform"><span></span></a> </div>
     </div>
   </div>
