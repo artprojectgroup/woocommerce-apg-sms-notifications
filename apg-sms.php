@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 0.8.1
+Version: 0.8.2
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -21,8 +21,16 @@ License: GPL2
     You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+//Definimos las constantes
+define('PLUGIN', 'WooCommerce - APG SMS Notifications');
+define('PAYPAL', 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J3RA5W3U43JTE');
+define('URL_PLUGIN', 'http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-sms-notifications');
+define('URL_IMAGEN', 'http://www.artprojectgroup.es/wp-content/artprojectgroup/woocommerce-apg-sms-notifications-582x139.jpg');
+define('PUNTUACION', 'http://wordpress.org/support/view/plugin-reviews/woocommerce-apg-sms-notifications');
+define('IDIOMA', 'apg_sms');
+
 //Carga el idioma
-load_plugin_textdomain('apg_sms', null, dirname(plugin_basename(__FILE__)) . '/lang');
+load_plugin_textdomain(IDIOMA, null, dirname(plugin_basename(__FILE__)) . '/lang');
 
 //Enlaces adicionales personalizados
 function apg_sms_enlaces($enlaces, $archivo) {
@@ -30,11 +38,12 @@ function apg_sms_enlaces($enlaces, $archivo) {
 
 	if ($archivo == $plugin) 
 	{
-		$enlaces[] = '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J3RA5W3U43JTE" target="_blank" title="' . __('Make a donation by ', 'apg_sms') . 'PayPal"><span class="icon-paypal"></span></a>';
-		$enlaces[] = '<a href="http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-sms-notifications" target="_blank" title="WooCommerce - APG SMS Notifications"><strong class="artprojectgroup">APG</strong></a>';
-		$enlaces[] = '<a href="https://www.facebook.com/artprojectgroup" title="' . __('Follow us on ', 'apg_sms') . 'Facebook" target="_blank"><span class="icon-facebook6"></span></a> <a href="https://twitter.com/artprojectgroup" title="' . __('Follow us on ', 'apg_sms') . 'Twitter" target="_blank"><span class="icon-social19"></span></a> <a href="https://plus.google.com/+ArtProjectGroupES" title="' . __('Follow us on ', 'apg_sms') . 'Google+" target="_blank"><span class="icon-google16"></span></a> <a href="http://es.linkedin.com/in/artprojectgroup" title="' . __('Follow us on ', 'apg_sms') . 'LinkedIn" target="_blank"><span class="icon-logo"></span></a>';
-		$enlaces[] = '<a href="http://profiles.wordpress.org/artprojectgroup/" title="' . __('More plugins on ', 'apg_sms') . 'WordPress" target="_blank"><span class="icon-wordpress2"></span></a>';
-		$enlaces[] = '<a href="mailto:info@artprojectgroup.es" title="' . __('Contact with us by ', 'apg_sms') . 'e-mail"><span class="icon-open21"></span></a> <a href="skype:artprojectgroup" title="' . __('Contact with us by ', 'apg_sms') . 'Skype"><span class="icon-social6"></span></a>';
+		$enlaces[] = '<a href="' . PAYPAL . '" target="_blank" title="' . __('Make a donation by ', IDIOMA) . 'PayPal"><span class="icon-paypal"></span></a>';
+		$enlaces[] = '<a href="'. URL_PLUGIN . '" target="_blank" title="' . PLUGIN . '"><strong class="artprojectgroup">APG</strong></a>';
+		$enlaces[] = '<a href="https://www.facebook.com/artprojectgroup" title="' . __('Follow us on ', IDIOMA) . 'Facebook" target="_blank"><span class="icon-facebook6"></span></a> <a href="https://twitter.com/artprojectgroup" title="' . __('Follow us on ', IDIOMA) . 'Twitter" target="_blank"><span class="icon-social19"></span></a> <a href="https://plus.google.com/+ArtProjectGroupES" title="' . __('Follow us on ', IDIOMA) . 'Google+" target="_blank"><span class="icon-google16"></span></a> <a href="http://es.linkedin.com/in/artprojectgroup" title="' . __('Follow us on ', IDIOMA) . 'LinkedIn" target="_blank"><span class="icon-logo"></span></a>';
+		$enlaces[] = '<a href="http://profiles.wordpress.org/artprojectgroup/" title="' . __('More plugins on ', IDIOMA) . 'WordPress" target="_blank"><span class="icon-wordpress2"></span></a>';
+		$enlaces[] = '<a href="mailto:info@artprojectgroup.es" title="' . __('Contact with us by ', IDIOMA) . 'e-mail"><span class="icon-open21"></span></a> <a href="skype:artprojectgroup" title="' . __('Contact with us by ', IDIOMA) . 'Skype"><span class="icon-social6"></span></a>';
+		$enlaces[] = '<div class="star-holder rate"><div style="width: 100px;" class="star-rating"></div><div class="star-rate"><a title="' . __('***** Fantastic!', IDIOMA) . '" href="' . PUNTUACION . '?rate=5#postform" target="_blank"><span></span></a> <a title="' . __('**** Great', IDIOMA) . '" href="' . PUNTUACION . '?rate=4#postform" target="_blank"><span></span></a> <a title="' . __('*** Good', IDIOMA) . '" href="' . PUNTUACION . '?rate=3#postform" target="_blank"><span></span></a> <a title="' . __('** Works', IDIOMA) . '" href="' . PUNTUACION . '?rate=2#postform" target="_blank"><span></span></a> <a title="' . __('* Poor', IDIOMA) . '" href="' . PUNTUACION . '?rate=1#postform" target="_blank"><span></span></a></div></div>';
 	}
 	
 	return $enlaces;
@@ -43,7 +52,7 @@ add_filter('plugin_row_meta', 'apg_sms_enlaces', 10, 2);
 
 //Añade el botón de configuración
 function apg_sms_enlace_de_ajustes($enlaces) { 
-	$enlace_de_ajustes = '<a href="admin.php?page=apg_sms" title="' . __('Settings of ', 'apg_sms') . 'WooCommerce - APG SMS Notifications">' . __('Settings', 'apg_sms') . '</a>'; 
+	$enlace_de_ajustes = '<a href="admin.php?page=apg_sms" title="' . __('Settings of ', IDIOMA) . PLUGIN .'">' . __('Settings', IDIOMA) . '</a>'; 
 	array_unshift($enlaces, $enlace_de_ajustes); 
 	
 	return $enlaces; 
@@ -59,7 +68,7 @@ function apg_sms_tab() {
 
 //Añade en el menú a WooCommerce
 function apg_sms_admin_menu() {
-	add_submenu_page('woocommerce', __('APG SMS Notifications', 'apg_sms'),  __('SMS Notifications', 'apg_sms') , 'manage_woocommerce', 'apg_sms', 'apg_sms_tab');
+	add_submenu_page('woocommerce', __('APG SMS Notifications', IDIOMA),  __('SMS Notifications', IDIOMA) , 'manage_woocommerce', IDIOMA, 'apg_sms_tab');
 }
 add_action('admin_menu', 'apg_sms_admin_menu', 15);
 
@@ -85,7 +94,7 @@ function apg_sms_procesa_estados($pedido) {
 
 	$pedido = new WC_Order($pedido);
 	$estado = $pedido->status;
-	$nombres_de_estado = array('on-hold' => 'Recibido', 'processing' => __('Processing', 'apg_sms'), 'completed' => __('Completed', 'apg_sms'));
+	$nombres_de_estado = array('on-hold' => 'Recibido', 'processing' => __('Processing', IDIOMA), 'completed' => __('Completed', IDIOMA));
 	foreach ($nombres_de_estado as $nombre_de_estado => $traduccion) if ($estado == $nombre_de_estado) $estado = $traduccion;
 
 	$configuracion = get_option('apg_sms_settings'); //Recoge las opciones de configuración
@@ -100,8 +109,8 @@ function apg_sms_procesa_estados($pedido) {
 		if (isset($configuracion['notificacion']) && $configuracion['notificacion'] == 1) apg_sms_envia_sms($configuracion, $configuracion['telefono'], apg_sms_procesa_variables($configuracion['mensaje_pedido'], $pedido)); //Mensaje para el propietario
 		$mensaje = apg_sms_procesa_variables($configuracion['mensaje_recibido'], $pedido);
 	}
-	else if ($estado == __('Processing', 'apg_sms')) $mensaje = apg_sms_procesa_variables($configuracion['mensaje_procesando'], $pedido);
-	else if ($estado == __('Completed', 'apg_sms')) $mensaje = apg_sms_procesa_variables($configuracion['mensaje_completado'], $pedido);
+	else if ($estado == __('Processing', IDIOMA)) $mensaje = apg_sms_procesa_variables($configuracion['mensaje_procesando'], $pedido);
+	else if ($estado == __('Completed', IDIOMA)) $mensaje = apg_sms_procesa_variables($configuracion['mensaje_completado'], $pedido);
 
 	if (!$internacional || (isset($configuracion['internacional']) && $configuracion['internacional'] == 1)) apg_sms_envia_sms($configuracion, $telefono, $mensaje);
 }
@@ -133,22 +142,22 @@ add_action('woocommerce_new_customer_note', 'apg_sms_procesa_notas', 10);
 //Envía el mensaje SMS
 function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 	//mail('info@artprojectgroup.com', 'SMS', $mensaje, "Content-Type: text/plain; charset=UTF-8\r\n");
-	if ($configuracion['servicio'] == "solutions_infini") curl("http://alerts.sinfini.com/api/web2sms.php?workingkey=" . $configuracion['clave_solutions_infini'] . "&to=" . $telefono . "&sender=" . $configuracion['identificador_solutions_infini'] . "&message=" . urlencode($mensaje));
+	if ($configuracion['servicio'] == "solutions_infini") apg_sms_curl("http://alerts.sinfini.com/api/web2sms.php?workingkey=" . $configuracion['clave_solutions_infini'] . "&to=" . $telefono . "&sender=" . $configuracion['identificador_solutions_infini'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje));
 	else if ($configuracion['servicio'] == "twillio")
 	{
 		require("lib/twilio.php");
 		$twillio = new Services_Twilio($configuracion['clave_twillio'], $configuracion['identificador_twillio']);
 		$twillio->account->messages->sendMessage($configuracion['telefono'], $telefono, $mensaje);
 	}
-	else if ($configuracion['servicio'] == "clickatell") curl("http://api.clickatell.com/http/sendmsg?api_id=" . $configuracion['identificador_clickatell'] . "&user=" . $configuracion['usuario_clickatell'] . "&password=" . $configuracion['contrasena_clickatell'] . "&to=" . $telefono . "&text=" . urlencode($mensaje));
-	else if ($configuracion['servicio'] == "clockwork") curl("https://api.clockworksms.com/http/send.aspx?key=" . $configuracion['identificador_clockwork'] . "&to=" . $telefono . "&content=" . urlencode($mensaje));
-	else if ($configuracion['servicio'] == "bulksms") curl("http://bulksms.vsms.net:5567/eapi/submission/send_sms/2/2.0?username=" . $configuracion['usuario_bulksms'] . "&password=" . $configuracion['contrasena_bulksms'] . "&message=" . urlencode($mensaje) . "&msisdn=" . $telefono);
-	else if ($configuracion['servicio'] == "open_dnd") curl("http://txn.opendnd.in/pushsms.php?username=" . $configuracion['usuario_open_dnd'] . "&password=" . $configuracion['contrasena_open_dnd'] . "&message=" . urlencode($mensaje) . "&sender=" . $configuracion['identificador_open_dnd'] . "&numbers=" . $telefono);
+	else if ($configuracion['servicio'] == "clickatell") apg_sms_curl("http://api.clickatell.com/http/sendmsg?api_id=" . $configuracion['identificador_clickatell'] . "&user=" . $configuracion['usuario_clickatell'] . "&password=" . $configuracion['contrasena_clickatell'] . "&to=" . $telefono . "&text=" . urlencode(htmlentities($mensaje, ENT_QUOTES, "UTF-8")));
+	else if ($configuracion['servicio'] == "clockwork") apg_sms_curl("https://api.clockworksms.com/http/send.aspx?key=" . $configuracion['identificador_clockwork'] . "&to=" . $telefono . "&content=" . urlencode(htmlentities($mensaje, ENT_QUOTES, "UTF-8")));
+	else if ($configuracion['servicio'] == "bulksms") apg_sms_curl("http://bulksms.vsms.net:5567/eapi/submission/send_sms/2/2.0?username=" . $configuracion['usuario_bulksms'] . "&password=" . $configuracion['contrasena_bulksms'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje) . "&msisdn=" . $telefono);
+	else if ($configuracion['servicio'] == "open_dnd") apg_sms_curl("http://txn.opendnd.in/pushsms.php?username=" . $configuracion['usuario_open_dnd'] . "&password=" . $configuracion['contrasena_open_dnd'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje) . "&sender=" . $configuracion['identificador_open_dnd'] . "&numbers=" . $telefono);
+	mail('info@artprojectgroup.com', 'SMS', $mensaje . " - ". "http://txn.opendnd.in/pushsms.php?username=" . $configuracion['usuario_open_dnd'] . "&password=" . $configuracion['contrasena_open_dnd'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje) . "&sender=" . $configuracion['identificador_open_dnd'] . "&numbers=" . $telefono, "Content-Type: text/plain; charset=UTF-8\r\n");
 }
 
 //Lee páginas externas al sitio web
-function curl($url) 
-{
+function apg_sms_curl($url) {
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_URL, $url);
@@ -158,6 +167,12 @@ function curl($url)
 	curl_close($ch);
 		
 	return utf8_encode($resultado); 
+}
+
+
+//Codifica el mensaje
+function apg_sms_codifica_el_mensaje($mensaje) {
+	return urlencode(htmlentities($mensaje, ENT_QUOTES | ENT_HTML5, "UTF-8"));
 }
 
 //Procesa el teléfono y le añade, si lo necesita, el prefijo
@@ -1135,6 +1150,6 @@ function apg_sms_muestra_mensaje() {
 add_action( 'admin_init', 'apg_sms_muestra_mensaje' );
 
 function apg_sms_actualizacion() {
-    echo '<div class="error fade" id="message"><h3>WooCommerce - APG SMS Notifications</h3><h4>' . sprintf(__("Please, update your %s. It's very important!", 'apg_sms'), '<a href="admin.php?page=apg_sms" title="' . __('Settings', 'apg_sms') . '">' . __('settings', 'apg_sms') . '</a>') . '</h4></div>';
+    echo '<div class="error fade" id="message"><h3>' . PLUGIN . '</h3><h4>' . sprintf(__("Please, update your %s. It's very important!", IDIOMA), '<a href="admin.php?page=apg_sms" title="' . __('Settings', IDIOMA) . '">' . __('settings', IDIOMA) . '</a>') . '</h4></div>';
 }
 ?>

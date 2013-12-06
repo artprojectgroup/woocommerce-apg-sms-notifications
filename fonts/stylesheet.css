@@ -12,7 +12,7 @@
 @font-face {
 	font-family: "Flaticon";
 	src: url("icon.eot");
-	src: url("icon.eot#iefix") format("embedded-opentype"),  url("icon.woff") format("woff"),  url("icon.ttf") format("truetype"),  url("icon.svg") format("svg");
+	src: url("icon.eot#iefix") format("embedded-opentype"), url("icon.woff") format("woff"), url("icon.ttf") format("truetype"), url("icon.svg") format("svg");
 	font-weight: normal;
 	font-style: normal;
 }
@@ -63,4 +63,31 @@
 }
 .icon-work:before {
 	content: "\e009";
+}
+div.star-holder {
+	display: inline-block;
+	vertical-align: text-bottom;
+}
+div.star-holder .star-rating {
+	overflow: hidden;
+	text-indent: 100%;
+	white-space: nowrap;
+}
+div.star-holder.rate .star-rate {
+	position: absolute;
+}
+div.star-holder.rate:hover .star-rating {
+	display: none;
+}
+div.star-holder .star-rate a {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+	float: right;
+	height: 17px;
+	width: 21px;
+}
+div.star-holder .star-rate a:first-child {
+	width: 14px;
+}
+div.star-holder .star-rate a:hover ~ a, div.star-holder .star-rate a:hover {
+	background: url("/wp-admin/images/stars.png?ver=20121108") no-repeat scroll left top rgba(0, 0, 0, 0);
 }
