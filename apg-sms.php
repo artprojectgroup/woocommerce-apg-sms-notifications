@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 0.8.4
+Version: 0.8.5
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -21,31 +21,33 @@ License: GPL2
     You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-//Definimos las constantes
-define('PLUGIN', 'WooCommerce - APG SMS Notifications');
-define('URI', 'woocommerce-apg-sms-notifications');
-define('PAYPAL', 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J3RA5W3U43JTE');
-define('URL_PLUGIN', 'http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-sms-notifications');
-define('URL_IMAGEN', 'http://www.artprojectgroup.es/wp-content/artprojectgroup/woocommerce-apg-sms-notifications-582x139.jpg');
-define('PUNTUACION', 'http://wordpress.org/support/view/plugin-reviews/woocommerce-apg-sms-notifications');
-define('IDIOMA', 'apg_sms');	
+//Definimos las variables
+$apg_sms = array(	'plugin' => 'WooCommerce - APG SMS Notifications', 
+					'plugin_uri' => 'woocommerce-apg-sms-notifications', 
+					'plugin_url' => 'http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-sms-notifications', 
+					'paypal' => 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J3RA5W3U43JTE', 
+					'ajustes' => 'admin.php?page=apg_sms', 
+					'imagen' => 'http://www.artprojectgroup.es/wp-content/artprojectgroup/woocommerce-apg-sms-notifications-582x139.jpg', 
+					'puntuacion' => 'http://wordpress.org/support/view/plugin-reviews/woocommerce-apg-sms-notifications');
 
 //Carga el idioma
-load_plugin_textdomain(IDIOMA, null, dirname(plugin_basename(__FILE__)) . '/lang');
+load_plugin_textdomain('apg_sms', null, dirname(plugin_basename(__FILE__)) . '/lang');
 
 //Enlaces adicionales personalizados
 function apg_sms_enlaces($enlaces, $archivo) {
+	global $apg_sms;
+	
 	$plugin = plugin_basename(__FILE__);
 
 	if ($archivo == $plugin) 
 	{
-		$plugin = apg_sms_plugin(URI);
-		$enlaces[] = '<a href="' . PAYPAL . '" target="_blank" title="' . __('Make a donation by ', IDIOMA) . 'PayPal"><span class="icon-paypal"></span></a>';
-		$enlaces[] = '<a href="'. URL_PLUGIN . '" target="_blank" title="' . PLUGIN . '"><strong class="artprojectgroup">APG</strong></a>';
-		$enlaces[] = '<a href="https://www.facebook.com/artprojectgroup" title="' . __('Follow us on ', IDIOMA) . 'Facebook" target="_blank"><span class="icon-facebook6"></span></a> <a href="https://twitter.com/artprojectgroup" title="' . __('Follow us on ', IDIOMA) . 'Twitter" target="_blank"><span class="icon-social19"></span></a> <a href="https://plus.google.com/+ArtProjectGroupES" title="' . __('Follow us on ', IDIOMA) . 'Google+" target="_blank"><span class="icon-google16"></span></a> <a href="http://es.linkedin.com/in/artprojectgroup" title="' . __('Follow us on ', IDIOMA) . 'LinkedIn" target="_blank"><span class="icon-logo"></span></a>';
-		$enlaces[] = '<a href="http://profiles.wordpress.org/artprojectgroup/" title="' . __('More plugins on ', IDIOMA) . 'WordPress" target="_blank"><span class="icon-wordpress2"></span></a>';
-		$enlaces[] = '<a href="mailto:info@artprojectgroup.es" title="' . __('Contact with us by ', IDIOMA) . 'e-mail"><span class="icon-open21"></span></a> <a href="skype:artprojectgroup" title="' . __('Contact with us by ', IDIOMA) . 'Skype"><span class="icon-social6"></span></a>';
-		$enlaces[] = '<div class="star-holder rate"><div style="width:' . esc_attr(str_replace(',', '.', $plugin['rating'])) . 'px;" class="star-rating"></div><div class="star-rate"><a title="' . __('***** Fantastic!', IDIOMA) . '" href="' . PUNTUACION . '?rate=5#postform" target="_blank"><span></span></a> <a title="' . __('**** Great', IDIOMA) . '" href="' . PUNTUACION . '?rate=4#postform" target="_blank"><span></span></a> <a title="' . __('*** Good', IDIOMA) . '" href="' . PUNTUACION . '?rate=3#postform" target="_blank"><span></span></a> <a title="' . __('** Works', IDIOMA) . '" href="' . PUNTUACION . '?rate=2#postform" target="_blank"><span></span></a> <a title="' . __('* Poor', IDIOMA) . '" href="' . PUNTUACION . '?rate=1#postform" target="_blank"><span></span></a></div></div>';
+		$plugin = apg_sms_plugin($apg_sms['plugin_uri']);
+		$enlaces[] = '<a href="' . $apg_sms['paypal'] . '" target="_blank" title="' . __('Make a donation by ', 'apg_sms') . 'PayPal"><span class="icon-paypal"></span></a>';
+		$enlaces[] = '<a href="'. $apg_sms['plugin_url'] . '" target="_blank" title="' . $apg_sms['plugin'] . '"><strong class="artprojectgroup">APG</strong></a>';
+		$enlaces[] = '<a href="https://www.facebook.com/artprojectgroup" title="' . __('Follow us on ', 'apg_sms') . 'Facebook" target="_blank"><span class="icon-facebook6"></span></a> <a href="https://twitter.com/artprojectgroup" title="' . __('Follow us on ', 'apg_sms') . 'Twitter" target="_blank"><span class="icon-social19"></span></a> <a href="https://plus.google.com/+ArtProjectGroupES" title="' . __('Follow us on ', 'apg_sms') . 'Google+" target="_blank"><span class="icon-google16"></span></a> <a href="http://es.linkedin.com/in/artprojectgroup" title="' . __('Follow us on ', 'apg_sms') . 'LinkedIn" target="_blank"><span class="icon-logo"></span></a>';
+		$enlaces[] = '<a href="http://profiles.wordpress.org/artprojectgroup/" title="' . __('More plugins on ', 'apg_sms') . 'WordPress" target="_blank"><span class="icon-wordpress2"></span></a>';
+		$enlaces[] = '<a href="mailto:info@artprojectgroup.es" title="' . __('Contact with us by ', 'apg_sms') . 'e-mail"><span class="icon-open21"></span></a> <a href="skype:artprojectgroup" title="' . __('Contact with us by ', 'apg_sms') . 'Skype"><span class="icon-social6"></span></a>';
+		$enlaces[] = '<div class="star-holder rate"><div style="width:' . esc_attr(str_replace(',', '.', $plugin['rating'])) . 'px;" class="star-rating"></div><div class="star-rate"><a title="' . __('***** Fantastic!', 'apg_sms') . '" href="' . $apg_sms['puntuacion'] . '?rate=5#postform" target="_blank"><span></span></a> <a title="' . __('**** Great', 'apg_sms') . '" href="' . $apg_sms['puntuacion'] . '?rate=4#postform" target="_blank"><span></span></a> <a title="' . __('*** Good', 'apg_sms') . '" href="' . $apg_sms['puntuacion'] . '?rate=3#postform" target="_blank"><span></span></a> <a title="' . __('** Works', 'apg_sms') . '" href="' . $apg_sms['puntuacion'] . '?rate=2#postform" target="_blank"><span></span></a> <a title="' . __('* Poor', 'apg_sms') . '" href="' . $apg_sms['puntuacion'] . '?rate=1#postform" target="_blank"><span></span></a></div></div>';
 	}
 	
 	return $enlaces;
@@ -54,7 +56,9 @@ add_filter('plugin_row_meta', 'apg_sms_enlaces', 10, 2);
 
 //Añade el botón de configuración
 function apg_sms_enlace_de_ajustes($enlaces) { 
-	$enlace_de_ajustes = '<a href="admin.php?page=apg_sms" title="' . __('Settings of ', IDIOMA) . PLUGIN .'">' . __('Settings', IDIOMA) . '</a>'; 
+	global $apg_sms;
+	
+	$enlace_de_ajustes = '<a href="' . $apg_sms['ajustes'] . '" title="' . __('Settings of ', 'apg_sms') . $apg_sms['plugin'] .'">' . __('Settings', 'apg_sms') . '</a>'; 
 	array_unshift($enlaces, $enlace_de_ajustes); 
 	
 	return $enlaces; 
@@ -70,7 +74,7 @@ function apg_sms_tab() {
 
 //Añade en el menú a WooCommerce
 function apg_sms_admin_menu() {
-	add_submenu_page('woocommerce', __('APG SMS Notifications', IDIOMA),  __('SMS Notifications', IDIOMA) , 'manage_woocommerce', IDIOMA, 'apg_sms_tab');
+	add_submenu_page('woocommerce', __('APG SMS Notifications', 'apg_sms'),  __('SMS Notifications', 'apg_sms') , 'manage_woocommerce', 'apg_sms', 'apg_sms_tab');
 }
 add_action('admin_menu', 'apg_sms_admin_menu', 15);
 
@@ -96,7 +100,7 @@ function apg_sms_procesa_estados($pedido) {
 
 	$pedido = new WC_Order($pedido);
 	$estado = $pedido->status;
-	$nombres_de_estado = array('on-hold' => 'Recibido', 'processing' => __('Processing', IDIOMA), 'completed' => __('Completed', IDIOMA));
+	$nombres_de_estado = array('on-hold' => 'Recibido', 'processing' => __('Processing', 'apg_sms'), 'completed' => __('Completed', 'apg_sms'));
 	foreach ($nombres_de_estado as $nombre_de_estado => $traduccion) if ($estado == $nombre_de_estado) $estado = $traduccion;
 
 	$configuracion = get_option('apg_sms_settings'); //Recoge las opciones de configuración
@@ -111,8 +115,8 @@ function apg_sms_procesa_estados($pedido) {
 		if (isset($configuracion['notificacion']) && $configuracion['notificacion'] == 1) apg_sms_envia_sms($configuracion, $configuracion['telefono'], apg_sms_procesa_variables($configuracion['mensaje_pedido'], $pedido)); //Mensaje para el propietario
 		$mensaje = apg_sms_procesa_variables($configuracion['mensaje_recibido'], $pedido);
 	}
-	else if ($estado == __('Processing', IDIOMA)) $mensaje = apg_sms_procesa_variables($configuracion['mensaje_procesando'], $pedido);
-	else if ($estado == __('Completed', IDIOMA)) $mensaje = apg_sms_procesa_variables($configuracion['mensaje_completado'], $pedido);
+	else if ($estado == __('Processing', 'apg_sms')) $mensaje = apg_sms_procesa_variables($configuracion['mensaje_procesando'], $pedido);
+	else if ($estado == __('Completed', 'apg_sms')) $mensaje = apg_sms_procesa_variables($configuracion['mensaje_completado'], $pedido);
 
 	if (!$internacional || (isset($configuracion['internacional']) && $configuracion['internacional'] == 1)) apg_sms_envia_sms($configuracion, $telefono, $mensaje);
 }
@@ -151,10 +155,10 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 		$twillio = new Services_Twilio($configuracion['clave_twillio'], $configuracion['identificador_twillio']);
 		$twillio->account->messages->sendMessage($configuracion['telefono'], $telefono, $mensaje);
 	}
-	else if ($configuracion['servicio'] == "clickatell") apg_sms_curl("http://api.clickatell.com/http/sendmsg?api_id=" . $configuracion['identificador_clickatell'] . "&user=" . $configuracion['usuario_clickatell'] . "&password=" . $configuracion['contrasena_clickatell'] . "&to=" . $telefono . "&text=" . apg_sms_codifica_el_mensaje(apg_sms_normaliza_mensaje($mensaje)));
+	else if ($configuracion['servicio'] == "clickatell") apg_sms_curl("http://api.clickatell.com/http/sendmsg?api_id=" . $configuracion['identificador_clickatell'] . "&user=" . $configuracion['usuario_clickatell'] . "&password=" . $configuracion['contrasena_clickatell'] . "&to=" . $telefono . "&text=" . apg_sms_codifica_el_mensaje($mensaje));
 	else if ($configuracion['servicio'] == "clockwork") apg_sms_curl("https://api.clockworksms.com/http/send.aspx?key=" . $configuracion['identificador_clockwork'] . "&to=" . $telefono . "&content=" . urlencode(htmlentities($mensaje, ENT_QUOTES, "UTF-8")));
 	else if ($configuracion['servicio'] == "bulksms") apg_sms_curl("http://bulksms.vsms.net:5567/eapi/submission/send_sms/2/2.0?username=" . $configuracion['usuario_bulksms'] . "&password=" . $configuracion['contrasena_bulksms'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje) . "&msisdn=" . $telefono);
-	else if ($configuracion['servicio'] == "open_dnd") apg_sms_curl("http://txn.opendnd.in/pushsms.php?username=" . $configuracion['usuario_open_dnd'] . "&password=" . $configuracion['contrasena_open_dnd'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje) . "&sender=" . $configuracion['identificador_open_dnd'] . "&numbers=" . $telefono);
+	else if ($configuracion['servicio'] == "open_dnd") apg_sms_curl("http://txn.opendnd.in/pushsms.php?username=" . $configuracion['usuario_open_dnd'] . "&password=" . $configuracion['contrasena_open_dnd'] . "&message=" . apg_sms_codifica_el_mensaje(apg_sms_normaliza_mensaje($mensaje)) . "&sender=" . $configuracion['identificador_open_dnd'] . "&numbers=" . $telefono);
 }
 
 //Lee páginas externas al sitio web
@@ -173,7 +177,7 @@ function apg_sms_curl($url) {
 //Normalizamos el texto
 function apg_sms_normaliza_mensaje($mensaje)
 {
-	$reemplazo = array('Š'=>'S', 'š'=>'s', 'Đ'=>'Dj', 'đ'=>'dj', 'Ž'=>'Z', 'ž'=>'z', 'Č'=>'C', 'č'=>'c', 'Ć'=>'C', 'ć'=>'c', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss', 'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e',  'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y',  'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'Ŕ'=>'R', 'ŕ'=>'r', "`" => "'", "´" => "'", "„" => ",", "`" => "'", "´" => "'", "“" => "\"", "”" => "\"", "´" => "'", "&acirc;€™" => "'", "{" => "", "~" => "", "–" => "-", "’" => "'", "!" => ".", "¡" => "");
+	$reemplazo = array('Š'=>'S', 'š'=>'s', 'Đ'=>'Dj', 'đ'=>'dj', 'Ž'=>'Z', 'ž'=>'z', 'Č'=>'C', 'č'=>'c', 'Ć'=>'C', 'ć'=>'c', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss', 'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e',  'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y',  'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'Ŕ'=>'R', 'ŕ'=>'r', "`" => "'", "´" => "'", "„" => ",", "`" => "'", "´" => "'", "“" => "\"", "”" => "\"", "´" => "'", "&acirc;€™" => "'", "{" => "", "~" => "", "–" => "-", "’" => "'", "!" => ".", "¡" => "", "?" => ".", "¿" => "");
  
 	$mensaje = str_replace(array_keys($reemplazo), array_values($reemplazo), $mensaje);
  
@@ -202,7 +206,7 @@ function apg_sms_procesa_el_telefono($pedido, $telefono, $codigo) {
 
 //Procesa las variables
 function apg_sms_procesa_variables($mensaje, $pedido, $nota = '') {
-	$variables = array("id", "order_key", "billing_first_name", "billing_last_name", "billing_company", "billing_address_1", "billing_address_2", "billing_city", "billing_postcode", "billing_country", "billing_state", "billing_email", "billing_phone", "shipping_first_name", "shipping_last_name", "shipping_company", "shipping_address_1", "shipping_address_2", "shipping_city", "shipping_postcode", "shipping_country", "shipping_state", "shipping_method", "shipping_method_title", "payment_method", "payment_method_title", "order_subtotal", "order_discount", "cart_discount", "order_tax", "order_shipping", "order_shipping_tax", "order_total", "status", "shop_name", "note"); 
+	$apg_sms = array("id", "order_key", "billing_first_name", "billing_last_name", "billing_company", "billing_address_1", "billing_address_2", "billing_city", "billing_postcode", "billing_country", "billing_state", "billing_email", "billing_phone", "shipping_first_name", "shipping_last_name", "shipping_company", "shipping_address_1", "shipping_address_2", "shipping_city", "shipping_postcode", "shipping_country", "shipping_state", "shipping_method", "shipping_method_title", "payment_method", "payment_method_title", "order_subtotal", "order_discount", "cart_discount", "order_tax", "order_shipping", "order_shipping_tax", "order_total", "status", "shop_name", "note"); 
 
 	preg_match_all("/%(.*?)%/", $mensaje, $busqueda);
 	
@@ -210,7 +214,7 @@ function apg_sms_procesa_variables($mensaje, $pedido, $nota = '') {
 	{ 
     	$variable = strtolower($variable);
 
-    	if (!in_array($variable, $variables)) continue; 
+    	if (!in_array($variable, $apg_sms)) continue; 
 
     	if ($variable != "shop_name" && $variable != "note") $mensaje = str_replace("%" . $variable . "%", $pedido->$variable, $mensaje);
 		else if ($variable == "shop_name") $mensaje = str_replace("%" . $variable . "%", get_bloginfo('name'), $mensaje);
@@ -1172,6 +1176,8 @@ function apg_sms_muestra_mensaje() {
 add_action( 'admin_init', 'apg_sms_muestra_mensaje' );
 
 function apg_sms_actualizacion() {
-    echo '<div class="error fade" id="message"><h3>' . PLUGIN . '</h3><h4>' . sprintf(__("Please, update your %s. It's very important!", IDIOMA), '<a href="admin.php?page=apg_sms" title="' . __('Settings', IDIOMA) . '">' . __('settings', IDIOMA) . '</a>') . '</h4></div>';
+	global $apg_sms;
+	
+    echo '<div class="error fade" id="message"><h3>' . $apg_sms['plugin'] . '</h3><h4>' . sprintf(__("Please, update your %s. It's very important!", 'apg_sms'), '<a href="' . $apg_sms['ajustes'] . '" title="' . __('Settings', 'apg_sms') . '">' . __('settings', 'apg_sms') . '</a>') . '</h4></div>';
 }
 ?>
