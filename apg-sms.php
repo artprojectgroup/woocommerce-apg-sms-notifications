@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 0.8
+Version: 0.8.1
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -90,12 +90,10 @@ function apg_sms_procesa_estados($pedido) {
 
 	$configuracion = get_option('apg_sms_settings'); //Recoge las opciones de configuración
 	
-	$telefono = $pedido->billing_phone;
-	
 	$internacional = $codigo = false;
 	if ($configuracion['servicio'] == "clockwork") $codigo = true;
 	$telefono = apg_sms_procesa_el_telefono($pedido, $pedido->billing_phone, $codigo);
-	if ($telefono != str_replace(array('+','-'), '', filter_var($pedido->billing_phone, FILTER_SANITIZE_NUMBER_INT))) $internacional = true;
+	if (!$codigo && $telefono != str_replace(array('+','-'), '', filter_var($pedido->billing_phone, FILTER_SANITIZE_NUMBER_INT))) $internacional = true;
 	
 	if ($estado == 'Recibido')
 	{
@@ -105,7 +103,7 @@ function apg_sms_procesa_estados($pedido) {
 	else if ($estado == __('Processing', 'apg_sms')) $mensaje = apg_sms_procesa_variables($configuracion['mensaje_procesando'], $pedido);
 	else if ($estado == __('Completed', 'apg_sms')) $mensaje = apg_sms_procesa_variables($configuracion['mensaje_completado'], $pedido);
 
-	if (!$internacional || $configuracion['internacional']) apg_sms_envia_sms($configuracion, $telefono, $mensaje);
+	if (!$internacional || (isset($configuracion['internacional']) && $configuracion['internacional'] == 1)) apg_sms_envia_sms($configuracion, $telefono, $mensaje);
 }
 add_action('woocommerce_order_status_completed', 'apg_sms_procesa_estados', 10);//Funciona cuando el pedido es marcado como completo
 add_action('woocommerce_order_status_processing', 'apg_sms_procesa_estados', 10);//Funciona cuando el pedido es marcado como procesando
@@ -119,9 +117,9 @@ add_action('woocommerce_order_status_pending_to_completed_notification', 'apg_sm
 function apg_sms_procesa_notas($datos) {
 	global $woocommerce;
 	
-	$configuracion = get_option('apg_sms_settings');
-	
 	$pedido = new WC_Order($datos['order_id']);
+	
+	$configuracion = get_option('apg_sms_settings');
 	
 	$internacional = $codigo = false;
 	if ($configuracion['servicio'] == "clockwork") $codigo = true;
