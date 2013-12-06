@@ -10,7 +10,7 @@
 }
 /* Iconos */
 @font-face {
-	font-family: "Flaticon";
+	font-family: "Icon";
 	src: url("icon.eot");
 	src: url("icon.eot#iefix") format("embedded-opentype"), url("icon.woff") format("woff"), url("icon.ttf") format("truetype"), url("icon.svg") format("svg");
 	font-weight: normal;
@@ -21,7 +21,7 @@
 	font-family: d3_euronismregular;
 }
 [class^="icon-"]:before, [class*=" icon-"]:before, [class^="icon-"]:after, [class*=" icon-"]:after {
-	font-family: Flaticon;
+	font-family: Icon!important;
 }
 [class^="icon-"]:before, [class*=" icon-"]:before, [class^="icon-"]:after, [class*=" icon-"]:after, .artprojectgroup {
 	font-style: normal;
