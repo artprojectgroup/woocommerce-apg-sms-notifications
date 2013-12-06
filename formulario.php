@@ -1,4 +1,5 @@
 <?php global $apg_sms; ?>
+
 <div class="wrap woocommerce">
   <div id="icon-woocommerce" class="icon32 icon32-woocommerce-settings">&nbsp;</div>
   <h2>
