@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 0.8.5
+Version: 0.8.6
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -68,7 +68,7 @@ add_filter("plugin_action_links_$plugin", 'apg_sms_enlace_de_ajustes');
 
 //Pinta el formulario de configuración
 function apg_sms_tab() {
-	wp_enqueue_style( 'apg_sms_hoja_de_estilo' ); //Carga la hoja de estilo
+	wp_enqueue_style('apg_sms_hoja_de_estilo'); //Carga la hoja de estilo
 	include('formulario.php');
 }
 
@@ -156,7 +156,7 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 		$twillio->account->messages->sendMessage($configuracion['telefono'], $telefono, $mensaje);
 	}
 	else if ($configuracion['servicio'] == "clickatell") apg_sms_curl("http://api.clickatell.com/http/sendmsg?api_id=" . $configuracion['identificador_clickatell'] . "&user=" . $configuracion['usuario_clickatell'] . "&password=" . $configuracion['contrasena_clickatell'] . "&to=" . $telefono . "&text=" . apg_sms_codifica_el_mensaje($mensaje));
-	else if ($configuracion['servicio'] == "clockwork") apg_sms_curl("https://api.clockworksms.com/http/send.aspx?key=" . $configuracion['identificador_clockwork'] . "&to=" . $telefono . "&content=" . urlencode(htmlentities($mensaje, ENT_QUOTES, "UTF-8")));
+	else if ($configuracion['servicio'] == "clockwork") apg_sms_curl("https://api.clockworksms.com/http/send.aspx?key=" . $configuracion['identificador_clockwork'] . "&to=" . $telefono . "&content=" . apg_sms_codifica_el_mensaje($mensaje));
 	else if ($configuracion['servicio'] == "bulksms") apg_sms_curl("http://bulksms.vsms.net:5567/eapi/submission/send_sms/2/2.0?username=" . $configuracion['usuario_bulksms'] . "&password=" . $configuracion['contrasena_bulksms'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje) . "&msisdn=" . $telefono);
 	else if ($configuracion['servicio'] == "open_dnd") apg_sms_curl("http://txn.opendnd.in/pushsms.php?username=" . $configuracion['usuario_open_dnd'] . "&password=" . $configuracion['contrasena_open_dnd'] . "&message=" . apg_sms_codifica_el_mensaje(apg_sms_normaliza_mensaje($mensaje)) . "&sender=" . $configuracion['identificador_open_dnd'] . "&numbers=" . $telefono);
 }
@@ -186,7 +186,7 @@ function apg_sms_normaliza_mensaje($mensaje)
 
 //Codifica el mensaje
 function apg_sms_codifica_el_mensaje($mensaje) {
-	return urlencode(htmlentities($mensaje, ENT_QUOTES | ENT_HTML5, "UTF-8"));
+	return urlencode(htmlentities($mensaje, ENT_QUOTES, "UTF-8"));
 }
 
 //Procesa el teléfono y le añade, si lo necesita, el prefijo
@@ -1159,21 +1159,21 @@ function apg_sms_plugin($nombre) {
 	$url = 'http://api.wordpress.org/plugins/info/1.0/';
 	$respuesta = wp_remote_post($url, array('body' => $consulta));
 	$plugin = unserialize($respuesta['body']);
-	//echo '<pre>' . print_r( $plugin, true ) . '</pre>';
+	//echo '<pre>' . print_r($plugin, true) . '</pre>';
 	
 	return get_object_vars($plugin);
 }
 
 //Comprueba si hay que mostrar el mensaje de configuración
 function apg_sms_muestra_mensaje() {
-	wp_register_style( 'apg_sms_hoja_de_estilo', plugins_url('style.css', __FILE__) ); //Carga la hoja de estilo
-	wp_register_style( 'apg_sms_fuentes', plugins_url('fonts/stylesheet.css', __FILE__) ); //Carga la hoja de estilo global
-	wp_enqueue_style( 'apg_sms_fuentes' ); //Carga la hoja de estilo global
+	wp_register_style('apg_sms_hoja_de_estilo', plugins_url('style.css', __FILE__)); //Carga la hoja de estilo
+	wp_register_style('apg_sms_fuentes', plugins_url('fonts/stylesheet.css', __FILE__)); //Carga la hoja de estilo global
+	wp_enqueue_style('apg_sms_fuentes'); //Carga la hoja de estilo global
 	
 	$configuracion = get_option('apg_sms_settings');
 	if (!isset($configuracion['mensaje_pedido']) || !isset($configuracion['mensaje_nota'])) add_action('admin_notices', 'apg_sms_actualizacion');
 }
-add_action( 'admin_init', 'apg_sms_muestra_mensaje' );
+add_action('admin_init', 'apg_sms_muestra_mensaje');
 
 function apg_sms_actualizacion() {
 	global $apg_sms;
