@@ -53,7 +53,7 @@ th.titledesc {
 	text-align: right;
 	width: 99%;
 }
-.chzn-container, input[type="text"], textarea, select {
+.chzn-container, input[type="text"], input[type="number"], textarea, select {
 	background-color: #FCFCFC;
 	border: 1px solid #E0E0E0;
 	color: #696868;
@@ -61,10 +61,10 @@ th.titledesc {
 	min-width: 188px;
 	padding: 8px 10px!important;
 }
-input[type="text"], textarea, select {
+input[type="text"], input[type="number"], textarea, select {
 	height: 30px!important;
 }
-input[type="text"], select {
+input[type="text"], input[type="number"], select {
 	max-width: 98%;
 	width: 300px!important;
 }
