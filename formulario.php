@@ -1,11 +1,9 @@
 <?php global $apg_sms; ?>
 
 <div class="wrap woocommerce">
-  <div id="icon-woocommerce" class="icon32 icon32-woocommerce-settings">&nbsp;</div>
   <h2>
     <?php _e('APG SMS Notifications Options.', 'apg_sms'); ?>
   </h2>
-  <hr />
   <?php 
 		settings_errors(); 
 		$tab = 1;
@@ -186,7 +184,7 @@
       </tr>
     </table>
     <p class="submit">
-      <input type="submit" class="button-primary" value="<?php _e('Save &raquo;', 'apg_sms'); ?>" name="submit" id="submit" tabindex="<?php echo $tab++; ?>" />
+      <input class="button-primary" type="submit" value="<?php _e('Save Changes', 'apg_sms'); ?>"  name="submit" id="submit" tabindex="<?php echo $tab++; ?>" />
     </p>
   </form>
 </div>

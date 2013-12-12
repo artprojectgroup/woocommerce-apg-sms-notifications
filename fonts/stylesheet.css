@@ -25,7 +25,6 @@
 }
 [class^="icon-"]:before, [class*=" icon-"]:before, [class^="icon-"]:after, [class*=" icon-"]:after, .artprojectgroup {
 	font-style: normal;
-	color: #333333!important;
 }
 [class^="icon-"]:hover, [class*=" icon-"]:hover, .artprojectgroup:hover {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
