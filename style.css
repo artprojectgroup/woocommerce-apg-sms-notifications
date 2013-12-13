@@ -5,6 +5,21 @@ table.form-table, .cabecera {
 	clear: none;
 	width: 70%;
 }
+.imagen {
+	border-left: 4px solid #7AD03A;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+	background-image: url(images/cabecera.jpg);
+	width: 582px;
+	height: 139px;
+	display: block;
+}
+.imagen:hover {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+	-moz-opacity: 0.8;
+	-khtml-opacity: 0.8;
+	opacity: 0.8;
+}
 div.donacion [class^="icon-"]:before, div.donacion [class*=" icon-"]:before, div.donacion [class^="icon-"]:after, div.donacion [class*=" icon-"]:after, div.donacion .artprojectgroup {
 	font-size: 20px;
 }
@@ -26,10 +41,6 @@ div.donacion > div {
 }
 div.donacion a {
 	text-decoration: none;
-}
-.cabecera img {
-	border-left: 4px solid #7AD03A;
-	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
 }
 input[type="text"], input[type="number"], textarea, select {
 	background-color: #FFFFFF;

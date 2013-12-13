@@ -16,7 +16,7 @@
   <?php include('cuadro-donacion.php'); ?>
   <form method="post" action="options.php">
     <?php settings_fields('apg_sms_settings_group'); ?>
-    <div class="cabecera"> <a href="<?php echo $apg_sms['plugin_url']; ?>" title="<?php echo $apg_sms['plugin']; ?>"><img src="<?php echo $apg_sms['imagen']; ?>" width="582" height="139" /></a> </div>
+    <div class="cabecera"> <a href="<?php echo $apg_sms['plugin_url']; ?>" title="<?php echo $apg_sms['plugin']; ?>" target="_blank"><span class="imagen"></span></a> </div>
     <table class="form-table">
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[servicio]">
