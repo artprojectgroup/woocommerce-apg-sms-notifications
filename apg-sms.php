@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 0.9.1
+Version: 0.9.2
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -167,9 +167,9 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 	else if ($configuracion['servicio'] == "clockwork") 
 	{
 		require_once("lib/class-Clockwork.php");
-	    if (!isset($clockwork)) $clockwork = new Clockwork($configuracion['identificador_clockwork']);
-    	$mensaje = array('to' => $telefono, 'message' => apg_sms_normaliza_mensaje($mensaje));
-    	$respuesta = $clockwork->send($mensaje);
+		if (!isset($clockwork)) $clockwork = new Clockwork($configuracion['identificador_clockwork']);
+		$mensaje = array('to' => $telefono, 'message' => apg_sms_normaliza_mensaje($mensaje));
+		$respuesta = $clockwork->send($mensaje);
 	}
 	else if ($configuracion['servicio'] == "bulksms") apg_sms_curl("http://bulksms.vsms.net/eapi/submission/send_sms/2/2.0?username=" . $configuracion['usuario_bulksms'] . "&password=" . $configuracion['contrasena_bulksms'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje) . "&msisdn=" . urlencode($telefono));
 	else if ($configuracion['servicio'] == "open_dnd") apg_sms_curl("http://txn.opendnd.in/pushsms.php?username=" . $configuracion['usuario_open_dnd'] . "&password=" . $configuracion['contrasena_open_dnd'] . "&message=" . apg_sms_codifica_el_mensaje(apg_sms_normaliza_mensaje($mensaje)) . "&sender=" . $configuracion['identificador_open_dnd'] . "&numbers=" . $telefono);
@@ -211,7 +211,7 @@ function apg_sms_procesa_el_telefono($pedido, $telefono, $servicio) {
 	$prefijo = apg_sms_prefijo($servicio);
 	
 	$telefono = str_replace(array('+','-'), '', filter_var($telefono, FILTER_SANITIZE_NUMBER_INT));
-	if ($woocommerce->countries->get_base_country() != $pedido->billing_country || $prefijo)
+	if ($pedido->billing_country && ($woocommerce->countries->get_base_country() != $pedido->billing_country || $prefijo))
 	{
 		$prefijo_internacional = dame_prefijo_pais($pedido->billing_country);
 		preg_match("/(\d{1,4})[0-9.\- ]+/", $telefono, $prefijo);
