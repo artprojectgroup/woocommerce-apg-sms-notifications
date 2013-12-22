@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, solutions infini, twilio, clickatell, clockwork, bulksms, open end
 Requires at least: 3.5
 Tested up to: 3.8
-Stable tag: 0.9.2
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * Clockwork.
  * BulkSMS.
  * OPEN DND.
+ * MSG91.
 * Posibilidad de informar al propietario de la tienda sobre nuevos pedidos.
 * Posibilidad de enviar, o no, SMS internacionales.
 * Inserta de forma automática el código telefónico internacional, si es necesario, al número de teléfono del cliente.
@@ -73,6 +74,8 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 1.0 =
+* Añadido soporte para MSG91.
 = 0.9.2 =
 * Arreglo en el procesamiento de números de teléfono cuando el país del cliente no existe.
 = 0.9.1 =
@@ -130,6 +133,8 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 * Versión inicial.
 
 == Upgrade Notice ==
+= 1.0 =
+* Añadido soporte para MSG91.
 = 0.9.2 =
 * Arreglo en el procesamiento de números de teléfono cuando el país del cliente no existe.
 = 0.9.1 =

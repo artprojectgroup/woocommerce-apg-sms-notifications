@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 0.9.2
+Version: 1.0
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -106,8 +106,7 @@ function apg_sms_procesa_estados($pedido) {
 	
 	$internacional = false;
 	$telefono = apg_sms_procesa_el_telefono($pedido, $pedido->billing_phone, $configuracion['servicio']);
-	$prefijo = apg_sms_prefijo($configuracion['servicio']);
-	if (!$prefijo && $telefono != str_replace(array('+','-'), '', filter_var($pedido->billing_phone, FILTER_SANITIZE_NUMBER_INT))) $internacional = true;
+	if ($pedido->billing_country && ($woocommerce->countries->get_base_country() != $pedido->billing_country)) $internacional = true;
 	
 	if ($estado == 'Recibido')
 	{
@@ -137,8 +136,7 @@ function apg_sms_procesa_notas($datos) {
 	
 	$internacional = false;
 	$telefono = apg_sms_procesa_el_telefono($pedido, $pedido->billing_phone, $configuracion['servicio']);
-	$prefijo = apg_sms_prefijo($configuracion['servicio']);
-	if (!$prefijo && $telefono != str_replace(array('+','-'), '', filter_var($pedido->billing_phone, FILTER_SANITIZE_NUMBER_INT))) $internacional = true;
+	if ($pedido->billing_country && ($woocommerce->countries->get_base_country() != $pedido->billing_country)) $internacional = true;
 	
 	if (!$internacional || (isset($configuracion['internacional']) && $configuracion['internacional'] == 1)) apg_sms_envia_sms($configuracion, $telefono, apg_sms_procesa_variables($configuracion['mensaje_nota'], $pedido, wptexturize($datos['customer_note'])));
 }
@@ -146,7 +144,6 @@ add_action('woocommerce_new_customer_note', 'apg_sms_procesa_notas', 10);
 
 //Envía el mensaje SMS
 function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
-	//mail('info@artprojectgroup.com', 'SMS', $mensaje, "Content-Type: text/plain; charset=UTF-8\r\n");
 	if ($configuracion['servicio'] == "solutions_infini") apg_sms_curl("http://alerts.sinfini.com/api/web2sms.php?workingkey=" . $configuracion['clave_solutions_infini'] . "&to=" . $telefono . "&sender=" . $configuracion['identificador_solutions_infini'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje));
 	else if ($configuracion['servicio'] == "twillio")
 	{
@@ -173,6 +170,26 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 	}
 	else if ($configuracion['servicio'] == "bulksms") apg_sms_curl("http://bulksms.vsms.net/eapi/submission/send_sms/2/2.0?username=" . $configuracion['usuario_bulksms'] . "&password=" . $configuracion['contrasena_bulksms'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje) . "&msisdn=" . urlencode($telefono));
 	else if ($configuracion['servicio'] == "open_dnd") apg_sms_curl("http://txn.opendnd.in/pushsms.php?username=" . $configuracion['usuario_open_dnd'] . "&password=" . $configuracion['contrasena_open_dnd'] . "&message=" . apg_sms_codifica_el_mensaje(apg_sms_normaliza_mensaje($mensaje)) . "&sender=" . $configuracion['identificador_open_dnd'] . "&numbers=" . $telefono);
+	else if ($configuracion['servicio'] == "msg91") 
+	{
+
+		$ch = curl_init();
+		curl_setopt_array($ch, array(
+			CURLOPT_URL => "http://control.msg91.com/sendhttp.php",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_POST => true,
+			CURLOPT_POSTFIELDS => array(
+				'authkey' => $configuracion['clave_msg91'],
+				'mobiles' => $telefono,
+				'message' => apg_sms_codifica_el_mensaje(apg_sms_normaliza_mensaje($mensaje)),
+				'sender' => $configuracion['identificador_msg91'],
+				'route' => $configuracion['ruta_msg91']
+			)
+		));
+		$respuesta = curl_exec($ch);
+		curl_close($ch);
+	}
+	//mail('info@artprojectgroup.com', 'SMS', $mensaje . print_r($respuesta,true), "Content-Type: text/plain; charset=UTF-8\r\n");
 }
 
 //Lee páginas externas al sitio web
@@ -202,6 +219,13 @@ function apg_sms_normaliza_mensaje($mensaje)
 //Codifica el mensaje
 function apg_sms_codifica_el_mensaje($mensaje) {
 	return urlencode(htmlentities($mensaje, ENT_QUOTES, "UTF-8"));
+}
+
+//Mira si necesita el prefijo telefónico internacional
+function apg_sms_prefijo($servicio) {
+	if ($servicio == "clockwork" || $servicio == "clickatell" || $servicio == "bulksms" || $servicio = "msg91") return true;
+	
+	return false;
 }
 
 //Procesa el teléfono y le añade, si lo necesita, el prefijo
@@ -239,13 +263,6 @@ function apg_sms_procesa_variables($mensaje, $pedido, $nota = '') {
 	}
 	
 	return $mensaje;
-}
-
-//Mira si necesita el prefijo telefónico internacional
-function apg_sms_prefijo($servicio) {
-	if ($servicio == "clockwork" || $servicio == "clickatell" || $servicio == "bulksms") return true;
-	
-	return false;
 }
 
 //Devuelve el código de prefijo del país

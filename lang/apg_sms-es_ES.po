@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce - APG SMS Notifications v0.9\n"
+"Project-Id-Version: WooCommerce - APG SMS Notifications v1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-12-12 20:05:04+0000\n"
+"PO-Revision-Date: 2013-12-22 11:21:06+0000\n"
 "Last-Translator: artprojectgroup <info@herves-vida.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,8 +20,8 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes"
 
-#: apg-sms.php:61
-#: apg-sms.php:551
+#: apg-sms.php:60
+#: apg-sms.php:286
 #@ apg_sms
 msgid "Settings"
 msgstr "Ajustes"
@@ -50,12 +50,12 @@ msgstr ""
 msgid "http://wordpress.org/plugins/woocommerce-apg-sms-notifications/"
 msgstr ""
 
-#: apg-sms.php:77
+#: apg-sms.php:76
 #@ apg_sms
 msgid "APG SMS Notifications"
 msgstr "APG Notificaciones SMS"
 
-#: apg-sms.php:77
+#: apg-sms.php:76
 #@ apg_sms
 msgid "SMS Notifications"
 msgstr "Notificaciones SMS"
@@ -74,21 +74,22 @@ msgstr "Clave:"
 #: formulario.php:47
 #: formulario.php:68
 #: formulario.php:110
+#: formulario.php:138
 #@ apg_sms
 msgid "Sender ID:"
 msgstr "Identificador:"
 
-#: formulario.php:131
+#: formulario.php:162
 #@ apg_sms
 msgid "Your mobile number:"
 msgstr "Tu teléfono móvil:"
 
-#: formulario.php:138
+#: formulario.php:169
 #@ apg_sms
 msgid "New order notification:"
 msgstr "Notificación de nuevo pedido:"
 
-#: formulario.php:147
+#: formulario.php:178
 #@ apg_sms
 msgid "Check if you want to send international SMS messages"
 msgstr "Habilítalo si quieres enviar mensajes SMS internacionales"
@@ -104,7 +105,7 @@ msgstr "Proveedor <abbr title=\"Short Message Service\" lang=\"en\">SMS</abbr>:"
 msgid "Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number."
 msgstr "Añade a WooCommerce notificaciones SMS a tus clientes cuando cambie el estado del pedido. Podrás recibir un mensaje SMS cuando la tienda tenga un nuevo pedido y seleccionar si quieres enviar mensajes SMS internacionales. El plugin añade automáticamente el código internacional al número de teléfono del cliente."
 
-#: formulario.php:145
+#: formulario.php:176
 #@ apg_sms
 msgid "Send international <abbr title=\"Short Message Service\" lang=\"en\">SMS</abbr>?:"
 msgstr "¿Enviar <abbr title=\"Short Message Service\" lang=\"en\">SMS</abbr> internacionales?:"
@@ -113,11 +114,6 @@ msgstr "¿Enviar <abbr title=\"Short Message Service\" lang=\"en\">SMS</abbr> in
 #@ apg_sms
 msgid "Account Sid:"
 msgstr "Sid de la cuenta:"
-
-#: formulario.php:61
-#@ apg_sms
-msgid "Auth Token:"
-msgstr "Token de autenticación:"
 
 #: formulario.php:75
 #: formulario.php:96
@@ -146,6 +142,9 @@ msgstr "Contraseña:"
 #: formulario.php:112
 #: formulario.php:119
 #: formulario.php:126
+#: formulario.php:133
+#: formulario.php:140
+#: formulario.php:147
 #, php-format
 #@ apg_sms
 msgid "The %s for your account in %s"
@@ -160,6 +159,7 @@ msgstr "clave"
 #: formulario.php:49
 #: formulario.php:70
 #: formulario.php:112
+#: formulario.php:140
 #@ apg_sms
 msgid "sender ID"
 msgstr "identificador de cuenta"
@@ -168,11 +168,6 @@ msgstr "identificador de cuenta"
 #@ apg_sms
 msgid "account Sid"
 msgstr "Sid de la cuenta"
-
-#: formulario.php:63
-#@ apg_sms
-msgid "auth token"
-msgstr "token de autenticación"
 
 #: formulario.php:77
 #: formulario.php:98
@@ -188,97 +183,97 @@ msgstr "nombre de usuario"
 msgid "password"
 msgstr "contraseña"
 
-#: formulario.php:140
+#: formulario.php:171
 #@ apg_sms
 msgid "Check if you want to receive a SMS message when there's a new order"
 msgstr "Habilítalo si quieres recibir un mensaje SMS cuando haya un nuevo pedido"
 
-#: formulario.php:133
+#: formulario.php:164
 #@ apg_sms
 msgid "The mobile number registered in your SMS gateway account and where you receive the SMS messages"
 msgstr "Número de móvil registrado en su cuenta de su proveedor SMS y donde se recibirán los mensajes SMS"
 
-#: formulario.php:183
+#: formulario.php:214
 #, php-format
 #@ apg_sms
 msgid "A note has just been added to your order No. %s: "
 msgstr "Una nota acaba de ser añadida a su pedido nº %s: "
 
-#: formulario.php:155
+#: formulario.php:186
 #, php-format
 #@ apg_sms
 msgid "Order No. %s received on "
 msgstr "Se ha recibido el pedido nº %s en "
 
-#: apg-sms.php:103
-#: apg-sms.php:118
-#: formulario.php:169
+#: apg-sms.php:102
+#: apg-sms.php:117
+#: formulario.php:200
 #@ apg_sms
 msgid "Processing"
 msgstr "Procesándose"
 
-#: apg-sms.php:103
-#: apg-sms.php:119
-#: formulario.php:176
+#: apg-sms.php:102
+#: apg-sms.php:118
+#: formulario.php:207
 #@ apg_sms
 msgid "Completed"
 msgstr "Completado"
 
-#: formulario.php:162
+#: formulario.php:193
 #, php-format
 #@ apg_sms
 msgid "Your order No. %s is received on %s. Thank you for shopping with us!"
 msgstr "Su pedido nº %s ha sido recibido en %s. ¡Gracias por comprar con nosotros!"
 
-#: formulario.php:169
-#: formulario.php:176
+#: formulario.php:200
+#: formulario.php:207
 #, php-format
 #@ apg_sms
 msgid "Thank you for shopping with us! Your order No. %s is now: "
 msgstr "¡Gracias por comprar con nosotros! Su pedido nº %s está ahora: "
 
-#: formulario.php:159
+#: formulario.php:190
 #@ apg_sms
 msgid "Order received custom message:"
 msgstr "Mensaje para pedido recibido:"
 
-#: formulario.php:166
+#: formulario.php:197
 #@ apg_sms
 msgid "Order processing custom message:"
 msgstr "Mensaje para pedido procesándose:"
 
-#: formulario.php:173
+#: formulario.php:204
 #@ apg_sms
 msgid "Order completed custom message:"
 msgstr "Mensaje para pedido completado:"
 
-#: formulario.php:152
+#: formulario.php:183
 #@ apg_sms
 msgid "Owner custom message:"
 msgstr "Mensaje para el propietario:"
 
-#: formulario.php:154
-#: formulario.php:161
-#: formulario.php:168
-#: formulario.php:175
-#: formulario.php:182
+#: formulario.php:185
+#: formulario.php:192
+#: formulario.php:199
+#: formulario.php:206
+#: formulario.php:213
 #, php-format
 #@ apg_sms
 msgid "You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_subtotal%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %shop_name% and %note%."
 msgstr "Puedes personalizar el mensaje. Recuerda que puedes utilizar estas variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_subtotal%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %shop_name% and %note%."
 
-#: formulario.php:180
+#: formulario.php:211
 #@ apg_sms
 msgid "Notes custom message:"
 msgstr "Mensaje para las notas:"
 
-#: apg-sms.php:551
+#: apg-sms.php:286
 #, php-format
 #@ apg_sms
 msgid "Please, update your %s. It's very important!"
 msgstr "Por favor, actualiza tus %s. ¡Es muy importante!"
 
-#: apg-sms.php:551
+#: apg-sms.php:286
 #@ apg_sms
 msgid "settings"
 msgstr "ajustes"
@@ -318,60 +313,60 @@ msgstr "Si te ha gustado y resultado útil este plugin, por favor, haz una donac
 msgid "Documentation and Support:"
 msgstr "Documentación y ayuda:"
 
-#: apg-sms.php:47
+#: apg-sms.php:46
 #: cuadro-donacion.php:15
 #@ apg_sms
 msgid "Follow us on "
 msgstr "Síguenos en "
 
-#: apg-sms.php:48
+#: apg-sms.php:47
 #: cuadro-donacion.php:21
 #@ apg_sms
 msgid "More plugins on "
 msgstr "Más plugins en "
 
-#: apg-sms.php:49
+#: apg-sms.php:48
 #: cuadro-donacion.php:27
 #@ apg_sms
 msgid "Contact with us by "
 msgstr "Contacta con nosotros por "
 
-#: apg-sms.php:61
+#: apg-sms.php:60
 #@ apg_sms
 msgid "Settings of "
 msgstr "Ajustes de "
 
-#: apg-sms.php:45
+#: apg-sms.php:44
 #: cuadro-donacion.php:6
 #@ apg_sms
 msgid "Make a donation by "
 msgstr "Haz una donación por "
 
-#: apg-sms.php:50
+#: apg-sms.php:49
 #: cuadro-donacion.php:39
 #@ apg_sms
 msgid "***** Fantastic!"
 msgstr "***** ¡Fantástico!"
 
-#: apg-sms.php:50
+#: apg-sms.php:49
 #: cuadro-donacion.php:39
 #@ apg_sms
 msgid "**** Great"
 msgstr "**** Genial"
 
-#: apg-sms.php:50
+#: apg-sms.php:49
 #: cuadro-donacion.php:39
 #@ apg_sms
 msgid "*** Good"
 msgstr "*** Bueno"
 
-#: apg-sms.php:50
+#: apg-sms.php:49
 #: cuadro-donacion.php:39
 #@ apg_sms
 msgid "** Works"
 msgstr "** Funciona"
 
-#: apg-sms.php:50
+#: apg-sms.php:49
 #: cuadro-donacion.php:39
 #@ apg_sms
 msgid "* Poor"
@@ -383,14 +378,49 @@ msgstr "* Pobre"
 msgid "Please, rate %s:"
 msgstr "Por favor, puntúa %s:"
 
-#. translators: plugin header field 'Version'
-#: apg-sms.php:0
-#@ apg_sms
-msgid "0.9"
-msgstr ""
-
-#: formulario.php:187
+#: formulario.php:218
 #@ apg_sms
 msgid "Save Changes"
 msgstr "Guardar cambios"
+
+#. translators: plugin header field 'Version'
+#: apg-sms.php:0
+#@ apg_sms
+msgid "1.0"
+msgstr ""
+
+#: formulario.php:63
+#@ apg_sms
+msgid "authentication token"
+msgstr "token de autenticación"
+
+#: formulario.php:131
+#@ apg_sms
+msgid "Authentication key:"
+msgstr "Clave de autenticación:"
+
+#: formulario.php:133
+#@ apg_sms
+msgid "authentication key"
+msgstr "clave de autenticación"
+
+#: formulario.php:145
+#@ apg_sms
+msgid "Route:"
+msgstr "Ruta:"
+
+#: formulario.php:147
+#@ apg_sms
+msgid "route"
+msgstr "ruta"
+
+#: formulario.php:150
+#@ apg_sms
+msgid "Default"
+msgstr "Predeterminada"
+
+#: formulario.php:61
+#@ apg_sms
+msgid "Authentication Token:"
+msgstr "Token de autenticación:"
 
