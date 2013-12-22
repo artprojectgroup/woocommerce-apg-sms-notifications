@@ -76,6 +76,7 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 == Changelog ==
 = 1.0 =
 * Añadido soporte para MSG91.
+* Arreglo de error que permitía enviar SMS internacionales a pesar de no estar seleccionada la opción.
 = 0.9.2 =
 * Arreglo en el procesamiento de números de teléfono cuando el país del cliente no existe.
 = 0.9.1 =
@@ -135,6 +136,7 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 == Upgrade Notice ==
 = 1.0 =
 * Añadido soporte para MSG91.
+* Arreglo de error que permitía enviar SMS internacionales a pesar de no estar seleccionada la opción.
 = 0.9.2 =
 * Arreglo en el procesamiento de números de teléfono cuando el país del cliente no existe.
 = 0.9.1 =
