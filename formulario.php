@@ -179,6 +179,13 @@
         <td class="forminp forminp-number"><input id="apg_sms_settings[internacional]" name="apg_sms_settings[internacional]" type="checkbox" value="1" <?php echo (isset($configuracion['internacional']) && $configuracion['internacional'] == "1" ? 'checked="checked"' : ''); ?> tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
       <tr valign="top">
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[variables]">
+            <?php _e('Custom variables:', 'apg_sms'); ?>
+          </label>
+          <img class="help_tip" data-tip="<?php _e('You can add your own variables. Each variable must be entered onto a new line without percentage character (%). Example: <code>_custom_variable_name</code><br /><code>_another_variable_name</code>.', 'apg_sms'); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
+        <td class="forminp forminp-number"><textarea id="apg_sms_settings[variables]" name="apg_sms_settings[variables]" cols="50" rows="5" tabindex="<?php echo $tab++; ?>"><?php echo stripcslashes(isset($configuracion['variables']) ? $configuracion['variables'] : ''); ?></textarea></td>
+      </tr>
+      <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[mensaje_pedido]">
             <?php _e('Owner custom message:', 'apg_sms'); ?>
           </label>

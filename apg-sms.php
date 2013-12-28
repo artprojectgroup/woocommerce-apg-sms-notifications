@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 1.0
+Version: 1.1
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -110,11 +110,11 @@ function apg_sms_procesa_estados($pedido) {
 	
 	if ($estado == 'Recibido')
 	{
-		if (isset($configuracion['notificacion']) && $configuracion['notificacion'] == 1) apg_sms_envia_sms($configuracion, $configuracion['telefono'], apg_sms_procesa_variables($configuracion['mensaje_pedido'], $pedido)); //Mensaje para el propietario
-		$mensaje = apg_sms_procesa_variables($configuracion['mensaje_recibido'], $pedido);
+		if (isset($configuracion['notificacion']) && $configuracion['notificacion'] == 1) apg_sms_envia_sms($configuracion, $configuracion['telefono'], apg_sms_procesa_variables($configuracion['mensaje_pedido'], $pedido, $configuracion['variables'])); //Mensaje para el propietario
+		$mensaje = apg_sms_procesa_variables($configuracion['mensaje_recibido'], $pedido, $configuracion['variables']);
 	}
-	else if ($estado == __('Processing', 'apg_sms')) $mensaje = apg_sms_procesa_variables($configuracion['mensaje_procesando'], $pedido);
-	else if ($estado == __('Completed', 'apg_sms')) $mensaje = apg_sms_procesa_variables($configuracion['mensaje_completado'], $pedido);
+	else if ($estado == __('Processing', 'apg_sms')) $mensaje = apg_sms_procesa_variables($configuracion['mensaje_procesando'], $pedido, $configuracion['variables']);
+	else if ($estado == __('Completed', 'apg_sms')) $mensaje = apg_sms_procesa_variables($configuracion['mensaje_completado'], $pedido, $configuracion['variables']);
 
 	if (!$internacional || (isset($configuracion['internacional']) && $configuracion['internacional'] == 1)) apg_sms_envia_sms($configuracion, $telefono, $mensaje);
 }
@@ -138,13 +138,13 @@ function apg_sms_procesa_notas($datos) {
 	$telefono = apg_sms_procesa_el_telefono($pedido, $pedido->billing_phone, $configuracion['servicio']);
 	if ($pedido->billing_country && ($woocommerce->countries->get_base_country() != $pedido->billing_country)) $internacional = true;
 	
-	if (!$internacional || (isset($configuracion['internacional']) && $configuracion['internacional'] == 1)) apg_sms_envia_sms($configuracion, $telefono, apg_sms_procesa_variables($configuracion['mensaje_nota'], $pedido, wptexturize($datos['customer_note'])));
+	if (!$internacional || (isset($configuracion['internacional']) && $configuracion['internacional'] == 1)) apg_sms_envia_sms($configuracion, $telefono, apg_sms_procesa_variables($configuracion['mensaje_nota'], $pedido, $configuracion['variables'], wptexturize($datos['customer_note'])));
 }
 add_action('woocommerce_new_customer_note', 'apg_sms_procesa_notas', 10);
 
 //Envía el mensaje SMS
 function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
-	if ($configuracion['servicio'] == "solutions_infini") apg_sms_curl("http://alerts.sinfini.com/api/web2sms.php?workingkey=" . $configuracion['clave_solutions_infini'] . "&to=" . $telefono . "&sender=" . $configuracion['identificador_solutions_infini'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje));
+	if ($configuracion['servicio'] == "solutions_infini") $respuesta = apg_sms_curl("http://alerts.sinfini.com/api/web2sms.php?workingkey=" . $configuracion['clave_solutions_infini'] . "&to=" . $telefono . "&sender=" . $configuracion['identificador_solutions_infini'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje));
 	else if ($configuracion['servicio'] == "twillio")
 	{
 		require_once("lib/twilio.php");
@@ -189,7 +189,7 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 		$respuesta = curl_exec($ch);
 		curl_close($ch);
 	}
-	//mail('info@artprojectgroup.com', 'SMS', $mensaje . print_r($respuesta,true), "Content-Type: text/plain; charset=UTF-8\r\n");
+	mail('info@artprojectgroup.com', 'SMS', $mensaje . print_r($respuesta,true), "Content-Type: text/plain; charset=UTF-8\r\n");
 }
 
 //Lee páginas externas al sitio web
@@ -246,18 +246,25 @@ function apg_sms_procesa_el_telefono($pedido, $telefono, $servicio) {
 }
 
 //Procesa las variables
-function apg_sms_procesa_variables($mensaje, $pedido, $nota = '') {
+function apg_sms_procesa_variables($mensaje, $pedido, $variables, $nota = '') {
 	$apg_sms = array("id", "order_key", "billing_first_name", "billing_last_name", "billing_company", "billing_address_1", "billing_address_2", "billing_city", "billing_postcode", "billing_country", "billing_state", "billing_email", "billing_phone", "shipping_first_name", "shipping_last_name", "shipping_company", "shipping_address_1", "shipping_address_2", "shipping_city", "shipping_postcode", "shipping_country", "shipping_state", "shipping_method", "shipping_method_title", "payment_method", "payment_method_title", "order_subtotal", "order_discount", "cart_discount", "order_tax", "order_shipping", "order_shipping_tax", "order_total", "status", "shop_name", "note"); 
 
+	$variables = str_replace(array("\r\n", "\r"), "\n", $variables);
+	$variables = explode("\n", $variables);
+
 	preg_match_all("/%(.*?)%/", $mensaje, $busqueda);
-	
+
 	foreach ($busqueda[1] as $variable) 
 	{ 
     	$variable = strtolower($variable);
 
-    	if (!in_array($variable, $apg_sms)) continue; 
+    	if (!in_array($variable, $apg_sms) && !in_array($variable, $variables)) continue;
 
-    	if ($variable != "shop_name" && $variable != "note") $mensaje = str_replace("%" . $variable . "%", $pedido->$variable, $mensaje);
+    	if ($variable != "shop_name" && $variable != "note") 
+		{
+			if (in_array($variable, $apg_sms)) $mensaje = str_replace("%" . $variable . "%", $pedido->$variable, $mensaje); //Variables estándar
+			else $mensaje = str_replace("%" . $variable . "%", $pedido->order_custom_fields[$variable][0], $mensaje); //Variables personalizadas
+		}
 		else if ($variable == "shop_name") $mensaje = str_replace("%" . $variable . "%", get_bloginfo('name'), $mensaje);
 		else if ($variable == "note") $mensaje = str_replace("%" . $variable . "%", $nota, $mensaje);
 	}

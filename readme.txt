@@ -1,10 +1,10 @@
 === WooCommerce - APG SMS Notifications ===
 Contributors: artprojectgroup
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J3RA5W3U43JTE
-Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, solutions infini, twilio, clickatell, clockwork, bulksms, open end
+Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, solutions infini, twilio, clickatell, clockwork, bulksms, open dnd, msg91
 Requires at least: 3.5
 Tested up to: 3.8
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 * También notifica por SMS las notas a los clientes.
 * Todos los mensajes son personalizables.
 * Soporta gran cantidad de variables para personalizar nuestros mensajes: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_subtotal%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %shop_name% y %note%.
+* Puedes añadir tus propias variables personalizadas.
 * Una vez configurado es totalmente automático.
 
 = Origen =
@@ -74,6 +75,8 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 1.1 =
+* Añadida posibilidad de crear nuestras propias variables personalizadas.
 = 1.0 =
 * Añadido soporte para MSG91.
 * Arreglo de error que permitía enviar SMS internacionales a pesar de no estar seleccionada la opción.
@@ -134,6 +137,8 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 * Versión inicial.
 
 == Upgrade Notice ==
+= 1.1 =
+* Añadida posibilidad de crear nuestras propias variables personalizadas.
 = 1.0 =
 * Añadido soporte para MSG91.
 * Arreglo de error que permitía enviar SMS internacionales a pesar de no estar seleccionada la opción.

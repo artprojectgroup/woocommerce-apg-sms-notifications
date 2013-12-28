@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce - APG SMS Notifications v1.0\n"
+"Project-Id-Version: WooCommerce - APG SMS Notifications v1.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-12-22 11:21:06+0000\n"
+"PO-Revision-Date: 2013-12-28 08:16:28+0000\n"
 "Last-Translator: artprojectgroup <info@herves-vida.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Textdomain-Support: yes"
 
 #: apg-sms.php:60
-#: apg-sms.php:286
+#: apg-sms.php:308
 #@ apg_sms
 msgid "Settings"
 msgstr "Ajustes"
@@ -206,14 +206,14 @@ msgid "Order No. %s received on "
 msgstr "Se ha recibido el pedido nº %s en "
 
 #: apg-sms.php:102
-#: apg-sms.php:117
+#: apg-sms.php:116
 #: formulario.php:200
 #@ apg_sms
 msgid "Processing"
 msgstr "Procesándose"
 
 #: apg-sms.php:102
-#: apg-sms.php:118
+#: apg-sms.php:117
 #: formulario.php:207
 #@ apg_sms
 msgid "Completed"
@@ -267,13 +267,13 @@ msgstr "Puedes personalizar el mensaje. Recuerda que puedes utilizar estas varia
 msgid "Notes custom message:"
 msgstr "Mensaje para las notas:"
 
-#: apg-sms.php:286
+#: apg-sms.php:308
 #, php-format
 #@ apg_sms
 msgid "Please, update your %s. It's very important!"
 msgstr "Por favor, actualiza tus %s. ¡Es muy importante!"
 
-#: apg-sms.php:286
+#: apg-sms.php:308
 #@ apg_sms
 msgid "settings"
 msgstr "ajustes"
@@ -378,16 +378,10 @@ msgstr "* Pobre"
 msgid "Please, rate %s:"
 msgstr "Por favor, puntúa %s:"
 
-#: formulario.php:218
+#: formulario.php:225
 #@ apg_sms
 msgid "Save Changes"
 msgstr "Guardar cambios"
-
-#. translators: plugin header field 'Version'
-#: apg-sms.php:0
-#@ apg_sms
-msgid "1.0"
-msgstr ""
 
 #: formulario.php:63
 #@ apg_sms
@@ -423,4 +417,20 @@ msgstr "Predeterminada"
 #@ apg_sms
 msgid "Authentication Token:"
 msgstr "Token de autenticación:"
+
+#. translators: plugin header field 'Version'
+#: apg-sms.php:0
+#@ apg_sms
+msgid "1.1"
+msgstr ""
+
+#: formulario.php:218
+#@ apg_sms
+msgid "Custom variables:"
+msgstr "Variables personalizadas:"
+
+#: formulario.php:220
+#@ apg_sms
+msgid "You can add your own variables. Each variable must be entered onto a new line without percentage character (%). Example: <code>_custom_variable_name</code><br /><code>_another_variable_name</code>."
+msgstr "Puedes añadir tus propias variables personalizadas. Cada variable debe introducirse en una nueva línea sin carácter de porcentaje (%). Por ejemplo: <code>_nombre_de_variable</code><br /><code>_otro_nombre_de_variable</code>."
 
