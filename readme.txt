@@ -75,6 +75,8 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 1.2 =
+* Arreglo de errores detectados con Twilio.
 = 1.1.1 =
 * Editada la notificación por correo electrónico al autor.
 = 1.1 =
@@ -139,6 +141,8 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 * Versión inicial.
 
 == Upgrade Notice ==
+= 1.2 =
+* Arreglo de errores detectados con Twilio.
 = 1.1.1 =
 * Editada la notificación por correo electrónico al autor.
 = 1.1 =

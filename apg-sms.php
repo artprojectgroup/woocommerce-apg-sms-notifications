@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 1.1.1
+Version: 1.2
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -149,7 +149,7 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 	{
 		require_once("lib/twilio.php");
 		if (!isset($twillio)) $twillio = new Services_Twilio($configuracion['clave_twillio'], $configuracion['identificador_twillio']);
-		$twillio->account->messages->sendMessage($configuracion['telefono'], $telefono, $mensaje);
+		$respuesta = $twillio->account->messages->create(array('To' => $telefono, 'From' => $configuracion['telefono'], 'Body' => $mensaje,));
 	}
 	else if ($configuracion['servicio'] == "clickatell") 
 	{
@@ -223,7 +223,7 @@ function apg_sms_codifica_el_mensaje($mensaje) {
 
 //Mira si necesita el prefijo telefónico internacional
 function apg_sms_prefijo($servicio) {
-	if ($servicio == "clockwork" || $servicio == "clickatell" || $servicio == "bulksms" || $servicio = "msg91") return true;
+	if ($servicio == "clockwork" || $servicio == "clickatell" || $servicio == "bulksms" || $servicio == "msg91" || $servicio == "twillio") return true;
 	
 	return false;
 }
@@ -240,6 +240,7 @@ function apg_sms_procesa_el_telefono($pedido, $telefono, $servicio) {
 		$prefijo_internacional = dame_prefijo_pais($pedido->billing_country);
 		preg_match("/(\d{1,4})[0-9.\- ]+/", $telefono, $prefijo);
 		if (strpos($prefijo[1], $prefijo_internacional) === false) $telefono = $prefijo_internacional . $telefono;
+		if ($servicio == "twillio") $telefono = "+" . $telefono;
 	}
 
 	return $telefono;
