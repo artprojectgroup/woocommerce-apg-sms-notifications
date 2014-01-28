@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 1.2
+Version: 1.3
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -291,20 +291,27 @@ function apg_sms_plugin($nombre) {
 	return get_object_vars($plugin);
 }
 
-//Comprueba si hay que mostrar el mensaje de configuración
+//Muestra el mensaje de actualización
+function apg_sms_actualizacion() {
+	global $apg_sms;
+	
+    echo '<div class="error fade" id="message"><h3>' . $apg_sms['plugin'] . '</h3><h4>' . sprintf(__("Please, update your %s. It's very important!", 'apg_sms'), '<a href="' . $apg_sms['ajustes'] . '" title="' . __('Settings', 'apg_sms') . '">' . __('settings', 'apg_sms') . '</a>') . '</h4></div>';
+}
+
+//Carga las hojas de estilo
 function apg_sms_muestra_mensaje() {
 	wp_register_style('apg_sms_hoja_de_estilo', plugins_url('style.css', __FILE__)); //Carga la hoja de estilo
 	wp_register_style('apg_sms_fuentes', plugins_url('fonts/stylesheet.css', __FILE__)); //Carga la hoja de estilo global
 	wp_enqueue_style('apg_sms_fuentes'); //Carga la hoja de estilo global
 	
 	$configuracion = get_option('apg_sms_settings');
-	if (!isset($configuracion['mensaje_pedido']) || !isset($configuracion['mensaje_nota'])) add_action('admin_notices', 'apg_sms_actualizacion');
+	if (!isset($configuracion['mensaje_pedido']) || !isset($configuracion['mensaje_nota'])) add_action('admin_notices', 'apg_sms_actualizacion'); //Comprueba si hay que mostrar el mensaje de actualización
 }
 add_action('admin_init', 'apg_sms_muestra_mensaje');
 
-function apg_sms_actualizacion() {
-	global $apg_sms;
-	
-    echo '<div class="error fade" id="message"><h3>' . $apg_sms['plugin'] . '</h3><h4>' . sprintf(__("Please, update your %s. It's very important!", 'apg_sms'), '<a href="' . $apg_sms['ajustes'] . '" title="' . __('Settings', 'apg_sms') . '">' . __('settings', 'apg_sms') . '</a>') . '</h4></div>';
+//Eliminamos todo rastro del plugin al desinstalarlo
+function apg_sms_desinstalar() {
+  delete_option('apg_sms_settings');
 }
+register_deactivation_hook( __FILE__, 'apg_sms_desinstalar' );
 ?>

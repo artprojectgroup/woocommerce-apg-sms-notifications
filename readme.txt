@@ -3,8 +3,8 @@ Contributors: artprojectgroup
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J3RA5W3U43JTE
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, solutions infini, twilio, clickatell, clockwork, bulksms, open dnd, msg91
 Requires at least: 3.5
-Tested up to: 3.8
-Stable tag: 1.1.1
+Tested up to: 3.8.1
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,8 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 1.3 =
+* Añadida nueva función que limpia la base de datos al desinstalar el plugin.
 = 1.2 =
 * Arreglo de errores detectados con Twilio.
 = 1.1.1 =
@@ -141,6 +143,8 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 * Versión inicial.
 
 == Upgrade Notice ==
+= 1.3 =
+* Añadida nueva función que limpia la base de datos al desinstalar el plugin.
 = 1.2 =
 * Arreglo de errores detectados con Twilio.
 = 1.1.1 =
