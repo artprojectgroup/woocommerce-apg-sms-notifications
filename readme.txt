@@ -4,7 +4,7 @@ Donate link: http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-ap
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, solutions infini, twilio, clickatell, clockwork, bulksms, open dnd, msg91, mvaayoo
 Requires at least: 3.5
 Tested up to: 3.8.1
-Stable tag: 1.4
+Stable tag: 1.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,6 +76,8 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 1.4.1 =
+* Comentada una línea que envía un correo electrónico automático a Art Project Group.
 = 1.4 =
 * Añadido soporte para mVaayoo.
 * Solucionado un error que enviaba mensajes duplicados a los clientes con algunos medios de pago.
@@ -149,6 +151,8 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 * Versión inicial.
 
 == Upgrade Notice ==
+= 1.4.1 =
+* Comentada una línea que envía un correo electrónico automático a Art Project Group.
 = 1.4 =
 * Añadido soporte para mVaayoo.
 * Solucionado un error que enviaba mensajes duplicados a los clientes con algunos medios de pago.
