@@ -11,8 +11,8 @@
 /* Iconos */
 @font-face {
 	font-family: "Icon";
-	src: url("icon.eot");
-	src: url("icon.eot#iefix") format("embedded-opentype"), url("icon.woff") format("woff"), url("icon.ttf") format("truetype"), url("icon.svg") format("svg");
+	src: url("icons.eot");
+	src: url("icons.eot#iefix") format("embedded-opentype"), url("icons.woff") format("woff"), url("icons.ttf") format("truetype"), url("icons.svg") format("svg");
 	font-weight: normal;
 	font-style: normal;
 }
@@ -33,19 +33,19 @@
 	-khtml-opacity: 0.8;
 	opacity: 0.8;
 }
-.icon-facebook6:before {
+.icon-bills:before {
 	content: "\e000";
 }
-.icon-google16:before {
+.icon-facebook6:before {
 	content: "\e001";
 }
-.icon-logo:before {
+.icon-google16:before {
 	content: "\e002";
 }
-.icon-open21:before {
+.icon-logo:before {
 	content: "\e003";
 }
-.icon-paypal:before {
+.icon-open21:before {
 	content: "\e004";
 }
 .icon-social19:before {

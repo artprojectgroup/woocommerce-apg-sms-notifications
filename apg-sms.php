@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 1.3
+Version: 1.4
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -25,7 +25,6 @@ License: GPL2
 $apg_sms = array(	'plugin' => 'WooCommerce - APG SMS Notifications', 
 					'plugin_uri' => 'woocommerce-apg-sms-notifications', 
 					'plugin_url' => 'http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-sms-notifications', 
-					'paypal' => 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J3RA5W3U43JTE', 
 					'ajustes' => 'admin.php?page=apg_sms', 
 					'puntuacion' => 'http://wordpress.org/support/view/plugin-reviews/woocommerce-apg-sms-notifications');
 
@@ -41,7 +40,7 @@ function apg_sms_enlaces($enlaces, $archivo) {
 	if ($archivo == $plugin) 
 	{
 		$plugin = apg_sms_plugin($apg_sms['plugin_uri']);
-		$enlaces[] = '<a href="' . $apg_sms['paypal'] . '" target="_blank" title="' . __('Make a donation by ', 'apg_sms') . 'PayPal"><span class="icon-paypal"></span></a>';
+		$enlaces[] = '<a href="' . $apg_sms['plugin_uri'] . '" target="_blank" title="' . __('Make a donation by ', 'apg_sms') . 'APG"><span class="icon-bills"></span></a>';
 		$enlaces[] = '<a href="'. $apg_sms['plugin_url'] . '" target="_blank" title="' . $apg_sms['plugin'] . '"><strong class="artprojectgroup">APG</strong></a>';
 		$enlaces[] = '<a href="https://www.facebook.com/artprojectgroup" title="' . __('Follow us on ', 'apg_sms') . 'Facebook" target="_blank"><span class="icon-facebook6"></span></a> <a href="https://twitter.com/artprojectgroup" title="' . __('Follow us on ', 'apg_sms') . 'Twitter" target="_blank"><span class="icon-social19"></span></a> <a href="https://plus.google.com/+ArtProjectGroupES" title="' . __('Follow us on ', 'apg_sms') . 'Google+" target="_blank"><span class="icon-google16"></span></a> <a href="http://es.linkedin.com/in/artprojectgroup" title="' . __('Follow us on ', 'apg_sms') . 'LinkedIn" target="_blank"><span class="icon-logo"></span></a>';
 		$enlaces[] = '<a href="http://profiles.wordpress.org/artprojectgroup/" title="' . __('More plugins on ', 'apg_sms') . 'WordPress" target="_blank"><span class="icon-wordpress2"></span></a>';
@@ -94,7 +93,7 @@ function apg_sms_registra_opciones() {
 add_action('admin_init', 'apg_sms_registra_opciones');
 
 //Procesa el SMS
-function apg_sms_procesa_estados($pedido) {
+function apg_sms_procesa_estados($pedido, $notificacion = false) {
 	global $woocommerce;
 
 	$pedido = new WC_Order($pedido);
@@ -113,18 +112,23 @@ function apg_sms_procesa_estados($pedido) {
 		if (isset($configuracion['notificacion']) && $configuracion['notificacion'] == 1) apg_sms_envia_sms($configuracion, $configuracion['telefono'], apg_sms_procesa_variables($configuracion['mensaje_pedido'], $pedido, $configuracion['variables'])); //Mensaje para el propietario
 		$mensaje = apg_sms_procesa_variables($configuracion['mensaje_recibido'], $pedido, $configuracion['variables']);
 	}
-	else if ($estado == __('Processing', 'apg_sms')) $mensaje = apg_sms_procesa_variables($configuracion['mensaje_procesando'], $pedido, $configuracion['variables']);
+	else if ($estado == __('Processing', 'apg_sms')) 
+	{
+		if (isset($configuracion['notificacion']) && $configuracion['notificacion'] == 1 && $notificacion) apg_sms_envia_sms($configuracion, $configuracion['telefono'], apg_sms_procesa_variables($configuracion['mensaje_pedido'], $pedido, $configuracion['variables'])); //Mensaje para el propietario
+		$mensaje = apg_sms_procesa_variables($configuracion['mensaje_procesando'], $pedido, $configuracion['variables']);
+	}
 	else if ($estado == __('Completed', 'apg_sms')) $mensaje = apg_sms_procesa_variables($configuracion['mensaje_completado'], $pedido, $configuracion['variables']);
 
-	if (!$internacional || (isset($configuracion['internacional']) && $configuracion['internacional'] == 1)) apg_sms_envia_sms($configuracion, $telefono, $mensaje);
+	if ((!$internacional || (isset($configuracion['internacional']) && $configuracion['internacional'] == 1)) && !$notificacion) apg_sms_envia_sms($configuracion, $telefono, $mensaje);
 }
-add_action('woocommerce_order_status_completed', 'apg_sms_procesa_estados', 10);//Funciona cuando el pedido es marcado como completo
+add_action('woocommerce_order_status_pending_to_on-hold_notification', 'apg_sms_procesa_estados', 10);//Funciona cuando el pedido es marcado como recibido
 add_action('woocommerce_order_status_processing', 'apg_sms_procesa_estados', 10);//Funciona cuando el pedido es marcado como procesando
+add_action('woocommerce_order_status_completed', 'apg_sms_procesa_estados', 10);//Funciona cuando el pedido es marcado como completo
 
-//Controlan los cambios de los pedidos
-add_action('woocommerce_order_status_pending_to_processing_notification', 'apg_sms_procesa_estados', 10);
-add_action('woocommerce_order_status_pending_to_on-hold_notification', 'apg_sms_procesa_estados', 10);
-add_action('woocommerce_order_status_pending_to_completed_notification', 'apg_sms_procesa_estados', 10);
+function apg_sms_notificacion($pedido) {
+	apg_sms_procesa_estados($pedido, true);
+}
+add_action('woocommerce_order_status_pending_to_processing_notification', 'apg_sms_notificacion', 10);//Funciona cuando el pedido es marcado directamente como procesando
 
 //Envía las notas de cliente por SMS
 function apg_sms_procesa_notas($datos) {
@@ -148,6 +152,7 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 	else if ($configuracion['servicio'] == "twillio")
 	{
 		require_once("lib/twilio.php");
+		
 		if (!isset($twillio)) $twillio = new Services_Twilio($configuracion['clave_twillio'], $configuracion['identificador_twillio']);
 		$respuesta = $twillio->account->messages->create(array('To' => $telefono, 'From' => $configuracion['telefono'], 'Body' => $mensaje,));
 	}
@@ -164,15 +169,15 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 	else if ($configuracion['servicio'] == "clockwork") 
 	{
 		require_once("lib/class-Clockwork.php");
+		
 		if (!isset($clockwork)) $clockwork = new Clockwork($configuracion['identificador_clockwork']);
 		$mensaje = array('to' => $telefono, 'message' => apg_sms_normaliza_mensaje($mensaje));
 		$respuesta = $clockwork->send($mensaje);
 	}
-	else if ($configuracion['servicio'] == "bulksms") apg_sms_curl("http://bulksms.vsms.net/eapi/submission/send_sms/2/2.0?username=" . $configuracion['usuario_bulksms'] . "&password=" . $configuracion['contrasena_bulksms'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje) . "&msisdn=" . urlencode($telefono));
-	else if ($configuracion['servicio'] == "open_dnd") apg_sms_curl("http://txn.opendnd.in/pushsms.php?username=" . $configuracion['usuario_open_dnd'] . "&password=" . $configuracion['contrasena_open_dnd'] . "&message=" . apg_sms_codifica_el_mensaje(apg_sms_normaliza_mensaje($mensaje)) . "&sender=" . $configuracion['identificador_open_dnd'] . "&numbers=" . $telefono);
+	else if ($configuracion['servicio'] == "bulksms") $respuesta = apg_sms_curl("http://bulksms.vsms.net/eapi/submission/send_sms/2/2.0?username=" . $configuracion['usuario_bulksms'] . "&password=" . $configuracion['contrasena_bulksms'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje) . "&msisdn=" . urlencode($telefono));
+	else if ($configuracion['servicio'] == "open_dnd") $respuesta = apg_sms_curl("http://txn.opendnd.in/pushsms.php?username=" . $configuracion['usuario_open_dnd'] . "&password=" . $configuracion['contrasena_open_dnd'] . "&message=" . apg_sms_codifica_el_mensaje(apg_sms_normaliza_mensaje($mensaje)) . "&sender=" . $configuracion['identificador_open_dnd'] . "&numbers=" . $telefono);
 	else if ($configuracion['servicio'] == "msg91") 
 	{
-
 		$ch = curl_init();
 		curl_setopt_array($ch, array(
 			CURLOPT_URL => "http://control.msg91.com/sendhttp.php",
@@ -189,7 +194,20 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 		$respuesta = curl_exec($ch);
 		curl_close($ch);
 	}
-	//mail('info@artprojectgroup.com', 'SMS', $mensaje . print_r($respuesta,true), "Content-Type: text/plain; charset=UTF-8\r\n");
+	else if ($configuracion['servicio'] == "mvaayoo")
+	{
+		require_once("lib/mvsms.php");
+		
+		$mvsms = new MvSMS($configuracion['usuario_mvaayoo'], $configuracion['contrasena_mvaayoo'], $configuracion['campana_mvaayoo'], $configuracion['identificador_mvaayoo']);
+		$respuesta = $mvsms->sendSMS($telefono, $mensaje);
+		$campID = $mvsms->campID;
+		if ($configuracion['campana_mvaayoo'] !== $campID)
+		{
+			$configuracion['campana_mvaayoo'] = $campID;
+			update_option('apg_sms_settings', $configuracion);
+		}        
+	}
+	mail('info@artprojectgroup.com', 'SMS', $mensaje . print_r($respuesta, true), "Content-Type: text/plain; charset=UTF-8\r\n");
 }
 
 //Lee páginas externas al sitio web
@@ -223,9 +241,9 @@ function apg_sms_codifica_el_mensaje($mensaje) {
 
 //Mira si necesita el prefijo telefónico internacional
 function apg_sms_prefijo($servicio) {
-	if ($servicio == "clockwork" || $servicio == "clickatell" || $servicio == "bulksms" || $servicio == "msg91" || $servicio == "twillio") return true;
-	
-	return false;
+    $prefijo = array("clockwork", "clickatell", "bulksms", "msg91", "twillio", "mvaayoo");
+    
+	return in_array($servicio, $prefijo);
 }
 
 //Procesa el teléfono y le añade, si lo necesita, el prefijo
@@ -284,11 +302,16 @@ function dame_prefijo_pais($pais = '') {
 function apg_sms_plugin($nombre) {
 	$argumentos = (object) array('slug' => $nombre);
 	$consulta = array('action' => 'plugin_information', 'timeout' => 15, 'request' => serialize($argumentos));
-	$url = 'http://api.wordpress.org/plugins/info/1.0/';
-	$respuesta = wp_remote_post($url, array('body' => $consulta));
-	$plugin = unserialize($respuesta['body']);
+	$respuesta = get_transient('apg_sms_plugin');
+	if (false === $respuesta) 
+	{
+		$respuesta = wp_remote_post('http://api.wordpress.org/plugins/info/1.0/', array('body' => $consulta));
+		set_transient('apg_sms_plugin', $respuesta, 24 * HOUR_IN_SECONDS);
+	}
+	if (isset($respuesta['body'])) $plugin = get_object_vars(unserialize($respuesta['body']));
+	else $plugin['rating'] = 100;
 	
-	return get_object_vars($plugin);
+	return $plugin;
 }
 
 //Muestra el mensaje de actualización
@@ -312,6 +335,7 @@ add_action('admin_init', 'apg_sms_muestra_mensaje');
 //Eliminamos todo rastro del plugin al desinstalarlo
 function apg_sms_desinstalar() {
   delete_option('apg_sms_settings');
+  delete_transient('apg_sms_plugin');
 }
 register_deactivation_hook( __FILE__, 'apg_sms_desinstalar' );
 ?>

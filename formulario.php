@@ -25,7 +25,7 @@
           <img class="help_tip" data-tip="<?php _e('Select your SMS gateway', 'apg_sms'); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><select id="apg_sms_settings[servicio]" name="apg_sms_settings[servicio]" tabindex="<?php echo $tab++; ?>">
             <?php
-            $proveedores = array("solutions_infini" => "Solutions Infini", "twillio" => "Twillio", "clickatell" => "Clickatell", "clockwork" => "Clockwork", "bulksms" => "BulkSMS", "open_dnd" => "OPEN DND", "msg91" => "MSG91");
+            $proveedores = array("solutions_infini" => "Solutions Infini", "twillio" => "Twillio", "clickatell" => "Clickatell", "clockwork" => "Clockwork", "bulksms" => "BulkSMS", "open_dnd" => "OPEN DND", "msg91" => "MSG91", "mvaayoo" => "mVaayoo");
             foreach ($proveedores as $valor => $proveedor) 
             {
 				$chequea = '';
@@ -156,6 +156,34 @@
             }
             ?>
           </select>
+      </tr>
+      <tr valign="top" class="mvaayoo"><!-- mVaayoo -->
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[usuario_mvaayoo]">
+            <?php _e('Username:', 'apg_sms'); ?>
+          </label>
+          <img class="help_tip" data-tip="<?php echo sprintf(__('The %s for your account in %s', 'apg_sms'), __('username', 'apg_sms'), "mVaayoo"); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
+        <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[usuario_mvaayoo]" name="apg_sms_settings[usuario_mvaayoo]" size="50" value="<?php echo (isset($configuracion['usuario_mvaayoo']) ? $configuracion['usuario_mvaayoo'] : ''); ?>" tabindex="<?php echo $tab++; ?>" /></td>
+      </tr>
+      <tr valign="top" class="mvaayoo"><!-- mVaayoo -->
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[contrasena_mvaayoo]">
+            <?php _e('Password:', 'apg_sms'); ?>
+          </label>
+          <img class="help_tip" data-tip="<?php echo sprintf(__('The %s for your account in %s', 'apg_sms'), __('password', 'apg_sms'), "mVaayoo"); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
+        <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[contrasena_mvaayoo]" name="apg_sms_settings[contrasena_mvaayoo]" size="50" value="<?php echo (isset($configuracion['contrasena_mvaayoo']) ? $configuracion['contrasena_mvaayoo'] : ''); ?>" tabindex="<?php echo $tab++; ?>" /></td>
+      </tr>
+      <tr valign="top" class="mvaayoo"><!-- mVaayoo -->
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[campana_mvaayoo]">
+            <?php _e('Campaign ID:', 'apg_sms'); ?>
+          </label>
+          <img class="help_tip" data-tip="<?php echo sprintf(__('The %s for your account in %s', 'apg_sms'), __('campaign ID', 'apg_sms'), "mVaayoo"); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
+        <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[campana_mvaayoo]" name="apg_sms_settings[campana_mvaayoo]" size="50" value="<?php echo (isset($configuracion['campana_mvaayoo']) ? $configuracion['campana_mvaayoo'] : ''); ?>" tabindex="<?php echo $tab++; ?>" /></td>
+      </tr>
+      <tr valign="top" class="mvaayoo"><!-- mVaayoo -->
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[identificador_mvaayoo]">
+            <?php _e('Sender ID:', 'apg_sms'); ?>
+          </label>
+          <img class="help_tip" data-tip="<?php echo sprintf(__('The %s for your account in %s', 'apg_sms'), __('sender ID', 'apg_sms'), "mVaayoo"); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
+        <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[identificador_mvaayoo]" name="apg_sms_settings[identificador_mvaayoo]" size="50" value="<?php echo (isset($configuracion['identificador_mvaayoo']) ? $configuracion['identificador_mvaayoo'] : ''); ?>" tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[telefono]">
