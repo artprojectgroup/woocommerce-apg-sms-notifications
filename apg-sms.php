@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 1.4.1
+Version: 1.4.2
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -24,6 +24,7 @@ License: GPL2
 //Definimos las variables
 $apg_sms = array(	'plugin' => 'WooCommerce - APG SMS Notifications', 
 					'plugin_uri' => 'woocommerce-apg-sms-notifications', 
+					'donacion' => 'http://www.artprojectgroup.es/donacion',
 					'plugin_url' => 'http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-sms-notifications', 
 					'ajustes' => 'admin.php?page=apg_sms', 
 					'puntuacion' => 'http://wordpress.org/support/view/plugin-reviews/woocommerce-apg-sms-notifications');
@@ -40,7 +41,7 @@ function apg_sms_enlaces($enlaces, $archivo) {
 	if ($archivo == $plugin) 
 	{
 		$plugin = apg_sms_plugin($apg_sms['plugin_uri']);
-		$enlaces[] = '<a href="' . $apg_sms['plugin_uri'] . '" target="_blank" title="' . __('Make a donation by ', 'apg_sms') . 'APG"><span class="icon-bills"></span></a>';
+		$enlaces[] = '<a href="' . $apg_sms['donacion'] . '" target="_blank" title="' . __('Make a donation by ', 'apg_sms') . 'APG"><span class="icon-bills"></span></a>';
 		$enlaces[] = '<a href="'. $apg_sms['plugin_url'] . '" target="_blank" title="' . $apg_sms['plugin'] . '"><strong class="artprojectgroup">APG</strong></a>';
 		$enlaces[] = '<a href="https://www.facebook.com/artprojectgroup" title="' . __('Follow us on ', 'apg_sms') . 'Facebook" target="_blank"><span class="icon-facebook6"></span></a> <a href="https://twitter.com/artprojectgroup" title="' . __('Follow us on ', 'apg_sms') . 'Twitter" target="_blank"><span class="icon-social19"></span></a> <a href="https://plus.google.com/+ArtProjectGroupES" title="' . __('Follow us on ', 'apg_sms') . 'Google+" target="_blank"><span class="icon-google16"></span></a> <a href="http://es.linkedin.com/in/artprojectgroup" title="' . __('Follow us on ', 'apg_sms') . 'LinkedIn" target="_blank"><span class="icon-logo"></span></a>';
 		$enlaces[] = '<a href="http://profiles.wordpress.org/artprojectgroup/" title="' . __('More plugins on ', 'apg_sms') . 'WordPress" target="_blank"><span class="icon-wordpress2"></span></a>';

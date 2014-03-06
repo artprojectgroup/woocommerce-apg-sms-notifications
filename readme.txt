@@ -1,16 +1,18 @@
 === WooCommerce - APG SMS Notifications ===
 Contributors: artprojectgroup
-Donate link: http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-sms-notifications
+Donate link: http://www.artprojectgroup.es/donacion
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, solutions infini, twilio, clickatell, clockwork, bulksms, open dnd, msg91, mvaayoo
 Requires at least: 3.5
 Tested up to: 3.8.1
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie el estado del pedido.
 
 == Description ==
+[*Español*](http://wordpress.org/plugins/woocommerce-apg-sms-notifications/) - [*English*](http://goo.gl/2xn4lj) - [*Italiano*](http://goo.gl/xgcBp3) - [*Français*](http://goo.gl/uIOZLe) - [*Deutsch*](http://goo.gl/Zl1vGp) 
+
 **WooCommerce - APG SMS Notifications** añade a tu tienda WooCommerce la posibilidad de enviar notificaciones SMS al cliente cada vez que cambie el estado del pedido. También notifica al propietario, si así lo desea, cuando la tienda tenga un nuevo pedido.
 
 = Características =
@@ -56,7 +58,7 @@ Recuerda que puedes encontrar más plugin para WordPress en [Art Project Group](
  * Buscar **WooCommerce - APG SMS Notifications** en el buscador disponible en *Plugins -> Añadir nuevo* y pulsar el botón *Instalar ahora*.
 2. Activar el plugin a través del menú *Plugins* en el Panel de Administración de WordPress.
 3. Configurar el plugin en *WooCommerce -> Ajustes -> Envío* o a través del botón *Ajustes*.
-4. Listo, ahora ya puedes disfrutar de él, y si te gusta y te resulta útil, hacer una [*donación*](http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-sms-notifications).
+4. Listo, ahora ya puedes disfrutar de él, y si te gusta y te resulta útil, hacer una [*donación*](http://www.artprojectgroup.es/donacion).
 
 
 == Frequently asked questions ==
@@ -76,6 +78,8 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 1.4.2 =
+* Cambio del enlace de donación.
 = 1.4.1 =
 * Comentada una línea que envía un correo electrónico automático a Art Project Group.
 = 1.4 =
@@ -151,6 +155,8 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 * Versión inicial.
 
 == Upgrade Notice ==
+= 1.4.2 =
+* Cambio del enlace de donación.
 = 1.4.1 =
 * Comentada una línea que envía un correo electrónico automático a Art Project Group.
 = 1.4 =
@@ -237,7 +243,7 @@ Por ello regalamos a esa gran comunidad hispana nuestros plugins con interfaces,
 Esperamos que os guste nuestra iniciativa.
 
 == Donación ==
-¿Te ha gustado y te ha resultado útil **WooCommerce - APG SMS Notifications** en tu sitio web? Te agradeceríamos una [pequeña donación](http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-sms-notifications) que nos ayudará a seguir mejorando este plugin y a crear más plugins totalmente gratuitos para toda la comunidad WordPress.
+¿Te ha gustado y te ha resultado útil **WooCommerce - APG SMS Notifications** en tu sitio web? Te agradeceríamos una [pequeña donación](http://www.artprojectgroup.es/donacion) que nos ayudará a seguir mejorando este plugin y a crear más plugins totalmente gratuitos para toda la comunidad WordPress.
 
 == Gracias ==
 * A [Chirag Vora](http://profiles.wordpress.org/chirag740) por habernos inspirado para crear **WooCommerce - APG SMS Notifications**.

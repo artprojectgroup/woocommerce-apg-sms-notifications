@@ -3,7 +3,7 @@
   <p>
     <?php _e('If you enjoyed and find helpful this plugin, please make a donation:', 'apg_sms'); ?>
   </p>
-  <p><a href="<?php echo $apg_sms['plugin_uri']; ?>" target="_blank" title="<?php _e('Make a donation by ', 'apg_sms'); ?>APG"><span class="icon-bills"></span></a></p>
+  <p><a href="<?php echo $apg_sms['donacion']; ?>" target="_blank" title="<?php _e('Make a donation by ', 'apg_sms'); ?>APG"><span class="icon-bills"></span></a></p>
   <div>
     <p>Art Project Group:</p>
     <p><a href="http://www.artprojectgroup.es" title="Art Project Group" target="_blank"><strong class="artprojectgroup">APG</strong></a></p>
