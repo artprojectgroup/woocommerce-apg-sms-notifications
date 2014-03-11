@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 1.4.2
+Version: 1.5
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -149,7 +149,8 @@ add_action('woocommerce_new_customer_note', 'apg_sms_procesa_notas', 10);
 
 //Envía el mensaje SMS
 function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
-	if ($configuracion['servicio'] == "solutions_infini") $respuesta = apg_sms_curl("http://alerts.sinfini.com/api/web2sms.php?workingkey=" . $configuracion['clave_solutions_infini'] . "&to=" . $telefono . "&sender=" . $configuracion['identificador_solutions_infini'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje));
+	if ($configuracion['servicio'] == "voipstunt") $respuesta = wp_remote_get("https://www.voipstunt.com/myaccount/sendsms.php?username=" . $configuracion['usuario_voipstunt'] . "&password=" . $configuracion['contrasena_voipstunt'] . "&from=" . $configuracion['telefono'] . "&to=" . $telefono . "&text=" . apg_sms_codifica_el_mensaje($mensaje));
+	else if ($configuracion['servicio'] == "solutions_infini") $respuesta = wp_remote_get("http://alerts.sinfini.com/api/web2sms.php?workingkey=" . $configuracion['clave_solutions_infini'] . "&to=" . $telefono . "&sender=" . $configuracion['identificador_solutions_infini'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje));
 	else if ($configuracion['servicio'] == "twillio")
 	{
 		require_once("lib/twilio.php");
@@ -175,25 +176,18 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 		$mensaje = array('to' => $telefono, 'message' => apg_sms_normaliza_mensaje($mensaje));
 		$respuesta = $clockwork->send($mensaje);
 	}
-	else if ($configuracion['servicio'] == "bulksms") $respuesta = apg_sms_curl("http://bulksms.vsms.net/eapi/submission/send_sms/2/2.0?username=" . $configuracion['usuario_bulksms'] . "&password=" . $configuracion['contrasena_bulksms'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje) . "&msisdn=" . urlencode($telefono));
-	else if ($configuracion['servicio'] == "open_dnd") $respuesta = apg_sms_curl("http://txn.opendnd.in/pushsms.php?username=" . $configuracion['usuario_open_dnd'] . "&password=" . $configuracion['contrasena_open_dnd'] . "&message=" . apg_sms_codifica_el_mensaje(apg_sms_normaliza_mensaje($mensaje)) . "&sender=" . $configuracion['identificador_open_dnd'] . "&numbers=" . $telefono);
+	else if ($configuracion['servicio'] == "bulksms") $respuesta = wp_remote_get("http://bulksms.vsms.net/eapi/submission/send_sms/2/2.0?username=" . $configuracion['usuario_bulksms'] . "&password=" . $configuracion['contrasena_bulksms'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje) . "&msisdn=" . urlencode($telefono));
+	else if ($configuracion['servicio'] == "open_dnd") $respuesta = wp_remote_get("http://txn.opendnd.in/pushsms.php?username=" . $configuracion['usuario_open_dnd'] . "&password=" . $configuracion['contrasena_open_dnd'] . "&message=" . apg_sms_codifica_el_mensaje(apg_sms_normaliza_mensaje($mensaje)) . "&sender=" . $configuracion['identificador_open_dnd'] . "&numbers=" . $telefono);
 	else if ($configuracion['servicio'] == "msg91") 
 	{
-		$ch = curl_init();
-		curl_setopt_array($ch, array(
-			CURLOPT_URL => "http://control.msg91.com/sendhttp.php",
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_POST => true,
-			CURLOPT_POSTFIELDS => array(
+		$argumentos['body'] = array(
 				'authkey' => $configuracion['clave_msg91'],
 				'mobiles' => $telefono,
 				'message' => apg_sms_codifica_el_mensaje(apg_sms_normaliza_mensaje($mensaje)),
 				'sender' => $configuracion['identificador_msg91'],
 				'route' => $configuracion['ruta_msg91']
-			)
-		));
-		$respuesta = curl_exec($ch);
-		curl_close($ch);
+			);
+		$respuesta = wp_remote_post("http://control.msg91.com/sendhttp.php", $argumentos);
 	}
 	else if ($configuracion['servicio'] == "mvaayoo")
 	{
@@ -209,20 +203,6 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 		}        
 	}
 	//mail('info@artprojectgroup.com', 'SMS', $mensaje . print_r($respuesta, true), "Content-Type: text/plain; charset=UTF-8\r\n");
-}
-
-//Lee páginas externas al sitio web
-function apg_sms_curl($url) {
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_POST, 1);
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
-	$resultado = curl_exec ($ch);
-	curl_close($ch);
-		
-	return utf8_encode($resultado); 
 }
 
 //Normalizamos el texto
@@ -242,7 +222,7 @@ function apg_sms_codifica_el_mensaje($mensaje) {
 
 //Mira si necesita el prefijo telefónico internacional
 function apg_sms_prefijo($servicio) {
-    $prefijo = array("clockwork", "clickatell", "bulksms", "msg91", "twillio", "mvaayoo");
+    $prefijo = array("voipstunt", "clockwork", "clickatell", "bulksms", "msg91", "twillio", "mvaayoo");
     
 	return in_array($servicio, $prefijo);
 }

@@ -25,7 +25,7 @@
           <img class="help_tip" data-tip="<?php _e('Select your SMS gateway', 'apg_sms'); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><select id="apg_sms_settings[servicio]" name="apg_sms_settings[servicio]" tabindex="<?php echo $tab++; ?>">
             <?php
-            $proveedores = array("solutions_infini" => "Solutions Infini", "twillio" => "Twillio", "clickatell" => "Clickatell", "clockwork" => "Clockwork", "bulksms" => "BulkSMS", "open_dnd" => "OPEN DND", "msg91" => "MSG91", "mvaayoo" => "mVaayoo");
+            $proveedores = array("voipstunt" => "VoipStunt", "solutions_infini" => "Solutions Infini", "twillio" => "Twillio", "clickatell" => "Clickatell", "clockwork" => "Clockwork", "bulksms" => "BulkSMS", "open_dnd" => "OPEN DND", "msg91" => "MSG91", "mvaayoo" => "mVaayoo");
             foreach ($proveedores as $valor => $proveedor) 
             {
 				$chequea = '';
@@ -34,6 +34,20 @@
             }
             ?>
           </select></td>
+      </tr>
+      <tr valign="top" class="voipstunt"><!-- VoipStunt -->
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[usuario_voipstunt]">
+            <?php _e('Username:', 'apg_sms'); ?>
+          </label>
+          <img class="help_tip" data-tip="<?php echo sprintf(__('The %s for your account in %s', 'apg_sms'), __('username', 'apg_sms'), "VoipStunt"); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
+        <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[usuario_voipstunt]" name="apg_sms_settings[usuario_voipstunt]" size="50" value="<?php echo (isset($configuracion['usuario_voipstunt']) ? $configuracion['usuario_voipstunt'] : ''); ?>" tabindex="<?php echo $tab++; ?>" /></td>
+      </tr>
+      <tr valign="top" class="voipstunt"><!-- VoipStunt -->
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[contrasena_voipstunt]">
+            <?php _e('Password:', 'apg_sms'); ?>
+          </label>
+          <img class="help_tip" data-tip="<?php echo sprintf(__('The %s for your account in %s', 'apg_sms'), __('password', 'apg_sms'), "VoipStunt"); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
+        <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[contrasena_voipstunt]" name="apg_sms_settings[contrasena_voipstunt]" size="50" value="<?php echo (isset($configuracion['contrasena_voipstunt']) ? $configuracion['contrasena_voipstunt'] : ''); ?>" tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
       <tr valign="top" class="solutions_infini"><!-- Solutions Infini -->
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[clave_solutions_infini]">

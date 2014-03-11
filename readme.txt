@@ -1,10 +1,10 @@
 === WooCommerce - APG SMS Notifications ===
 Contributors: artprojectgroup
 Donate link: http://www.artprojectgroup.es/donacion
-Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, solutions infini, twilio, clickatell, clockwork, bulksms, open dnd, msg91, mvaayoo
+Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, voipstunt, solutions infini, twilio, clickatell, clockwork, bulksms, open dnd, msg91, mvaayoo
 Requires at least: 3.5
 Tested up to: 3.8.1
-Stable tag: 1.4.2
+Stable tag: 1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,6 +17,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 
 = Características =
 * Soporte de múltiples proveedores SMS:
+ * VoipStunt.
  * Solutions Infini.
  * Twillio.
  * Clickatell.
@@ -78,6 +79,9 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 1.5 =
+* Soporte para VoipStunt.
+* Eliminación de CURL por las funciones nativas de WordPress. 
 = 1.4.2 =
 * Cambio del enlace de donación.
 = 1.4.1 =
@@ -155,6 +159,10 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 * Versión inicial.
 
 == Upgrade Notice ==
+== Changelog ==
+= 1.5 =
+* Soporte para VoipStunt.
+* Eliminación de CURL por las funciones nativas de WordPress. 
 = 1.4.2 =
 * Cambio del enlace de donación.
 = 1.4.1 =
