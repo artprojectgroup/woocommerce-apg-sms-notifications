@@ -4,7 +4,7 @@ Donate link: http://www.artprojectgroup.es/donacion
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, voipstunt, solutions infini, twilio, clickatell, clockwork, bulksms, open dnd, msg91, mvaayoo
 Requires at least: 3.5
 Tested up to: 3.8.1
-Stable tag: 1.5
+Stable tag: 1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,6 +12,8 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 
 == Description ==
 [*Español*](http://wordpress.org/plugins/woocommerce-apg-sms-notifications/) - [*English*](http://goo.gl/2xn4lj) - [*Italiano*](http://goo.gl/xgcBp3) - [*Français*](http://goo.gl/uIOZLe) - [*Deutsch*](http://goo.gl/Zl1vGp) 
+
+**IMPORTANTE: *WooCommerce - APG SMS Notifications* requiere WooCommerce 2.1.0 o superior.**
 
 **WooCommerce - APG SMS Notifications** añade a tu tienda WooCommerce la posibilidad de enviar notificaciones SMS al cliente cada vez que cambie el estado del pedido. También notifica al propietario, si así lo desea, cuando la tienda tenga un nuevo pedido.
 
@@ -31,7 +33,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 * Inserta de forma automática el código telefónico internacional, si es necesario, al número de teléfono del cliente.
 * También notifica por SMS las notas a los clientes.
 * Todos los mensajes son personalizables.
-* Soporta gran cantidad de variables para personalizar nuestros mensajes: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_subtotal%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %shop_name% y %note%.
+* Soporta gran cantidad de variables para personalizar nuestros mensajes: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name% y %note%.
 * Puedes añadir tus propias variables personalizadas.
 * Una vez configurado es totalmente automático.
 
@@ -79,6 +81,9 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 1.6 =
+* Arreglo del código que traduce las variables de WooCommerce y las variables personalizadas de otros plugins. **Ojo: No es compatible con versiones anteriores a WooCommerce 2.1.0.**
+* Actualizada la lista de las variables preestablecidas soportadas.
 = 1.5 =
 * Soporte para VoipStunt.
 * Eliminación de CURL por las funciones nativas de WordPress. 
@@ -160,6 +165,9 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 
 == Upgrade Notice ==
 == Changelog ==
+= 1.6 =
+* Arreglo del código que traduce las variables de WooCommerce y las variables personalizadas de otros plugins. **Ojo: No es compatible con versiones anteriores a WooCommerce 2.1.0.**
+* Actualizada la lista de las variables preestablecidas soportadas.
 = 1.5 =
 * Soporte para VoipStunt.
 * Eliminación de CURL por las funciones nativas de WordPress. 

@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 1.5
+Version: 1.6
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -247,23 +247,24 @@ function apg_sms_procesa_el_telefono($pedido, $telefono, $servicio) {
 
 //Procesa las variables
 function apg_sms_procesa_variables($mensaje, $pedido, $variables, $nota = '') {
-	$apg_sms = array("id", "order_key", "billing_first_name", "billing_last_name", "billing_company", "billing_address_1", "billing_address_2", "billing_city", "billing_postcode", "billing_country", "billing_state", "billing_email", "billing_phone", "shipping_first_name", "shipping_last_name", "shipping_company", "shipping_address_1", "shipping_address_2", "shipping_city", "shipping_postcode", "shipping_country", "shipping_state", "shipping_method", "shipping_method_title", "payment_method", "payment_method_title", "order_subtotal", "order_discount", "cart_discount", "order_tax", "order_shipping", "order_shipping_tax", "order_total", "status", "shop_name", "note"); 
+	$apg_sms = array("id", "status", "prices_include_tax", "tax_display_cart", "display_totals_ex_tax", "display_cart_ex_tax", "order_date", "modified_date", "customer_message", "customer_note", "post_status", "shop_name", "note");
+	$apg_sms_variables = array("order_key", "billing_first_name", "billing_last_name", "billing_company", "billing_address_1", "billing_address_2", "billing_city", "billing_postcode", "billing_country", "billing_state", "billing_email", "billing_phone", "shipping_first_name", "shipping_last_name", "shipping_company", "shipping_address_1", "shipping_address_2", "shipping_city", "shipping_postcode", "shipping_country", "shipping_state", "shipping_method", "shipping_method_title", "payment_method", "payment_method_title", "order_discount", "cart_discount", "order_tax", "order_shipping", "order_shipping_tax", "order_total"); //Hay que añadirles un guión
+	$variables = explode("\n", str_replace(array("\r\n", "\r"), "\n", $variables));
 
-	$variables = str_replace(array("\r\n", "\r"), "\n", $variables);
-	$variables = explode("\n", $variables);
+	$variables_personalizadas = get_post_custom($pedido->id); //WooCommerce 2.1
 
 	preg_match_all("/%(.*?)%/", $mensaje, $busqueda);
-
 	foreach ($busqueda[1] as $variable) 
 	{ 
     	$variable = strtolower($variable);
 
-    	if (!in_array($variable, $apg_sms) && !in_array($variable, $variables)) continue;
+    	if (!in_array($variable, $apg_sms) && !in_array($variable, $apg_sms_variables) && !in_array($variable, $variables)) continue;
 
     	if ($variable != "shop_name" && $variable != "note") 
 		{
-			if (in_array($variable, $apg_sms)) $mensaje = str_replace("%" . $variable . "%", $pedido->$variable, $mensaje); //Variables estándar
-			else $mensaje = str_replace("%" . $variable . "%", $pedido->order_custom_fields[$variable][0], $mensaje); //Variables personalizadas
+			if (in_array($variable, $apg_sms)) $mensaje = str_replace("%" . $variable . "%", $pedido->$variable, $mensaje); //Variables estándar - Objeto
+			else if (in_array($variable, $apg_sms_variables)) $mensaje = str_replace("%" . $variable . "%", $variables_personalizadas["_" . $variable][0], $mensaje); //Variables estándar - Array
+			else if (isset($variables_personalizadas[$variable])) $mensaje = str_replace("%" . $variable . "%", $variables_personalizadas[$variable][0], $mensaje); //Variables personalizadas
 		}
 		else if ($variable == "shop_name") $mensaje = str_replace("%" . $variable . "%", get_bloginfo('name'), $mensaje);
 		else if ($variable == "note") $mensaje = str_replace("%" . $variable . "%", $nota, $mensaje);
