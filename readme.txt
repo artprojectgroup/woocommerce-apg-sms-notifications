@@ -1,10 +1,10 @@
 === WooCommerce - APG SMS Notifications ===
 Contributors: artprojectgroup
 Donate link: http://www.artprojectgroup.es/donacion
-Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, voipstunt, solutions infini, twilio, clickatell, clockwork, bulksms, open dnd, msg91, mvaayoo
+Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, voipstunt, solutions infini, twilio, clickatell, clockwork, bulksms, open dnd, msg91, mvaayoo, custom order statuses & actions
 Requires at least: 3.5
 Tested up to: 3.8.1
-Stable tag: 1.6
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * mVaayoo.
 * Posibilidad de informar al propietario de la tienda sobre nuevos pedidos.
 * Posibilidad de enviar, o no, SMS internacionales.
+* Soporte de los estados personalizados del plugin [Custom Order Statuses & Actions](http://codecanyon.net/item/woocommerce-custom-order-status-actions/6392174).
 * Inserta de forma automática el código telefónico internacional, si es necesario, al número de teléfono del cliente.
 * También notifica por SMS las notas a los clientes.
 * Todos los mensajes son personalizables.
@@ -81,6 +82,11 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.0 =
+* Añadido soporte de los estados personalizados del plugin [Custom Order Statuses & Actions](http://codecanyon.net/item/woocommerce-custom-order-status-actions/6392174). **Actualización patrocinada por [Chirag Vora](http://profiles.wordpress.org/chirag740)**.
+* Arreglos menores del código encargado de mostrar las variables de WooCommerce.
+* Actualización de la apariencia de los campos de selección.
+* Actualización de la captura de pantalla.
 = 1.6 =
 * Arreglo del código que traduce las variables de WooCommerce y las variables personalizadas de otros plugins. **Ojo: No es compatible con versiones anteriores a WooCommerce 2.1.0.**
 * Actualizada la lista de las variables preestablecidas soportadas.
@@ -164,7 +170,11 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 * Versión inicial.
 
 == Upgrade Notice ==
-== Changelog ==
+= 2.0 =
+* Añadido soporte de los estados personalizados del plugin [Custom Order Statuses & Actions](http://codecanyon.net/item/woocommerce-custom-order-status-actions/6392174). **Actualización patrocinada por [Chirag Vora](http://profiles.wordpress.org/chirag740)**.
+* Arreglos menores del código encargado de mostrar las variables de WooCommerce.
+* Actualización de la apariencia de los campos de selección.
+* Actualización de la captura de pantalla.
 = 1.6 =
 * Arreglo del código que traduce las variables de WooCommerce y las variables personalizadas de otros plugins. **Ojo: No es compatible con versiones anteriores a WooCommerce 2.1.0.**
 * Actualizada la lista de las variables preestablecidas soportadas.

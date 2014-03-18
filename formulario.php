@@ -8,6 +8,8 @@
 		settings_errors(); 
 		$tab = 1;
 		$configuracion = get_option('apg_sms_settings');
+
+	global $woocommerce;
   ?>
   <h3><a href="<?php echo $apg_sms['plugin_url']; ?>" title="Art Project Group"><?php echo $apg_sms['plugin']; ?></a></h3>
   <p>
@@ -23,13 +25,12 @@
             <?php _e('<abbr title="Short Message Service" lang="en">SMS</abbr> gateway:', 'apg_sms'); ?>
           </label>
           <img class="help_tip" data-tip="<?php _e('Select your SMS gateway', 'apg_sms'); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
-        <td class="forminp forminp-number"><select id="apg_sms_settings[servicio]" name="apg_sms_settings[servicio]" tabindex="<?php echo $tab++; ?>">
+        <td class="forminp forminp-number"><select class="chosen_select servicio" id="apg_sms_settings[servicio]" name="apg_sms_settings[servicio]" style="width: 450px;" tabindex="<?php echo $tab++; ?>">
             <?php
             $proveedores = array("voipstunt" => "VoipStunt", "solutions_infini" => "Solutions Infini", "twillio" => "Twillio", "clickatell" => "Clickatell", "clockwork" => "Clockwork", "bulksms" => "BulkSMS", "open_dnd" => "OPEN DND", "msg91" => "MSG91", "mvaayoo" => "mVaayoo");
             foreach ($proveedores as $valor => $proveedor) 
             {
-				$chequea = '';
-				if (isset($configuracion['servicio']) && $configuracion['servicio'] == $valor) $chequea = ' selected="selected"';
+				$chequea = (isset($configuracion['servicio']) && $configuracion['servicio'] == $valor) ? ' selected="selected"' : '';
 				echo '<option value="' . $valor . '"' . $chequea . '>' . $proveedor . '</option>' . PHP_EOL;
             }
             ?>
@@ -220,6 +221,43 @@
           <img class="help_tip" data-tip="<?php _e('Check if you want to send international SMS messages', 'apg_sms'); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><input id="apg_sms_settings[internacional]" name="apg_sms_settings[internacional]" type="checkbox" value="1" <?php echo (isset($configuracion['internacional']) && $configuracion['internacional'] == "1" ? 'checked="checked"' : ''); ?> tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
+      <?php if (function_exists('wc_custom_status_init')) { ?>
+      <tr valign="top">
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[estados_personalizados]">
+            <?php _e('Custom Order Statuses & Actions:', 'apg_sms'); ?>
+          </label>
+          <img class="help_tip" data-tip="<?php _e('Select your own statuses.', 'apg_sms'); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
+        <td class="forminp forminp-number"><select multiple="multiple" class="multiselect chosen_select estados_personalizados" id="apg_sms_settings[estados_personalizados]" name="apg_sms_settings[estados_personalizados][]" style="width: 450px;" tabindex="<?php echo $tab++; ?>">
+            <?php							
+				$lista_de_estados = WC_Custom_Status::get_status_list();
+				foreach ($lista_de_estados as $estado)
+				{
+					if ($estado)
+					{
+						$estados_personalizados = new WC_Custom_Status();
+						$estados_personalizados->load_status_from_db($estado);
+						if ($estados_personalizados->sends_email)
+						{
+							$chequea = '';
+							foreach ($configuracion['estados_personalizados'] as $estado_personalizado) 
+							{
+								if ($estado_personalizado == $estado) $chequea = ' selected="selected"';
+							}
+							echo '<option value="' . $estado . '"' . $chequea . '>' . ucfirst($estado) . '</option>' . PHP_EOL;
+						}
+					}
+				}
+            ?>
+          </select></td>
+      </tr>
+      <?php foreach ($lista_de_estados as $estados_personalizados) { ?>
+      <tr valign="top" class="<?php echo $estados_personalizados; ?>"><!-- <?php echo ucfirst($estados_personalizados); ?> -->
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[<?php echo $estados_personalizados; ?>]"> <?php echo sprintf(__('%s state custom message:', 'apg_sms'), ucfirst($estados_personalizados)); ?> </label>
+          <img class="help_tip" data-tip="<?php _e('You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name% and %note%.', 'apg_sms'); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
+        <td class="forminp forminp-number"><textarea id="apg_sms_settings[<?php echo $estados_personalizados; ?>]" name="apg_sms_settings[<?php echo $estados_personalizados; ?>]" cols="50" rows="5" tabindex="<?php echo $tab++; ?>"><?php echo stripcslashes(isset($configuracion[$estados_personalizados]) ? $configuracion[$estados_personalizados] : ""); ?></textarea></td>
+      </tr>
+      <?php } ?>
+      <?php } ?>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[variables]">
             <?php _e('Custom variables:', 'apg_sms'); ?>
@@ -270,19 +308,36 @@
 </div>
 <script type="text/javascript">
 jQuery(document).ready(function($) {	
-	$('select').on('change', function () {
-		control($(this).val());
-	});
-
-	var control = function(capa) {
+	$('.servicio').on('change', function () { control($(this).val()); });
+	var control = function(capa) 
+	{
 		var proveedores= new Array();
 		<?php foreach($proveedores as $indice => $valor) echo "proveedores['$indice'] = '$valor';" . PHP_EOL; ?>
 		
-		for (var valor in proveedores) {
+		for (var valor in proveedores) 
+		{
     		if (valor == capa) $('.' + capa).show();
 			else $('.' + valor).hide();
 		}
 	};
-	control($('select').val());
+	control($('.servicio').val());
+
+	jQuery("select.chosen_select").chosen();
+<?php if (function_exists('wc_custom_status_init')) { ?>	
+	$('.estados_personalizados').on('change', function () { control_personalizados($(this).val()); });
+	var control_personalizados = function(capa) 
+	{
+		var estados= new Array();
+		<?php foreach($lista_de_estados as $valor) echo "estados['$valor'] = '$valor';" . PHP_EOL; ?>
+
+		for (var valor in estados) 
+		{
+			$('.' + valor).hide();
+			for (var valor_capa in capa) if (valor == capa[valor_capa]) $('.' + valor).show();
+		}
+	};
+
+	control_personalizados($('.estados_personalizados').val());
+<?php } ?>	
 });
 </script> 
