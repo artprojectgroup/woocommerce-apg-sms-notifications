@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.0
+Version: 2.1
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -118,15 +118,16 @@ function apg_sms_procesa_estados($pedido, $notificacion = false) {
 	$internacional = false;
 	$telefono = apg_sms_procesa_el_telefono($pedido, $pedido->billing_phone, $configuracion['servicio']);
 	if ($pedido->billing_country && ($woocommerce->countries->get_base_country() != $pedido->billing_country)) $internacional = true;
+	$telefono_propietario = apg_sms_procesa_el_telefono($pedido, $configuracion['telefono'], $configuracion['servicio']);
 	
 	if ($estado == 'Recibido')
 	{
-		if (isset($configuracion['notificacion']) && $configuracion['notificacion'] == 1) apg_sms_envia_sms($configuracion, $configuracion['telefono'], apg_sms_procesa_variables($configuracion['mensaje_pedido'], $pedido, $configuracion['variables'])); //Mensaje para el propietario
+		if (isset($configuracion['notificacion']) && $configuracion['notificacion'] == 1) apg_sms_envia_sms($configuracion, $telefono_propietario, apg_sms_procesa_variables($configuracion['mensaje_pedido'], $pedido, $configuracion['variables'])); //Mensaje para el propietario
 		$mensaje = apg_sms_procesa_variables($configuracion['mensaje_recibido'], $pedido, $configuracion['variables']);
 	}
 	else if ($estado == __('Processing', 'apg_sms')) 
 	{
-		if (isset($configuracion['notificacion']) && $configuracion['notificacion'] == 1 && $notificacion) apg_sms_envia_sms($configuracion, $configuracion['telefono'], apg_sms_procesa_variables($configuracion['mensaje_pedido'], $pedido, $configuracion['variables'])); //Mensaje para el propietario
+		if (isset($configuracion['notificacion']) && $configuracion['notificacion'] == 1 && $notificacion) apg_sms_envia_sms($configuracion, $telefono_propietario, apg_sms_procesa_variables($configuracion['mensaje_pedido'], $pedido, $configuracion['variables'])); //Mensaje para el propietario
 		$mensaje = apg_sms_procesa_variables($configuracion['mensaje_procesando'], $pedido, $configuracion['variables']);
 	}
 	else if ($estado == __('Completed', 'apg_sms')) $mensaje = apg_sms_procesa_variables($configuracion['mensaje_completado'], $pedido, $configuracion['variables']);
@@ -212,6 +213,7 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 			update_option('apg_sms_settings', $configuracion);
 		}        
 	}
+	else if ($configuracion['servicio'] == "esebun") $respuesta = wp_remote_get("http://api.cloud.bz.esebun.com/api/v3/sendsms/plain?user=" . $configuracion['usuario_esebun'] . "&password=" . $configuracion['contrasena_esebun'] . "&sender=" . apg_sms_codifica_el_mensaje($configuracion['identificador_esebun']) . "&SMSText=" . apg_sms_codifica_el_mensaje($mensaje) . "&GSM=" . preg_replace('/\+/', '', $telefono));
 	//mail('info@artprojectgroup.com', 'SMS', $mensaje . print_r($respuesta, true), "Content-Type: text/plain; charset=UTF-8\r\n");
 }
 
@@ -232,7 +234,7 @@ function apg_sms_codifica_el_mensaje($mensaje) {
 
 //Mira si necesita el prefijo telefónico internacional
 function apg_sms_prefijo($servicio) {
-    $prefijo = array("voipstunt", "clockwork", "clickatell", "bulksms", "msg91", "twillio", "mvaayoo");
+    $prefijo = array("voipstunt", "clockwork", "clickatell", "bulksms", "msg91", "twillio", "mvaayoo", "esebun");
     
 	return in_array($servicio, $prefijo);
 }
