@@ -1,10 +1,10 @@
 === WooCommerce - APG SMS Notifications ===
 Contributors: artprojectgroup
 Donate link: http://www.artprojectgroup.es/donacion
-Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, voipstunt, solutions infini, twilio, clickatell, clockwork, bulksms, open dnd, msg91, mvaayoo, custom order statuses & actions, esebun business (enterprise & developers only)
+Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, voipstunt, solutions infini, twilio, clickatell, clockwork, bulksms, open dnd, msg91, mvaayoo, custom order statuses & actions, esebun business (enterprise & developers only), woocommerce advance order status, woocommerce sequential order numbers pro
 Requires at least: 3.5
-Tested up to: 3.8.1
-Stable tag: 2.1
+Tested up to: 3.8.2
+Stable tag: 2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,7 +31,8 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * Esebun Business (Enterprise & Developers only).
 * Posibilidad de informar al propietario de la tienda sobre nuevos pedidos.
 * Posibilidad de enviar, o no, SMS internacionales.
-* Soporte de los estados personalizados del plugin [Custom Order Statuses & Actions](http://codecanyon.net/item/woocommerce-custom-order-status-actions/6392174).
+* Soporte de los estados personalizados de los plugin [Custom Order Statuses & Actions](http://codecanyon.net/item/woocommerce-custom-order-status-actions/6392174) y [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931).
+* Soporte para los números de pedido personalizados del plugin [WooCommerce Sequential Order Numbers Pro](http://www.woothemes.com/products/sequential-order-numbers-pro/).
 * Inserta de forma automática el código telefónico internacional, si es necesario, al número de teléfono del cliente.
 * También notifica por SMS las notas a los clientes.
 * Todos los mensajes son personalizables.
@@ -83,6 +84,11 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.2 =
+* Añadido soporte de los estados personalizados del plugin [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931).
+* Añadido soporte para los números de pedido personalizados del plugin [WooCommerce Sequential Order Numbers Pro](http://www.woothemes.com/products/sequential-order-numbers-pro/).
+* Arreglo de error que borraba toda la configuración al desactivar el plugin.
+* Corrección menor que evita la aparición de un código de error al recopilar información sobre el plugin.
 = 2.1 =
 * Soporte para Esebun Business (Enterprise & Developers only). **Actualización patrocinada por [Esebun Business](http://www.bz.esebun.com/)**.
 = 2.0 =
@@ -173,6 +179,11 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 * Versión inicial.
 
 == Upgrade Notice ==
+= 2.2 =
+* Añadido soporte de los estados personalizados del plugin [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931).
+* Añadido soporte para los números de pedido personalizados del plugin [WooCommerce Sequential Order Numbers Pro](http://www.woothemes.com/products/sequential-order-numbers-pro/).
+* Arreglo de error que borraba toda la configuración al desactivar el plugin.
+* Corrección menor que evita la aparición de un código de error al recopilar información sobre el plugin.
 = 2.1 =
 * Soporte para Esebun Business (Enterprise & Developers only). **Actualización patrocinada por [Esebun Business](http://www.bz.esebun.com/)**.
 = 2.0 =

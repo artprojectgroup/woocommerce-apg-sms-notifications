@@ -242,31 +242,58 @@
           <img class="help_tip" data-tip="<?php _e('Check if you want to send international SMS messages', 'apg_sms'); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><input id="apg_sms_settings[internacional]" name="apg_sms_settings[internacional]" type="checkbox" value="1" <?php echo (isset($configuracion['internacional']) && $configuracion['internacional'] == "1" ? 'checked="checked"' : ''); ?> tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
-      <?php if (function_exists('wc_custom_status_init')) { ?>
+      <?php if (function_exists('wc_custom_status_init') || function_exists('AppZab_woo_advance_order_status_init')) { ?>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[estados_personalizados]">
             <?php _e('Custom Order Statuses & Actions:', 'apg_sms'); ?>
           </label>
           <img class="help_tip" data-tip="<?php _e('Select your own statuses.', 'apg_sms'); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><select multiple="multiple" class="multiselect chosen_select estados_personalizados" id="apg_sms_settings[estados_personalizados]" name="apg_sms_settings[estados_personalizados][]" style="width: 450px;" tabindex="<?php echo $tab++; ?>">
-            <?php							
-				$lista_de_estados = WC_Custom_Status::get_status_list();
-				foreach ($lista_de_estados as $estado)
+            <?php
+				if (function_exists('wc_custom_status_init'))
 				{
-					if ($estado)
+					$lista_de_estados =  WC_Custom_Status::get_status_list();
+					foreach ($lista_de_estados as $estado)
 					{
-						$estados_personalizados = new WC_Custom_Status();
-						$estados_personalizados->load_status_from_db($estado);
-						if ($estados_personalizados->sends_email)
+						if ($estado)
 						{
-							$chequea = '';
-							foreach ($configuracion['estados_personalizados'] as $estado_personalizado) 
+							$estados_personalizados = new WC_Custom_Status();
+							$estados_personalizados->load_status_from_db($estado);
+							if ($estados_personalizados->sends_email)
 							{
-								if ($estado_personalizado == $estado) $chequea = ' selected="selected"';
+								$chequea = '';
+								foreach ($configuracion['estados_personalizados'] as $estado_personalizado) 
+								{
+									if ($estado_personalizado == $estado) $chequea = ' selected="selected"';
+								}
+								echo '<option value="' . $estado . '"' . $chequea . '>' . ucfirst($estado) . '</option>' . PHP_EOL;
 							}
-							echo '<option value="' . $estado . '"' . $chequea . '>' . ucfirst($estado) . '</option>' . PHP_EOL;
 						}
 					}
+				}
+				else
+				{
+					$estados_originales = array('pending','failed','on-hold','processing','completed','refunded','cancelled');
+					$lista_de_estados = (array) get_terms('shop_order_status', array('hide_empty' => 0, 'orderby' => 'id'));
+					$lista_nueva = array();
+					foreach( $lista_de_estados as $estado)
+					{
+						if (!in_array($estado->slug, $estados_originales)) 
+						{
+							$estados_personalizados = get_option('taxonomy_' . $estado->term_id, false);
+							if ($estados_personalizados && isset($estados_personalizados['woocommerce_woo_advance_order_status_email'] ) && ( '1' == $estados_personalizados['woocommerce_woo_advance_order_status_email'] || 'yes' == $estados_personalizados['woocommerce_woo_advance_order_status_email']))
+							{
+								$chequea = '';
+								foreach ($configuracion['estados_personalizados'] as $estado_personalizado) 
+								{
+									if ($estado_personalizado == $estado->slug) $chequea = ' selected="selected"';
+								}
+								echo '<option value="' . $estado->slug . '"' . $chequea . '>' . $estado->name . '</option>' . PHP_EOL;
+								$lista_nueva[] = $estado->slug;
+							}
+						}
+					}
+					$lista_de_estados = $lista_nueva;
 				}
             ?>
           </select></td>
@@ -344,7 +371,7 @@ jQuery(document).ready(function($) {
 	control($('.servicio').val());
 
 	jQuery("select.chosen_select").chosen();
-<?php if (function_exists('wc_custom_status_init')) { ?>	
+<?php if (function_exists('wc_custom_status_init') || function_exists('AppZab_woo_advance_order_status_init')) { ?>	
 	$('.estados_personalizados').on('change', function () { control_personalizados($(this).val()); });
 	var control_personalizados = function(capa) 
 	{

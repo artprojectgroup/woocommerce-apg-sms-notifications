@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.1
+Version: 2.2
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -99,7 +99,7 @@ function apg_sms_registra_opciones() {
 	
 	register_setting('apg_sms_settings_group', 'apg_sms_settings');
 
-	if (class_exists('WC_Custom_Status')) 
+	if ((class_exists('WC_Custom_Status') || class_exists('AppZab_Woo_Advance_Order_Status')) && isset($configuracion['estados_personalizados']))
 	{
 		foreach ($configuracion['estados_personalizados'] as $estado) add_action("woocommerce_order_status_{$estado}", 'apg_sms_procesa_estados', 10); //Funciona cuando se ejecuta WooCommerce Custom Order Statuses & Actions
 	}
@@ -214,7 +214,8 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 		}        
 	}
 	else if ($configuracion['servicio'] == "esebun") $respuesta = wp_remote_get("http://api.cloud.bz.esebun.com/api/v3/sendsms/plain?user=" . $configuracion['usuario_esebun'] . "&password=" . $configuracion['contrasena_esebun'] . "&sender=" . apg_sms_codifica_el_mensaje($configuracion['identificador_esebun']) . "&SMSText=" . apg_sms_codifica_el_mensaje($mensaje) . "&GSM=" . preg_replace('/\+/', '', $telefono));
-	//mail('info@artprojectgroup.com', 'SMS', $mensaje . print_r($respuesta, true), "Content-Type: text/plain; charset=UTF-8\r\n");
+	
+	//mail('info@artprojectgroup.com', 'SMS', "http://api.cloud.bz.esebun.com/api/v3/sendsms/plain?user=" . $configuracion['usuario_esebun'] . "&password=" . $configuracion['contrasena_esebun'] . "&sender=" . apg_sms_codifica_el_mensaje($configuracion['identificador_esebun']) . "&SMSText=" . apg_sms_codifica_el_mensaje($mensaje) . "&GSM=" . $telefono . " - " . $mensaje . print_r($respuesta, true), "Content-Type: text/plain; charset=UTF-8\r\n");
 }
 
 //Normalizamos el texto
@@ -272,7 +273,7 @@ function apg_sms_procesa_variables($mensaje, $pedido, $variables, $nota = '') {
 
     	if (!in_array($variable, $apg_sms) && !in_array($variable, $apg_sms_variables) && !in_array($variable, $variables)) continue;
 
-    	if ($variable != "order_date" && $variable != "modified_date" && $variable != "shop_name" && $variable != "note") 
+    	if ($variable != "order_date" && $variable != "modified_date" && $variable != "shop_name" && $variable != "note" && $variable != "id") 
 		{
 			if (in_array($variable, $apg_sms)) $mensaje = str_replace("%" . $variable . "%", $pedido->$variable, $mensaje); //Variables estándar - Objeto
 			else if (in_array($variable, $apg_sms_variables)) $mensaje = str_replace("%" . $variable . "%", $variables_personalizadas["_" . $variable][0], $mensaje); //Variables estándar - Array
@@ -281,6 +282,7 @@ function apg_sms_procesa_variables($mensaje, $pedido, $variables, $nota = '') {
 		else if ($variable == "order_date" || $variable == "modified_date") $mensaje = str_replace("%" . $variable . "%", date_i18n(woocommerce_date_format(), strtotime($pedido->$variable)), $mensaje);
 		else if ($variable == "shop_name") $mensaje = str_replace("%" . $variable . "%", get_bloginfo('name'), $mensaje);
 		else if ($variable == "note") $mensaje = str_replace("%" . $variable . "%", $nota, $mensaje);
+		else if ($variable == "id") $mensaje = str_replace("%" . $variable . "%", $pedido->get_order_number(), $mensaje);
 	}
 	
 	return $mensaje;
@@ -303,7 +305,7 @@ function apg_sms_plugin($nombre) {
 		$respuesta = wp_remote_post('http://api.wordpress.org/plugins/info/1.0/', array('body' => $consulta));
 		set_transient('apg_sms_plugin', $respuesta, 24 * HOUR_IN_SECONDS);
 	}
-	if (isset($respuesta['body'])) $plugin = get_object_vars(unserialize($respuesta['body']));
+	if (!is_wp_error($respuesta)) $plugin = get_object_vars(unserialize($respuesta['body']));
 	else $plugin['rating'] = 100;
 	
 	return $plugin;
@@ -324,7 +326,7 @@ function apg_sms_muestra_mensaje() {
 	wp_register_style('apg_sms_fuentes', plugins_url('fonts/stylesheet.css', __FILE__)); //Carga la hoja de estilo global
 	wp_enqueue_style('apg_sms_fuentes'); //Carga la hoja de estilo global
 
-	if (!isset($configuracion['mensaje_pedido']) || !isset($configuracion['mensaje_nota'])) add_action('admin_notices', 'apg_sms_actualizacion'); //Comprueba si hay que mostrar el mensaje de actualización
+	if (!isset($configuracion['mensaje_pedido']) || !isset($configuracion['mensaje_nota']) || ((class_exists('WC_Custom_Status') || class_exists('AppZab_Woo_Advance_Order_Status')) && !isset($configuracion['estados_personalizados']))) add_action('admin_notices', 'apg_sms_actualizacion'); //Comprueba si hay que mostrar el mensaje de actualización
 }
 add_action('admin_init', 'apg_sms_muestra_mensaje');
 
@@ -333,5 +335,5 @@ function apg_sms_desinstalar() {
   delete_option('apg_sms_settings');
   delete_transient('apg_sms_plugin');
 }
-register_deactivation_hook( __FILE__, 'apg_sms_desinstalar' );
+register_uninstall_hook( __FILE__, 'apg_sms_desinstalar' );
 ?>
