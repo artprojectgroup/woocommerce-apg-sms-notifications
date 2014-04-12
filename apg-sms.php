@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.2.1
+Version: 2.2.2
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -250,13 +250,13 @@ function apg_sms_procesa_el_telefono($pedido, $telefono, $servicio, $propietario
 	if (!$propietario && $pedido->billing_country && ($woocommerce->countries->get_base_country() != $pedido->billing_country || $prefijo)) $prefijo_internacional = dame_prefijo_pais($pedido->billing_country);
 	else if ($propietario && $prefijo) $prefijo_internacional = dame_prefijo_pais($woocommerce->countries->get_base_country());
 
+	preg_match("/(\d{1,4})[0-9.\- ]+/", $telefono, $prefijo);
 	if (isset($prefijo_internacional))
 	{
-		preg_match("/(\d{1,4})[0-9.\- ]+/", $telefono, $prefijo);
 		if (strpos($prefijo[1], $prefijo_internacional) === false) $telefono = $prefijo_internacional . $telefono;
-		if ($servicio == "twillio") $telefono = "+" . $telefono;
 	}
-	
+	if ($servicio == "twillio" && strpos($prefijo[1], "+") === false) $telefono = "+" . $telefono;
+
 	return $telefono;
 }
 
