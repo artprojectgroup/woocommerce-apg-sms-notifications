@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.2
+Version: 2.2.1
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -118,7 +118,7 @@ function apg_sms_procesa_estados($pedido, $notificacion = false) {
 	$internacional = false;
 	$telefono = apg_sms_procesa_el_telefono($pedido, $pedido->billing_phone, $configuracion['servicio']);
 	if ($pedido->billing_country && ($woocommerce->countries->get_base_country() != $pedido->billing_country)) $internacional = true;
-	$telefono_propietario = apg_sms_procesa_el_telefono($pedido, $configuracion['telefono'], $configuracion['servicio']);
+	$telefono_propietario = apg_sms_procesa_el_telefono($pedido, $configuracion['telefono'], $configuracion['servicio'], true);
 	
 	if ($estado == 'Recibido')
 	{
@@ -164,7 +164,7 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 	else if ($configuracion['servicio'] == "solutions_infini") $respuesta = wp_remote_get("http://alerts.sinfini.com/api/web2sms.php?workingkey=" . $configuracion['clave_solutions_infini'] . "&to=" . $telefono . "&sender=" . $configuracion['identificador_solutions_infini'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje));
 	else if ($configuracion['servicio'] == "twillio")
 	{
-		require_once("lib/twilio.php");
+		require_once("lib/Twilio.php");
 		
 		if (!isset($twillio)) $twillio = new Services_Twilio($configuracion['clave_twillio'], $configuracion['identificador_twillio']);
 		$respuesta = $twillio->account->messages->create(array('To' => $telefono, 'From' => $configuracion['telefono'], 'Body' => $mensaje,));
@@ -241,20 +241,22 @@ function apg_sms_prefijo($servicio) {
 }
 
 //Procesa el teléfono y le añade, si lo necesita, el prefijo
-function apg_sms_procesa_el_telefono($pedido, $telefono, $servicio) {
+function apg_sms_procesa_el_telefono($pedido, $telefono, $servicio, $propietario = false) {
 	global $woocommerce;
 	
 	$prefijo = apg_sms_prefijo($servicio);
 	
 	$telefono = str_replace(array('+','-'), '', filter_var($telefono, FILTER_SANITIZE_NUMBER_INT));
-	if ($pedido->billing_country && ($woocommerce->countries->get_base_country() != $pedido->billing_country || $prefijo))
+	if (!$propietario && $pedido->billing_country && ($woocommerce->countries->get_base_country() != $pedido->billing_country || $prefijo)) $prefijo_internacional = dame_prefijo_pais($pedido->billing_country);
+	else if ($propietario && $prefijo) $prefijo_internacional = dame_prefijo_pais($woocommerce->countries->get_base_country());
+
+	if (isset($prefijo_internacional))
 	{
-		$prefijo_internacional = dame_prefijo_pais($pedido->billing_country);
 		preg_match("/(\d{1,4})[0-9.\- ]+/", $telefono, $prefijo);
 		if (strpos($prefijo[1], $prefijo_internacional) === false) $telefono = $prefijo_internacional . $telefono;
 		if ($servicio == "twillio") $telefono = "+" . $telefono;
 	}
-
+	
 	return $telefono;
 }
 
@@ -326,7 +328,7 @@ function apg_sms_muestra_mensaje() {
 	wp_register_style('apg_sms_fuentes', plugins_url('fonts/stylesheet.css', __FILE__)); //Carga la hoja de estilo global
 	wp_enqueue_style('apg_sms_fuentes'); //Carga la hoja de estilo global
 
-	if (!isset($configuracion['mensaje_pedido']) || !isset($configuracion['mensaje_nota']) || ((class_exists('WC_Custom_Status') || class_exists('AppZab_Woo_Advance_Order_Status')) && !isset($configuracion['estados_personalizados']))) add_action('admin_notices', 'apg_sms_actualizacion'); //Comprueba si hay que mostrar el mensaje de actualización
+	if (!isset($configuracion['mensaje_pedido']) || !isset($configuracion['mensaje_nota'])) add_action('admin_notices', 'apg_sms_actualizacion'); //Comprueba si hay que mostrar el mensaje de actualización
 }
 add_action('admin_init', 'apg_sms_muestra_mensaje');
 
