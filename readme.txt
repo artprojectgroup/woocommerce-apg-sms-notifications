@@ -4,7 +4,7 @@ Donate link: http://www.artprojectgroup.es/donacion
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, voipstunt, solutions infini, twilio, clickatell, clockwork, bulksms, open dnd, msg91, mvaayoo, custom order statuses & actions, esebun business (enterprise & developers only), woocommerce advance order status, woocommerce sequential order numbers pro
 Requires at least: 3.5
 Tested up to: 3.8.2
-Stable tag: 2.2.2
+Stable tag: 2.2.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,7 +21,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 * Soporte de múltiples proveedores SMS:
  * VoipStunt.
  * Solutions Infini.
- * Twillio.
+ * Twilio.
  * Clickatell.
  * Clockwork.
  * BulkSMS.
@@ -84,10 +84,12 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.2.2.1 =
+* Arreglo de errata en el nombre de Twilio.
 = 2.2.2 =
-* Añadido pequeño control para comprobar la existencia del símbolo + en los teléfonos de Twillio.
+* Añadido pequeño control para comprobar la existencia del símbolo + en los teléfonos de Twilio.
 = 2.2.1 =
-* Solucionado un error con Twillio.
+* Solucionado un error con Twilio.
 * Solucionado un error al procesar el número de teléfono del propietario.
 = 2.2 =
 * Añadido soporte de los estados personalizados del plugin [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931).
@@ -184,10 +186,12 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 * Versión inicial.
 
 == Upgrade Notice ==
+= 2.2.2.1 =
+* Arreglo de errata en el nombre de Twilio.
 = 2.2.2 =
-* Añadido pequeño control para comprobar la existencia del símbolo + en los teléfonos de Twillio.
+* Añadido pequeño control para comprobar la existencia del símbolo + en los teléfonos de Twilio.
 = 2.2.1 =
-* Solucionado un error con Twillio.
+* Solucionado un error con Twilio.
 * Solucionado un error al procesar el número de teléfono del propietario.
 = 2.2 =
 * Añadido soporte de los estados personalizados del plugin [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931).

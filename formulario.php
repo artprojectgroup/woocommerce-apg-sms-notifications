@@ -27,7 +27,7 @@
           <img class="help_tip" data-tip="<?php _e('Select your SMS gateway', 'apg_sms'); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><select class="chosen_select servicio" id="apg_sms_settings[servicio]" name="apg_sms_settings[servicio]" style="width: 450px;" tabindex="<?php echo $tab++; ?>">
             <?php
-            $proveedores = array("voipstunt" => "VoipStunt", "solutions_infini" => "Solutions Infini", "twillio" => "Twillio", "clickatell" => "Clickatell", "clockwork" => "Clockwork", "bulksms" => "BulkSMS", "open_dnd" => "OPEN DND", "msg91" => "MSG91", "mvaayoo" => "mVaayoo", "esebun" => "Esebun Business (Enterprise & Developers only)");
+            $proveedores = array("voipstunt" => "VoipStunt", "solutions_infini" => "Solutions Infini", "twilio" => "Twilio", "clickatell" => "Clickatell", "clockwork" => "Clockwork", "bulksms" => "BulkSMS", "open_dnd" => "OPEN DND", "msg91" => "MSG91", "mvaayoo" => "mVaayoo", "esebun" => "Esebun Business (Enterprise & Developers only)");
             foreach ($proveedores as $valor => $proveedor) 
             {
 				$chequea = (isset($configuracion['servicio']) && $configuracion['servicio'] == $valor) ? ' selected="selected"' : '';
@@ -64,19 +64,19 @@
           <img class="help_tip" data-tip="<?php echo sprintf(__('The %s for your account in %s', 'apg_sms'), __('sender ID', 'apg_sms'), "Solutions Infini"); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[identificador_solutions_infini]" name="apg_sms_settings[identificador_solutions_infini]" size="50" value="<?php echo (isset($configuracion['identificador_solutions_infini']) ? $configuracion['identificador_solutions_infini'] : ''); ?>" tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
-      <tr valign="top" class="twillio"><!-- Twillio -->
-        <th scope="row" class="titledesc"> <label for="apg_sms_settings[clave_twillio]">
+      <tr valign="top" class="twilio"><!-- Twilio -->
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[clave_twilio]">
             <?php _e('Account Sid:', 'apg_sms'); ?>
           </label>
-          <img class="help_tip" data-tip="<?php echo sprintf(__('The %s for your account in %s', 'apg_sms'), __('account Sid', 'apg_sms'), "Twillio"); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
-        <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[clave_twillio]" name="apg_sms_settings[clave_twillio]" size="50" value="<?php echo (isset($configuracion['clave_twillio']) ? $configuracion['clave_twillio'] : ''); ?>" tabindex="<?php echo $tab++; ?>" /></td>
+          <img class="help_tip" data-tip="<?php echo sprintf(__('The %s for your account in %s', 'apg_sms'), __('account Sid', 'apg_sms'), "Twilio"); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
+        <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[clave_twilio]" name="apg_sms_settings[clave_twilio]" size="50" value="<?php echo (isset($configuracion['clave_twilio']) ? $configuracion['clave_twilio'] : ''); ?>" tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
-      <tr valign="top" class="twillio"><!-- Twillio -->
-        <th scope="row" class="titledesc"> <label for="apg_sms_settings[identificador_twillio]">
+      <tr valign="top" class="twilio"><!-- Twilio -->
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[identificador_twilio]">
             <?php _e('Authentication Token:', 'apg_sms'); ?>
           </label>
-          <img class="help_tip" data-tip="<?php echo sprintf(__('The %s for your account in %s', 'apg_sms'), __('authentication token', 'apg_sms'), "Twillio"); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
-        <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[identificador_twillio]" name="apg_sms_settings[identificador_twillio]" size="50" value="<?php echo (isset($configuracion['identificador_twillio']) ? $configuracion['identificador_twillio'] : ''); ?>" tabindex="<?php echo $tab++; ?>" /></td>
+          <img class="help_tip" data-tip="<?php echo sprintf(__('The %s for your account in %s', 'apg_sms'), __('authentication token', 'apg_sms'), "Twilio"); ?>" src="<?php echo plugins_url( 'woocommerce/assets/images/help.png');?>" height="16" width="16" /> </th>
+        <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[identificador_twilio]" name="apg_sms_settings[identificador_twilio]" size="50" value="<?php echo (isset($configuracion['identificador_twilio']) ? $configuracion['identificador_twilio'] : ''); ?>" tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
       <tr valign="top" class="clickatell"><!-- Clickatell -->
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[identificador_clickatell]">

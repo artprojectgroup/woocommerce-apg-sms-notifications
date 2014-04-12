@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.2.2
+Version: 2.2.2.1
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -79,7 +79,19 @@ function apg_sms_tab() {
 
 //Añade en el menú a WooCommerce
 function apg_sms_admin_menu() {
+	global $configuracion;
+	
 	add_submenu_page('woocommerce', __('APG SMS Notifications', 'apg_sms'),  __('SMS Notifications', 'apg_sms') , 'manage_woocommerce', 'apg_sms', 'apg_sms_tab');
+
+	if ($configuracion['servicio'] == 'twillio')
+	{
+		$configuracion['clave_twilio'] = $configuracion['clave_twillio'];
+		unset($configuracion['clave_twillio']);
+		$configuracion['identificador_twilio'] = $configuracion['identificador_twillio'];
+		unset($configuracion['identificador_twillio']);
+		$configuracion['servicio'] == 'twilio';
+		update_option('apg_sms_settings', $configuracion);
+	}
 }
 add_action('admin_menu', 'apg_sms_admin_menu', 15);
 
@@ -162,12 +174,12 @@ add_action('woocommerce_new_customer_note', 'apg_sms_procesa_notas', 10);
 function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 	if ($configuracion['servicio'] == "voipstunt") $respuesta = wp_remote_get("https://www.voipstunt.com/myaccount/sendsms.php?username=" . $configuracion['usuario_voipstunt'] . "&password=" . $configuracion['contrasena_voipstunt'] . "&from=" . $configuracion['telefono'] . "&to=" . $telefono . "&text=" . apg_sms_codifica_el_mensaje($mensaje));
 	else if ($configuracion['servicio'] == "solutions_infini") $respuesta = wp_remote_get("http://alerts.sinfini.com/api/web2sms.php?workingkey=" . $configuracion['clave_solutions_infini'] . "&to=" . $telefono . "&sender=" . $configuracion['identificador_solutions_infini'] . "&message=" . apg_sms_codifica_el_mensaje($mensaje));
-	else if ($configuracion['servicio'] == "twillio")
+	else if ($configuracion['servicio'] == "twilio")
 	{
 		require_once("lib/Twilio.php");
 		
-		if (!isset($twillio)) $twillio = new Services_Twilio($configuracion['clave_twillio'], $configuracion['identificador_twillio']);
-		$respuesta = $twillio->account->messages->create(array('To' => $telefono, 'From' => $configuracion['telefono'], 'Body' => $mensaje,));
+		if (!isset($twilio)) $twilio = new Services_Twilio($configuracion['clave_twilio'], $configuracion['identificador_twilio']);
+		$respuesta = $twilio->account->messages->create(array('To' => $telefono, 'From' => $configuracion['telefono'], 'Body' => $mensaje,));
 	}
 	else if ($configuracion['servicio'] == "clickatell") 
 	{
@@ -235,7 +247,7 @@ function apg_sms_codifica_el_mensaje($mensaje) {
 
 //Mira si necesita el prefijo telefónico internacional
 function apg_sms_prefijo($servicio) {
-    $prefijo = array("voipstunt", "clockwork", "clickatell", "bulksms", "msg91", "twillio", "mvaayoo", "esebun");
+    $prefijo = array("voipstunt", "clockwork", "clickatell", "bulksms", "msg91", "twilio", "mvaayoo", "esebun");
     
 	return in_array($servicio, $prefijo);
 }
@@ -255,7 +267,7 @@ function apg_sms_procesa_el_telefono($pedido, $telefono, $servicio, $propietario
 	{
 		if (strpos($prefijo[1], $prefijo_internacional) === false) $telefono = $prefijo_internacional . $telefono;
 	}
-	if ($servicio == "twillio" && strpos($prefijo[1], "+") === false) $telefono = "+" . $telefono;
+	if ($servicio == "twilio" && strpos($prefijo[1], "+") === false) $telefono = "+" . $telefono;
 
 	return $telefono;
 }
