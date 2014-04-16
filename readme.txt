@@ -4,7 +4,7 @@ Donate link: http://www.artprojectgroup.es/donacion
 Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, voipstunt, solutions infini, twilio, clickatell, clockwork, bulksms, open dnd, msg91, mvaayoo, custom order statuses & actions, esebun business (enterprise & developers only), woocommerce advance order status, woocommerce sequential order numbers pro
 Requires at least: 3.5
 Tested up to: 3.8.2
-Stable tag: 2.2.2.1
+Stable tag: 2.2.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,18 +44,18 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 **WooCommerce - APG SMS Notifications** ha sido programado a partir de la petición de [Chirag Vora](http://profiles.wordpress.org/chirag740) para añadir a WooCommerce la posibilidad de enviar notificaciones sobre el estado de los pedidos a través de mensajes SMS.
 
 = Más información =
-En nuestro sitio web oficial puede obtener más información sobre [**WooCommerce - APG SMS Notifications**](http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-sms-notifications). 
+En nuestro sitio web oficial puede obtener más información sobre [**WooCommerce - APG SMS Notifications**](http://www.artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-sms-notifications). 
 
 = Comentarios =
 No olvides dejarnos tu comentario en:
 
-* [WooCommerce - APG SMS Notifications](http://www.artprojectgroup.es/plugins-para-wordpress/woocommerce-apg-sms-notifications) en Art Project Group.
+* [WooCommerce - APG SMS Notifications](http://www.artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-sms-notifications) en Art Project Group.
 * [Art Project Group](https://www.facebook.com/artprojectgroup) en Facebook.
 * [@artprojectgroup](https://twitter.com/artprojectgroup) en Twitter.
 * [+ArtProjectGroupES](https://plus.google.com/+ArtProjectGroupES/) en Google+.
 
 = Más plugins =
-Recuerda que puedes encontrar más plugin para WordPress en [Art Project Group](http://www.artprojectgroup.es/plugins-para-wordpress/) y en nuestro perfil en [WordPress](http://profiles.wordpress.org/artprojectgroup/).
+Recuerda que puedes encontrar más [plugins para WordPress](http://www.artprojectgroup.es/plugins-para-wordpress) y más [plugins para WooCommerce](http://www.artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce) en [Art Project Group](http://www.artprojectgroup.es) y en nuestro perfil en [WordPress](http://profiles.wordpress.org/artprojectgroup/).
 
 == Installation ==
 1. Puedes:
@@ -84,6 +84,8 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.2.2.2 =
+* Modificación de la URL del plugin en Art Project Group.
 = 2.2.2.1 =
 * Arreglo de errata en el nombre de Twilio.
 = 2.2.2 =
@@ -186,6 +188,8 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 * Versión inicial.
 
 == Upgrade Notice ==
+= 2.2.2.2 =
+* Modificación de la URL del plugin en Art Project Group.
 = 2.2.2.1 =
 * Arreglo de errata en el nombre de Twilio.
 = 2.2.2 =
