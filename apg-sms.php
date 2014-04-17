@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.2.2.2
+Version: 2.3
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -226,8 +226,9 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 		}        
 	}
 	else if ($configuracion['servicio'] == "esebun") $respuesta = wp_remote_get("http://api.cloud.bz.esebun.com/api/v3/sendsms/plain?user=" . $configuracion['usuario_esebun'] . "&password=" . $configuracion['contrasena_esebun'] . "&sender=" . apg_sms_codifica_el_mensaje($configuracion['identificador_esebun']) . "&SMSText=" . apg_sms_codifica_el_mensaje($mensaje) . "&GSM=" . preg_replace('/\+/', '', $telefono));
+	else if ($configuracion['servicio'] == "isms") $respuesta = wp_remote_get("https://www.isms.com.my/isms_send.php?un=" . $configuracion['usuario_isms'] . "&pwd=" . $configuracion['contrasena_isms'] . "&dstno=" . $telefono . "&msg=" . apg_sms_codifica_el_mensaje($mensaje) . "&type=2" . "&sendid=" . $configuracion['telefono']);
 	
-	//mail('info@artprojectgroup.com', 'SMS', "http://api.cloud.bz.esebun.com/api/v3/sendsms/plain?user=" . $configuracion['usuario_esebun'] . "&password=" . $configuracion['contrasena_esebun'] . "&sender=" . apg_sms_codifica_el_mensaje($configuracion['identificador_esebun']) . "&SMSText=" . apg_sms_codifica_el_mensaje($mensaje) . "&GSM=" . $telefono . " - " . $mensaje . print_r($respuesta, true), "Content-Type: text/plain; charset=UTF-8\r\n");
+	//mail('info@artprojectgroup.com', 'SMS', "https://www.isms.com.my/isms_send.php?un=" . $configuracion['usuario_isms'] . "&pwd=" . $configuracion['contrasena_isms'] . "&dstno=" . $telefono . "&msg=" . apg_sms_codifica_el_mensaje($mensaje) . "&type=2" . "&sendid=" . $configuracion['telefono'] . " - " . $mensaje . print_r($respuesta, true), "Content-Type: text/plain; charset=UTF-8\r\n");
 }
 
 //Normalizamos el texto
@@ -242,12 +243,12 @@ function apg_sms_normaliza_mensaje($mensaje)
 
 //Codifica el mensaje
 function apg_sms_codifica_el_mensaje($mensaje) {
-	return urlencode(htmlentities($mensaje, ENT_QUOTES, "UTF-8"));
+	return urlencode(html_entity_decode($mensaje, ENT_QUOTES, "UTF-8"));
 }
 
 //Mira si necesita el prefijo telefónico internacional
 function apg_sms_prefijo($servicio) {
-    $prefijo = array("voipstunt", "clockwork", "clickatell", "bulksms", "msg91", "twilio", "mvaayoo", "esebun");
+    $prefijo = array("voipstunt", "clockwork", "clickatell", "bulksms", "msg91", "twilio", "mvaayoo", "esebun", "isms");
     
 	return in_array($servicio, $prefijo);
 }
@@ -268,6 +269,7 @@ function apg_sms_procesa_el_telefono($pedido, $telefono, $servicio, $propietario
 		if (strpos($prefijo[1], $prefijo_internacional) === false) $telefono = $prefijo_internacional . $telefono;
 	}
 	if ($servicio == "twilio" && strpos($prefijo[1], "+") === false) $telefono = "+" . $telefono;
+	else if ($servicio == "isms" && isset($prefijo_internacional)) $telefono = "00" . preg_replace('/\+/', '', $telefono);
 
 	return $telefono;
 }

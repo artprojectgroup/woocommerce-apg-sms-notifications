@@ -1,10 +1,10 @@
 === WooCommerce - APG SMS Notifications ===
 Contributors: artprojectgroup
 Donate link: http://www.artprojectgroup.es/donacion
-Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, voipstunt, solutions infini, twilio, clickatell, clockwork, bulksms, open dnd, msg91, mvaayoo, custom order statuses & actions, esebun business (enterprise & developers only), woocommerce advance order status, woocommerce sequential order numbers pro
+Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, voipstunt, solutions infini, twilio, clickatell, clockwork, bulksms, open dnd, msg91, mvaayoo, custom order statuses & actions, esebun business (enterprise & developers only), woocommerce advance order status, woocommerce sequential order numbers pro, isms malaysia
 Requires at least: 3.5
-Tested up to: 3.8.2
-Stable tag: 2.2.2.2
+Tested up to: 3.9
+Stable tag: 2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * MSG91.
  * mVaayoo.
  * Esebun Business (Enterprise & Developers only).
+ * iSMS Malaysia
 * Posibilidad de informar al propietario de la tienda sobre nuevos pedidos.
 * Posibilidad de enviar, o no, SMS internacionales.
 * Soporte de los estados personalizados de los plugin [Custom Order Statuses & Actions](http://codecanyon.net/item/woocommerce-custom-order-status-actions/6392174) y [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931).
@@ -84,6 +85,8 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.3 =
+* Soporte para iSMS Malaysia. **Actualización patrocinada por [Wan Nur Izzati](http://profiles.wordpress.org/wniizzati/)**.
 = 2.2.2.2 =
 * Modificación de la URL del plugin en Art Project Group.
 = 2.2.2.1 =
@@ -188,6 +191,8 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 * Versión inicial.
 
 == Upgrade Notice ==
+= 2.3 =
+* Soporte para iSMS Malaysia. **Actualización patrocinada por [Wan Nur Izzati](http://profiles.wordpress.org/wniizzati/)**.
 = 2.2.2.2 =
 * Modificación de la URL del plugin en Art Project Group.
 = 2.2.2.1 =
