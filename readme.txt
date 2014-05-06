@@ -41,6 +41,9 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 * Puedes añadir tus propias variables personalizadas.
 * Una vez configurado es totalmente automático.
 
+= Soporte técnico =
+**Art Project Group** te ofrece [**Soporte técnico**](http://www.artprojectgroup.es/servicios/servicios-para-wordpress-y-woocommerce/soporte-tecnico) para configurar o instalar **WooCommerce - APG SMS Notifications**. 
+
 = Origen =
 **WooCommerce - APG SMS Notifications** ha sido programado a partir de la petición de [Chirag Vora](http://profiles.wordpress.org/chirag740) para añadir a WooCommerce la posibilidad de enviar notificaciones sobre el estado de los pedidos a través de mensajes SMS.
 
