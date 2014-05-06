@@ -1,10 +1,10 @@
 === WooCommerce - APG SMS Notifications ===
 Contributors: artprojectgroup
 Donate link: http://www.artprojectgroup.es/donacion
-Tags: woocommerce, commerce, e-commerce, commerce, shop, virtual shop, sms, sms notifications, voipstunt, solutions infini, twilio, clickatell, clockwork, bulksms, open dnd, msg91, mvaayoo, custom order statuses & actions, esebun business (enterprise & developers only), woocommerce advance order status, woocommerce sequential order numbers pro, isms malaysia
+Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Clickatell, Clockwork, BulkSMS, OPEN DND, MSG91, mVaayoo, Custom Order Statuses & Actions, Esebun Business (Enterprise & Developers only), WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro, iSMS Malaysia
 Requires at least: 3.5
 Tested up to: 3.9
-Stable tag: 2.3
+Stable tag: 2.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -78,6 +78,11 @@ Se debe indicar si queremos, o no, recibir notificaciones SMS por cada nuevo ped
 
 Por último hay que personalizar, si se desea, los mensajes que se enviarán por SMS.
 
+= Soporte técnico =
+Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notifications**, **Art Project Group** te ofrece su servicio de [**Soporte técnico**](http://www.artprojectgroup.es/servicios/servicios-para-wordpress-y-woocommerce/soporte-tecnico). 
+
+*En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
+
 = How to configure? =
 [Chirag Vora](http://profiles.wordpress.org/chirag740) had made a translation in english on [Big Kahuna](http://bigkahuna.in/woocommerce-apg-sms-notifications).
 
@@ -85,6 +90,10 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.3.1 =
+* Solución de un problema detectado con los proveedores mVaayoo y BulkSMS.
+* Nuevos enlaces e iconos.
+* Nueva captura de pantalla. 
 = 2.3 =
 * Soporte para iSMS Malaysia. **Actualización patrocinada por [Wan Nur Izzati](http://profiles.wordpress.org/wniizzati/)**.
 = 2.2.2.2 =
@@ -191,6 +200,10 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 * Versión inicial.
 
 == Upgrade Notice ==
+= 2.3.1 =
+* Solución de un problema detectado con los proveedores mVaayoo y BulkSMS.
+* Nuevos enlaces e iconos.
+* Nueva captura de pantalla. 
 = 2.3 =
 * Soporte para iSMS Malaysia. **Actualización patrocinada por [Wan Nur Izzati](http://profiles.wordpress.org/wniizzati/)**.
 = 2.2.2.2 =
@@ -297,6 +310,9 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 ==Traducciones ==
 * *English*: by **Art Project Group** (default language).
 * *Español*: por **Art Project Group**.
+
+== Soporte técnico ==
+Dado que **WooCommerce - APG SMS Notifications** es totalmente gratuito, **Art Project Group** sólo proporciona el servicio de [**Soporte técnico**](http://www.artprojectgroup.es/servicios/servicios-para-wordpress-y-woocommerce/soporte-tecnico) previo pago. En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.
 
 == ¿Por qué está esta página en español? ==
 Mientras WordPress no nos permita a los desarrolladores realizar esta página en más de un idioma, elegiremos siempre el español.

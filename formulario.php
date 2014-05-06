@@ -87,7 +87,6 @@
 	  	"mvaayoo" 				=> array(
 			"usuario_mvaayoo" 						=> 'username',
 			"contrasena_mvaayoo" 					=> 'password',
-			"campana_mvaayoo" 						=> 'campaign ID',
 			"identificador_mvaayoo" 				=> 'sender ID',
 		),
 	  	"esebun" 				=> array(

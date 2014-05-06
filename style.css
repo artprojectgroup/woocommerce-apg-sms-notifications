@@ -20,7 +20,12 @@ table.form-table, .cabecera {
 	-khtml-opacity: 0.8;
 	opacity: 0.8;
 }
-div.donacion [class^="icon-"]:before, div.donacion [class*=" icon-"]:before, div.donacion [class^="icon-"]:after, div.donacion [class*=" icon-"]:after, div.donacion .artprojectgroup {
+div.donacion .genericon {
+	width: 25px;
+	height: 25px;
+	font-size: 25px;
+}
+div.donacion .artprojectgroup {
 	font-size: 20px;
 }
 div.donacion {
