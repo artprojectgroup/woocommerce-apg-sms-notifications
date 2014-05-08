@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.3.1
+Version: 2.4
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -83,7 +83,9 @@ function apg_sms_admin_menu() {
 	global $configuracion;
 	
 	add_submenu_page('woocommerce', __('APG SMS Notifications', 'apg_sms'),  __('SMS Notifications', 'apg_sms') , 'manage_woocommerce', 'apg_sms', 'apg_sms_tab');
-
+	
+	//Estos ajustes temporales hay que borrarlos en un par de versiones
+	$actualiza = false;
 	if ($configuracion['servicio'] == 'twillio')
 	{
 		$configuracion['clave_twilio'] = $configuracion['clave_twillio'];
@@ -91,8 +93,22 @@ function apg_sms_admin_menu() {
 		$configuracion['identificador_twilio'] = $configuracion['identificador_twillio'];
 		unset($configuracion['identificador_twillio']);
 		$configuracion['servicio'] == 'twilio';
-		update_option('apg_sms_settings', $configuracion);
+		$actualiza = true;
 	}
+	if (isset($configuracion['telefono']))
+	{
+		if (!isset($configuracion['telefono_twilio']) || empty($configuracion['telefono_twilio'])) 
+		{
+			$configuracion['telefono_twilio'] = $configuracion['telefono'];
+			$actualiza = true;
+		}
+		if (!isset($configuracion['telefono_isms']) || empty($configuracion['telefono_isms'])) 
+		{
+			$configuracion['telefono_isms'] = $configuracion['telefono'];
+			$actualiza = true;
+		}
+	}
+	if ($actualiza) update_option('apg_sms_settings', $configuracion);
 }
 add_action('admin_menu', 'apg_sms_admin_menu', 15);
 
@@ -180,7 +196,7 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 		require_once("lib/Twilio.php");
 		
 		if (!isset($twilio)) $twilio = new Services_Twilio($configuracion['clave_twilio'], $configuracion['identificador_twilio']);
-		$respuesta = $twilio->account->messages->create(array('To' => $telefono, 'From' => $configuracion['telefono'], 'Body' => $mensaje,));
+		$respuesta = $twilio->account->messages->create(array('To' => $telefono, 'From' => $configuracion['telefono_twilio'], 'Body' => $mensaje,));
 	}
 	else if ($configuracion['servicio'] == "clickatell") 
 	{
@@ -215,7 +231,7 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 	}
 	else if ($configuracion['servicio'] == "mvaayoo") $respuesta = wp_remote_post("http://api.mVaayoo.com/mvaayooapi/MessageCompose?user=" . $configuracion['usuario_mvaayoo'] . ":" . $configuracion['contrasena_mvaayoo'] . "&senderID=" . $configuracion['identificador_mvaayoo'] . "&receipientno=" . $telefono . "&dcs=0&msgtxt=" . apg_sms_codifica_el_mensaje(apg_sms_normaliza_mensaje($mensaje)) . "&state=4"); 	 
 	else if ($configuracion['servicio'] == "esebun") $respuesta = wp_remote_get("http://api.cloud.bz.esebun.com/api/v3/sendsms/plain?user=" . $configuracion['usuario_esebun'] . "&password=" . $configuracion['contrasena_esebun'] . "&sender=" . apg_sms_codifica_el_mensaje($configuracion['identificador_esebun']) . "&SMSText=" . apg_sms_codifica_el_mensaje($mensaje) . "&GSM=" . preg_replace('/\+/', '', $telefono));
-	else if ($configuracion['servicio'] == "isms") $respuesta = wp_remote_get("https://www.isms.com.my/isms_send.php?un=" . $configuracion['usuario_isms'] . "&pwd=" . $configuracion['contrasena_isms'] . "&dstno=" . $telefono . "&msg=" . apg_sms_codifica_el_mensaje($mensaje) . "&type=2" . "&sendid=" . $configuracion['telefono']);
+	else if ($configuracion['servicio'] == "isms") $respuesta = wp_remote_get("https://www.isms.com.my/isms_send.php?un=" . $configuracion['usuario_isms'] . "&pwd=" . $configuracion['contrasena_isms'] . "&dstno=" . $telefono . "&msg=" . apg_sms_codifica_el_mensaje($mensaje) . "&type=2" . "&sendid=" . $configuracion['telefono_isms']);
 	
 	//wp_mail('artprojectgroup@gmail.com', 'WooCommerce - APG SMS Notifications', print_r($respuesta, true), 'charset=UTF-8' . "\r\n"); 
 }

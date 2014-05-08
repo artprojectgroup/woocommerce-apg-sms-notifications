@@ -8,6 +8,27 @@
 		settings_errors(); 
 		$tab = 1;
 		$configuracion = get_option('apg_sms_settings');
+       //Traducciones ocultas    
+		__('account Sid', 'apg_sms');
+		__('Account Sid:', 'apg_sms');
+		__('authentication Token', 'apg_sms');
+		__('Authentication Token:', 'apg_sms');
+		__('key', 'apg_sms');
+		__('Key:', 'apg_sms');
+		__('authentication key', 'apg_sms');
+		__('Authentication key:', 'apg_sms');
+		__('sender ID', 'apg_sms');
+		__('Sender ID:', 'apg_sms');
+		__('route', 'apg_sms');
+		__('Route:', 'apg_sms');
+		__('sender ID', 'apg_sms');
+		__('Sender ID:', 'apg_sms');
+		__('username', 'apg_sms');
+		__('Username:', 'apg_sms');
+		__('password', 'apg_sms');
+		__('Password:', 'apg_sms');
+		__('mobile number', 'apg_sms');
+		__('Mobile number:', 'apg_sms');
 
 	global $woocommerce;
   ?>
@@ -61,6 +82,7 @@
 	  	"twilio" 				=> array(
 			"clave_twilio" 						=> 'account Sid',
 			"identificador_twilio" 				=> 'authentication Token',
+			"telefono_twilio" 						=> 'mobile number',
 		),
 	  	"clickatell" 			=> array(
 			"identificador_clickatell" 			=> 'sender ID',
@@ -97,6 +119,7 @@
 	  	"isms" 					=> array(
 			"usuario_isms" 						=> 'username',
 			"contrasena_isms" 						=> 'password',
+			"telefono_isms" 						=> 'mobile number',
 		),
 	  );
 	  
