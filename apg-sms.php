@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.4.1
+Version: 2.4.2
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -216,7 +216,19 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 			);
 		$respuesta = wp_remote_post("http://control.msg91.com/sendhttp.php", $argumentos);
 	}
-	else if ($configuracion['servicio'] == "mvaayoo") $respuesta = wp_remote_post("http://api.mVaayoo.com/mvaayooapi/MessageCompose?user=" . $configuracion['usuario_mvaayoo'] . ":" . $configuracion['contrasena_mvaayoo'] . "&senderID=" . $configuracion['identificador_mvaayoo'] . "&receipientno=" . $telefono . "&dcs=0&msgtxt=" . apg_sms_codifica_el_mensaje(apg_sms_normaliza_mensaje($mensaje)) . "&state=4"); 	 
+	else if ($configuracion['servicio'] == "mvaayoo")
+	{
+		require_once("lib/mvsms.php");
+
+		if (!isset($mvsms)) $mvsms = new MvSMS($configuracion['usuario_mvaayoo'], $configuracion['contrasena_mvaayoo'], $configuracion['campana_mvaayoo'], $configuracion['identificador_mvaayoo']);
+		$respuesta = $mvsms->sendSMS($telefono, $mensaje);
+		$campana = $mvsms->campID;
+		if ($configuracion['campana_mvaayoo'] !== $campana)
+		{
+			$configuracion['campana_mvaayoo'] = $campana;
+			update_option('apg_sms_settings', $configuracion);
+		}
+	}	
 	else if ($configuracion['servicio'] == "esebun") $respuesta = wp_remote_get("http://api.cloud.bz.esebun.com/api/v3/sendsms/plain?user=" . $configuracion['usuario_esebun'] . "&password=" . $configuracion['contrasena_esebun'] . "&sender=" . apg_sms_codifica_el_mensaje($configuracion['identificador_esebun']) . "&SMSText=" . apg_sms_codifica_el_mensaje($mensaje) . "&GSM=" . preg_replace('/\+/', '', $telefono));
 	else if ($configuracion['servicio'] == "isms") $respuesta = wp_remote_get("https://www.isms.com.my/isms_send.php?un=" . $configuracion['usuario_isms'] . "&pwd=" . $configuracion['contrasena_isms'] . "&dstno=" . $telefono . "&msg=" . apg_sms_codifica_el_mensaje($mensaje) . "&type=2" . "&sendid=" . $configuracion['telefono_isms']);
 	

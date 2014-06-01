@@ -29,6 +29,8 @@
 		__('Password:', 'apg_sms');
 		__('mobile number', 'apg_sms');
 		__('Mobile number:', 'apg_sms');
+		__('campaign ID', 'apg_sms');
+		__('Campaign ID:', 'apg_sms');
 
 	global $woocommerce;
   ?>
@@ -110,6 +112,7 @@
 			"usuario_mvaayoo" 						=> 'username',
 			"contrasena_mvaayoo" 					=> 'password',
 			"identificador_mvaayoo" 				=> 'sender ID',
+			"campana_mvaayoo" 						=> 'campaign ID',
 		),
 	  	"esebun" 				=> array(
 			"usuario_esebun" 						=> 'username',
