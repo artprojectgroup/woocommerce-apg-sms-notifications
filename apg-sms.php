@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.4.2
+Version: 2.5
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -24,8 +24,8 @@ License: GPL2
 //Definimos las variables
 $apg_sms = array(	'plugin' 		=> 'WooCommerce - APG SMS Notifications', 
 					'plugin_uri' 	=> 'woocommerce-apg-sms-notifications', 
-					'donacion' 	=> 'http://www.artprojectgroup.es/donacion',
-					'soporte' 		=> 'http://www.artprojectgroup.es/servicios/servicios-para-wordpress-y-woocommerce/soporte-tecnico',
+					'donacion' 	=> 'http://www.artprojectgroup.es/tienda/donacion',
+					'soporte' 		=> 'http://www.artprojectgroup.es/tienda/soporte-tecnico',
 					'plugin_url' 	=> 'http://www.artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-sms-notifications', 
 					'ajustes' 		=> 'admin.php?page=apg_sms', 
 					'puntuacion' 	=> 'http://wordpress.org/support/view/plugin-reviews/woocommerce-apg-sms-notifications');
@@ -212,7 +212,7 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 				'mobiles' 	=> $telefono,
 				'message' 	=> apg_sms_codifica_el_mensaje(apg_sms_normaliza_mensaje($mensaje)),
 				'sender' 	=> $configuracion['identificador_msg91'],
-				'route' 	=> $configuracion['ruta_msg91']
+				'route' 		=> $configuracion['ruta_msg91']
 			);
 		$respuesta = wp_remote_post("http://control.msg91.com/sendhttp.php", $argumentos);
 	}
@@ -231,8 +231,21 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 	}	
 	else if ($configuracion['servicio'] == "esebun") $respuesta = wp_remote_get("http://api.cloud.bz.esebun.com/api/v3/sendsms/plain?user=" . $configuracion['usuario_esebun'] . "&password=" . $configuracion['contrasena_esebun'] . "&sender=" . apg_sms_codifica_el_mensaje($configuracion['identificador_esebun']) . "&SMSText=" . apg_sms_codifica_el_mensaje($mensaje) . "&GSM=" . preg_replace('/\+/', '', $telefono));
 	else if ($configuracion['servicio'] == "isms") $respuesta = wp_remote_get("https://www.isms.com.my/isms_send.php?un=" . $configuracion['usuario_isms'] . "&pwd=" . $configuracion['contrasena_isms'] . "&dstno=" . $telefono . "&msg=" . apg_sms_codifica_el_mensaje($mensaje) . "&type=2" . "&sendid=" . $configuracion['telefono_isms']);
-	
-	//wp_mail('artprojectgroup@gmail.com', 'WooCommerce - APG SMS Notifications', $telefono . print_r($respuesta, true), 'charset=UTF-8' . "\r\n"); 
+	else if ($configuracion['servicio'] == "smslane")
+	{
+		$argumentos['body'] = array(
+				'user' 		=> $configuracion['usuario_smslane'],
+				'password' 	=> $configuracion['contrasena_smslane'],
+				'msisdn' 	=> $telefono,
+				'sid' 		=> $configuracion['sid_smslane'],
+				'msg' 		=> $mensaje,
+				'fl' 		=> "0",
+				'gwid' 		=> "2",
+			);
+		$respuesta = wp_remote_post("http://smslane.com/vendorsms/pushsms.aspx", $argumentos);
+	}
+
+	//wp_mail('artprojectgroup@gmail.com', 'WooCommerce - APG SMS Notifications', strtr($mensaje, $conversion) ."\r\n" . print_r($respuesta, true), 'charset=UTF-8' . "\r\n"); 
 }
 
 //Normalizamos el texto
@@ -252,7 +265,7 @@ function apg_sms_codifica_el_mensaje($mensaje) {
 
 //Mira si necesita el prefijo telefónico internacional
 function apg_sms_prefijo($servicio) {
-    $prefijo = array("voipstunt", "clockwork", "clickatell", "bulksms", "msg91", "twilio", "mvaayoo", "esebun", "isms");
+    $prefijo = array("voipstunt", "clockwork", "clickatell", "bulksms", "msg91", "twilio", "mvaayoo", "esebun", "isms", "smslane");
     
 	return in_array($servicio, $prefijo);
 }

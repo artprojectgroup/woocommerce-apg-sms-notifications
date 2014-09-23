@@ -53,15 +53,16 @@
             $proveedores = array(
 				"voipstunt" 			=> "VoipStunt", 
 				"solutions_infini" 	=> "Solutions Infini", 
-				"twilio" 				=> "Twilio", 
-				"clickatell" 			=> "Clickatell", 
+				"twilio" 			=> "Twilio", 
+				"clickatell" 		=> "Clickatell", 
 				"clockwork" 			=> "Clockwork", 
-				"bulksms" 				=> "BulkSMS", 
+				"bulksms" 			=> "BulkSMS", 
 				"open_dnd" 			=> "OPEN DND", 
 				"msg91" 				=> "MSG91", 
-				"mvaayoo" 				=> "mVaayoo", 
-				"esebun" 				=> "Esebun Business (Enterprise & Developers only)",
-				"isms" 					=> "iSMS Malaysia",
+				"mvaayoo" 			=> "mVaayoo", 
+				"esebun" 			=> "Esebun Business (Enterprise & Developers only)",
+				"isms" 				=> "iSMS Malaysia",
+				"smslane" 			=> "SMS Lane (Transactional SMS only)",
             );
             foreach ($proveedores as $valor => $proveedor) 
             {
@@ -74,55 +75,60 @@
       <?php             
 	  $proveedores_campos = array(
 	  	"voipstunt" 			=> array(
-			"usuario_voipstunt" 					=> 'username',
+			"usuario_voipstunt" 				=> 'username',
 			"contrasena_voipstunt" 				=> 'password',
 		), 
 	  	"solutions_infini" 	=> array(
-			"clave_solutions_infini" 				=> 'key',
+			"clave_solutions_infini" 			=> 'key',
 			"identificador_solutions_infini" 	=> 'sender ID',
 		),
-	  	"twilio" 				=> array(
+	  	"twilio" 			=> array(
 			"clave_twilio" 						=> 'account Sid',
 			"identificador_twilio" 				=> 'authentication Token',
-			"telefono_twilio" 						=> 'mobile number',
+			"telefono_twilio" 					=> 'mobile number',
 		),
-	  	"clickatell" 			=> array(
+	  	"clickatell" 		=> array(
 			"identificador_clickatell" 			=> 'sender ID',
-			"usuario_clickatell" 					=> 'username',
-			"contrasena_clickatell" 				=> 'password',
+			"usuario_clickatell" 				=> 'username',
+			"contrasena_clickatell" 			=> 'password',
 		),
 	  	"clockwork" 			=> array(
 			"identificador_clockwork" 			=> 'key',
 		),
-	  	"bulksms" 				=> array(
-			"usuario_bulksms" 						=> 'username',
-			"contrasena_bulksms" 					=> 'password',
+	  	"bulksms" 			=> array(
+			"usuario_bulksms" 					=> 'username',
+			"contrasena_bulksms" 				=> 'password',
 		),
 	  	"open_dnd" 			=> array(
-			"identificador_open_dnd" 				=> 'sender ID',
+			"identificador_open_dnd" 			=> 'sender ID',
 			"usuario_open_dnd" 					=> 'username',
 			"contrasena_open_dnd" 				=> 'password',
 		),
 	  	"msg91" 				=> array(
-			"clave_msg91" 							=> 'authentication key',
+			"clave_msg91" 						=> 'authentication key',
 			"identificador_msg91" 				=> 'sender ID',
-			"ruta_msg91" 							=> 'route',
+			"ruta_msg91" 						=> 'route',
 		),
-	  	"mvaayoo" 				=> array(
-			"usuario_mvaayoo" 						=> 'username',
-			"contrasena_mvaayoo" 					=> 'password',
-			"identificador_mvaayoo" 				=> 'sender ID',
-			"campana_mvaayoo" 						=> 'campaign ID',
+	  	"mvaayoo" 			=> array(
+			"usuario_mvaayoo" 					=> 'username',
+			"contrasena_mvaayoo" 				=> 'password',
+			"identificador_mvaayoo" 			=> 'sender ID',
+			"campana_mvaayoo" 					=> 'campaign ID',
 		),
-	  	"esebun" 				=> array(
-			"usuario_esebun" 						=> 'username',
-			"contrasena_esebun" 					=> 'password',
+	  	"esebun" 			=> array(
+			"usuario_esebun" 					=> 'username',
+			"contrasena_esebun" 				=> 'password',
 			"identificador_esebun" 				=> 'sender ID',
 		),
-	  	"isms" 					=> array(
+	  	"isms" 				=> array(
 			"usuario_isms" 						=> 'username',
-			"contrasena_isms" 						=> 'password',
-			"telefono_isms" 						=> 'mobile number',
+			"contrasena_isms" 					=> 'password',
+			"telefono_isms" 					=> 'mobile number',
+		),
+	  	"smslane" 			=> array(
+			"usuario_smslane" 					=> 'username',
+			"contrasena_smslane" 				=> 'password',
+			"sid_smslane" 						=> 'sender ID',
 		),
 	  );
 	  
