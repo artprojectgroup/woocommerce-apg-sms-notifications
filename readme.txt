@@ -33,7 +33,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * SMS Lane (Transactional SMS only)
 * Posibilidad de informar al propietario de la tienda sobre nuevos pedidos.
 * Posibilidad de enviar, o no, SMS internacionales.
-* Soporte de los estados personalizados de los plugin [Custom Order Statuses & Actions](http://codecanyon.net/item/woocommerce-custom-order-status-actions/6392174) y [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931).
+* Soporte de los estados personalizados de los plugin [Custom Order Statuses & Actions](http://codecanyon.net/item/woocommerce-custom-order-status-actions/6392174?ref=apgmijas) y [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931?ref=apgmijas).
 * Soporte para los números de pedido personalizados del plugin [WooCommerce Sequential Order Numbers Pro](http://www.woothemes.com/products/sequential-order-numbers-pro/).
 * Inserta de forma automática el código telefónico internacional, si es necesario, al número de teléfono del cliente.
 * También notifica por SMS las notas a los clientes.
@@ -119,14 +119,14 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 * Solucionado un error con Twilio.
 * Solucionado un error al procesar el número de teléfono del propietario.
 = 2.2 =
-* Añadido soporte de los estados personalizados del plugin [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931).
+* Añadido soporte de los estados personalizados del plugin [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931?ref=apgmijas).
 * Añadido soporte para los números de pedido personalizados del plugin [WooCommerce Sequential Order Numbers Pro](http://www.woothemes.com/products/sequential-order-numbers-pro/).
 * Arreglo de error que borraba toda la configuración al desactivar el plugin.
 * Corrección menor que evita la aparición de un código de error al recopilar información sobre el plugin.
 = 2.1 =
 * Soporte para Esebun Business (Enterprise & Developers only). **Actualización patrocinada por [Esebun Business](http://www.bz.esebun.com/)**.
 = 2.0 =
-* Añadido soporte de los estados personalizados del plugin [Custom Order Statuses & Actions](http://codecanyon.net/item/woocommerce-custom-order-status-actions/6392174). **Actualización patrocinada por [Chirag Vora](http://profiles.wordpress.org/chirag740)**.
+* Añadido soporte de los estados personalizados del plugin [Custom Order Statuses & Actions](http://codecanyon.net/item/woocommerce-custom-order-status-actions/6392174?ref=apgmijas). **Actualización patrocinada por [Chirag Vora](http://profiles.wordpress.org/chirag740)**.
 * Arreglos menores del código encargado de mostrar las variables de WooCommerce.
 * Actualización de la apariencia de los campos de selección.
 * Actualización de la captura de pantalla.
@@ -238,14 +238,14 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 * Solucionado un error con Twilio.
 * Solucionado un error al procesar el número de teléfono del propietario.
 = 2.2 =
-* Añadido soporte de los estados personalizados del plugin [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931).
+* Añadido soporte de los estados personalizados del plugin [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931?ref=apgmijas).
 * Añadido soporte para los números de pedido personalizados del plugin [WooCommerce Sequential Order Numbers Pro](http://www.woothemes.com/products/sequential-order-numbers-pro/).
 * Arreglo de error que borraba toda la configuración al desactivar el plugin.
 * Corrección menor que evita la aparición de un código de error al recopilar información sobre el plugin.
 = 2.1 =
 * Soporte para Esebun Business (Enterprise & Developers only). **Actualización patrocinada por [Esebun Business](http://www.bz.esebun.com/)**.
 = 2.0 =
-* Añadido soporte de los estados personalizados del plugin [Custom Order Statuses & Actions](http://codecanyon.net/item/woocommerce-custom-order-status-actions/6392174). **Actualización patrocinada por [Chirag Vora](http://profiles.wordpress.org/chirag740)**.
+* Añadido soporte de los estados personalizados del plugin [Custom Order Statuses & Actions](http://codecanyon.net/item/woocommerce-custom-order-status-actions/6392174?ref=apgmijas). **Actualización patrocinada por [Chirag Vora](http://profiles.wordpress.org/chirag740)**.
 * Arreglos menores del código encargado de mostrar las variables de WooCommerce.
 * Actualización de la apariencia de los campos de selección.
 * Actualización de la captura de pantalla.
