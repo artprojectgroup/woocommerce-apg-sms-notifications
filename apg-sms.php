@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.5
+Version: 2.6
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -245,7 +245,7 @@ function apg_sms_envia_sms($configuracion, $telefono, $mensaje) {
 		$respuesta = wp_remote_post("http://smslane.com/vendorsms/pushsms.aspx", $argumentos);
 	}
 
-	//wp_mail('artprojectgroup@gmail.com', 'WooCommerce - APG SMS Notifications', strtr($mensaje, $conversion) ."\r\n" . print_r($respuesta, true), 'charset=UTF-8' . "\r\n"); 
+	//wp_mail('artprojectgroup@gmail.com', 'WooCommerce - APG SMS Notifications', $mensaje ."\r\n" . print_r($respuesta, true), 'charset=UTF-8' . "\r\n"); 
 }
 
 //Normalizamos el texto
@@ -293,7 +293,7 @@ function apg_sms_procesa_el_telefono($pedido, $telefono, $servicio, $propietario
 
 //Procesa las variables
 function apg_sms_procesa_variables($mensaje, $pedido, $variables, $nota = '') {
-	$apg_sms = array("id", "status", "prices_include_tax", "tax_display_cart", "display_totals_ex_tax", "display_cart_ex_tax", "order_date", "modified_date", "customer_message", "customer_note", "post_status", "shop_name", "note");
+	$apg_sms = array("id", "status", "prices_include_tax", "tax_display_cart", "display_totals_ex_tax", "display_cart_ex_tax", "order_date", "modified_date", "customer_message", "customer_note", "post_status", "shop_name", "note", "order_product");
 	$apg_sms_variables = array("order_key", "billing_first_name", "billing_last_name", "billing_company", "billing_address_1", "billing_address_2", "billing_city", "billing_postcode", "billing_country", "billing_state", "billing_email", "billing_phone", "shipping_first_name", "shipping_last_name", "shipping_company", "shipping_address_1", "shipping_address_2", "shipping_city", "shipping_postcode", "shipping_country", "shipping_state", "shipping_method", "shipping_method_title", "payment_method", "payment_method_title", "order_discount", "cart_discount", "order_tax", "order_shipping", "order_shipping_tax", "order_total"); //Hay que añadirles un guión
 	$variables = explode("\n", str_replace(array("\r\n", "\r"), "\n", $variables));
 
@@ -306,7 +306,8 @@ function apg_sms_procesa_variables($mensaje, $pedido, $variables, $nota = '') {
 
     	if (!in_array($variable, $apg_sms) && !in_array($variable, $apg_sms_variables) && !in_array($variable, $variables)) continue;
 
-    	if ($variable != "order_date" && $variable != "modified_date" && $variable != "shop_name" && $variable != "note" && $variable != "id") 
+	    $especiales = array("order_date", "modified_date", "shop_name", "note", "id", "order_product"); //Variables especiales (no éstandar y no personalizadas)
+    	if (!in_array($variable, $especiales)) 
 		{
 			if (in_array($variable, $apg_sms)) $mensaje = str_replace("%" . $variable . "%", $pedido->$variable, $mensaje); //Variables estándar - Objeto
 			else if (in_array($variable, $apg_sms_variables)) $mensaje = str_replace("%" . $variable . "%", $variables_personalizadas["_" . $variable][0], $mensaje); //Variables estándar - Array
@@ -316,6 +317,14 @@ function apg_sms_procesa_variables($mensaje, $pedido, $variables, $nota = '') {
 		else if ($variable == "shop_name") $mensaje = str_replace("%" . $variable . "%", get_bloginfo('name'), $mensaje);
 		else if ($variable == "note") $mensaje = str_replace("%" . $variable . "%", $nota, $mensaje);
 		else if ($variable == "id") $mensaje = str_replace("%" . $variable . "%", $pedido->get_order_number(), $mensaje);
+		else if ($variable == "order_product")
+		{
+			$productos = $pedido->get_items();
+			$nombre = $productos[key($productos)]['name'];
+			if (strlen($nombre) > 10) $nombre = substr($nombre, 0, 10) . "...";
+			if (count($productos) > 1) $nombre .= " (+" .  (count($productos) - 1) .")";
+			$mensaje = str_replace("%" . $variable . "%", $nombre, $mensaje);
+		}
 	}
 	
 	return $mensaje;
