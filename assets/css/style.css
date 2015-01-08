@@ -1,5 +1,5 @@
 @charset "UTF-8";
- @import url(fonts/stylesheet.css);
+ @import url(../fonts/stylesheet.css);
 /*General*/
 table.form-table, .cabecera {
 	clear: none;
@@ -8,7 +8,7 @@ table.form-table, .cabecera {
 .imagen {
 	border-left: 4px solid #7AD03A;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-	background-image: url(images/cabecera.jpg);
+	background-image: url(../images/cabecera.jpg);
 	width: 582px;
 	height: 139px;
 	display: block;

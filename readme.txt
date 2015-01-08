@@ -1,10 +1,10 @@
 === WooCommerce - APG SMS Notifications ===
 Contributors: artprojectgroup
 Donate link: http://www.artprojectgroup.es/tienda/donacion
-Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Clickatell, Clockwork, BulkSMS, OPEN DND, MSG91, mVaayoo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), Custom Order Statuses & Actions, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro
-Requires at least: 3.5
-Tested up to: 4.0
-Stable tag: 2.6
+Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Clickatell, Clockwork, BulkSMS, OPEN DND, MSG91, mVaayoo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, Custom Order Statuses & Actions, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro
+Requires at least: 3.8
+Tested up to: 4.1
+Stable tag: 2.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * Esebun Business (Enterprise & Developers only).
  * iSMS Malaysia
  * SMS Lane (Transactional SMS only)
+ * SMS Country
 * Posibilidad de informar al propietario de la tienda sobre nuevos pedidos.
 * Posibilidad de enviar, o no, SMS internacionales.
 * Soporte de los estados personalizados de los plugin [Custom Order Statuses & Actions](http://codecanyon.net/item/woocommerce-custom-order-status-actions/6392174?ref=apgmijas) y [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931?ref=apgmijas).
@@ -94,6 +95,10 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.7 =
+* Soporte para la nueva API de mVaayoo.
+* Soporte para SMS Country.
+* Modificación de la estructura interna del plugin para ajustarse a los estándares de WordPress.
 = 2.6 =
 * Añadida nueva variable %order_product% para mostrar el nombre del primer producto del pedido.  **Actualización patrocinada por [Sanam Patel](http://san.am/)**.
 = 2.5 =
@@ -215,6 +220,10 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 * Versión inicial.
 
 == Upgrade Notice ==
+= 2.7 =
+* Soporte para la nueva API de mVaayoo.
+* Soporte para SMS Country.
+* Modificación de la estructura interna del plugin para ajustarse a los estándares de WordPress.
 = 2.6 =
 * Añadida nueva variable %order_product% para mostrar el nombre del primer producto del pedido.  **Actualización patrocinada por [Sanam Patel](http://san.am/)**.
 = 2.5 =
