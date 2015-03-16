@@ -187,7 +187,7 @@
           <img class="help_tip" data-tip="<?php _e( 'Check if you want to send international SMS messages', 'apg_sms' ); ?>" src="<?php echo plugins_url(  'woocommerce/assets/images/help.png' );?>" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><input id="apg_sms_settings[internacional]" name="apg_sms_settings[internacional]" type="checkbox" value="1" <?php echo ( isset( $configuracion['internacional'] ) && $configuracion['internacional'] == "1" ? 'checked="checked"' : '' ); ?> tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
-      <?php if ( function_exists( 'wc_custom_status_init' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) ) : ?>
+      <?php if ( function_exists( 'wc_custom_status_init' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : ?>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[estados_personalizados]">
             <?php _e( 'Custom Order Statuses & Actions:', 'apg_sms' ); ?>
@@ -220,25 +220,45 @@
 						'processing',
 						'completed',
 						'refunded',
-						'cancelled' 
+						'cancelled',
 					);
-					$lista_de_estados = ( array ) get_terms( 'shop_order_status', array( 
-						'hide_empty' => 0, 
-						'orderby' => 'id' 
-					) );
+					if ( isset( $GLOBALS['advorder_lite_orderstatus'] ) ) {
+						$lista_de_estados = ( array ) $GLOBALS['advorder_lite_orderstatus']->get_terms( 'shop_order_status', array( 
+							'hide_empty' => 0, 
+							'orderby' => 'id' 
+						) );
+					} else {
+						$lista_de_estados = ( array ) get_terms( 'shop_order_status', array( 
+							'hide_empty' => 0, 
+							'orderby' => 'id' 
+						) );
+					}
 					$lista_nueva = array();
 					foreach(  $lista_de_estados as $estado ) {
-						if ( !in_array( $estado->slug, $estados_originales ) ) {
+						$estado_nombre = str_replace( "wc-", "", $estado->slug );
+						if ( !in_array( $estado_nombre, $estados_originales ) ) {
+							$muestra_estado = false;
 							$estados_personalizados = get_option( 'taxonomy_' . $estado->term_id, false );
-							if ( $estados_personalizados && isset( $estados_personalizados['woocommerce_woo_advance_order_status_email']  ) && (  '1' == $estados_personalizados['woocommerce_woo_advance_order_status_email'] || 'yes' == $estados_personalizados['woocommerce_woo_advance_order_status_email'] ) ) {
+							if ( $estados_personalizados && ( isset( $estados_personalizados['woocommerce_woo_advance_order_status_email'] ) ) && (  '1' == $estados_personalizados['woocommerce_woo_advance_order_status_email'] || 'yes' == $estados_personalizados['woocommerce_woo_advance_order_status_email'] ) ) {
+								$muestra_estado = true;
+							}
+							if ( get_option( 'az_custom_order_status_meta_' . $estado->slug, true ) ) {
+								$estados_personalizados = get_option( 'az_custom_order_status_meta_' . $estado->slug, true );
+								if ( $estados_personalizados && ( isset( $estados_personalizados['woocommerce_wc_lite_orderstatus_email'] ) ) && (  '1' == $estados_personalizados['woocommerce_wc_lite_orderstatus_email'] ) ) {
+									$muestra_estado = true;
+								}
+							}
+							if ( $muestra_estado ) {
 								$chequea = '';
-								foreach ( $configuracion['estados_personalizados'] as $estado_personalizado ) {
-									if ( $estado_personalizado == $estado->slug ) {
-										$chequea = ' selected="selected"';
+								if ( isset( $configuracion['estados_personalizados'] ) ) {
+									foreach ( $configuracion['estados_personalizados'] as $estado_personalizado ) {
+										if ( $estado_personalizado == $estado_nombre ) {
+											$chequea = ' selected="selected"';
+										}
 									}
 								}
-								echo '<option value="' . $estado->slug . '"' . $chequea . '>' . $estado->name . '</option>' . PHP_EOL;
-								$lista_nueva[] = $estado->slug;
+								echo '<option value="' . $estado_nombre . '"' . $chequea . '>' . $estado->name . '</option>' . PHP_EOL;
+								$lista_nueva[] = $estado_nombre;
 							}
 						}
 					}
@@ -326,8 +346,10 @@ jQuery( document ).ready( function( $ ) {
 	};
 	control( $( '.servicio' ).val() );
 
-	jQuery( "select.chosen_select" ).chosen();
-<?php if ( function_exists( 'wc_custom_status_init' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) ) : ?>	
+	if (typeof chosen !== 'undefined' && $.isFunction(chosen)) {
+		jQuery( "select.chosen_select" ).chosen();
+	}
+<?php if ( function_exists( 'wc_custom_status_init' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : ?>	
 	$( '.estados_personalizados' ).on( 'change', function () { 
 		control_personalizados( $( this ).val() ); 
 	} );
@@ -345,7 +367,9 @@ jQuery( document ).ready( function( $ ) {
 		}
 	};
 
-	control_personalizados( $( '.estados_personalizados' ).val() );
+	$( '.estados_personalizados' ).each( function( i, selected ) { 
+	  control_personalizados( $( selected ).val() );
+	} );
 <?php endif; ?>	
 } );
 </script> 

@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.7.0.1
+Version: 2.7.1
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 4.1
+Tested up to: 4.1.1
 
 Text Domain: apg_sms
 Domain Path: /i18n/languages
@@ -134,7 +134,7 @@ function apg_sms_registra_opciones() {
 	
 	register_setting( 'apg_sms_settings_group', 'apg_sms_settings' );
 
-	if ( ( class_exists( 'WC_Custom_Status' ) || class_exists( 'AppZab_Woo_Advance_Order_Status' ) ) && isset( $configuracion['estados_personalizados'] ) ) {
+	if ( ( class_exists( 'WC_Custom_Status' ) || class_exists( 'AppZab_Woo_Advance_Order_Status' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) && isset( $configuracion['estados_personalizados'] ) ) {
 		foreach ( $configuracion['estados_personalizados'] as $estado ) {
 			add_action( "woocommerce_order_status_{$estado}", 'apg_sms_procesa_estados', 10 ); //Funciona cuando se ejecuta WooCommerce Custom Order Statuses & Actions
 		}
@@ -289,7 +289,7 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 	        break;
 	}
 	
-	//wp_mail( 'artprojectgroup@gmail.com', 'WooCommerce - APG SMS Notifications', $telefono . "\r\n" . $mensaje . "\r\n" . print_r( $respuesta, true ), 'charset=UTF-8' . "\r\n" ); 
+	wp_mail( 'artprojectgroup@gmail.com', 'WooCommerce - APG SMS Notifications', $telefono . "\r\n" . $mensaje . "\r\n" . print_r( $respuesta, true ), 'charset=UTF-8' . "\r\n" ); 
 }
 
 //Normalizamos el texto
