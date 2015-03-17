@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.7.1.1
+Version: 2.7.1.2
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -223,7 +223,7 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 	        $respuesta = wp_remote_get( "https://api.clockworksms.com/http/send.aspx?key=" . $configuracion['identificador_clockwork'] . "&to=" . $telefono . "&content=" . apg_sms_normaliza_mensaje( $mensaje ) );
 	        break;
 	    case "bulksms":
-	        $respuesta = wp_remote_post( "http://bulksms.vsms.net/eapi/submission/send_sms/2/2.0?username=" . $configuracion['usuario_bulksms'] . "&password=" . $configuracion['contrasena_bulksms'] . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&msisdn=" . urlencode( $telefono ) );
+	        $respuesta = wp_remote_post( "http://bulksms.2way.co.za/eapi/submission/send_sms/2/2.0?username=" . urlencode( $configuracion['usuario_bulksms'] ) . "&password=" . urlencode( $configuracion['contrasena_bulksms'] ) . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&msisdn=" . urlencode( $telefono ) );
 	        break;
 	    case "open_dnd":
 	        $respuesta = wp_remote_get( "http://txn.opendnd.in/pushsms.php?username=" . $configuracion['usuario_open_dnd'] . "&password=" . $configuracion['contrasena_open_dnd'] . "&message=" . apg_sms_codifica_el_mensaje( apg_sms_normaliza_mensaje( $mensaje ) ) . "&sender=" . $configuracion['identificador_open_dnd'] . "&numbers=" . $telefono );
