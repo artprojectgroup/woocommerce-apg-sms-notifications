@@ -1,16 +1,15 @@
 @charset "UTF-8";
  @import url(../fonts/stylesheet.css);
 /*General*/
-table.form-table, .cabecera {
+table.apg-table, .cabecera {
 	clear: none;
-	width: 70%;
+	width: 79%;
+	max-width: 586px;
 }
 .imagen {
 	border-left: 4px solid #7AD03A;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-	background-image: url(../images/cabecera.jpg);
-	width: 582px;
-	height: 139px;
+	max-width: 100%;
 	display: block;
 }
 .imagen:hover {
@@ -20,54 +19,89 @@ table.form-table, .cabecera {
 	-khtml-opacity: 0.8;
 	opacity: 0.8;
 }
-div.donacion .genericon {
-	width: 25px;
-	height: 25px;
-	font-size: 25px;
+.estrellas div {
+	display: inline!important;
 }
-div.donacion .artprojectgroup {
-	font-size: 20px;
+.estrellas div:hover {
+	color: #2ea2cc;
 }
-div.donacion {
+.estrellas .star-rating .star {
+	font-size: 18px;
+}
+div.informacion .genericon, div.informacion .estrellas .star-rating .star, div.informacion .artprojectgroup, {
+ width: 15px;
+ height: 15px;
+ font-size: 15px;
+}
+div.informacion {
 	background-color: #FFFFFF;
 	float: right;
-	margin: 10px 0px;
 	padding: 10px;
-	width: 220px;
+	width: 15%;
+	max-width: 220px;
 	text-align: center;
 	border-left: 4px solid #7AD03A;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
 }
-div.donacion > div {
-	padding: 10px;
+div.informacion div.fila {
+	padding: 10px 10px 0px;
 	margin: 10px auto 0px;
-	width: 190px;
+	max-width: 190px;
+}
+div.informacion div.fila, div.informacion div.columna:nth-child(2n) {
 	border-top: 1px solid #7AD03A;
 }
-div.donacion a {
+div.informacion div.fila:first-child {
+	border: none;
+	margin-top: 0px;
+}
+div.informacion div.columna.final {
+	display: none;
+}
+div.informacion div.fila.final {
+	padding: 10px;
+	margin: 0px auto 10px;
+}
+div.informacion a {
 	text-decoration: none;
 }
-input[type="text"], input[type="number"], textarea, select {
-	background-color: #FFFFFF;
-	border: 1px solid #DDDDDD;
-	width: 25em!important;
-	outline: 0px none;
-	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07) inset!important;
-	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07) inset!important;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07) inset!important;
+table.apg-table select, table.apg-table textarea {
+	width: 100% !important;
 }
-input[type="text"], input[type="number"], textarea, select {
-	height: 30px!important;
+table.apg-table textarea {
+	min-height: 200px;
 }
-textarea {
+
+@media screen and (max-width: 806px) {
+table.apg-table, .cabecera {
+	clear: none;
+	width: 100%;
+}
+div.informacion {
+	display: table;
 	float: none;
-	height: 150px!important;
-	width: 100%!important;
-	max-width: 590px!important;
+	margin: 0px 0px 10px 0px;
+	max-width: 562px;
+	width: auto;
 }
-input:focus, textarea:focus, select:focus, .chzn-container:hover {
-	border-color: #999999;
-	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1)!important;
-	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1)!important;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1)!important;
+div.informacion div.fila {
+	display: table-row;
+	width: 100%;
+	border-top: 1px solid #7AD03A;
+}
+div.informacion div.fila:first-child {
+	border: none;
+}
+div.informacion div.columna {
+	display: table-cell;
+	width: 50%;
+	padding: 10px;
+}
+div.informacion div.fila, div.informacion div.columna, div.informacion div.columna:first-child {
+	border-top: 1px solid #7AD03A;
+}
+div.informacion div.fila:first-child, div.informacion div.fila:first-child div.columna {
+	border: none;
+	margin-top: 0px;
+}
 }

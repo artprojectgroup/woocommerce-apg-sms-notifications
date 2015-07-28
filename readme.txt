@@ -3,10 +3,12 @@ Contributors: artprojectgroup
 Donate link: http://www.artprojectgroup.es/tienda/donacion
 Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Clickatell, Clockwork, BulkSMS, OPEN DND, MSG91, mVaayoo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, Custom Order Statuses & Actions, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro
 Requires at least: 3.8
-Tested up to: 4.1.1
-Stable tag: 2.7.1.2
+Tested up to: 4.2.3
+Stable tag: 2.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+WC requires at least: 2.1
+WC tested up to: 2.3.13
 
 Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie el estado del pedido.
 
@@ -32,6 +34,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * iSMS Malaysia
  * SMS Lane (Transactional SMS only)
  * SMS Country
+ * LabsMobile Spain
 * Posibilidad de informar al propietario de la tienda sobre nuevos pedidos.
 * Posibilidad de enviar, o no, SMS internacionales.
 * Soporte de los estados personalizados de los plugin [Custom Order Statuses & Actions](http://codecanyon.net/item/woocommerce-custom-order-status-actions/6392174?ref=apgmijas) y [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931?ref=apgmijas).
@@ -95,6 +98,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.7.2 =
+* Soporte para LabsMobile Spain. **Actualización patrocinada por [LabsMobile Spain](http://www.labsmobile.com/)**.
+* Nueva hoja de estilo sensible.
 = 2.7.1.2 =
 * Soporte para la nueva URL de BulkSMS.
 = 2.7.1.1 =
@@ -229,6 +235,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 * Versión inicial.
 
 == Upgrade Notice ==
+= 2.7.2 =
+* Soporte para LabsMobile Spain. **Actualización patrocinada por [LabsMobile Spain](http://www.labsmobile.com/)**.
+* Nueva hoja de estilo sensible.
 = 2.7.1.2 =
 * Soporte para la nueva URL de BulkSMS.
 = 2.7.1.1 =

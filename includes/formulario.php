@@ -29,8 +29,8 @@
 		__( 'Password:', 'apg_sms' );
 		__( 'mobile number', 'apg_sms' );
 		__( 'Mobile number:', 'apg_sms' );
-		__( 'campaign ID', 'apg_sms' );
-		__( 'Campaign ID:', 'apg_sms' );
+		__( 'client', 'apg_sms' );
+		__( 'Client:', 'apg_sms' );
 
 	global $woocommerce;
   ?>
@@ -41,8 +41,8 @@
   <?php include( 'cuadro-donacion.php' ); ?>
   <form method="post" action="options.php">
     <?php settings_fields( 'apg_sms_settings_group' ); ?>
-    <div class="cabecera"> <a href="<?php echo $apg_sms['plugin_url']; ?>" title="<?php echo $apg_sms['plugin']; ?>" target="_blank"><span class="imagen"></span></a> </div>
-    <table class="form-table">
+    <div class="cabecera"> <a href="<?php echo $apg_sms['plugin_url']; ?>" title="<?php echo $apg_sms['plugin']; ?>" target="_blank"><img src="<?php echo plugins_url( '../assets/images/cabecera.jpg', __FILE__ ); ?>" class="imagen" alt="<?php echo $apg_sms['plugin']; ?>" /></a> </div>
+    <table class="form-table apg-table">
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[servicio]">
             <?php _e( '<abbr title="Short Message Service" lang="en">SMS</abbr> gateway:', 'apg_sms' ); ?>
@@ -64,6 +64,7 @@
 				"isms" 				=> "iSMS Malaysia",
 				"smslane" 			=> "SMS Lane ( Transactional SMS only )",
 				"smscountry" 		=> "SMS Country",
+				"labsmobile" 		=> "LabsMobile Spain",
              );
             foreach ( $proveedores as $valor => $proveedor ) {
 				$chequea = ( isset( $configuracion['servicio'] ) && $configuracion['servicio'] == $valor ) ? ' selected="selected"' : '';
@@ -73,7 +74,7 @@
           </select></td>
       </tr>
       <?php             
-	  $proveedores_campos = array( 
+      $proveedores_campos = array( 
 	  	"voipstunt" 			=> array( 
 			"usuario_voipstunt" 				=> 'username',
 			"contrasena_voipstunt" 				=> 'password',
@@ -134,36 +135,42 @@
 			"contrasena_smscountry" 			=> 'password',
 			"sid_smscountry" 					=> 'sender ID',
 		 ),
-	   );
+		"labsmobile"       => array(
+			"identificador_labsmobile"			=> 'client',
+			"usuario_labsmobile"				=> 'username',
+			"contrasena_labsmobile"				=> 'password',
+			"sid_labsmobile"					=> 'sender ID',
+		),
+      );
 	  
 	  //Pinta los campos de los proveedores
 	  foreach ( $proveedores as $valor => $proveedor ) {
-		  foreach ( $proveedores_campos[$valor] as $valor_campo => $campo ) {
-			  if ( $valor_campo == "ruta_msg91" ) {
-				  echo '
+		foreach ( $proveedores_campos[$valor] as $valor_campo => $campo ) {
+			if ( $valor_campo == "ruta_msg91" ) {
+				echo '
       <tr valign="top" class="' . $valor . '"><!-- ' . $proveedor . ' -->
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . __( ucfirst( $campo ) . ":", "apg_sms" ) . '</label>
           <img class="help_tip" data-tip="' . sprintf( __( "The %s for your account in %s", "apg_sms" ), __( $campo, "apg_sms" ), $proveedor ) . '" src="' . plugins_url(  "woocommerce/assets/images/help.png" ) . '" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><select id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" tabindex="' . $tab++ . '">
 			  ';
-				  $opciones = array( "default" => __( "Default", "apg_sms" ), 1 => 1, 4 => 4 );
-				  foreach ( $opciones as $valor => $opcion ) {
-				  	$chequea = ( isset( $configuracion['ruta_msg91'] ) && $configuracion['ruta_msg91'] == $valor ) ? ' selected="selected"' : '';
+				$opciones = array( "default" => __( "Default", "apg_sms" ), 1 => 1, 4 => 4 );
+				foreach ( $opciones as $valor => $opcion ) {
+					$chequea = ( isset( $configuracion['ruta_msg91'] ) && $configuracion['ruta_msg91'] == $valor ) ? ' selected="selected"' : '';
 				  	echo '<option value="' . $valor . '"' . $chequea . '>' . $opcion . '</option>' . PHP_EOL;
-				  }
-				  echo '          </select></td>
+				}
+				echo '          </select></td>
       </tr>
 			  ';
-              } else {
-				  echo '
+			} else {
+				echo '
       <tr valign="top" class="' . $valor . '"><!-- ' . $proveedor . ' -->
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . __( ucfirst( $campo ) . ":", "apg_sms" ) . '</label>
           <img class="help_tip" data-tip="' . sprintf( __( "The %s for your account in %s", "apg_sms" ), __( $campo, "apg_sms" ), $proveedor ) . '" src="' . plugins_url(  "woocommerce/assets/images/help.png" ) . '" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" size="50" value="' . ( isset( $configuracion[$valor_campo] ) ? $configuracion[$valor_campo] : '' ) . '" tabindex="' . $tab++ . '" /></td>
       </tr>
 			  ';
-			  }
-		  }
+			}
+		}
 	  }
       ?>
       <tr valign="top">
