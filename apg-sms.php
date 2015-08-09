@@ -9,7 +9,7 @@ Author: Art Project Group
 Requires at least: 3.8
 Tested up to: 4.3
 WC requires at least: 2.1
-WC tested up to: 2.3
+WC tested up to: 2.3.13
 
 Text Domain: apg_sms
 Domain Path: /i18n/languages
