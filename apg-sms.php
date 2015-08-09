@@ -38,14 +38,14 @@ $apg_sms = array(
 	'puntuacion' 	=> 'http://wordpress.org/support/view/plugin-reviews/woocommerce-apg-sms-notifications' 
 );
 
+//Carga el idioma
+load_plugin_textdomain( 'apg_sms', null, dirname( DIRECCION_apg_sms ) . '/i18n/languages' );
+
 //¿Está activo WooCommerce?
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 	//Carga la configuración del plugin
 	$configuracion = get_option( 'apg_sms_settings' );
 	$mensaje_personalizado = array();
-
-	//Carga el idioma
-	load_plugin_textdomain( 'apg_sms', null, dirname( DIRECCION_apg_sms ) . '/i18n/languages' );
 
 	//Enlaces adicionales personalizados
 	function apg_sms_enlaces( $enlaces, $archivo ) {
