@@ -1,15 +1,13 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.7.2
+Version: 2.7.2.1
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
 Tested up to: 4.3
-WC requires at least: 2.1
-WC tested up to: 2.3.13
 
 Text Domain: apg_sms
 Domain Path: /i18n/languages
@@ -503,18 +501,18 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			"order_shipping_tax", 
 			"order_total" 
 		);
-		$variables = explode( "\n", str_replace( array( 
+		$variables_personalizadas = explode( "\n", str_replace( array( 
 			"\r\n", 
 			"\r" 
 		), "\n", $variables ) );
 	
-		$variables_personalizadas = get_post_custom( $pedido->id ); //WooCommerce 2.1
+		$variables_de_pedido = get_post_custom( $pedido->id ); //WooCommerce 2.1
 	
 		preg_match_all( "/%(.*?)%/", $mensaje, $busqueda );
 		foreach ( $busqueda[1] as $variable ) { 
 			$variable = strtolower( $variable );
 	
-			if ( !in_array( $variable, $apg_sms ) && !in_array( $variable, $apg_sms_variables ) && !in_array( $variable, $variables ) ) {
+			if ( !in_array( $variable, $apg_sms ) && !in_array( $variable, $apg_sms_variables ) && !in_array( $variable, $variables_personalizadas ) ) {
 				continue;
 			}
 	
@@ -530,9 +528,9 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 				if ( in_array( $variable, $apg_sms ) ) {
 					$mensaje = str_replace( "%" . $variable . "%", $pedido->$variable, $mensaje ); //Variables estándar - Objeto
 				} else if ( in_array( $variable, $apg_sms_variables ) ) {
-					$mensaje = str_replace( "%" . $variable . "%", $variables_personalizadas["_" . $variable][0], $mensaje ); //Variables estándar - Array
-				} else if ( isset( $variables_personalizadas[$variable] ) ) {
-					$mensaje = str_replace( "%" . $variable . "%", $variables_personalizadas[$variable][0], $mensaje ); //Variables personalizadas
+					$mensaje = str_replace( "%" . $variable . "%", $variables_de_pedido["_" . $variable][0], $mensaje ); //Variables estándar - Array
+				} else if ( isset( $variables_de_pedido[$variable] ) || in_array( $variable, $variables_personalizadas ) ) {
+					$mensaje = str_replace( "%" . $variable . "%", $variables_de_pedido[$variable][0], $mensaje ); //Variables de pedido y personalizadas
 				}
 			} else if ( $variable == "order_date" || $variable == "modified_date" ) {
 				$mensaje = str_replace( "%" . $variable . "%", date_i18n( woocommerce_date_format(), strtotime( $pedido->$variable ) ), $mensaje );
