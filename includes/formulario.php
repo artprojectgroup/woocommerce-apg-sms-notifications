@@ -5,32 +5,34 @@
     <?php _e( 'APG SMS Notifications Options.', 'apg_sms' ); ?>
   </h2>
   <?php 
-		settings_errors(); 
-		$tab = 1;
-		$configuracion = get_option( 'apg_sms_settings' );
-       //Traducciones ocultas    
-		__( 'account Sid', 'apg_sms' );
-		__( 'Account Sid:', 'apg_sms' );
-		__( 'authentication Token', 'apg_sms' );
-		__( 'Authentication Token:', 'apg_sms' );
-		__( 'key', 'apg_sms' );
-		__( 'Key:', 'apg_sms' );
-		__( 'authentication key', 'apg_sms' );
-		__( 'Authentication key:', 'apg_sms' );
-		__( 'sender ID', 'apg_sms' );
-		__( 'Sender ID:', 'apg_sms' );
-		__( 'route', 'apg_sms' );
-		__( 'Route:', 'apg_sms' );
-		__( 'sender ID', 'apg_sms' );
-		__( 'Sender ID:', 'apg_sms' );
-		__( 'username', 'apg_sms' );
-		__( 'Username:', 'apg_sms' );
-		__( 'password', 'apg_sms' );
-		__( 'Password:', 'apg_sms' );
-		__( 'mobile number', 'apg_sms' );
-		__( 'Mobile number:', 'apg_sms' );
-		__( 'client', 'apg_sms' );
-		__( 'Client:', 'apg_sms' );
+	settings_errors(); 
+	$tab = 1;
+	$configuracion = get_option( 'apg_sms_settings' );
+	//Traducciones ocultas    
+	__( 'account Sid', 'apg_sms' );
+	__( 'Account Sid:', 'apg_sms' );
+	__( 'authentication Token', 'apg_sms' );
+	__( 'Authentication Token:', 'apg_sms' );
+	__( 'key', 'apg_sms' );
+	__( 'Key:', 'apg_sms' );
+	__( 'authentication key', 'apg_sms' );
+	__( 'Authentication key:', 'apg_sms' );
+	__( 'sender ID', 'apg_sms' );
+	__( 'Sender ID:', 'apg_sms' );
+	__( 'route', 'apg_sms' );
+	__( 'Route:', 'apg_sms' );
+	__( 'sender ID', 'apg_sms' );
+	__( 'Sender ID:', 'apg_sms' );
+	__( 'username', 'apg_sms' );
+	__( 'Username:', 'apg_sms' );
+	__( 'password', 'apg_sms' );
+	__( 'Password:', 'apg_sms' );
+	__( 'mobile number', 'apg_sms' );
+	__( 'Mobile number:', 'apg_sms' );
+	__( 'client', 'apg_sms' );
+	__( 'Client:', 'apg_sms' );
+	__( 'authentication ID', 'apg_sms' );
+	__( 'Authentication ID:', 'apg_sms' );
 
 	global $woocommerce;
   ?>
@@ -65,6 +67,7 @@
 				"smslane" 			=> "SMS Lane ( Transactional SMS only )",
 				"smscountry" 		=> "SMS Country",
 				"labsmobile" 		=> "LabsMobile Spain",
+				"plivo" 				=> "Plivo",
              );
             foreach ( $proveedores as $valor => $proveedor ) {
 				$chequea = ( isset( $configuracion['servicio'] ) && $configuracion['servicio'] == $valor ) ? ' selected="selected"' : '';
@@ -74,104 +77,109 @@
           </select></td>
       </tr>
       <?php             
-      $proveedores_campos = array( 
-	  	"voipstunt" 			=> array( 
-			"usuario_voipstunt" 				=> 'username',
-			"contrasena_voipstunt" 				=> 'password',
-		 ), 
-	  	"solutions_infini" 	=> array( 
-			"clave_solutions_infini" 			=> 'key',
-			"identificador_solutions_infini" 	=> 'sender ID',
-		 ),
-	  	"twilio" 			=> array( 
-			"clave_twilio" 						=> 'account Sid',
-			"identificador_twilio" 				=> 'authentication Token',
-			"telefono_twilio" 					=> 'mobile number',
-		 ),
-	  	"clickatell" 		=> array( 
-			"identificador_clickatell" 			=> 'sender ID',
-			"usuario_clickatell" 				=> 'username',
-			"contrasena_clickatell" 			=> 'password',
-		 ),
-	  	"clockwork" 			=> array( 
-			"identificador_clockwork" 			=> 'key',
-		 ),
-	  	"bulksms" 			=> array( 
-			"usuario_bulksms" 					=> 'username',
-			"contrasena_bulksms" 				=> 'password',
-		 ),
-	  	"open_dnd" 			=> array( 
-			"identificador_open_dnd" 			=> 'sender ID',
-			"usuario_open_dnd" 					=> 'username',
-			"contrasena_open_dnd" 				=> 'password',
-		 ),
-	  	"msg91" 				=> array( 
-			"clave_msg91" 						=> 'authentication key',
-			"identificador_msg91" 				=> 'sender ID',
-			"ruta_msg91" 						=> 'route',
-		 ),
-	  	"mvaayoo" 			=> array( 
-			"usuario_mvaayoo" 					=> 'username',
-			"contrasena_mvaayoo" 				=> 'password',
-			"identificador_mvaayoo" 			=> 'sender ID',
-		 ),
-	  	"esebun" 			=> array( 
-			"usuario_esebun" 					=> 'username',
-			"contrasena_esebun" 				=> 'password',
-			"identificador_esebun" 				=> 'sender ID',
-		 ),
-	  	"isms" 				=> array( 
-			"usuario_isms" 						=> 'username',
-			"contrasena_isms" 					=> 'password',
-			"telefono_isms" 					=> 'mobile number',
-		 ),
-	  	"smslane" 			=> array( 
-			"usuario_smslane" 					=> 'username',
-			"contrasena_smslane" 				=> 'password',
-			"sid_smslane" 						=> 'sender ID',
-		 ),
-	  	"smscountry" 		=> array( 
-			"usuario_smscountry"				=> 'username',
-			"contrasena_smscountry" 			=> 'password',
-			"sid_smscountry" 					=> 'sender ID',
-		 ),
-		"labsmobile"       => array(
-			"identificador_labsmobile"			=> 'client',
-			"usuario_labsmobile"				=> 'username',
-			"contrasena_labsmobile"				=> 'password',
-			"sid_labsmobile"					=> 'sender ID',
-		),
-      );
+		$proveedores_campos = array( 
+			"voipstunt" 			=> array( 
+				"usuario_voipstunt" 				=> 'username',
+				"contrasena_voipstunt" 				=> 'password',
+			), 
+			"solutions_infini" 	=> array( 
+				"clave_solutions_infini" 			=> 'key',
+				"identificador_solutions_infini" 	=> 'sender ID',
+			),
+			"twilio" 			=> array( 
+				"clave_twilio" 						=> 'account Sid',
+				"identificador_twilio" 				=> 'authentication Token',
+				"telefono_twilio" 					=> 'mobile number',
+			),
+			"clickatell" 		=> array( 
+				"identificador_clickatell" 			=> 'sender ID',
+				"usuario_clickatell" 				=> 'username',
+				"contrasena_clickatell" 			=> 'password',
+			),
+			"clockwork" 			=> array( 
+				"identificador_clockwork" 			=> 'key',
+			),
+			"bulksms" 			=> array( 
+				"usuario_bulksms" 					=> 'username',
+				"contrasena_bulksms" 				=> 'password',
+			),
+			"open_dnd" 			=> array( 
+				"identificador_open_dnd" 			=> 'sender ID',
+				"usuario_open_dnd" 					=> 'username',
+				"contrasena_open_dnd" 				=> 'password',
+			),
+			"msg91" 				=> array( 
+				"clave_msg91" 						=> 'authentication key',
+				"identificador_msg91" 				=> 'sender ID',
+				"ruta_msg91" 						=> 'route',
+			),
+			"mvaayoo" 			=> array( 
+				"usuario_mvaayoo" 					=> 'username',
+				"contrasena_mvaayoo" 				=> 'password',
+				"identificador_mvaayoo" 			=> 'sender ID',
+			),
+			"esebun" 			=> array( 
+				"usuario_esebun" 					=> 'username',
+				"contrasena_esebun" 				=> 'password',
+				"identificador_esebun" 				=> 'sender ID',
+			),
+			"isms" 				=> array( 
+				"usuario_isms" 						=> 'username',
+				"contrasena_isms" 					=> 'password',
+				"telefono_isms" 					=> 'mobile number',
+			),
+			"smslane" 			=> array( 
+				"usuario_smslane" 					=> 'username',
+				"contrasena_smslane" 				=> 'password',
+				"sid_smslane" 						=> 'sender ID',
+			),
+			"smscountry" 		=> array( 
+				"usuario_smscountry"				=> 'username',
+				"contrasena_smscountry" 			=> 'password',
+				"sid_smscountry" 					=> 'sender ID',
+			),
+			"labsmobile"       => array(
+				"identificador_labsmobile"			=> 'client',
+				"usuario_labsmobile"				=> 'username',
+				"contrasena_labsmobile"				=> 'password',
+				"sid_labsmobile"					=> 'sender ID',
+			),
+			"plivo"				=> array(
+				"usuario_plivo"						=> 'authentication ID',
+				"clave_plivo"						=> 'authentication Token',
+				"identificador_plivo"				=> 'sender ID',
+			),
+		);
 	  
-	  //Pinta los campos de los proveedores
-	  foreach ( $proveedores as $valor => $proveedor ) {
-		foreach ( $proveedores_campos[$valor] as $valor_campo => $campo ) {
-			if ( $valor_campo == "ruta_msg91" ) {
-				echo '
+		//Pinta los campos de los proveedores
+		foreach ( $proveedores as $valor => $proveedor ) {
+			foreach ( $proveedores_campos[$valor] as $valor_campo => $campo ) {
+				if ( $valor_campo == "ruta_msg91" ) {
+					echo '
       <tr valign="top" class="' . $valor . '"><!-- ' . $proveedor . ' -->
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . __( ucfirst( $campo ) . ":", "apg_sms" ) . '</label>
           <img class="help_tip" data-tip="' . sprintf( __( "The %s for your account in %s", "apg_sms" ), __( $campo, "apg_sms" ), $proveedor ) . '" src="' . plugins_url(  "woocommerce/assets/images/help.png" ) . '" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><select id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" tabindex="' . $tab++ . '">
-			  ';
-				$opciones = array( "default" => __( "Default", "apg_sms" ), 1 => 1, 4 => 4 );
-				foreach ( $opciones as $valor => $opcion ) {
-					$chequea = ( isset( $configuracion['ruta_msg91'] ) && $configuracion['ruta_msg91'] == $valor ) ? ' selected="selected"' : '';
-				  	echo '<option value="' . $valor . '"' . $chequea . '>' . $opcion . '</option>' . PHP_EOL;
-				}
-				echo '          </select></td>
+					';
+					$opciones = array( "default" => __( "Default", "apg_sms" ), 1 => 1, 4 => 4 );
+					foreach ( $opciones as $valor => $opcion ) {
+						$chequea = ( isset( $configuracion['ruta_msg91'] ) && $configuracion['ruta_msg91'] == $valor ) ? ' selected="selected"' : '';
+				  		echo '<option value="' . $valor . '"' . $chequea . '>' . $opcion . '</option>' . PHP_EOL;
+					}
+					echo '          </select></td>
       </tr>
-			  ';
-			} else {
-				echo '
+					';
+				} else {
+					echo '
       <tr valign="top" class="' . $valor . '"><!-- ' . $proveedor . ' -->
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . __( ucfirst( $campo ) . ":", "apg_sms" ) . '</label>
           <img class="help_tip" data-tip="' . sprintf( __( "The %s for your account in %s", "apg_sms" ), __( $campo, "apg_sms" ), $proveedor ) . '" src="' . plugins_url(  "woocommerce/assets/images/help.png" ) . '" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" size="50" value="' . ( isset( $configuracion[$valor_campo] ) ? $configuracion[$valor_campo] : '' ) . '" tabindex="' . $tab++ . '" /></td>
       </tr>
-			  ';
+					';
+				}
 			}
 		}
-	  }
       ?>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[telefono]">

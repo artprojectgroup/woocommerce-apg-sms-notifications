@@ -1,10 +1,10 @@
 === WooCommerce - APG SMS Notifications ===
 Contributors: artprojectgroup
 Donate link: http://www.artprojectgroup.es/tienda/donacion
-Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Clickatell, Clockwork, BulkSMS, OPEN DND, MSG91, mVaayoo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Custom Order Statuses & Actions, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro
+Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Clickatell, Clockwork, BulkSMS, OPEN DND, MSG91, mVaayoo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, Custom Order Statuses & Actions, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro
 Requires at least: 3.8
 Tested up to: 4.3
-Stable tag: 2.7.2.1
+Stable tag: 2.7.3
 WC requires at least: 2.1
 WC tested up to: 2.4.6
 License: GPLv3
@@ -35,6 +35,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * SMS Lane (Transactional SMS only)
  * SMS Country
  * LabsMobile Spain
+ * Plivo
 * Posibilidad de informar al propietario de la tienda sobre nuevos pedidos.
 * Posibilidad de enviar, o no, SMS internacionales.
 * Soporte de los estados personalizados de los plugin [Custom Order Statuses & Actions](http://codecanyon.net/item/woocommerce-custom-order-status-actions/6392174?ref=apgmijas) y [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931?ref=apgmijas).
@@ -44,6 +45,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 * Todos los mensajes son personalizables.
 * Soporta gran cantidad de variables para personalizar nuestros mensajes: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% y %note%.
 * Puedes añadir tus propias variables personalizadas.
+* Dispone del filtro *apg_sms_message* para facilitar la personalización de los mensajes SMS desde plugins de terceros. 
 * Una vez configurado es totalmente automático.
 
 = Soporte técnico =
@@ -98,6 +100,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.7.3 =
+* Soporte para Plivo. 
+* Añadido el filtro *apg_sms_message* para facilitar el envío de mensajes SMS desde plugins de terceros. **Ambas modificaciones han sido ideadas por [Marco Almeida](http://www.webdados.pt/)**.
 = 2.7.2.1 =
 * Corrección de error que no procesaba los valores introducidos en Variables personalizadas.
 = 2.7.2 =
@@ -237,6 +242,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 * Versión inicial.
 
 == Upgrade Notice ==
+= 2.7.3 =
+* Soporte para Plivo. 
+* Añadido el filtro *apg_sms_message* para facilitar el envío de mensajes SMS desde plugins de terceros. **Ambas modificaciones han sido ideadas por [Marco Almeida](http://www.webdados.pt/)**.
 = 2.7.2.1 =
 * Corrección de error que no procesaba los valores introducidos en Variables personalizadas.
 = 2.7.2 =

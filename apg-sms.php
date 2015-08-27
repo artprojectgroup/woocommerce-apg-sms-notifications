@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.7.2.1
+Version: 2.7.3
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -177,7 +177,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		} else if ( $estado == __( 'Completed', 'apg_sms' ) ) {
 			$mensaje = apg_sms_procesa_variables( $configuracion['mensaje_completado'], $pedido, $configuracion['variables'] );
 		} else {
-				$mensaje = apg_sms_procesa_variables( $configuracion[$estado], $pedido, $configuracion['variables'] );
+			$mensaje = apg_sms_procesa_variables( $configuracion[$estado], $pedido, $configuracion['variables'] );
 		}
 
 		if ( ( !$internacional || ( isset( $configuracion['internacional'] ) && $configuracion['internacional'] == 1 ) ) && !$notificacion ) {
@@ -292,8 +292,22 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 				 );
 				$respuesta = wp_remote_post( "http://api.smscountry.com/SMSCwebservice_bulk.aspx", $argumentos );
 		        break;
+		    case "plivo":
+		        $argumentos['headers'] = array(
+					'Authorization'	=> 'Basic ' . base64_encode( $configuracion['usuario_plivo'] . ":" . $configuracion['clave_plivo'] ),
+					'Connection'	=> 'close',
+					'Content-Type'	=> 'application/json',
+				);
+		    	$argumentos['body'] = json_encode( array(
+					'src'			=> ( trim( $configuracion['identificador_plivo'] ) != '' ? $configuracion['identificador_plivo'] : $configuracion['telefono'] ),
+					'dst'			=> $telefono,
+					'text'			=> $mensaje,
+					'type'			=> 'sms',
+				) );
+				$respuesta = wp_remote_post( "https://api.plivo.com/v1/Account/" . $configuracion['usuario_plivo'] . "/Message/", $argumentos );
+		    	break;
 		}
-	
+
 		//wp_mail( 'artprojectgroup@gmail.com', 'WooCommerce - APG SMS Notifications', $telefono . "\r\n" . $mensaje . "\r\n" . print_r( $respuesta, true ), 'charset=UTF-8' . "\r\n" ); 
 	}
 
@@ -416,7 +430,8 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			"isms", 
 			"smslane",
 			"smscountry",
-			"labsmobile"
+			"labsmobile",
+			"plivo",
 		);
 		
 		return in_array( $servicio, $prefijo );
@@ -552,6 +567,8 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 				$mensaje = str_replace( "%" . $variable . "%", $nombre, $mensaje );
 			}
 		}
+		
+		$mensaje = apply_filters( 'apg_sms_message' , $mensaje , $pedido->id );
 		
 		return $mensaje;
 	}
