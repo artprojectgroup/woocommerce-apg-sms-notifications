@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.7.3
+Version: 2.7.3.1
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -39,46 +39,46 @@ $apg_sms = array(
 //Carga el idioma
 load_plugin_textdomain( 'apg_sms', null, dirname( DIRECCION_apg_sms ) . '/i18n/languages' );
 
+//Carga la configuración del plugin
+$configuracion = get_option( 'apg_sms_settings' );
+$mensaje_personalizado = array();
+
+//Enlaces adicionales personalizados
+function apg_sms_enlaces( $enlaces, $archivo ) {
+	global $apg_sms;
+
+	if ( $archivo == DIRECCION_apg_sms ) {
+		$enlaces[] = '<a href="' . $apg_sms['donacion'] . '" target="_blank" title="' . __( 'Make a donation by ', 'apg_sms' ) . 'APG"><span class="genericon genericon-cart"></span></a>';
+		$enlaces[] = '<a href="'. $apg_sms['plugin_url'] . '" target="_blank" title="' . $apg_sms['plugin'] . '"><strong class="artprojectgroup">APG</strong></a>';
+		$enlaces[] = '<a href="https://www.facebook.com/artprojectgroup" title="' . __( 'Follow us on ', 'apg_sms' ) . 'Facebook" target="_blank"><span class="genericon genericon-facebook-alt"></span></a> <a href="https://twitter.com/artprojectgroup" title="' . __( 'Follow us on ', 'apg_sms' ) . 'Twitter" target="_blank"><span class="genericon genericon-twitter"></span></a> <a href="https://plus.google.com/+ArtProjectGroupES" title="' . __( 'Follow us on ', 'apg_sms' ) . 'Google+" target="_blank"><span class="genericon genericon-googleplus-alt"></span></a> <a href="http://es.linkedin.com/in/artprojectgroup" title="' . __( 'Follow us on ', 'apg_sms' ) . 'LinkedIn" target="_blank"><span class="genericon genericon-linkedin"></span></a>';
+		$enlaces[] = '<a href="http://profiles.wordpress.org/artprojectgroup/" title="' . __( 'More plugins on ', 'apg_sms' ) . 'WordPress" target="_blank"><span class="genericon genericon-wordpress"></span></a>';
+		$enlaces[] = '<a href="mailto:info@artprojectgroup.es" title="' . __( 'Contact with us by ', 'apg_sms' ) . 'e-mail"><span class="genericon genericon-mail"></span></a> <a href="skype:artprojectgroup" title="' . __( 'Contact with us by ', 'apg_sms' ) . 'Skype"><span class="genericon genericon-skype"></span></a>';
+		$enlaces[] = apg_sms_plugin( $apg_sms['plugin_uri'] );
+	}
+
+	return $enlaces;
+}
+add_filter( 'plugin_row_meta', 'apg_sms_enlaces', 10, 2 );
+
+//Añade el botón de configuración
+function apg_sms_enlace_de_ajustes( $enlaces ) { 
+	global $apg_sms;
+
+	$enlaces_de_ajustes = array( 
+		'<a href="' . $apg_sms['ajustes'] . '" title="' . __( 'Settings of ', 'apg_sms' ) . $apg_sms['plugin'] .'">' . __( 'Settings', 'apg_sms' ) . '</a>', 
+		'<a href="' . $apg_sms['soporte'] . '" title="' . __( 'Support of ', 'apg_sms' ) . $apg_sms['plugin'] .'">' . __( 'Support', 'apg_sms' ) . '</a>' 
+	);
+	foreach( $enlaces_de_ajustes as $enlace_de_ajustes )	{
+		array_unshift( $enlaces, $enlace_de_ajustes );
+	}
+
+	return $enlaces; 
+}
+$plugin = DIRECCION_apg_sms; 
+add_filter( "plugin_action_links_$plugin", 'apg_sms_enlace_de_ajustes' );
+
 //¿Está activo WooCommerce?
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-	//Carga la configuración del plugin
-	$configuracion = get_option( 'apg_sms_settings' );
-	$mensaje_personalizado = array();
-
-	//Enlaces adicionales personalizados
-	function apg_sms_enlaces( $enlaces, $archivo ) {
-		global $apg_sms;
-
-		if ( $archivo == DIRECCION_apg_sms ) {
-			$enlaces[] = '<a href="' . $apg_sms['donacion'] . '" target="_blank" title="' . __( 'Make a donation by ', 'apg_sms' ) . 'APG"><span class="genericon genericon-cart"></span></a>';
-			$enlaces[] = '<a href="'. $apg_sms['plugin_url'] . '" target="_blank" title="' . $apg_sms['plugin'] . '"><strong class="artprojectgroup">APG</strong></a>';
-			$enlaces[] = '<a href="https://www.facebook.com/artprojectgroup" title="' . __( 'Follow us on ', 'apg_sms' ) . 'Facebook" target="_blank"><span class="genericon genericon-facebook-alt"></span></a> <a href="https://twitter.com/artprojectgroup" title="' . __( 'Follow us on ', 'apg_sms' ) . 'Twitter" target="_blank"><span class="genericon genericon-twitter"></span></a> <a href="https://plus.google.com/+ArtProjectGroupES" title="' . __( 'Follow us on ', 'apg_sms' ) . 'Google+" target="_blank"><span class="genericon genericon-googleplus-alt"></span></a> <a href="http://es.linkedin.com/in/artprojectgroup" title="' . __( 'Follow us on ', 'apg_sms' ) . 'LinkedIn" target="_blank"><span class="genericon genericon-linkedin"></span></a>';
-			$enlaces[] = '<a href="http://profiles.wordpress.org/artprojectgroup/" title="' . __( 'More plugins on ', 'apg_sms' ) . 'WordPress" target="_blank"><span class="genericon genericon-wordpress"></span></a>';
-			$enlaces[] = '<a href="mailto:info@artprojectgroup.es" title="' . __( 'Contact with us by ', 'apg_sms' ) . 'e-mail"><span class="genericon genericon-mail"></span></a> <a href="skype:artprojectgroup" title="' . __( 'Contact with us by ', 'apg_sms' ) . 'Skype"><span class="genericon genericon-skype"></span></a>';
-			$enlaces[] = apg_sms_plugin( $apg_sms['plugin_uri'] );
-		}
-	
-		return $enlaces;
-	}
-	add_filter( 'plugin_row_meta', 'apg_sms_enlaces', 10, 2 );
-
-	//Añade el botón de configuración
-	function apg_sms_enlace_de_ajustes( $enlaces ) { 
-		global $apg_sms;
-	
-		$enlaces_de_ajustes = array( 
-			'<a href="' . $apg_sms['ajustes'] . '" title="' . __( 'Settings of ', 'apg_sms' ) . $apg_sms['plugin'] .'">' . __( 'Settings', 'apg_sms' ) . '</a>', 
-			'<a href="' . $apg_sms['soporte'] . '" title="' . __( 'Support of ', 'apg_sms' ) . $apg_sms['plugin'] .'">' . __( 'Support', 'apg_sms' ) . '</a>' 
-		);
-		foreach( $enlaces_de_ajustes as $enlace_de_ajustes )	{
-			array_unshift( $enlaces, $enlace_de_ajustes );
-		}
-	
-		return $enlaces; 
-	}
-	$plugin = DIRECCION_apg_sms; 
-	add_filter( "plugin_action_links_$plugin", 'apg_sms_enlace_de_ajustes' );
-
 	//Pinta el formulario de configuración
 	function apg_sms_tab() {
 		wp_enqueue_style( 'apg_sms_hoja_de_estilo' ); //Carga la hoja de estilo
