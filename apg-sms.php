@@ -19,7 +19,7 @@ Domain Path: /i18n/languages
 
 //Igual no deberías poder abrirme
 if ( !defined( 'ABSPATH' ) ) {
-    exit;
+    exit();
 }
 
 //Definimos constantes
