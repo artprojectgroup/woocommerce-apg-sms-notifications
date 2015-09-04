@@ -40,7 +40,7 @@
   <p>
     <?php _e( 'Add to WooCommerce the possibility to send <abbr title="Short Message Service" lang="en">SMS</abbr> notifications to the client each time you change the order status. Notifies the owner, if desired, when the store has a new order. You can also send customer notes.', 'apg_sms' ); ?>
   </p>
-  <?php include( 'cuadro-donacion.php' ); ?>
+  <?php include( 'cuadro-informacion.php' ); ?>
   <form method="post" action="options.php">
     <?php settings_fields( 'apg_sms_settings_group' ); ?>
     <div class="cabecera"> <a href="<?php echo $apg_sms['plugin_url']; ?>" title="<?php echo $apg_sms['plugin']; ?>" target="_blank"><img src="<?php echo plugins_url( '../assets/images/cabecera.jpg', __FILE__ ); ?>" class="imagen" alt="<?php echo $apg_sms['plugin']; ?>" /></a> </div>

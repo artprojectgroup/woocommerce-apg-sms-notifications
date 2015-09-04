@@ -25,14 +25,14 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * Clickatell.
  * Clockwork.
  * Esebun Business (Enterprise & Developers only).
- * iSMS Malaysia
- * LabsMobile Spain
+ * iSMS Malaysia.
+ * LabsMobile Spain.
  * MSG91.
  * mVaayoo.
  * OPEN DND.
- * Plivo
- * SMS Country
- * SMS Lane (Transactional SMS only)
+ * Plivo.
+ * SMS Country.
+ * SMS Lane (Transactional SMS only).
  * Solutions Infini.
  * Twilio.
  * VoipStunt.
