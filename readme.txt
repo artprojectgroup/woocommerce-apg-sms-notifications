@@ -48,7 +48,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 * Dispone del filtro *apg_sms_message* para facilitar la personalización de los mensajes SMS desde plugins de terceros. 
 * Una vez configurado es totalmente automático.
 
-=Traducciones =
+= Traducciones =
 * Español ([**Art Project Group**](http://www.artprojectgroup.es/)).
 * English ([**Art Project Group**](http://www.artprojectgroup.es/)).
 
