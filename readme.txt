@@ -400,8 +400,8 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 * Mejorado el código que comprueba el código internacional.
 
 ==Traducciones ==
-* *English*: by ([**Art Project Group**](http://www.artprojectgroup.es/)) (default language).
-* *Español*: por ([**Art Project Group**](http://www.artprojectgroup.es/)).
+* *English*: by [**Art Project Group**](http://www.artprojectgroup.es/) (default language).
+* *Español*: por [**Art Project Group**](http://www.artprojectgroup.es/).
 
 == Soporte técnico ==
 Dado que **WooCommerce - APG SMS Notifications** es totalmente gratuito, **Art Project Group** sólo proporciona el servicio de [**Soporte técnico**](http://www.artprojectgroup.es/servicios/servicios-para-wordpress-y-woocommerce/soporte-tecnico) previo pago. En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.

@@ -82,8 +82,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	//Pinta el formulario de configuración
 	function apg_sms_tab() {
 		wp_enqueue_style( 'apg_sms_hoja_de_estilo' ); //Carga la hoja de estilo
-		//wp_enqueue_style( 'woocommerce_admin_styles' );
-		//wp_enqueue_script( 'wc-enhanced-select' );
+
 		include( 'includes/formulario.php' );
 	}
 
