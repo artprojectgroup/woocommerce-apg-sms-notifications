@@ -50,9 +50,9 @@
             <?php _e( '<abbr title="Short Message Service" lang="en">SMS</abbr> gateway:', 'apg_sms' ); ?>
           </label>
           <img class="help_tip" data-tip="<?php _e( 'Select your SMS gateway', 'apg_sms' ); ?>" src="<?php echo plugins_url(  'woocommerce/assets/images/help.png' );?>" height="16" width="16" /> </th>
-        <td class="forminp forminp-number"><select class="chosen_select servicio" id="apg_sms_settings[servicio]" name="apg_sms_settings[servicio]" style="width: 450px;" tabindex="<?php echo $tab++; ?>">
+        <td class="forminp forminp-number"><select class="wc-enhanced-select servicio" id="apg_sms_settings[servicio]" name="apg_sms_settings[servicio]" style="width: 450px;" tabindex="<?php echo $tab++; ?>">
             <?php
-            $proveedores = array( 
+			$proveedores = array( 
 				"voipstunt" 			=> "VoipStunt", 
 				"solutions_infini" 	=> "Solutions Infini", 
 				"twilio" 			=> "Twilio", 
@@ -68,7 +68,8 @@
 				"smscountry" 		=> "SMS Country",
 				"labsmobile" 		=> "LabsMobile Spain",
 				"plivo" 				=> "Plivo",
-             );
+			);
+			asort( $proveedores, SORT_NATURAL | SORT_FLAG_CASE ); //Ordena alfabeticamente los proveedores
             foreach ( $proveedores as $valor => $proveedor ) {
 				$chequea = ( isset( $configuracion['servicio'] ) && $configuracion['servicio'] == $valor ) ? ' selected="selected"' : '';
 				echo '<option value="' . $valor . '"' . $chequea . '>' . $proveedor . '</option>' . PHP_EOL;
@@ -344,6 +345,9 @@ jQuery( document ).ready( function( $ ) {
 		control( $( this ).val() ); 
 	} );
 	var control = function( capa ) {
+		if ( capa == '' ) {
+			capa = $( '.servicio option:first' ).val();
+		}
 		var proveedores= new Array();
 		<?php 
 		foreach( $proveedores as $indice => $valor ) {

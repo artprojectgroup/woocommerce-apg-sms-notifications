@@ -4,7 +4,7 @@ Donate link: http://www.artprojectgroup.es/tienda/donacion
 Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Clickatell, Clockwork, BulkSMS, OPEN DND, MSG91, mVaayoo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, Custom Order Statuses & Actions, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro
 Requires at least: 3.8
 Tested up to: 4.3
-Stable tag: 2.7.3.1
+Stable tag: 2.7.4
 WC requires at least: 2.1
 WC tested up to: 2.4.6
 License: GPLv3
@@ -21,21 +21,21 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 
 = Características =
 * Soporte de múltiples proveedores SMS:
- * VoipStunt.
- * Solutions Infini.
- * Twilio.
+ * BulkSMS.
  * Clickatell.
  * Clockwork.
- * BulkSMS.
- * OPEN DND.
- * MSG91.
- * mVaayoo.
  * Esebun Business (Enterprise & Developers only).
  * iSMS Malaysia
- * SMS Lane (Transactional SMS only)
- * SMS Country
  * LabsMobile Spain
+ * MSG91.
+ * mVaayoo.
+ * OPEN DND.
  * Plivo
+ * SMS Country
+ * SMS Lane (Transactional SMS only)
+ * Solutions Infini.
+ * Twilio.
+ * VoipStunt.
 * Posibilidad de informar al propietario de la tienda sobre nuevos pedidos.
 * Posibilidad de enviar, o no, SMS internacionales.
 * Soporte de los estados personalizados de los plugin [Custom Order Statuses & Actions](http://codecanyon.net/item/woocommerce-custom-order-status-actions/6392174?ref=apgmijas) y [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931?ref=apgmijas).
@@ -47,6 +47,10 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 * Puedes añadir tus propias variables personalizadas.
 * Dispone del filtro *apg_sms_message* para facilitar la personalización de los mensajes SMS desde plugins de terceros. 
 * Una vez configurado es totalmente automático.
+
+=Traducciones =
+* Español ([**Art Project Group**](http://www.artprojectgroup.es/)).
+* English ([**Art Project Group**](http://www.artprojectgroup.es/)).
 
 = Soporte técnico =
 **Art Project Group** te ofrece [**Soporte técnico**](http://www.artprojectgroup.es/servicios/servicios-para-wordpress-y-woocommerce/soporte-tecnico) para configurar o instalar **WooCommerce - APG SMS Notifications**. 
@@ -100,6 +104,11 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.7.4 =
+* Eliminación de código obsoleto.
+* Pequeñas mejoras en el código.
+* Control de activación de WooCommerce.
+* Actualización de la captura de pantalla.
 = 2.7.3.1 =
 * Recolocación de código.
 = 2.7.3 =
@@ -244,6 +253,11 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 * Versión inicial.
 
 == Upgrade Notice ==
+= 2.7.4 =
+* Eliminación de código obsoleto.
+* Pequeñas mejoras en el código.
+* Control de activación de WooCommerce.
+* Actualización de la captura de pantalla.
 = 2.7.3.1 =
 * Recolocación de código.
 = 2.7.3 =
@@ -386,8 +400,8 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 * Mejorado el código que comprueba el código internacional.
 
 ==Traducciones ==
-* *English*: by **Art Project Group** (default language).
-* *Español*: por **Art Project Group**.
+* *English*: by ([**Art Project Group**](http://www.artprojectgroup.es/)) (default language).
+* *Español*: por ([**Art Project Group**](http://www.artprojectgroup.es/)).
 
 == Soporte técnico ==
 Dado que **WooCommerce - APG SMS Notifications** es totalmente gratuito, **Art Project Group** sólo proporciona el servicio de [**Soporte técnico**](http://www.artprojectgroup.es/servicios/servicios-para-wordpress-y-woocommerce/soporte-tecnico) previo pago. En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.

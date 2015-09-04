@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.7.3.1
+Version: 2.7.4
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -82,8 +82,8 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	//Pinta el formulario de configuración
 	function apg_sms_tab() {
 		wp_enqueue_style( 'apg_sms_hoja_de_estilo' ); //Carga la hoja de estilo
-		wp_enqueue_style( 'woocommerce_chosen_styles' );
-		wp_enqueue_script( 'wc-chosen' );
+		//wp_enqueue_style( 'woocommerce_admin_styles' );
+		//wp_enqueue_script( 'wc-enhanced-select' );
 		include( 'includes/formulario.php' );
 	}
 
@@ -92,30 +92,6 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		global $configuracion;
 	
 		add_submenu_page( 'woocommerce', __( 'APG SMS Notifications', 'apg_sms' ),  __( 'SMS Notifications', 'apg_sms' ) , 'manage_woocommerce', 'apg_sms', 'apg_sms_tab' );
-	
-		//Estos ajustes temporales hay que borrarlos en un par de versiones
-		$actualiza = false;
-		if ( $configuracion['servicio'] == 'twillio' ) {
-			$configuracion['clave_twilio'] = $configuracion['clave_twillio'];
-			unset( $configuracion['clave_twillio'] );
-			$configuracion['identificador_twilio'] = $configuracion['identificador_twillio'];
-			unset( $configuracion['identificador_twillio'] );
-			$configuracion['servicio'] == 'twilio';
-			$actualiza = true;
-		}
-		if ( isset( $configuracion['telefono'] ) ) {
-			if ( !isset( $configuracion['telefono_twilio'] ) || empty( $configuracion['telefono_twilio'] ) ) {
-				$configuracion['telefono_twilio'] = $configuracion['telefono'];
-				$actualiza = true;
-			}
-			if ( !isset( $configuracion['telefono_isms'] ) || empty( $configuracion['telefono_isms'] ) ) {
-				$configuracion['telefono_isms'] = $configuracion['telefono'];
-				$actualiza = true;
-			}
-		}
-		if ( $actualiza ) {
-			update_option( 'apg_sms_settings', $configuracion );
-		}
 	}
 	add_action( 'admin_menu', 'apg_sms_admin_menu', 15 );
 
@@ -846,80 +822,81 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	
 		return ( $pais == '' ) ? $paises : ( isset( $paises[$pais] ) ? $paises[$pais] : '' );
 	}
-	
-	//Obtiene toda la información sobre el plugin
-	function apg_sms_plugin( $nombre ) {
-		global $apg_sms;
-		
-		$argumentos = ( object ) array( 
-			'slug' => $nombre 
-		);
-		$consulta = array( 
-			'action' => 'plugin_information', 
-			'timeout' => 15, 
-			'request' => serialize( $argumentos )
-		);
-		$respuesta = get_transient( 'apg_sms_plugin' );
-		if ( false === $respuesta ) {
-			$respuesta = wp_remote_post( 'http://api.wordpress.org/plugins/info/1.0/', array( 
-				'body' => $consulta)
-			);
-			set_transient( 'apg_sms_plugin', $respuesta, 24 * HOUR_IN_SECONDS );
-		}
-		if ( !is_wp_error( $respuesta ) ) {
-			$plugin = get_object_vars( unserialize( $respuesta['body'] ) );
-		} else {
-			$plugin['rating'] = 100;
-		}
-	
-		$rating = array(
-		   'rating'	=> $plugin['rating'],
-		   'type'	=> 'percent',
-		   'number'	=> $plugin['num_ratings'],
-		);
-		ob_start();
-		wp_star_rating( $rating );
-		$estrellas = ob_get_contents();
-		ob_end_clean();
-	
-		return '<a title="' . sprintf( __( 'Please, rate %s:', 'apg_sms' ), $apg_sms['plugin'] ) . '" href="' . $apg_sms['puntuacion'] . '?rate=5#postform" class="estrellas">' . $estrellas . '</a>';
-	}
-	
-	//Muestra el mensaje de actualización
-	function apg_sms_actualizacion() {
-		global $apg_sms;
-		
-		echo '<div class="error fade" id="message"><h3>' . $apg_sms['plugin'] . '</h3><h4>' . sprintf( __( "Please, update your %s. It's very important!", 'apg_sms' ), '<a href="' . $apg_sms['ajustes'] . '" title="' . __( 'Settings', 'apg_sms' ) . '">' . __( 'settings', 'apg_sms' ) . '</a>' ) . '</h4></div>';
-	}
-	
-	//Carga las hojas de estilo
-	function apg_sms_muestra_mensaje() {
-		global $configuracion;
-	
-		wp_register_style( 'apg_sms_hoja_de_estilo', plugins_url( 'assets/css/style.css', __FILE__ ) ); //Carga la hoja de estilo
-		wp_register_style( 'apg_sms_fuentes', plugins_url( 'assets/fonts/stylesheet.css', __FILE__ ) ); //Carga la hoja de estilo global
-		wp_enqueue_style( 'apg_sms_fuentes' ); //Carga la hoja de estilo global
-	
-		if ( !isset( $configuracion['mensaje_pedido'] ) || !isset( $configuracion['mensaje_nota'] ) ) { //Comprueba si hay que mostrar el mensaje de actualización
-			add_action( 'admin_notices', 'apg_sms_actualizacion' );
-		}
-	}
-	add_action( 'admin_init', 'apg_sms_muestra_mensaje' );
 } else {
 	add_action( 'admin_notices', 'apg_sms_requiere_wc' );
 }
 
-//Muestra el mensaje de actualización
+//Muestra el mensaje de activación de WooCommerce y desactiva el plugin
 function apg_sms_requiere_wc() {
 	global $apg_sms;
 		
+	echo '<div class="error fade" id="message"><h3>' . $apg_sms['plugin'] . '</h3><h4>' . __( "This plugin require WooCommerce active to run!", 'apg_sms' ) . '</h4></div>';
+	deactivate_plugins( DIRECCION_apg_sms );
+}
+
+//Obtiene toda la información sobre el plugin
+function apg_sms_plugin( $nombre ) {
+	global $apg_sms;
+	
+	$argumentos = ( object ) array( 
+		'slug' => $nombre 
+	);
+	$consulta = array( 
+		'action' => 'plugin_information', 
+		'timeout' => 15, 
+		'request' => serialize( $argumentos )
+	);
+	$respuesta = get_transient( 'apg_sms_plugin' );
+	if ( false === $respuesta ) {
+		$respuesta = wp_remote_post( 'http://api.wordpress.org/plugins/info/1.0/', array( 
+			'body' => $consulta)
+		);
+		set_transient( 'apg_sms_plugin', $respuesta, 24 * HOUR_IN_SECONDS );
+	}
+	if ( !is_wp_error( $respuesta ) ) {
+		$plugin = get_object_vars( unserialize( $respuesta['body'] ) );
+	} else {
+		$plugin['rating'] = 100;
+	}
+
+	$rating = array(
+	   'rating'	=> $plugin['rating'],
+	   'type'	=> 'percent',
+	   'number'	=> $plugin['num_ratings'],
+	);
+	ob_start();
+	wp_star_rating( $rating );
+	$estrellas = ob_get_contents();
+	ob_end_clean();
+
+	return '<a title="' . sprintf( __( 'Please, rate %s:', 'apg_sms' ), $apg_sms['plugin'] ) . '" href="' . $apg_sms['puntuacion'] . '?rate=5#postform" class="estrellas">' . $estrellas . '</a>';
+}
+
+//Muestra el mensaje de actualización
+function apg_sms_actualizacion() {
+	global $apg_sms;
+	
 	echo '<div class="error fade" id="message"><h3>' . $apg_sms['plugin'] . '</h3><h4>' . sprintf( __( "Please, update your %s. It's very important!", 'apg_sms' ), '<a href="' . $apg_sms['ajustes'] . '" title="' . __( 'Settings', 'apg_sms' ) . '">' . __( 'settings', 'apg_sms' ) . '</a>' ) . '</h4></div>';
 }
 
+//Carga las hojas de estilo
+function apg_sms_muestra_mensaje() {
+	global $configuracion;
+
+	wp_register_style( 'apg_sms_hoja_de_estilo', plugins_url( 'assets/css/style.css', __FILE__ ) ); //Carga la hoja de estilo
+	wp_register_style( 'apg_sms_fuentes', plugins_url( 'assets/fonts/stylesheet.css', __FILE__ ) ); //Carga la hoja de estilo global
+	wp_enqueue_style( 'apg_sms_fuentes' ); //Carga la hoja de estilo global
+
+	/*if ( !isset( $configuracion['mensaje_pedido'] ) || !isset( $configuracion['mensaje_nota'] ) ) { //Comprueba si hay que mostrar el mensaje de actualización
+		add_action( 'admin_notices', 'apg_sms_actualizacion' );
+	}*/
+}
+add_action( 'admin_init', 'apg_sms_muestra_mensaje' );
+
 //Eliminamos todo rastro del plugin al desinstalarlo
 function apg_sms_desinstalar() {
-  delete_option( 'apg_sms_settings' );
-  delete_transient( 'apg_sms_plugin' );
+	delete_option( 'apg_sms_settings' );
+	delete_transient( 'apg_sms_plugin' );
 }
 register_uninstall_hook( __FILE__, 'apg_sms_desinstalar' );
 ?>

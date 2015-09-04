@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce - APG SMS Notifications\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Sep 03 2015 19:35:35 GMT+0200 (CEST)\n"
-"PO-Revision-Date: Thu Sep 03 2015 19:35:50 GMT+0200 (CEST)\n"
+"PO-Revision-Date: Fri Sep 04 2015 11:59:51 GMT+0200 (CEST)\n"
 "Last-Translator: Art Project Group <info@artprojectgroup.com>\n"
 "Language-Team: \n"
 "Language: Spanish (Spain)\n"
@@ -50,7 +50,7 @@ msgstr "Contacta con nosotros por "
 msgid "Settings of "
 msgstr "Ajustes de "
 
-#: ../../apg-sms.php:68 ../../apg-sms.php:892 ../../apg-sms.php:916
+#: ../../apg-sms.php:68 ../../apg-sms.php:879
 msgid "Settings"
 msgstr "Ajustes"
 
@@ -70,25 +70,29 @@ msgstr "APG Notificaciones SMS"
 msgid "SMS Notifications"
 msgstr "Notificaciones SMS"
 
-#: ../../apg-sms.php:154 ../../apg-sms.php:172 ../../includes/formulario.php:319
+#: ../../apg-sms.php:130 ../../apg-sms.php:148 ../../includes/formulario.php:320
 msgid "Processing"
 msgstr "Procesándose"
 
-#: ../../apg-sms.php:155 ../../apg-sms.php:177 ../../includes/formulario.php:326
+#: ../../apg-sms.php:131 ../../apg-sms.php:153 ../../includes/formulario.php:327
 msgid "Completed"
 msgstr "Completado"
 
-#: ../../apg-sms.php:885 ../../includes/cuadro-donacion.php:44
+#: ../../apg-sms.php:833
+msgid "This plugin require WooCommerce active to run!"
+msgstr "¡Este plugin necesita WooCommerce activo para funcionar!\n"
+
+#: ../../apg-sms.php:872 ../../includes/cuadro-donacion.php:44
 #, php-format
 msgid "Please, rate %s:"
 msgstr "Por favor, puntúa %s:"
 
-#: ../../apg-sms.php:892 ../../apg-sms.php:916
+#: ../../apg-sms.php:879
 #, php-format
 msgid "Please, update your %s. It's very important!"
 msgstr "Por favor, actualiza tus %s. ¡Es muy importante!"
 
-#: ../../apg-sms.php:892 ../../apg-sms.php:916
+#: ../../apg-sms.php:879
 msgid "settings"
 msgstr "ajustes"
 
@@ -224,20 +228,20 @@ msgstr "Proveedor <abbr title=\"Short Message Service\" lang=\"en\">SMS</abbr>:"
 msgid "Select your SMS gateway"
 msgstr "Selecciona tu proveedor SMS"
 
-#: ../../includes/formulario.php:161 ../../includes/formulario.php:176
+#: ../../includes/formulario.php:162 ../../includes/formulario.php:177
 #, php-format
 msgid "The %s for your account in %s"
 msgstr "El/la %s para tu cuenta en %s"
 
-#: ../../includes/formulario.php:164
+#: ../../includes/formulario.php:165
 msgid "Default"
 msgstr "Predeterminada"
 
-#: ../../includes/formulario.php:186
+#: ../../includes/formulario.php:187
 msgid "Your mobile number:"
 msgstr "Tu teléfono móvil:"
 
-#: ../../includes/formulario.php:188
+#: ../../includes/formulario.php:189
 msgid ""
 "The mobile number registered in your SMS gateway account and where you "
 "receive the SMS messages"
@@ -245,40 +249,40 @@ msgstr ""
 "Número de móvil registrado en su cuenta de su proveedor SMS y donde se "
 "recibirán los mensajes SMS"
 
-#: ../../includes/formulario.php:193
+#: ../../includes/formulario.php:194
 msgid "New order notification:"
 msgstr "Notificación de nuevo pedido:"
 
-#: ../../includes/formulario.php:195
+#: ../../includes/formulario.php:196
 msgid "Check if you want to receive a SMS message when there's a new order"
 msgstr "Habilítalo si quieres recibir un mensaje SMS cuando haya un nuevo pedido"
 
-#: ../../includes/formulario.php:200
+#: ../../includes/formulario.php:201
 msgid "Send international <abbr title=\"Short Message Service\" lang=\"en\">SMS</abbr>?:"
 msgstr ""
 "¿Enviar <abbr title=\"Short Message Service\" lang=\"en\">SMS</abbr> "
 "internacionales?:"
 
-#: ../../includes/formulario.php:202
+#: ../../includes/formulario.php:203
 msgid "Check if you want to send international SMS messages"
 msgstr "Habilítalo si quieres enviar mensajes SMS internacionales"
 
-#: ../../includes/formulario.php:208
+#: ../../includes/formulario.php:209
 msgid "Custom Order Statuses & Actions:"
 msgstr "Custom Order Statuses & Actions:"
 
-#: ../../includes/formulario.php:210
+#: ../../includes/formulario.php:211
 msgid "Select your own statuses."
 msgstr "Selecciona tus propios estados."
 
-#: ../../includes/formulario.php:287
+#: ../../includes/formulario.php:288
 #, php-format
 msgid "%s state custom message:"
 msgstr "Mensaje para el estado %s:"
 
-#: ../../includes/formulario.php:288 ../../includes/formulario.php:304 ../..
-#: includes/formulario.php:311 ../../includes/formulario.php:318 ../..
-#: includes/formulario.php:325 ../../includes/formulario.php:332
+#: ../../includes/formulario.php:289 ../../includes/formulario.php:305 ../..
+#: includes/formulario.php:312 ../../includes/formulario.php:319 ../..
+#: includes/formulario.php:326 ../../includes/formulario.php:333
 #, php-format
 msgid ""
 "You can customize your message. Remember that you can use this variables: "
@@ -309,11 +313,11 @@ msgstr ""
 "%display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, "
 "%customer_note%, %post_status%, %shop_name%, %order_product% y %note%."
 
-#: ../../includes/formulario.php:295
+#: ../../includes/formulario.php:296
 msgid "Custom variables:"
 msgstr "Variables personalizadas:"
 
-#: ../../includes/formulario.php:297
+#: ../../includes/formulario.php:298
 msgid ""
 "You can add your own variables. Each variable must be entered onto a new "
 "line without percentage character ( % ). Example: "
@@ -324,46 +328,46 @@ msgstr ""
 "<code>_nombre_variable_personalizada</code><br "
 "/><code>_otro_nombre_variable_personalizada</code>."
 
-#: ../../includes/formulario.php:302
+#: ../../includes/formulario.php:303
 msgid "Owner custom message:"
 msgstr "Mensaje para el propietario:"
 
-#: ../../includes/formulario.php:305
+#: ../../includes/formulario.php:306
 #, php-format
 msgid "Order No. %s received on "
 msgstr "Se ha recibido el pedido nº %s en "
 
-#: ../../includes/formulario.php:309
+#: ../../includes/formulario.php:310
 msgid "Order received custom message:"
 msgstr "Mensaje para pedido recibido:"
 
-#: ../../includes/formulario.php:312
+#: ../../includes/formulario.php:313
 #, php-format
 msgid "Your order No. %s is received on %s. Thank you for shopping with us!"
 msgstr "Su pedido nº %s ha sido recibido en %s. ¡Gracias por comprar con nosotros!"
 
-#: ../../includes/formulario.php:316
+#: ../../includes/formulario.php:317
 msgid "Order processing custom message:"
 msgstr "Mensaje para pedido procesándose:"
 
-#: ../../includes/formulario.php:319 ../../includes/formulario.php:326
+#: ../../includes/formulario.php:320 ../../includes/formulario.php:327
 #, php-format
 msgid "Thank you for shopping with us! Your order No. %s is now: "
 msgstr "¡Gracias por comprar con nosotros! Su pedido nº %s está ahora: "
 
-#: ../../includes/formulario.php:323
+#: ../../includes/formulario.php:324
 msgid "Order completed custom message:"
 msgstr "Mensaje para pedido completado:"
 
-#: ../../includes/formulario.php:330
+#: ../../includes/formulario.php:331
 msgid "Notes custom message:"
 msgstr "Mensaje para las notas:"
 
-#: ../../includes/formulario.php:333
+#: ../../includes/formulario.php:334
 #, php-format
 msgid "A note has just been added to your order No. %s: "
 msgstr "Una nota acaba de ser añadida a su pedido nº %s: "
 
-#: ../../includes/formulario.php:337
+#: ../../includes/formulario.php:338
 msgid "Save Changes"
 msgstr "Guardar cambios"

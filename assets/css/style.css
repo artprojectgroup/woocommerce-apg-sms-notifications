@@ -1,5 +1,5 @@
 @charset "UTF-8";
- @import url(../fonts/stylesheet.css);
+@import url(../fonts/stylesheet.css);
 /*General*/
 table.apg-table, .cabecera {
 	clear: none;
@@ -28,10 +28,10 @@ table.apg-table, .cabecera {
 .estrellas .star-rating .star {
 	font-size: 18px;
 }
-div.informacion .genericon, div.informacion .estrellas .star-rating .star, div.informacion .artprojectgroup, {
- width: 15px;
- height: 15px;
- font-size: 15px;
+div.informacion .genericon, div.informacion .estrellas .star-rating .star, div.informacion .artprojectgroup {
+	width: 15px;
+	height: 15px;
+	font-size: 15px;
 }
 div.informacion {
 	background-color: #FFFFFF;
