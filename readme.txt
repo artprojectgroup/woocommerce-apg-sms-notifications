@@ -1,10 +1,10 @@
 === WooCommerce - APG SMS Notifications ===
 Contributors: artprojectgroup
 Donate link: http://www.artprojectgroup.es/tienda/donacion
-Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Clickatell, Clockwork, BulkSMS, OPEN DND, MSG91, mVaayoo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, Custom Order Statuses & Actions, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro
+Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Clickatell, Clockwork, BulkSMS, OPEN DND, MSG91, mVaayoo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Custom Order Statuses & Actions, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro
 Requires at least: 3.8
 Tested up to: 4.3
-Stable tag: 2.7.4
+Stable tag: 2.7.5
 WC requires at least: 2.1
 WC tested up to: 2.4.6
 License: GPLv3
@@ -31,10 +31,14 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * mVaayoo.
  * OPEN DND.
  * Plivo.
+ * SIP Discount
+ * SMS Discount
  * SMS Country.
  * SMS Lane (Transactional SMS only).
  * Solutions Infini.
  * Twilio.
+ * VoipBuster.
+ * VoipBusterPro.
  * VoipStunt.
 * Posibilidad de informar al propietario de la tienda sobre nuevos pedidos.
 * Posibilidad de enviar, o no, SMS internacionales.
@@ -104,6 +108,8 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.7.5 =
+* Añadido soporte para VoipBusterPro, VoipBuster, SMS Discount y SIP Discount. **Modificación ideada por [Alain Aubry](http://www.casa-indigo.com/)**.
 = 2.7.4 =
 * Eliminación de código obsoleto.
 * Pequeñas mejoras en el código.
@@ -253,6 +259,8 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 * Versión inicial.
 
 == Upgrade Notice ==
+= 2.7.5 =
+* Añadido soporte para VoipBusterPro, VoipBuster, SMS Discount y SIP Discount. **Modificación ideada por [Alain Aubry](http://www.casa-indigo.com/)**.
 = 2.7.4 =
 * Eliminación de código obsoleto.
 * Pequeñas mejoras en el código.

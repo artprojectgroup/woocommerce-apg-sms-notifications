@@ -54,6 +54,10 @@
             <?php
 			$proveedores = array( 
 				"voipstunt" 			=> "VoipStunt", 
+				"voipbusterpro" 	=> "VoipBusterPro", 
+				"voipbuster" 		=> "VoipBuster", 
+				"smsdiscount" 		=> "SMS Discount", 
+				"sipdiscount" 		=> "SIP Discount", 
 				"solutions_infini" 	=> "Solutions Infini", 
 				"twilio" 			=> "Twilio", 
 				"clickatell" 		=> "Clickatell", 
@@ -79,9 +83,25 @@
       </tr>
       <?php             
 		$proveedores_campos = array( 
-			"voipstunt" 			=> array( 
+			"voipstunt"			=> array( 
 				"usuario_voipstunt" 				=> 'username',
 				"contrasena_voipstunt" 				=> 'password',
+			), 
+			"voipbusterpro"		=> array( 
+				"usuario_voipbusterpro"				=> 'username',
+				"contrasena_voipbusterpro"			=> 'password',
+			), 
+			"voipbuster"		=> array( 
+				"usuario_voipbuster" 				=> 'username',
+				"contrasena_voipbuster"				=> 'password',
+			), 
+			"smsdiscount"		=> array( 
+				"usuario_smsdiscount" 				=> 'username',
+				"contrasena_smsdiscount"			=> 'password',
+			), 
+			"sipdiscount"		=> array( 
+				"usuario_sipdiscount" 				=> 'username',
+				"contrasena_sipdiscount"			=> 'password',
 			), 
 			"solutions_infini" 	=> array( 
 				"clave_solutions_infini" 			=> 'key',

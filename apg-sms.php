@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.7.4
+Version: 2.7.5
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -41,7 +41,6 @@ load_plugin_textdomain( 'apg_sms', null, dirname( DIRECCION_apg_sms ) . '/i18n/l
 
 //Carga la configuración del plugin
 $configuracion = get_option( 'apg_sms_settings' );
-$mensaje_personalizado = array();
 
 //Enlaces adicionales personalizados
 function apg_sms_enlaces( $enlaces, $archivo ) {
@@ -79,17 +78,16 @@ add_filter( "plugin_action_links_$plugin", 'apg_sms_enlace_de_ajustes' );
 
 //¿Está activo WooCommerce?
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+	//Cargamos los proveedores SMS
+	include( 'includes/admin/proveedores.php' );
+
 	//Pinta el formulario de configuración
 	function apg_sms_tab() {
-		wp_enqueue_style( 'apg_sms_hoja_de_estilo' ); //Carga la hoja de estilo
-
 		include( 'includes/formulario.php' );
 	}
 
 	//Añade en el menú a WooCommerce
 	function apg_sms_admin_menu() {
-		global $configuracion;
-	
 		add_submenu_page( 'woocommerce', __( 'APG SMS Notifications', 'apg_sms' ),  __( 'SMS Notifications', 'apg_sms' ) , 'manage_woocommerce', 'apg_sms', 'apg_sms_tab' );
 	}
 	add_action( 'admin_menu', 'apg_sms_admin_menu', 15 );
@@ -106,7 +104,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 	//Registra las opciones
 	function apg_sms_registra_opciones() {
-		global $configuracion, $mensaje_personalizado;
+		global $configuracion;
 	
 		register_setting( 'apg_sms_settings_group', 'apg_sms_settings' );
 
@@ -120,7 +118,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 	//Procesa el SMS
 	function apg_sms_procesa_estados( $pedido, $notificacion = false ) {
-		global $woocommerce, $configuracion, $mensaje_personalizado;
+		global $woocommerce, $configuracion;
 
 		$pedido = new WC_Order( $pedido );
 		$estado = $pedido->status;
@@ -182,109 +180,6 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		}
 	}
 	add_action( 'woocommerce_new_customer_note', 'apg_sms_procesa_notas', 10 );
-
-	//Envía el mensaje SMS
-	function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
-		switch ( $configuracion['servicio'] ) {
-		    case "voipstunt":
-		        $respuesta = wp_remote_get( "https://www.voipstunt.com/myaccount/sendsms.php?username=" . $configuracion['usuario_voipstunt'] . "&password=" . $configuracion['contrasena_voipstunt'] . "&from=" . $configuracion['telefono'] . "&to=" . $telefono . "&text=" . apg_sms_codifica_el_mensaje( $mensaje ) );
-		        break;
-	    	case "solutions_infini":
-	        	$respuesta = wp_remote_get( "http://alerts.sinfini.com/api/web2sms.php?workingkey=" . $configuracion['clave_solutions_infini'] . "&to=" . $telefono . "&sender=" . $configuracion['identificador_solutions_infini'] . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) );
-		        break;
-		    case "clickatell":
-	    	    $respuesta = wp_remote_get( "http://api.clickatell.com/http/sendmsg?api_id=" . $configuracion['identificador_clickatell'] . "&user=" . $configuracion['usuario_clickatell'] . "&password=" . $configuracion['contrasena_clickatell'] . "&to=" . $telefono . "&text=" . apg_sms_codifica_el_mensaje( $mensaje ) );
-	        	break;
-		    case "clockwork":
-		        $respuesta = wp_remote_get( "https://api.clockworksms.com/http/send.aspx?key=" . $configuracion['identificador_clockwork'] . "&to=" . $telefono . "&content=" . apg_sms_normaliza_mensaje( $mensaje ) );
-		        break;
-		    case "bulksms":
-		        $respuesta = wp_remote_post( "http://bulksms.2way.co.za/eapi/submission/send_sms/2/2.0?username=" . urlencode( $configuracion['usuario_bulksms'] ) . "&password=" . urlencode( $configuracion['contrasena_bulksms'] ) . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&msisdn=" . urlencode( $telefono ) );
-		        break;
-		    case "open_dnd":
-		        $respuesta = wp_remote_get( "http://txn.opendnd.in/pushsms.php?username=" . $configuracion['usuario_open_dnd'] . "&password=" . $configuracion['contrasena_open_dnd'] . "&message=" . apg_sms_codifica_el_mensaje( apg_sms_normaliza_mensaje( $mensaje ) ) . "&sender=" . $configuracion['identificador_open_dnd'] . "&numbers=" . $telefono );
-	    	    break;
-		    case "esebun":
-		        $respuesta = wp_remote_get( "http://api.cloud.bz.esebun.com/api/v3/sendsms/plain?user=" . $configuracion['usuario_esebun'] . "&password=" . $configuracion['contrasena_esebun'] . "&sender=" . apg_sms_codifica_el_mensaje( $configuracion['identificador_esebun'] ) . "&SMSText=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&GSM=" . preg_replace( '/\+/', '', $telefono ) );
-	    	    break;
-	    	case "isms":
-		        $respuesta = wp_remote_get( "https://www.isms.com.my/isms_send.php?un=" . $configuracion['usuario_isms'] . "&pwd=" . $configuracion['contrasena_isms'] . "&dstno=" . $telefono . "&msg=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&type=2" . "&sendid=" . $configuracion['telefono_isms'] );
-		        break;
-		    case "labsmobile":
-				$respuesta = wp_remote_get( "https://api.labsmobile.com/get/send.php?client=" . $configuracion['identificador_labsmobile'] . "&username=" . $configuracion['usuario_labsmobile'] . "&password=" . $configuracion['contrasena_labsmobile'] . "&msisdn=" . $telefono . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&sender=" . $configuracion['sid_labsmobile'] );
-				break;			
-    		case "twilio":
-		        $argumentos['header'] = "Accept-Charset: utf-8\r\n";
-				$argumentos['body'] = array( 
-					'To' 	=> $telefono,
-					'From' 	=> $configuracion['telefono_twilio'],
-					'Body' 	=> $mensaje
-				 );
-				$respuesta = wp_remote_post( "https://" . $configuracion['clave_twilio'] . ":" . $configuracion['identificador_twilio'] . "@api.twilio.com/2010-04-01/Accounts/" . $configuracion['clave_twilio'] . "/Messages", $argumentos );
-		        break;
-		    case "msg91":
-				$argumentos['body'] = array( 
-					'authkey' 	=> $configuracion['clave_msg91'],
-					'mobiles' 	=> $telefono,
-					'message' 	=> apg_sms_codifica_el_mensaje( apg_sms_normaliza_mensaje( $mensaje ) ),
-					'sender' 	=> $configuracion['identificador_msg91'],
-					'route' 		=> $configuracion['ruta_msg91']
-				 );
-				$respuesta = wp_remote_post( "http://control.msg91.com/sendhttp.php", $argumentos );
-		        break;
-		    case "smslane":
-				$argumentos['body'] = array( 
-					'user' 		=> $configuracion['usuario_smslane'],
-					'password' 	=> $configuracion['contrasena_smslane'],
-					'msisdn' 	=> $telefono,
-					'sid' 		=> $configuracion['sid_smslane'],
-					'msg' 		=> $mensaje,
-					'fl' 		=> "0",
-					'gwid' 		=> "2",
-				 );
-				$respuesta = wp_remote_post( "http://smslane.com/vendorsms/pushsms.aspx", $argumentos );
-		        break;
-		    case "mvaayoo":
-				$argumentos['body'] = array( 
-					'user' 			=> $configuracion['usuario_mvaayoo'] . ":" . $configuracion['contrasena_mvaayoo'],
-					'senderID' 		=> $configuracion['identificador_mvaayoo'],
-					'receipientno' 	=> $telefono,
-					'msgtxt' 		=> $mensaje,
-					'dcs' 			=> "0",
-					'state' 			=> "4",
-				 );
-				$respuesta = wp_remote_post( "http://api.mVaayoo.com/mvaayooapi/MessageCompose", $argumentos );
-		        break;
-		    case "smscountry":
-				$argumentos['body'] = array( 
-					'User' 			=> $configuracion['usuario_smscountry'],
-					'passwd' 		=> $configuracion['contrasena_smscountry'],
-					'mobilenumber' 	=> $telefono,
-					'sid' 			=> $configuracion['sid_smscountry'],
-					'message' 		=> $mensaje,
-					'mtype' 			=> "N",
-					'DR' 			=> "Y",
-				 );
-				$respuesta = wp_remote_post( "http://api.smscountry.com/SMSCwebservice_bulk.aspx", $argumentos );
-		        break;
-		    case "plivo":
-		        $argumentos['headers'] = array(
-					'Authorization'	=> 'Basic ' . base64_encode( $configuracion['usuario_plivo'] . ":" . $configuracion['clave_plivo'] ),
-					'Connection'	=> 'close',
-					'Content-Type'	=> 'application/json',
-				);
-		    	$argumentos['body'] = json_encode( array(
-					'src'			=> ( trim( $configuracion['identificador_plivo'] ) != '' ? $configuracion['identificador_plivo'] : $configuracion['telefono'] ),
-					'dst'			=> $telefono,
-					'text'			=> $mensaje,
-					'type'			=> 'sms',
-				) );
-				$respuesta = wp_remote_post( "https://api.plivo.com/v1/Account/" . $configuracion['usuario_plivo'] . "/Message/", $argumentos );
-		    	break;
-		}
-
-		//wp_mail( 'artprojectgroup@gmail.com', 'WooCommerce - APG SMS Notifications', $telefono . "\r\n" . $mensaje . "\r\n" . print_r( $respuesta, true ), 'charset=UTF-8' . "\r\n" ); 
-	}
 
 	//Normalizamos el texto
 	function apg_sms_normaliza_mensaje( $mensaje ) {
@@ -389,27 +284,6 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	//Codifica el mensaje
 	function apg_sms_codifica_el_mensaje( $mensaje ) {
 		return urlencode( html_entity_decode( $mensaje, ENT_QUOTES, "UTF-8" ) );
-	}
-	
-	//Mira si necesita el prefijo telefónico internacional
-	function apg_sms_prefijo( $servicio ) {
-		$prefijo = array( 
-			"voipstunt", 
-			"clockwork", 
-			"clickatell", 
-			"bulksms", 
-			"msg91", 
-			"twilio", 
-			"mvaayoo", 
-			"esebun", 
-			"isms", 
-			"smslane",
-			"smscountry",
-			"labsmobile",
-			"plivo",
-		);
-		
-		return in_array( $servicio, $prefijo );
 	}
 	
 	//Procesa el teléfono y le añade, si lo necesita, el prefijo
