@@ -4,7 +4,7 @@ Donate link: http://www.artprojectgroup.es/tienda/donacion
 Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Clickatell, Clockwork, BulkSMS, OPEN DND, MSG91, mVaayoo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Custom Order Statuses & Actions, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro
 Requires at least: 3.8
 Tested up to: 4.3
-Stable tag: 2.7.5
+Stable tag: 2.7.5.1
 WC requires at least: 2.1
 WC tested up to: 2.4.6
 License: GPLv3
@@ -85,7 +85,6 @@ Recuerda que puedes encontrar más [plugins para WordPress](http://www.artprojec
 3. Configurar el plugin en *WooCommerce -> Ajustes -> Envío* o a través del botón *Ajustes*.
 4. Listo, ahora ya puedes disfrutar de él, y si te gusta y te resulta útil, hacer una [*donación*](http://www.artprojectgroup.es/tienda/donacion).
 
-
 == Frequently asked questions ==
 = ¿Cómo se configura? =
 Para configurar el plugin sólo hay que añadir los datos proporcionados por cada proveedor SMS, y que varían en función de este. 
@@ -108,6 +107,8 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.7.5.1 =
+* Arreglo de pequeño error JavaScript que no seleccionaba correctamente el proveedor SMS configurado.
 = 2.7.5 =
 * Añadido soporte para VoipBusterPro, VoipBuster, SMS Discount y SIP Discount. **Modificación ideada por [Alain Aubry](http://www.casa-indigo.com/)**.
 = 2.7.4 =
@@ -259,6 +260,8 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 * Versión inicial.
 
 == Upgrade Notice ==
+= 2.7.5.1 =
+* Arreglo de pequeño error JavaScript que no seleccionaba correctamente el proveedor SMS configurado.
 = 2.7.5 =
 * Añadido soporte para VoipBusterPro, VoipBuster, SMS Discount y SIP Discount. **Modificación ideada por [Alain Aubry](http://www.casa-indigo.com/)**.
 = 2.7.4 =

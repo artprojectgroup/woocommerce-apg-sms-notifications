@@ -366,7 +366,7 @@ jQuery( document ).ready( function( $ ) {
 	} );
 	var control = function( capa ) {
 		if ( capa == '' ) {
-			capa = $( '.servicio option:first' ).val();
+			capa = $( '.servicio option:selected' ).val();
 		}
 		var proveedores= new Array();
 		<?php 
