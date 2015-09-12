@@ -31,8 +31,8 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * mVaayoo.
  * OPEN DND.
  * Plivo.
- * SIP Discount
- * SMS Discount
+ * SIP Discount.
+ * SMS Discount.
  * SMS Country.
  * SMS Lane (Transactional SMS only).
  * Solutions Infini.
