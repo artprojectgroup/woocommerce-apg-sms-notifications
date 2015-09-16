@@ -41,6 +41,9 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 		case "labsmobile":
 			$respuesta = wp_remote_get( "https://api.labsmobile.com/get/send.php?client=" . $configuracion['identificador_labsmobile'] . "&username=" . $configuracion['usuario_labsmobile'] . "&password=" . $configuracion['contrasena_labsmobile'] . "&msisdn=" . $telefono . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&sender=" . $configuracion['sid_labsmobile'] );
 			break;			
+		case "springedge":
+			$respuesta = wp_remote_get( "http://instantalerts.co/api/web/send/?apikey=" . $configuracion['clave_springedge'] . "&sender=" . $configuracion['identificador_springedge'] . "&to=" . $telefono . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&format=json" );
+			break;			
 		case "twilio":
 			$argumentos['header'] = "Accept-Charset: utf-8\r\n";
 			$argumentos['body'] = array( 
@@ -135,6 +138,7 @@ function apg_sms_prefijo( $servicio ) {
 		"smscountry",
 		"labsmobile",
 		"plivo",
+		"springedge",
 	);
 	
 	return in_array( $servicio, $prefijo );

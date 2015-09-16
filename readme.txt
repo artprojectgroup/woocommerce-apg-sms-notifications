@@ -1,10 +1,10 @@
 === WooCommerce - APG SMS Notifications ===
 Contributors: artprojectgroup
 Donate link: http://www.artprojectgroup.es/tienda/donacion
-Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Clickatell, Clockwork, BulkSMS, OPEN DND, MSG91, mVaayoo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Custom Order Statuses & Actions, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro
+Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Clickatell, Clockwork, BulkSMS, OPEN DND, MSG91, mVaayoo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, Custom Order Statuses & Actions, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro, WPML
 Requires at least: 3.8
 Tested up to: 4.3
-Stable tag: 2.7.5.1
+Stable tag: 2.7.6
 WC requires at least: 2.1
 WC tested up to: 2.4.6
 License: GPLv3
@@ -36,12 +36,14 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * SMS Country.
  * SMS Lane (Transactional SMS only).
  * Solutions Infini.
+ * Spring Edge.
  * Twilio.
  * VoipBuster.
  * VoipBusterPro.
  * VoipStunt.
 * Posibilidad de informar al propietario de la tienda sobre nuevos pedidos.
 * Posibilidad de enviar, o no, SMS internacionales.
+* 100% compatible con [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS).
 * Soporte de los estados personalizados de los plugin [Custom Order Statuses & Actions](http://codecanyon.net/item/woocommerce-custom-order-status-actions/6392174?ref=apgmijas) y [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931?ref=apgmijas).
 * Soporte para los números de pedido personalizados del plugin [WooCommerce Sequential Order Numbers Pro](http://www.woothemes.com/products/sequential-order-numbers-pro/).
 * Inserta de forma automática el código telefónico internacional, si es necesario, al número de teléfono del cliente.
@@ -107,6 +109,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.7.6 =
+* Añadida compatibilidad con WPML. **Modificación solicitada en [WordPress.org](https://wordpress.org/support/topic/wpml-compatibility-66)**.
+* Añadido soporte para Spring Edge. **Actualización patrocinada por [Spring Edge](http://springedge.com/)**.
 = 2.7.5.1 =
 * Arreglo de pequeño error JavaScript que no seleccionaba correctamente el proveedor SMS configurado.
 = 2.7.5 =
@@ -260,6 +265,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 * Versión inicial.
 
 == Upgrade Notice ==
+= 2.7.6 =
+* Añadida compatibilidad con WPML. **Modificación solicitada en [WordPress.org](https://wordpress.org/support/topic/wpml-compatibility-66)**.
+* Añadido soporte para Spring Edge. **Actualización patrocinada por [Spring Edge](http://springedge.com/)**.
 = 2.7.5.1 =
 * Arreglo de pequeño error JavaScript que no seleccionaba correctamente el proveedor SMS configurado.
 = 2.7.5 =

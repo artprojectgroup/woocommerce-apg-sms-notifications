@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.7.5.1
+Version: 2.7.6
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -78,6 +78,24 @@ add_filter( "plugin_action_links_$plugin", 'apg_sms_enlace_de_ajustes' );
 
 //¿Está activo WooCommerce?
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+	//Comprobamos si está instalado y activo WPML
+	$wpml_activo = function_exists( 'icl_object_id' );
+	
+	//Registramos los textos en WPML
+	if ( $wpml_activo && function_exists( 'icl_register_string' ) ) {
+		icl_register_string( 'apg_sms', 'mensaje_pedido', $configuracion['mensaje_pedido'] );
+		icl_register_string( 'apg_sms', 'mensaje_recibido', $configuracion['mensaje_recibido'] );
+		icl_register_string( 'apg_sms', 'mensaje_procesando', $configuracion['mensaje_procesando'] );
+		icl_register_string( 'apg_sms', 'mensaje_completado', $configuracion['mensaje_completado'] );
+		icl_register_string( 'apg_sms', 'mensaje_nota', $configuracion['mensaje_nota'] );
+	} else if ( $wpml_activo ) {
+		do_action( 'wpml_register_single_string', 'apg_sms', 'mensaje_pedido', $configuracion['mensaje_pedido'] );
+		do_action( 'wpml_register_single_string', 'apg_sms', 'mensaje_recibido', $configuracion['mensaje_recibido'] );
+		do_action( 'wpml_register_single_string', 'apg_sms', 'mensaje_procesando', $configuracion['mensaje_procesando'] );
+		do_action( 'wpml_register_single_string', 'apg_sms', 'mensaje_completado', $configuracion['mensaje_completado'] );
+		do_action( 'wpml_register_single_string', 'apg_sms', 'mensaje_nota', $configuracion['mensaje_nota'] );
+	}
+	
 	//Cargamos los proveedores SMS
 	include( 'includes/admin/proveedores.php' );
 
@@ -118,7 +136,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 	//Procesa el SMS
 	function apg_sms_procesa_estados( $pedido, $notificacion = false ) {
-		global $woocommerce, $configuracion;
+		global $woocommerce, $configuracion, $wpml_activo;
 
 		$pedido = new WC_Order( $pedido );
 		$estado = $pedido->status;
@@ -137,18 +155,31 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		$internacional = ( $pedido->billing_country && ( $woocommerce->countries->get_base_country() != $pedido->billing_country ) ) ? true : false;
 		$telefono_propietario = apg_sms_procesa_el_telefono( $pedido, $configuracion['telefono'], $configuracion['servicio'], true );
 		
+		//WPML
+		if ( function_exists( 'icl_register_string' ) || !$wpml_activo ) { //Versión anterior a la 3.2
+			$mensaje_pedido		= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_pedido', $configuracion['mensaje_pedido'] ) : $configuracion['mensaje_pedido'];
+			$mensaje_recibido	= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_recibido', $configuracion['mensaje_recibido'] ) : $configuracion['mensaje_recibido'];
+			$mensaje_procesando	= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_procesando', $configuracion['mensaje_procesando'] ) : $configuracion['mensaje_procesando'];
+			$mensaje_completado	= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_completado', $configuracion['mensaje_completado'] ) : $configuracion['mensaje_completado'];
+		} else if ( $wpml_activo ) { //Versión 3.2 o superior
+			$mensaje_pedido		= apply_filters( 'wpml_translate_single_string', $configuracion['mensaje_pedido'], 'apg_sms', 'mensaje_pedido' );
+			$mensaje_recibido	= apply_filters( 'wpml_translate_single_string', $configuracion['mensaje_recibido'], 'apg_sms', 'mensaje_recibido' );
+			$mensaje_procesando	= apply_filters( 'wpml_translate_single_string', $configuracion['mensaje_procesando'], 'apg_sms', 'mensaje_procesando' );
+			$mensaje_completado	= apply_filters( 'wpml_translate_single_string', $configuracion['mensaje_completado'], 'apg_sms', 'mensaje_completado' );
+		}
+		
 		if ( $estado == 'Recibido' ) {
 			if ( isset( $configuracion['notificacion'] ) && $configuracion['notificacion'] == 1 ) {
-				apg_sms_envia_sms( $configuracion, $telefono_propietario, apg_sms_procesa_variables( $configuracion['mensaje_pedido'], $pedido, $configuracion['variables'] ) ); //Mensaje para el propietario
+				apg_sms_envia_sms( $configuracion, $telefono_propietario, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $configuracion['variables'] ) ); //Mensaje para el propietario
 			}
-			$mensaje = apg_sms_procesa_variables( $configuracion['mensaje_recibido'], $pedido, $configuracion['variables'] );
+			$mensaje = apg_sms_procesa_variables( $mensaje_recibido, $pedido, $configuracion['variables'] );
 		} else if ( $estado == __( 'Processing', 'apg_sms' ) ) {
 			if ( isset( $configuracion['notificacion'] ) && $configuracion['notificacion'] == 1 && $notificacion ) {
-				apg_sms_envia_sms( $configuracion, $telefono_propietario, apg_sms_procesa_variables( $configuracion['mensaje_pedido'], $pedido, $configuracion['variables'] ) ); //Mensaje para el propietario
+				apg_sms_envia_sms( $configuracion, $telefono_propietario, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $configuracion['variables'] ) ); //Mensaje para el propietario
 			}
-			$mensaje = apg_sms_procesa_variables( $configuracion['mensaje_procesando'], $pedido, $configuracion['variables'] );
+			$mensaje = apg_sms_procesa_variables( $mensaje_procesando, $pedido, $configuracion['variables'] );
 		} else if ( $estado == __( 'Completed', 'apg_sms' ) ) {
-			$mensaje = apg_sms_procesa_variables( $configuracion['mensaje_completado'], $pedido, $configuracion['variables'] );
+			$mensaje = apg_sms_procesa_variables( $mensaje_completado, $pedido, $configuracion['variables'] );
 		} else {
 			$mensaje = apg_sms_procesa_variables( $configuracion[$estado], $pedido, $configuracion['variables'] );
 		}
@@ -168,7 +199,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 	//Envía las notas de cliente por SMS
 	function apg_sms_procesa_notas( $datos ) {
-		global $woocommerce, $configuracion;
+		global $woocommerce, $configuracion, $wpml_activo;
 	
 		$pedido = new WC_Order( $datos['order_id'] );
 	
@@ -176,7 +207,14 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		$internacional = ( $pedido->billing_country && ( $woocommerce->countries->get_base_country() != $pedido->billing_country ) ) ? true : false;
 		
 		if ( !$internacional || ( isset( $configuracion['internacional'] ) && $configuracion['internacional'] == 1 ) ) {
-			apg_sms_envia_sms( $configuracion, $telefono, apg_sms_procesa_variables( $configuracion['mensaje_nota'], $pedido, $configuracion['variables'], wptexturize( $datos['customer_note'] ) ) );
+			//WPML
+			if ( function_exists( 'icl_register_string' ) || !$wpml_activo ) { //Versión anterior a la 3.2
+				$mensaje_nota		= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_nota', $configuracion['mensaje_nota'] ) : $configuracion['mensaje_nota'];
+			} else if ( $wpml_activo ) { //Versión 3.2 o superior
+				$mensaje_nota		= apply_filters( 'wpml_translate_single_string', $configuracion['mensaje_nota'], 'apg_sms', 'mensaje_nota' );
+			}
+
+			apg_sms_envia_sms( $configuracion, $telefono, apg_sms_procesa_variables( $mensaje_nota, $pedido, $configuracion['variables'], wptexturize( $datos['customer_note'] ) ) );
 		}
 	}
 	add_action( 'woocommerce_new_customer_note', 'apg_sms_procesa_notas', 10 );
