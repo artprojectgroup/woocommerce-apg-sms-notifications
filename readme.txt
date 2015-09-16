@@ -21,26 +21,26 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 
 = Características =
 * Soporte de múltiples proveedores SMS:
- * BulkSMS.
- * Clickatell.
- * Clockwork.
- * Esebun Business (Enterprise & Developers only).
- * iSMS Malaysia.
- * LabsMobile Spain.
- * MSG91.
- * mVaayoo.
- * OPEN DND.
- * Plivo.
- * SIP Discount.
- * SMS Discount.
- * SMS Country.
- * SMS Lane (Transactional SMS only).
- * Solutions Infini.
- * Spring Edge.
- * Twilio.
- * VoipBuster.
- * VoipBusterPro.
- * VoipStunt.
+ * [BulkSMS](http://www.bulksms.com/).
+ * [Clickatell](https://www.clickatell.com/).
+ * [Clockwork](https://www.clockworksms.com/).
+ * [Esebun Business (Enterprise & Developers only)](http://www.bz.esebun.com/).
+ * [iSMS Malaysia](http://www.isms.com.my/).
+ * [LabsMobile Spain](http://www.labsmobile.com/es).
+ * [MSG91](https://msg91.com/).
+ * [mVaayoo](http://www.mvaayoo.com/).
+ * [OPEN DND](http://www.opendnd.in/).
+ * [Plivo](https://www.plivo.com/).
+ * [SIP Discount](https://www.sipdiscount.com/dashboard).
+ * [SMS Discount](https://www.smsdiscount.com/dashboard).
+ * [SMS Country](http://www.smscountry.com/).
+ * [SMS Lane (Transactional SMS only)](http://www.smslane.com).
+ * [Solutions Infini](http://www.solutionsinfini.com/).
+ * [Spring Edge](http://springedge.com/).
+ * [Twilio](https://www.twilio.com/).
+ * [VoipBuster](https://www.voipbuster.com/dashboard).
+ * [VoipBusterPro](https://www.voipbusterpro.com/dashboard).
+ * [VoipStunt](https://www.voipstunt.com/dashboard).
 * Posibilidad de informar al propietario de la tienda sobre nuevos pedidos.
 * Posibilidad de enviar, o no, SMS internacionales.
 * 100% compatible con [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS).
