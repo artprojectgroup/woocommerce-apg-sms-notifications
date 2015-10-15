@@ -3,10 +3,10 @@ Contributors: artprojectgroup
 Donate link: http://www.artprojectgroup.es/tienda/donacion
 Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Clickatell, Clockwork, BulkSMS, OPEN DND, MSG91, mVaayoo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, Custom Order Statuses & Actions, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro, WPML
 Requires at least: 3.8
-Tested up to: 4.3
-Stable tag: 2.7.6
+Tested up to: 4.3.1
+Stable tag: 2.7.6.1
 WC requires at least: 2.1
-WC tested up to: 2.4.6
+WC tested up to: 2.4.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -59,7 +59,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 * English ([**Art Project Group**](http://www.artprojectgroup.es/)).
 
 = Soporte técnico =
-**Art Project Group** te ofrece [**Soporte técnico**](http://www.artprojectgroup.es/servicios/servicios-para-wordpress-y-woocommerce/soporte-tecnico) para configurar o instalar **WooCommerce - APG SMS Notifications**. 
+**Art Project Group** te ofrece [**Soporte técnico**](http://www.artprojectgroup.es/tienda/soporte-tecnico) para configurar o instalar ***WooCommerce - APG SMS Notifications***.
 
 = Origen =
 **WooCommerce - APG SMS Notifications** ha sido programado a partir de la petición de [Chirag Vora](http://profiles.wordpress.org/chirag740) para añadir a WooCommerce la posibilidad de enviar notificaciones sobre el estado de los pedidos a través de mensajes SMS.
@@ -109,6 +109,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.7.6.1 =
+* Actualización del paquete de fuentes. Nuevo icono de Google+.
+* Actualización de las traducciones.
 = 2.7.6 =
 * Añadida compatibilidad con WPML. **Modificación solicitada en [WordPress.org](https://wordpress.org/support/topic/wpml-compatibility-66)**.
 * Añadido soporte para Spring Edge. **Actualización patrocinada por [Spring Edge](http://springedge.com/)**.
@@ -265,6 +268,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 * Versión inicial.
 
 == Upgrade Notice ==
+= 2.7.6.1 =
+* Actualización del paquete de fuentes. Nuevo icono de Google+.
+* Actualización de las traducciones.
 = 2.7.6 =
 * Añadida compatibilidad con WPML. **Modificación solicitada en [WordPress.org](https://wordpress.org/support/topic/wpml-compatibility-66)**.
 * Añadido soporte para Spring Edge. **Actualización patrocinada por [Spring Edge](http://springedge.com/)**.

@@ -6,9 +6,8 @@
 <font id="d3_euronismregular" horiz-adv-x="1024" >
 <font-face units-per-em="2048" ascent="1638" descent="-410" />
 <missing-glyph horiz-adv-x="1600" />
-<glyph horiz-adv-x="2048" />
-<glyph horiz-adv-x="2048" />
-<glyph unicode="&#xd;" horiz-adv-x="2048" />
+<glyph horiz-adv-x="0" />
+<glyph horiz-adv-x="682" />
 <glyph unicode=" "  horiz-adv-x="1600" />
 <glyph unicode="&#x09;" horiz-adv-x="1600" />
 <glyph unicode="&#xa0;" horiz-adv-x="1600" />
@@ -237,6 +236,6 @@
 <glyph unicode="&#x205f;" horiz-adv-x="357" />
 <glyph unicode="&#x20ac;" />
 <glyph unicode="&#x2122;" />
-<glyph unicode="&#xe000;" horiz-adv-x="1160" d="M0 0v1160h1160v-1160h-1160z" />
+<glyph unicode="&#x25fc;" horiz-adv-x="1160" d="M0 0v1160h1160v-1160h-1160z" />
 </font>
 </defs></svg> 

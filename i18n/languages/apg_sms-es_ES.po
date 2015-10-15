@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WooCommerce - APG SMS Notifications\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Sep 03 2015 19:35:35 GMT+0200 (CEST)\n"
-"PO-Revision-Date: Wed Sep 16 2015 18:47:03 GMT+0200 (CEST)\n"
+"PO-Revision-Date: Thu Oct 15 2015 10:56:47 GMT+0200 (CEST)\n"
 "Last-Translator: Herves-Vida <info@herves-vida.com>\n"
 "Language-Team: \n"
 "Language: Spanish (Spain)\n"
@@ -34,14 +34,6 @@ msgstr "WooCommerce - APG SMS Notifications"
 msgid "http://wordpress.org/plugins/woocommerce-apg-sms-notifications"
 msgstr "http://wordpress.org/plugins/woocommerce-apg-sms-notifications"
 
-#. Author URI of the plugin
-msgid "http://www.artprojectgroup.es"
-msgstr "http://www.artprojectgroup.es"
-
-#. Author of the plugin
-msgid "Art Project Group"
-msgstr "Art Project Group"
-
 #. Description of the plugin
 msgid ""
 "Add to WooCommerce SMS notifications to your clients for order status "
@@ -54,6 +46,14 @@ msgstr ""
 "tienda reciba un nuevo pedido y seleccionar si quiere enviar SMS "
 "internacionales. El plugin añade el prefijo telefónico internacional "
 "automáticamente al número de teléfono del cliente."
+
+#. Author URI of the plugin
+msgid "http://www.artprojectgroup.es"
+msgstr "http://www.artprojectgroup.es"
+
+#. Author of the plugin
+msgid "Art Project Group"
+msgstr "Art Project Group"
 
 #: ../../apg-sms.php:50 ../../includes/cuadro-informacion.php:7
 msgid "Make a donation by "
