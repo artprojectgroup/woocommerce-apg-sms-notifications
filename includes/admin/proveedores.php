@@ -44,6 +44,9 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 		case "springedge":
 			$respuesta = wp_remote_get( "http://instantalerts.co/api/web/send/?apikey=" . $configuracion['clave_springedge'] . "&sender=" . $configuracion['identificador_springedge'] . "&to=" . $telefono . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&format=json" );
 			break;			
+		case "moreify":
+			$respuesta = wp_remote_get( "https://members.moreify.com/api/v1/sendSms?project=" . $configuracion['proyecto_moreify'] . "&password=" . $configuracion['identificador_moreify'] . "&phonenumber=" . $telefono . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) );
+			break;
 		case "twilio":
 			$argumentos['header'] = "Accept-Charset: utf-8\r\n";
 			$argumentos['body'] = array( 
@@ -139,6 +142,7 @@ function apg_sms_prefijo( $servicio ) {
 		"labsmobile",
 		"plivo",
 		"springedge",
+		"moreify",
 	);
 	
 	return in_array( $servicio, $prefijo );

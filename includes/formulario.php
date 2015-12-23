@@ -33,6 +33,8 @@
 	__( 'Client:', 'apg_sms' );
 	__( 'authentication ID', 'apg_sms' );
 	__( 'Authentication ID:', 'apg_sms' );
+	__( 'project', 'apg_sms' );
+	__( 'Project:', 'apg_sms' );
 
 	global $woocommerce, $wpml_activo;
 	
@@ -50,7 +52,6 @@
 		$mensaje_completado	= apply_filters( 'wpml_translate_single_string', $configuracion['mensaje_completado'], 'apg_sms', 'mensaje_completado' );
 		$mensaje_nota		= apply_filters( 'wpml_translate_single_string', $configuracion['mensaje_nota'], 'apg_sms', 'mensaje_nota' );
 	}
-	echo $mensaje_pedido;
   ?>
   <h3><a href="<?php echo $apg_sms['plugin_url']; ?>" title="Art Project Group"><?php echo $apg_sms['plugin']; ?></a></h3>
   <p>
@@ -89,6 +90,7 @@
 				"labsmobile" 		=> "LabsMobile Spain",
 				"plivo" 				=> "Plivo",
 				"springedge" 		=> "Spring Edge",
+				"moreify" 			=> "Moreify",
 			);
 			asort( $proveedores, SORT_NATURAL | SORT_FLAG_CASE ); //Ordena alfabeticamente los proveedores
             foreach ( $proveedores as $valor => $proveedor ) {
@@ -190,6 +192,10 @@
 			"springedge" 		=> array( 
 				"clave_springedge" 					=> 'key',
 				"identificador_springedge"		 	=> 'sender ID',
+			),
+			"moreify" 			=> array( 
+				"proyecto_moreify"					=> 'project',
+				"identificador_moreify" 			=> 'authentication Token',
 			),
 		);
 	  
