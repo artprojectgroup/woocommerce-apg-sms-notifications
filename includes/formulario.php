@@ -250,7 +250,7 @@
           <img class="help_tip" data-tip="<?php _e( 'Check if you want to send international SMS messages', 'apg_sms' ); ?>" src="<?php echo plugins_url(  'woocommerce/assets/images/help.png' );?>" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><input id="apg_sms_settings[internacional]" name="apg_sms_settings[internacional]" type="checkbox" value="1" <?php echo ( isset( $configuracion['internacional'] ) && $configuracion['internacional'] == "1" ? 'checked="checked"' : '' ); ?> tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
-      <?php if ( in_array( 'woocommerce-order-status-actions-manager/wc_custom_action_status.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : ?>
+      <?php if ( class_exists( 'WC_Custom_Status' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : ?>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[estados_personalizados]">
             <?php _e( 'Custom Order Statuses & Actions:', 'apg_sms' ); ?>
@@ -258,7 +258,7 @@
           <img class="help_tip" data-tip="<?php _e( 'Select your own statuses.', 'apg_sms' ); ?>" src="<?php echo plugins_url(  'woocommerce/assets/images/help.png' );?>" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><select multiple="multiple" class="multiselect chosen_select estados_personalizados" id="apg_sms_settings[estados_personalizados]" name="apg_sms_settings[estados_personalizados][]" style="width: 450px;" tabindex="<?php echo $tab++; ?>">
             <?php
-				if ( in_array( 'woocommerce-order-status-actions-manager/wc_custom_action_status.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+				if ( class_exists( 'WC_Custom_Status' ) ) {
 					$lista_de_estados =  WC_Custom_Status::get_status_list();
 					foreach ( $lista_de_estados as $estado ) {
 						if ( $estado ) {
@@ -415,7 +415,7 @@ jQuery( document ).ready( function( $ ) {
 	if (typeof chosen !== 'undefined' && $.isFunction(chosen)) {
 		jQuery( "select.chosen_select" ).chosen();
 	}
-<?php if ( in_array( 'woocommerce-order-status-actions-manager/wc_custom_action_status.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : ?>	
+<?php if ( class_exists( 'WC_Custom_Status' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : ?>	
 	$( '.estados_personalizados' ).on( 'change', function () { 
 		control_personalizados( $( this ).val() ); 
 	} );
