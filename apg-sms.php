@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.7.8.1
+Version: 2.7.8.2
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 4.4.1
+Tested up to: 4.4.2
 
 Text Domain: apg_sms
 Domain Path: /i18n/languages
@@ -30,7 +30,7 @@ $apg_sms = array(
 	'plugin' 		=> 'WooCommerce - APG SMS Notifications', 
 	'plugin_uri' 	=> 'woocommerce-apg-sms-notifications', 
 	'donacion' 		=> 'http://www.artprojectgroup.es/tienda/donacion',
-	'soporte' 		=> 'http://www.artprojectgroup.es/tienda/soporte-tecnico',
+	'soporte' 		=> 'http://www.wcprojectgroup.es/tienda/ticket-de-soporte',
 	'plugin_url' 	=> 'http://www.artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-sms-notifications', 
 	'ajustes' 		=> 'admin.php?page=apg_sms', 
 	'puntuacion' 	=> 'http://wordpress.org/support/view/plugin-reviews/woocommerce-apg-sms-notifications' 
@@ -807,8 +807,6 @@ function apg_sms_muestra_mensaje() {
 
 	wp_register_style( 'apg_sms_hoja_de_estilo', plugins_url( 'assets/css/style.css', __FILE__ ) ); //Carga la hoja de estilo
 	wp_enqueue_style( 'apg_sms_hoja_de_estilo' ); //Carga la hoja de estilo
-	wp_register_style( 'apg_sms_fuentes', plugins_url( 'assets/fonts/stylesheet.css', __FILE__ ) ); //Carga la hoja de estilo global
-	wp_enqueue_style( 'apg_sms_fuentes' ); //Carga la hoja de estilo global
 
 	/*if ( !isset( $configuracion['mensaje_pedido'] ) || !isset( $configuracion['mensaje_nota'] ) ) { //Comprueba si hay que mostrar el mensaje de actualización
 		add_action( 'admin_notices', 'apg_sms_actualizacion' );

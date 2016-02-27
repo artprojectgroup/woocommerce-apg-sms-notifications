@@ -3,10 +3,10 @@ Contributors: artprojectgroup
 Donate link: http://www.artprojectgroup.es/tienda/donacion
 Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Clickatell, Clockwork, BulkSMS, OPEN DND, Moreify, MSG91, mVaayoo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, Custom Order Statuses & Actions, WooCommerce Order Status & Actions Manager, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro, WPML
 Requires at least: 3.8
-Tested up to: 4.4.1
-Stable tag: 2.7.8.1
+Tested up to: 4.4.2
+Stable tag: 2.7.8.2
 WC requires at least: 2.1
-WC tested up to: 2.5.1
+WC tested up to: 2.5.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -60,7 +60,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 * English ([**Art Project Group**](http://www.artprojectgroup.es/)).
 
 = Soporte técnico =
-**Art Project Group** te ofrece [**Soporte técnico**](http://www.artprojectgroup.es/tienda/soporte-tecnico) para configurar o instalar ***WooCommerce - APG SMS Notifications***.
+**Art Project Group** te ofrece [**Soporte técnico**](http://www.wcprojectgroup.es/tienda/ticket-de-soporte) para configurar o instalar ***WooCommerce - APG SMS Notifications***.
 
 = Origen =
 **WooCommerce - APG SMS Notifications** ha sido programado a partir de la petición de [Chirag Vora](http://profiles.wordpress.org/chirag740) para añadir a WooCommerce la posibilidad de enviar notificaciones sobre el estado de los pedidos a través de mensajes SMS.
@@ -102,7 +102,7 @@ Se debe indicar si queremos, o no, recibir notificaciones SMS por cada nuevo ped
 Por último hay que personalizar, si se desea, los mensajes que se enviarán por SMS.
 
 = Soporte técnico =
-Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notifications**, **Art Project Group** te ofrece su servicio de [**Soporte técnico**](http://www.artprojectgroup.es/servicios/servicios-para-wordpress-y-woocommerce/soporte-tecnico). 
+Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notifications**, **Art Project Group** te ofrece su servicio de [**Soporte técnico**](http://www.wcprojectgroup.es/tienda/ticket-de-soporte). 
 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
@@ -113,6 +113,8 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.7.8.2 =
+* Actualización de enlaces de soporte y pequeñas actualizaciones.
 = 2.7.8.1 =
 * Actualización del soporte para WooCommerce Order Status & Actions Manager.
 * Arreglo de la carga de la hoja de estilo.
@@ -278,12 +280,16 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 = 0.1 =
 * Versión inicial.
 
+== Upgrade Notice ==
+= 2.7.8.2 =
+* Actualización de enlaces de soporte y pequeñas actualizaciones.
+
 ==Traducciones ==
 * *English*: by [**Art Project Group**](http://www.artprojectgroup.es/) (default language).
 * *Español*: por [**Art Project Group**](http://www.artprojectgroup.es/).
 
 == Soporte técnico ==
-Dado que **WooCommerce - APG SMS Notifications** es totalmente gratuito, **Art Project Group** sólo proporciona el servicio de [**Soporte técnico**](http://www.artprojectgroup.es/servicios/servicios-para-wordpress-y-woocommerce/soporte-tecnico) previo pago. En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.
+Dado que **WooCommerce - APG SMS Notifications** es totalmente gratuito, **Art Project Group** sólo proporciona el servicio de [**Soporte técnico**](http://www.wcprojectgroup.es/tienda/ticket-de-soporte) previo pago. En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.
 
 == ¿Por qué está esta página en español? ==
 Mientras WordPress no nos permita a los desarrolladores realizar esta página en más de un idioma, elegiremos siempre el español.
