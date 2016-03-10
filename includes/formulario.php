@@ -250,7 +250,7 @@
           <img class="help_tip" data-tip="<?php _e( 'Check if you want to send international SMS messages', 'apg_sms' ); ?>" src="<?php echo plugins_url(  'woocommerce/assets/images/help.png' );?>" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><input id="apg_sms_settings[internacional]" name="apg_sms_settings[internacional]" type="checkbox" value="1" <?php echo ( isset( $configuracion['internacional'] ) && $configuracion['internacional'] == "1" ? 'checked="checked"' : '' ); ?> tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
-      <?php if ( class_exists( 'WC_Custom_Status' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : ?>
+      <?php if ( class_exists( 'WC_Custom_Status' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : //Comprueba la existencia de los plugins de estado personalizado ?>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[estados_personalizados]">
             <?php _e( 'Custom Order Statuses & Actions:', 'apg_sms' ); ?>
@@ -285,7 +285,7 @@
 						'refunded',
 						'cancelled',
 					);
-					if ( isset( $GLOBALS['advorder_lite_orderstatus'] ) ) {
+					if ( isset( $GLOBALS['advorder_lite_orderstatus'] ) ) { //WooCommerce Advance Order Status
 						$lista_de_estados = ( array ) $GLOBALS['advorder_lite_orderstatus']->get_terms( 'shop_order_status', array( 
 							'hide_empty' => 0, 
 							'orderby' => 'id' 
@@ -305,9 +305,9 @@
 							if ( $estados_personalizados && ( isset( $estados_personalizados['woocommerce_woo_advance_order_status_email'] ) ) && (  '1' == $estados_personalizados['woocommerce_woo_advance_order_status_email'] || 'yes' == $estados_personalizados['woocommerce_woo_advance_order_status_email'] ) ) {
 								$muestra_estado = true;
 							}
-							if ( get_option( 'az_custom_order_status_meta_' . $estado->slug, true ) ) {
+							if ( get_option( 'az_custom_order_status_meta_' . $estado->slug, true ) ) { //WooCommerce Advance Order Status
 								$estados_personalizados = get_option( 'az_custom_order_status_meta_' . $estado->slug, true );
-								if ( $estados_personalizados && ( isset( $estados_personalizados['woocommerce_wc_lite_orderstatus_email'] ) ) && (  '1' == $estados_personalizados['woocommerce_wc_lite_orderstatus_email'] ) ) {
+								if ( $estados_personalizados ) { //Ya no hay que controlar si se notifica por correo electrónico o no
 									$muestra_estado = true;
 								}
 							}
@@ -415,7 +415,7 @@ jQuery( document ).ready( function( $ ) {
 	if (typeof chosen !== 'undefined' && $.isFunction(chosen)) {
 		jQuery( "select.chosen_select" ).chosen();
 	}
-<?php if ( class_exists( 'WC_Custom_Status' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : ?>	
+<?php if ( class_exists( 'WC_Custom_Status' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : //Comprueba la existencia de los plugins de estado personalizado ?>	
 	$( '.estados_personalizados' ).on( 'change', function () { 
 		control_personalizados( $( this ).val() ); 
 	} );
