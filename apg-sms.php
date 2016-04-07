@@ -7,7 +7,7 @@ Description: Add to WooCommerce SMS notifications to your clients for order stat
 Author URI: http://www.artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 4.4.2
+Tested up to: 4.5
 
 Text Domain: apg_sms
 Domain Path: /i18n/languages
