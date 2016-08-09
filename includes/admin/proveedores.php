@@ -117,7 +117,7 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 			break;
 	}
 
-	wp_mail( 'artprojectgroup@gmail.com', 'WooCommerce - APG SMS Notifications', $telefono . "\r\n" . $mensaje . "\r\n" . print_r( $respuesta, true ), 'charset=UTF-8' . "\r\n" ); 
+	//wp_mail( 'artprojectgroup@gmail.com', 'WooCommerce - APG SMS Notifications', $telefono . "\r\n" . $mensaje . "\r\n" . print_r( $respuesta, true ), 'charset=UTF-8' . "\r\n" ); 
 }
 
 
