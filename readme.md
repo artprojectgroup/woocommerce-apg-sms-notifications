@@ -9,7 +9,7 @@ Requires at least: 3.8
 
 Tested up to: 4.6
 
-Stable tag: 2.7.8.3
+Stable tag: 2.7.8.4
 
 WC requires at least: 2.1
 
@@ -119,6 +119,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 [Chirag Vora](http://profiles.wordpress.org/chirag740) had made a translation in english on [Big Kahuna](http://bigkahuna.in/woocommerce-apg-sms-notifications).
 
 ## Changelog
+### 2.7.8.4
+* Actualización de icono de ayuda.
+
 ### 2.7.8.3
 * Actualización del soporte para WooCommerce Order Status & Actions Manager.
 
