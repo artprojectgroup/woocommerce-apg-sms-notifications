@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.7.8.4
+Version: 2.7.8.5
 Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://www.artprojectgroup.es/
@@ -81,23 +81,28 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	//Comprobamos si está instalado y activo WPML
 	$wpml_activo = function_exists( 'icl_object_id' );
 	
-	//Registramos los textos en WPML
-	if ( $wpml_activo && function_exists( 'icl_register_string' ) ) {
-		icl_register_string( 'apg_sms', 'mensaje_pedido', $configuracion['mensaje_pedido'] );
-		icl_register_string( 'apg_sms', 'mensaje_recibido', $configuracion['mensaje_recibido'] );
-		icl_register_string( 'apg_sms', 'mensaje_procesando', $configuracion['mensaje_procesando'] );
-		icl_register_string( 'apg_sms', 'mensaje_completado', $configuracion['mensaje_completado'] );
-		icl_register_string( 'apg_sms', 'mensaje_nota', $configuracion['mensaje_nota'] );
-	} else if ( $wpml_activo ) {
-		do_action( 'wpml_register_single_string', 'apg_sms', 'mensaje_pedido', $configuracion['mensaje_pedido'] );
-		do_action( 'wpml_register_single_string', 'apg_sms', 'mensaje_recibido', $configuracion['mensaje_recibido'] );
-		do_action( 'wpml_register_single_string', 'apg_sms', 'mensaje_procesando', $configuracion['mensaje_procesando'] );
-		do_action( 'wpml_register_single_string', 'apg_sms', 'mensaje_completado', $configuracion['mensaje_completado'] );
-		do_action( 'wpml_register_single_string', 'apg_sms', 'mensaje_nota', $configuracion['mensaje_nota'] );
+	function apg_sms_inicializacion() {
+		global $wpml_activo;
+		
+		//Registramos los textos en WPML
+		if ( $wpml_activo && function_exists( 'icl_register_string' ) ) {
+			icl_register_string( 'apg_sms', 'mensaje_pedido', $configuracion['mensaje_pedido'] );
+			icl_register_string( 'apg_sms', 'mensaje_recibido', $configuracion['mensaje_recibido'] );
+			icl_register_string( 'apg_sms', 'mensaje_procesando', $configuracion['mensaje_procesando'] );
+			icl_register_string( 'apg_sms', 'mensaje_completado', $configuracion['mensaje_completado'] );
+			icl_register_string( 'apg_sms', 'mensaje_nota', $configuracion['mensaje_nota'] );
+		} else if ( $wpml_activo ) {
+			do_action( 'wpml_register_single_string', 'apg_sms', 'mensaje_pedido', $configuracion['mensaje_pedido'] );
+			do_action( 'wpml_register_single_string', 'apg_sms', 'mensaje_recibido', $configuracion['mensaje_recibido'] );
+			do_action( 'wpml_register_single_string', 'apg_sms', 'mensaje_procesando', $configuracion['mensaje_procesando'] );
+			do_action( 'wpml_register_single_string', 'apg_sms', 'mensaje_completado', $configuracion['mensaje_completado'] );
+			do_action( 'wpml_register_single_string', 'apg_sms', 'mensaje_nota', $configuracion['mensaje_nota'] );
+		}
+		
+		//Cargamos los proveedores SMS
+		include_once( 'includes/admin/proveedores.php' );
 	}
-	
-	//Cargamos los proveedores SMS
-	include( 'includes/admin/proveedores.php' );
+	add_action( 'init', 'apg_sms_inicializacion' );
 
 	//Pinta el formulario de configuración
 	function apg_sms_tab() {
