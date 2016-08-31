@@ -250,6 +250,33 @@
           <span class="woocommerce-help-tip" data-tip="<?php _e( 'Check if you want to send international SMS messages', 'apg_sms' ); ?>"></span> </th>
         <td class="forminp forminp-number"><input id="apg_sms_settings[internacional]" name="apg_sms_settings[internacional]" type="checkbox" value="1" <?php echo ( isset( $configuracion['internacional'] ) && $configuracion['internacional'] == "1" ? 'checked="checked"' : '' ); ?> tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
+      <tr valign="top">
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[envio]">
+            <?php _e( 'Send <abbr title="Short Message Service" lang="en">SMS</abbr> to shipping mobile?:', 'apg_sms' ); ?>
+          </label>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Check if you want to send SMS messages to shipping mobile numbers, only if it is different from billing mobile number', 'apg_sms' ); ?>"></span> </th>
+        <td class="forminp forminp-number"><input id="apg_sms_settings[envio]" name="apg_sms_settings[envio]" type="checkbox" class="envio" value="1" <?php echo ( isset( $configuracion['envio'] ) && $configuracion['envio'] == "1" ? 'checked="checked"' : '' ); ?> tabindex="<?php echo $tab++; ?>" /></td>
+      </tr>
+      <tr valign="top" class="campo_envio">
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[campo_envio]">
+            <?php _e( 'Shipping mobile field:', 'apg_sms' ); ?>
+          </label>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Select the shipping mobile field', 'apg_sms' ); ?>"></span> </th>
+        <td class="forminp forminp-number"><select id="apg_sms_settings[campo_envio]" name="apg_sms_settings[campo_envio]" class="wc-enhanced-select" tabindex="<?php echo $tab++; ?>">
+        <?php
+			$pais	= new WC_Countries();
+			$campos	= $pais->get_address_fields( $pais->get_base_country(), 'shipping_' ); //Campos ordinarios
+			$campos_personalizados = apply_filters( 'woocommerce_checkout_fields', array() );
+			$campos += $campos_personalizados['shipping'];
+            foreach ( $campos as $valor => $campo ) {
+				$chequea = ( isset( $configuracion['campo_envio'] ) && $configuracion['campo_envio'] == $valor ) ? ' selected="selected"' : '';
+				if ( isset( $campo['label'] ) ) {
+					echo '<option value="' . $valor . '"' . $chequea . '>' . $campo['label'] . '</option>' . PHP_EOL;
+				}
+            }
+		?>
+        </select></td>
+      </tr>
       <?php if ( class_exists( 'WC_Custom_Status' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : //Comprueba la existencia de los plugins de estado personalizado ?>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[estados_personalizados]">
@@ -387,7 +414,8 @@
   </form>
 </div>
 <script type="text/javascript">
-jQuery( document ).ready( function( $ ) {	
+jQuery( document ).ready( function( $ ) {
+	//Cambia los campos en función del proveedor de servicios SMS
 	$( '.servicio' ).on( 'change', function () { 
 		control( $( this ).val() ); 
 	} );
@@ -412,16 +440,35 @@ jQuery( document ).ready( function( $ ) {
 	};
 	control( $( '.servicio' ).val() );
 
-	if (typeof chosen !== 'undefined' && $.isFunction(chosen)) {
+	if ( typeof chosen !== 'undefined' && $.isFunction( chosen ) ) {
 		jQuery( "select.chosen_select" ).chosen();
 	}
+	
+	//Controla el campo de teléfono del formulario de envío
+	$( '.campo_envio' ).hide();
+	$( '.envio' ).on( 'change', function () { 
+		control_envio( '.envio' ); 
+	} );
+	var control_envio = function( capa ) {
+		if ( $( capa ).is(':checked') ){
+			$( '.campo_envio' ).show();
+		} else {
+			$( '.campo_envio' ).hide();
+		}
+	};
+	control_envio( '.envio' ); 
+	
 <?php if ( class_exists( 'WC_Custom_Status' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : //Comprueba la existencia de los plugins de estado personalizado ?>	
 	$( '.estados_personalizados' ).on( 'change', function () { 
 		control_personalizados( $( this ).val() ); 
 	} );
 	var control_personalizados = function( capa ) {
 		var estados= new Array();
-		<?php foreach( $lista_de_estados as $valor ) echo "estados['$valor'] = '$valor';" . PHP_EOL; ?>
+		<?php 
+		foreach( $lista_de_estados as $valor ) {
+			echo "estados['$valor'] = '$valor';" . PHP_EOL; 
+		}
+		?>
 
 		for ( var valor in estados ) {
 			$( '.' + valor ).hide();

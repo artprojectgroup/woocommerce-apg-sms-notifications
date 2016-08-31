@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.7.8.5
-Plugin URI: http://wordpress.org/plugins/woocommerce-apg-sms-notifications/
+Version: 2.7.9
+Plugin URI: https://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
-Author URI: http://www.artprojectgroup.es/
+Author URI: http://artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
 Tested up to: 4.6
@@ -29,11 +29,11 @@ define( 'DIRECCION_apg_sms', plugin_basename( __FILE__ ) );
 $apg_sms = array( 	
 	'plugin' 		=> 'WooCommerce - APG SMS Notifications', 
 	'plugin_uri' 	=> 'woocommerce-apg-sms-notifications', 
-	'donacion' 		=> 'http://www.artprojectgroup.es/tienda/donacion',
-	'soporte' 		=> 'http://www.wcprojectgroup.es/tienda/ticket-de-soporte',
-	'plugin_url' 	=> 'http://www.artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-sms-notifications', 
+	'donacion' 		=> 'http://artprojectgroup.es/tienda/donacion',
+	'soporte' 		=> 'http://wcprojectgroup.es/tienda/ticket-de-soporte',
+	'plugin_url' 	=> 'http://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-sms-notifications', 
 	'ajustes' 		=> 'admin.php?page=apg_sms', 
-	'puntuacion' 	=> 'http://wordpress.org/support/view/plugin-reviews/woocommerce-apg-sms-notifications' 
+	'puntuacion' 	=> 'https://wordpress.org/support/view/plugin-reviews/woocommerce-apg-sms-notifications' 
 );
 
 //Carga el idioma
@@ -50,7 +50,7 @@ function apg_sms_enlaces( $enlaces, $archivo ) {
 		$enlaces[] = '<a href="' . $apg_sms['donacion'] . '" target="_blank" title="' . __( 'Make a donation by ', 'apg_sms' ) . 'APG"><span class="genericon genericon-cart"></span></a>';
 		$enlaces[] = '<a href="'. $apg_sms['plugin_url'] . '" target="_blank" title="' . $apg_sms['plugin'] . '"><strong class="artprojectgroup">APG</strong></a>';
 		$enlaces[] = '<a href="https://www.facebook.com/artprojectgroup" title="' . __( 'Follow us on ', 'apg_sms' ) . 'Facebook" target="_blank"><span class="genericon genericon-facebook-alt"></span></a> <a href="https://twitter.com/artprojectgroup" title="' . __( 'Follow us on ', 'apg_sms' ) . 'Twitter" target="_blank"><span class="genericon genericon-twitter"></span></a> <a href="https://plus.google.com/+ArtProjectGroupES" title="' . __( 'Follow us on ', 'apg_sms' ) . 'Google+" target="_blank"><span class="genericon genericon-googleplus-alt"></span></a> <a href="http://es.linkedin.com/in/artprojectgroup" title="' . __( 'Follow us on ', 'apg_sms' ) . 'LinkedIn" target="_blank"><span class="genericon genericon-linkedin"></span></a>';
-		$enlaces[] = '<a href="http://profiles.wordpress.org/artprojectgroup/" title="' . __( 'More plugins on ', 'apg_sms' ) . 'WordPress" target="_blank"><span class="genericon genericon-wordpress"></span></a>';
+		$enlaces[] = '<a href="https://profiles.wordpress.org/artprojectgroup/" title="' . __( 'More plugins on ', 'apg_sms' ) . 'WordPress" target="_blank"><span class="genericon genericon-wordpress"></span></a>';
 		$enlaces[] = '<a href="mailto:info@artprojectgroup.es" title="' . __( 'Contact with us by ', 'apg_sms' ) . 'e-mail"><span class="genericon genericon-mail"></span></a> <a href="skype:artprojectgroup" title="' . __( 'Contact with us by ', 'apg_sms' ) . 'Skype"><span class="genericon genericon-skype"></span></a>';
 		$enlaces[] = apg_sms_plugin( $apg_sms['plugin_uri'] );
 	}
@@ -157,7 +157,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		}
 	
 		$telefono = apg_sms_procesa_el_telefono( $pedido, $pedido->billing_phone, $configuracion['servicio'] );
+		$telefono_envio = apg_sms_procesa_el_telefono( $pedido, $pedido->{$configuracion['campo_envio']}, $configuracion['servicio'], false, true );
+		$enviar_envio = ( $telefono != $telefono_envio && $configuracion['envio'] == 1 ) ? true : false;
 		$internacional = ( $pedido->billing_country && ( $woocommerce->countries->get_base_country() != $pedido->billing_country ) ) ? true : false;
+		$internacional_envio = ( $pedido->shipping_country && ( $woocommerce->countries->get_base_country() != $pedido->shipping_country ) ) ? true : false;
 		$telefono_propietario = apg_sms_procesa_el_telefono( $pedido, $configuracion['telefono'], $configuracion['servicio'], true );
 		
 		//WPML
@@ -173,6 +176,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			$mensaje_completado	= apply_filters( 'wpml_translate_single_string', $configuracion['mensaje_completado'], 'apg_sms', 'mensaje_completado' );
 		}
 		
+		//Envía el SMS
 		if ( $estado == 'Recibido' ) {
 			if ( isset( $configuracion['notificacion'] ) && $configuracion['notificacion'] == 1 ) {
 				apg_sms_envia_sms( $configuracion, $telefono_propietario, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $configuracion['variables'] ) ); //Mensaje para el propietario
@@ -190,17 +194,20 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		}
 
 		if ( ( !$internacional || ( isset( $configuracion['internacional'] ) && $configuracion['internacional'] == 1 ) ) && !$notificacion ) {
-			apg_sms_envia_sms( $configuracion, $telefono, $mensaje );
+			apg_sms_envia_sms( $configuracion, $telefono, $mensaje ); //Mensaje para el teléfono de facturación
+		}
+		if ( ( !$internacional_envio || ( isset( $configuracion['internacional'] ) && $configuracion['internacional'] == 1 ) ) && !$notificacion && $enviar_envio ) {
+			apg_sms_envia_sms( $configuracion, $telefono_envio, $mensaje ); //Mensaje para el teléfono de envío
 		}
 	}
-	add_action( 'woocommerce_order_status_pending_to_on-hold_notification', 'apg_sms_procesa_estados', 10 );//Funciona cuando el pedido es marcado como recibido
-	add_action( 'woocommerce_order_status_processing', 'apg_sms_procesa_estados', 10 );//Funciona cuando el pedido es marcado como procesando
-	add_action( 'woocommerce_order_status_completed', 'apg_sms_procesa_estados', 10 );//Funciona cuando el pedido es marcado como completo
+	add_action( 'woocommerce_order_status_pending_to_on-hold_notification', 'apg_sms_procesa_estados', 10 ); //Funciona cuando el pedido es marcado como recibido
+	add_action( 'woocommerce_order_status_processing', 'apg_sms_procesa_estados', 10 ); //Funciona cuando el pedido es marcado como procesando
+	add_action( 'woocommerce_order_status_completed', 'apg_sms_procesa_estados', 10 ); //Funciona cuando el pedido es marcado como completo
 
 	function apg_sms_notificacion( $pedido ) {
 		apg_sms_procesa_estados( $pedido, true );
 	}
-	add_action( 'woocommerce_order_status_pending_to_processing_notification', 'apg_sms_notificacion', 10 );//Funciona cuando el pedido es marcado directamente como procesando
+	add_action( 'woocommerce_order_status_pending_to_processing_notification', 'apg_sms_notificacion', 10 ); //Funciona cuando el pedido es marcado directamente como procesando
 
 	//Envía las notas de cliente por SMS
 	function apg_sms_procesa_notas( $datos ) {
@@ -209,17 +216,24 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		$pedido = new WC_Order( $datos['order_id'] );
 	
 		$telefono = apg_sms_procesa_el_telefono( $pedido, $pedido->billing_phone, $configuracion['servicio'] );
+		$telefono_envio = apg_sms_procesa_el_telefono( $pedido, $pedido->{$configuracion['campo_envio']}, $configuracion['servicio'], false, true );
+		$enviar_envio = ( $telefono != $telefono_envio && $configuracion['envio'] == 1 ) ? true : false;
 		$internacional = ( $pedido->billing_country && ( $woocommerce->countries->get_base_country() != $pedido->billing_country ) ) ? true : false;
-		
-		if ( !$internacional || ( isset( $configuracion['internacional'] ) && $configuracion['internacional'] == 1 ) ) {
-			//WPML
-			if ( function_exists( 'icl_register_string' ) || !$wpml_activo ) { //Versión anterior a la 3.2
-				$mensaje_nota		= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_nota', $configuracion['mensaje_nota'] ) : $configuracion['mensaje_nota'];
-			} else if ( $wpml_activo ) { //Versión 3.2 o superior
-				$mensaje_nota		= apply_filters( 'wpml_translate_single_string', $configuracion['mensaje_nota'], 'apg_sms', 'mensaje_nota' );
-			}
+		$internacional_envio = ( $pedido->shipping_country && ( $woocommerce->countries->get_base_country() != $pedido->shipping_country ) ) ? true : false;
 
-			apg_sms_envia_sms( $configuracion, $telefono, apg_sms_procesa_variables( $mensaje_nota, $pedido, $configuracion['variables'], wptexturize( $datos['customer_note'] ) ) );
+		//WPML
+		if ( function_exists( 'icl_register_string' ) || !$wpml_activo ) { //Versión anterior a la 3.2
+			$mensaje_nota		= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_nota', $configuracion['mensaje_nota'] ) : $configuracion['mensaje_nota'];
+		} else if ( $wpml_activo ) { //Versión 3.2 o superior
+			$mensaje_nota		= apply_filters( 'wpml_translate_single_string', $configuracion['mensaje_nota'], 'apg_sms', 'mensaje_nota' );
+		}
+		
+		//Envía el SMS
+		if ( !$internacional || ( isset( $configuracion['internacional'] ) && $configuracion['internacional'] == 1 ) ) {
+			apg_sms_envia_sms( $configuracion, $telefono, apg_sms_procesa_variables( $mensaje_nota, $pedido, $configuracion['variables'], wptexturize( $datos['customer_note'] ) ) ); //Mensaje para el teléfono de facturación
+		}
+		if ( ( !$internacional_envio || ( isset( $configuracion['internacional'] ) && $configuracion['internacional'] == 1 ) ) && $enviar_envio ) {
+			apg_sms_envia_sms( $configuracion, $telefono_envio, apg_sms_procesa_variables( $mensaje_nota, $pedido, $configuracion['variables'], wptexturize( $datos['customer_note'] ) ) ); //Mensaje para el teléfono de envío
 		}
 	}
 	add_action( 'woocommerce_new_customer_note', 'apg_sms_procesa_notas', 10 );
@@ -330,14 +344,18 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	}
 	
 	//Procesa el teléfono y le añade, si lo necesita, el prefijo
-	function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietario = false ) {
+	function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietario = false, $envio = false ) {
 		global $woocommerce;
 		
 		$prefijo = apg_sms_prefijo( $servicio );
 		
 		$telefono = str_replace( array( '+','-' ), '', filter_var( $telefono, FILTER_SANITIZE_NUMBER_INT ) );
-		if ( !$propietario && $pedido->billing_country && ( $woocommerce->countries->get_base_country() != $pedido->billing_country || $prefijo ) ) {
-			$prefijo_internacional = dame_prefijo_pais( $pedido->billing_country );
+		if ( !$propietario ) {
+			if ( !$envio && $pedido->billing_country && ( $woocommerce->countries->get_base_country() != $pedido->billing_country || $prefijo ) ) {
+				$prefijo_internacional = dame_prefijo_pais( $pedido->billing_country ); //Teléfono de facturación
+			} else if ( $envio && $pedido->shipping_country && ( $woocommerce->countries->get_base_country() != $pedido->shipping_country || $prefijo ) ) {
+				$prefijo_internacional = dame_prefijo_pais( $pedido->shipping_country ); //Teléfono de envío
+			}
 		} else if ( $propietario && $prefijo ) {
 			$prefijo_internacional = dame_prefijo_pais( $woocommerce->countries->get_base_country() );
 		}
@@ -775,7 +793,7 @@ function apg_sms_plugin( $nombre ) {
 	);
 	$respuesta = get_transient( 'apg_sms_plugin' );
 	if ( false === $respuesta ) {
-		$respuesta = wp_remote_post( 'http://api.wordpress.org/plugins/info/1.0/', array( 
+		$respuesta = wp_remote_post( 'https://api.wordpress.org/plugins/info/1.0/', array( 
 			'body' => $consulta)
 		);
 		set_transient( 'apg_sms_plugin', $respuesta, 24 * HOUR_IN_SECONDS );
