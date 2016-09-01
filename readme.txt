@@ -4,7 +4,7 @@ Donate link: http://artprojectgroup.es/tienda/donacion
 Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Clickatell, Clockwork, BulkSMS, OPEN DND, Moreify, MSG91, mVaayoo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, Custom Order Statuses & Actions, WooCommerce Order Status & Actions Manager, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro, WPML
 Requires at least: 3.8
 Tested up to: 4.6
-Stable tag: 2.7.9
+Stable tag: 2.7.9.1
 WC requires at least: 2.1
 WC tested up to: 2.6.4
 License: GPLv3
@@ -76,7 +76,7 @@ Don’t forget to leave us your comment on:
 * [+ArtProjectGroupES](https://plus.google.com/+ArtProjectGroupES/) on Google+.
 
 = More plugins =
-Remember that you can find more [plugins for WordPress](http://artprojectgroup.es/plugins-para-wordpress) and more [plugins for WooCommerce](http://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce) on [Art Project Group](http://artprojectgroup.es) and our profile on [WordPress(https://profiles.wordpress.org/artprojectgroup/).
+Remember that you can find more [plugins for WordPress](http://artprojectgroup.es/plugins-para-wordpress) and more [plugins for WooCommerce](http://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce) on [Art Project Group](http://artprojectgroup.es) and our profile on [WordPress](https://profiles.wordpress.org/artprojectgroup/).
 
 = GitHub =
 You can follow the development of this plugin on [Github](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications).
@@ -91,7 +91,7 @@ You can follow the development of this plugin on [Github](https://github.com/art
 4. Ready, now you can enjoy it, and if you like it and find it useful, make a [*donation*](http://artprojectgroup.es/tienda/donacion).
 
 == Frequently asked questions ==
-= ¿Cómo se configura? =
+= How do you set? =
 To configure the plugin simply add the data provided by each SMS gateway, which vary based on it.
 
 Also have to add the mobile phone number that’s linked to the account. 
@@ -109,6 +109,8 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 1. Screenshot of WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.7.9.1 =
+* Fixed error generated when reading shipping form fields.
 = 2.7.9 =
 * Added new function to send SMS messages to mobile phone from shipping form.
 * Updated screenshot.
@@ -286,9 +288,8 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 * Initial version.
 
 == Upgrade Notice ==
-= 2.7.9 =
-* Added new function to send SMS messages to mobile phone from shipping form.
-* Updated screenshot.
+= 2.7.9.1 =
+* Fixed error generated when reading shipping form fields.
 
 == Translations ==
 * *English*: by [**Art Project Group**](http://artprojectgroup.es/) (default language).

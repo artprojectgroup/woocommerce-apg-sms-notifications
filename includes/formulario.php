@@ -267,7 +267,9 @@
 			$pais	= new WC_Countries();
 			$campos	= $pais->get_address_fields( $pais->get_base_country(), 'shipping_' ); //Campos ordinarios
 			$campos_personalizados = apply_filters( 'woocommerce_checkout_fields', array() );
-			$campos += $campos_personalizados['shipping'];
+			if ( isset( $campos_personalizados['shipping'] ) ) {
+				$campos += $campos_personalizados['shipping'];
+			}
             foreach ( $campos as $valor => $campo ) {
 				$chequea = ( isset( $configuracion['campo_envio'] ) && $configuracion['campo_envio'] == $valor ) ? ' selected="selected"' : '';
 				if ( isset( $campo['label'] ) ) {

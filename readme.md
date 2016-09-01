@@ -9,7 +9,7 @@ Requires at least: 3.8
 
 Tested up to: 4.6
 
-Stable tag: 2.7.9
+Stable tag: 2.7.9.1
 
 WC requires at least: 2.1
 
@@ -115,6 +115,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.7.9.1
+* Control de error generado al leer los campos del formulario de envío.
+
 ### 2.7.9
 * Añadida nueva función que permite enviar mensajes SMS a los teléfonos móviles del formulario de envío.
 * Actualización de la captura de pantalla.
