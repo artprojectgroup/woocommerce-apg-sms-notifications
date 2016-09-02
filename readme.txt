@@ -13,7 +13,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Add to your WooCommerce store SMS notifications to your customers when order status changed.
 
 == Description ==
-** IMPORTANT: *WooCommerce - APG SMS Notifications* require WooCommerce 2.1.0 or higher.**
+**IMPORTANT: *WooCommerce - APG SMS Notifications* require WooCommerce 2.1.0 or higher.**
 
 **WooCommerce - APG SMS Notifications** add to your WooCommerce store the possibility of send SMS notifications to customer every time the order status changed. Also notifies the owner, if you desired, when the store have a new order.
 
