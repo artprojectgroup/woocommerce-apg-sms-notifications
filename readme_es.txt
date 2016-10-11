@@ -290,8 +290,8 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 * Versión inicial.
 
 == Upgrade Notice ==
-= 2.7.9.1 =
-* Control de error generado al leer los campos del formulario de envío.
+= 2.7.9.2 =
+* Actualización del soporte para WooCommerce Order Status & Actions Manager.
 
 ==Traducciones ==
 * *English*: by [**Art Project Group**](http://artprojectgroup.es/) (default language).

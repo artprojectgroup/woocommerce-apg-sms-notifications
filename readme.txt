@@ -290,8 +290,8 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 * Initial version.
 
 == Upgrade Notice ==
-= 2.7.9.1 =
-* Fixed error generated when reading shipping form fields.
+= 2.7.9.2 =
+* Updated support for WooCommerce Order Status & Actions Manager.
 
 == Translations ==
 * *English*: by [**Art Project Group**](http://artprojectgroup.es/) (default language).
