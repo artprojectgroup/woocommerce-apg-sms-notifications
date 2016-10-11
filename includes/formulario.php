@@ -279,7 +279,7 @@
 		?>
         </select></td>
       </tr>
-      <?php if ( class_exists( 'WC_Custom_Status' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : //Comprueba la existencia de los plugins de estado personalizado ?>
+      <?php if ( class_exists( 'WC_SA' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : //Comprueba la existencia de los plugins de estado personalizado ?>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[estados_personalizados]">
             <?php _e( 'Custom Order Statuses & Actions:', 'apg_sms' ); ?>
@@ -287,23 +287,27 @@
           <span class="woocommerce-help-tip" data-tip="<?php _e( 'Select your own statuses.', 'apg_sms' ); ?>"></span> </th>
         <td class="forminp forminp-number"><select multiple="multiple" class="multiselect chosen_select estados_personalizados" id="apg_sms_settings[estados_personalizados]" name="apg_sms_settings[estados_personalizados][]" style="width: 450px;" tabindex="<?php echo $tab++; ?>">
             <?php
-				if ( class_exists( 'WC_Custom_Status' ) ) {
-					$lista_de_estados =  WC_Custom_Status::get_status_list();
-					foreach ( $lista_de_estados as $estado ) {
-						if ( $estado ) {
-							$estados_personalizados = new WC_Custom_Status();
-							$estados_personalizados->load_status_from_db( $estado );
-							if ( $estados_personalizados->sends_email ) {
+				if ( class_exists( 'WC_SA' ) ) { //WooCommerce Order Status & Actions Manager
+					$lista_de_estados_temporal = array();
+					$lista_de_estados = wc_sa_get_statuses();
+					foreach ( $lista_de_estados as $clave => $estado ) {
+						if ( $estado->label ) {
+							$estados_personalizados = new WC_SA_Status( $clave );
+							if ( $estados_personalizados->email_notification ) {
 								$chequea = '';
-								foreach ( $configuracion['estados_personalizados'] as $estado_personalizado ) {
-									if ( $estado_personalizado == $estado ) {
-										$chequea = ' selected="selected"';
+								if ( $configuracion['estados_personalizados'] ) {
+									foreach ( $configuracion['estados_personalizados'] as $estado_personalizado ) {
+										if ( $estado_personalizado == $estado->label ) {
+											$chequea = ' selected="selected"';
+										}
 									}
 								}
-								echo '<option value="' . $estado . '"' . $chequea . '>' . ucfirst( $estado ) . '</option>' . PHP_EOL;
+								echo '<option value="' . $estado->label . '"' . $chequea . '>' . ucfirst( $estado->label ) . '</option>' . PHP_EOL;
 							}
+							$lista_de_estados_temporal[$clave] = $estado->label;
 						}
 					}
+					$lista_de_estados = $lista_de_estados_temporal;
 				} else {
 					$estados_originales = array( 
 						'pending',
@@ -460,7 +464,7 @@ jQuery( document ).ready( function( $ ) {
 	};
 	control_envio( '.envio' ); 
 	
-<?php if ( class_exists( 'WC_Custom_Status' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : //Comprueba la existencia de los plugins de estado personalizado ?>	
+<?php if ( class_exists( 'WC_SA' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : //Comprueba la existencia de los plugins de estado personalizado ?>	
 	$( '.estados_personalizados' ).on( 'change', function () { 
 		control_personalizados( $( this ).val() ); 
 	} );
