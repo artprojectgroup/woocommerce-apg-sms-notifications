@@ -9,7 +9,7 @@ Requires at least: 3.8
 
 Tested up to: 4.6
 
-Stable tag: 2.7.9.2
+Stable tag: 2.7.10
 
 WC requires at least: 2.1
 
@@ -115,6 +115,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.7.10
+* Añadida nueva opción que envía información de depuración.
+
 ### 2.7.9.2
 * Actualización del soporte para WooCommerce Order Status & Actions Manager.
 

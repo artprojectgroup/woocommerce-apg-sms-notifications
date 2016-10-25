@@ -104,7 +104,7 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 		case "plivo":
 			$argumentos['headers'] = array(
 				'Authorization'	=> 'Basic ' . base64_encode( $configuracion['usuario_plivo'] . ":" . $configuracion['clave_plivo'] ),
-				'Connection'	=> 'close',
+				'Connection'		=> 'close',
 				'Content-Type'	=> 'application/json',
 			);
 			$argumentos['body'] = json_encode( array(
@@ -117,7 +117,12 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 			break;
 	}
 
-	//wp_mail( 'artprojectgroup@gmail.com', 'WooCommerce - APG SMS Notifications', $telefono . "\r\n" . $mensaje . "\r\n" . print_r( $respuesta, true ), 'charset=UTF-8' . "\r\n" ); 
+	if ( isset( $configuracion['debug'] ) && $configuracion['debug'] == "1" && isset( $configuracion['campo_debug'] ) ) {
+		$correo	= __( 'Mobile number:', 'apg_sms' ) . "\r\n" . $telefono . "\r\n\r\n";
+		$correo	.= __( 'Message: ', 'apg_sms' ) . "\r\n" . $mensaje . "\r\n\r\n"; 
+		$correo	.= __( 'Gateway answer: ', 'apg_sms' ) . "\r\n" . print_r( $respuesta, true );
+		wp_mail( $configuracion['campo_debug'], 'WooCommerce - APG SMS Notifications', $correo, 'charset=UTF-8' . "\r\n" ); 
+	}
 }
 
 

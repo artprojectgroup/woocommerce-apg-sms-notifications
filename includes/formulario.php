@@ -1,4 +1,4 @@
-<?php global $apg_sms; ?>
+<?php global $configuracion, $apg_sms, $wpml_activo; ?>
 
 <div class="wrap woocommerce">
   <h2>
@@ -7,7 +7,6 @@
   <?php 
 	settings_errors(); 
 	$tab = 1;
-	$configuracion = get_option( 'apg_sms_settings' );
 	//Traducciones ocultas    
 	__( 'account Sid', 'apg_sms' );
 	__( 'Account Sid:', 'apg_sms' );
@@ -35,8 +34,6 @@
 	__( 'Authentication ID:', 'apg_sms' );
 	__( 'project', 'apg_sms' );
 	__( 'Project:', 'apg_sms' );
-
-	global $woocommerce, $wpml_activo;
 	
 	//WPML
 	if ( function_exists( 'icl_register_string' ) || !$wpml_activo ) { //Versión anterior a la 3.2
@@ -413,6 +410,20 @@
           <span class="woocommerce-help-tip" data-tip="<?php _e( 'You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.', 'apg_sms' ); ?>"></span> </th>
         <td class="forminp forminp-number"><textarea id="apg_sms_settings[mensaje_nota]" name="apg_sms_settings[mensaje_nota]" cols="50" rows="5" tabindex="<?php echo $tab++; ?>"><?php echo stripcslashes( isset( $mensaje_nota ) ? $mensaje_nota : sprintf( __( 'A note has just been added to your order No. %s: ', 'apg_sms' ), "%id%" ) . "%note%" ); ?></textarea></td>
       </tr>
+      <tr valign="top">
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[debug]">
+            <?php _e( 'Send debug information?:', 'apg_sms' ); ?>
+          </label>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Check if you want to receive debug information from your SMS gateway', 'apg_sms' ); ?>"></span> </th>
+        <td class="forminp forminp-number"><input id="apg_sms_settings[debug]" name="apg_sms_settings[debug]" type="checkbox" class="debug" value="1" <?php echo ( isset( $configuracion['debug'] ) && $configuracion['debug'] == "1" ? 'checked="checked"' : '' ); ?> tabindex="<?php echo $tab++; ?>" /></td>
+      </tr>
+      <tr valign="top" class="campo_debug">
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[campo_debug]">
+            <?php _e( 'email address:', 'apg_sms' ); ?>
+          </label>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Add an email address where you want to receive the debug information', 'apg_sms' ); ?>"></span> </th>
+        <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[campo_debug]" name="apg_sms_settings[campo_debug]" size="50" value="<?php echo ( isset( $configuracion['campo_debug'] ) ? $configuracion['campo_debug'] : '' ); ?>" tabindex="<?php echo $tab++; ?>" /></td>
+      </tr>
     </table>
     <p class="submit">
       <input class="button-primary" type="submit" value="<?php _e( 'Save Changes', 'apg_sms' ); ?>"  name="submit" id="submit" tabindex="<?php echo $tab++; ?>" />
@@ -463,6 +474,20 @@ jQuery( document ).ready( function( $ ) {
 		}
 	};
 	control_envio( '.envio' ); 
+	
+	//Controla el campo de correo electrónico del formulario de envío
+	$( '.campo_debug' ).hide();
+	$( '.debug' ).on( 'change', function () { 
+		control_debug( '.debug' ); 
+	} );
+	var control_debug = function( capa ) {
+		if ( $( capa ).is(':checked') ){
+			$( '.campo_debug' ).show();
+		} else {
+			$( '.campo_debug' ).hide();
+		}
+	};
+	control_debug( '.debug' ); 
 	
 <?php if ( class_exists( 'WC_SA' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : //Comprueba la existencia de los plugins de estado personalizado ?>	
 	$( '.estados_personalizados' ).on( 'change', function () { 
