@@ -20,7 +20,7 @@ This program incorporates work covered by the following copyright and
 permission notices:
 
   WooCommerce - APG SMS Notifications is Copyright (c) 2013 Art Project Group
-  http://www.artprojectgroup.es - http://www.artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-weight-and-postcodestatecountry-shipping
+  http://artprojectgroup.es - http://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-sms-notifications
 
   WooCommerce - APG SMS Notifications is released under the GPL
 
