@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.7.11
+Version: 2.8
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: http://artprojectgroup.es/
@@ -156,7 +156,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	
 		$telefono				= apg_sms_procesa_el_telefono( $pedido, $pedido->billing_phone, $configuracion['servicio'] );
 		$telefono_envio			= apg_sms_procesa_el_telefono( $pedido, $pedido->{$configuracion['campo_envio']}, $configuracion['servicio'], false, true );
-		$enviar_envio			= ( $telefono != $telefono_envio && $configuracion['envio'] == 1 ) ? true : false;
+		$enviar_envio			= ( $telefono != $telefono_envio && isset( $configuracion['envio'] ) && $configuracion['envio'] == 1 ) ? true : false;
 		$internacional			= ( $pedido->billing_country && ( WC()->countries->get_base_country() != $pedido->billing_country ) ) ? true : false;
 		$internacional_envio	= ( $pedido->shipping_country && ( WC()->countries->get_base_country() != $pedido->shipping_country ) ) ? true : false;
 		$telefono_propietario	= apg_sms_procesa_el_telefono( $pedido, $configuracion['telefono'], $configuracion['servicio'], true );
@@ -331,7 +331,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 			"¿"			=> "" 
 		);
 	 
-		$mensaje = str_replace( array_keys( $reemplazo ), array_values( $reemplazo ), htmlentities( $mensaje, ENT_QUOTES, "UTF-8" ) );
+		$mensaje = str_replace( array_keys( $reemplazo ), array_values( $reemplazo ), $mensaje );
 	 
 		return $mensaje;
 	}
@@ -344,7 +344,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 	//Procesa el teléfono y le añade, si lo necesita, el prefijo
 	function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietario = false, $envio = false ) {
 		$prefijo	= apg_sms_prefijo( $servicio );
-		
+
 		$telefono	= str_replace( array( '+','-' ), '', filter_var( $telefono, FILTER_SANITIZE_NUMBER_INT ) );
 		if ( !$propietario ) {
 			if ( !$envio && $pedido->billing_country && ( WC()->countries->get_base_country() != $pedido->billing_country || $prefijo ) ) {
@@ -355,10 +355,13 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 		} else if ( $propietario && $prefijo ) {
 			$prefijo_internacional = dame_prefijo_pais( WC()->countries->get_base_country() );
 		}
-	
-		preg_match( "/(\d{1,4})[0-9.\- ]+/", $telefono, $prefijo );
+
+		preg_match( "/(\d{1,4})[0-9.\- ]+/", $telefono, $prefijo_telefonico );
+		if ( empty( $prefijo_telefonico ) ) {
+			return;
+		}
 		if ( isset( $prefijo_internacional ) ) {
-			if ( strpos( $prefijo[1], $prefijo_internacional ) === false ) {
+			if ( strpos( $prefijo_telefonico[1], $prefijo_internacional ) === false ) {
 				$telefono = $prefijo_internacional . $telefono;
 			}
 		}

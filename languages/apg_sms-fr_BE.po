@@ -1,0 +1,465 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce - APG SMS Notifications\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-02 18:48+0000\n"
+"POT-Revision-Date: Wed Aug 10 2016 13:38:05 GMT+0200 (CEST)\n"
+"PO-Revision-Date: 2017-01-02 18:48+0000\n"
+"Language-Team: French (Belgium)\n"
+"Plural-Forms: nplurals=2; plural=n > 1\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Generator: Loco - https://localise.biz/\n"
+"Last-Translator: artprojectgroup <artprojectgroup@gmail.com>\n"
+"Language: fr-BE\n"
+"X-Poedit-SearchPath-0: ../.."
+
+#: includes/formulario.php:64
+msgid "<abbr title=\"Short Message Service\" lang=\"en\">SMS</abbr> gateway:"
+msgstr "<abbr title=\"Short Message Service\" lang=\"en\">SMS</abbr> gateway:"
+
+#: apg-sms.php:50 includes/cuadro-informacion.php:7
+msgid "Make a donation by "
+msgstr "Faire un don par"
+
+#: apg-sms.php:52 apg-sms.php:52 apg-sms.php:52 apg-sms.php:52
+#: includes/cuadro-informacion.php:19 includes/cuadro-informacion.php:19
+#: includes/cuadro-informacion.php:19 includes/cuadro-informacion.php:19
+msgid "Follow us on "
+msgstr "Suivez-nous sur"
+
+#: apg-sms.php:53 includes/cuadro-informacion.php:25
+msgid "More plugins on "
+msgstr "Plus de plugins sur"
+
+#: apg-sms.php:54 apg-sms.php:54 includes/cuadro-informacion.php:33
+#: includes/cuadro-informacion.php:33
+msgid "Contact with us by "
+msgstr "Contactez-nous par"
+
+#: apg-sms.php:67
+msgid "Settings of "
+msgstr "Paramètres de"
+
+#: apg-sms.php:67 apg-sms.php:820
+msgid "Settings"
+msgstr "Réglages"
+
+#: apg-sms.php:68
+msgid "Support of "
+msgstr "Soutien de"
+
+#: apg-sms.php:68 includes/cuadro-informacion.php:39
+msgid "Support"
+msgstr "Support"
+
+#: apg-sms.php:114
+msgid "APG SMS Notifications"
+msgstr "Notifications SMS APG"
+
+#: apg-sms.php:114
+msgid "SMS Notifications"
+msgstr "Notifications SMS"
+
+#: apg-sms.php:148 apg-sms.php:183 includes/formulario.php:397
+msgid "Processing"
+msgstr "En traitement"
+
+#: apg-sms.php:149 apg-sms.php:188 includes/formulario.php:404
+msgid "Completed"
+msgstr "Complet"
+
+#: apg-sms.php:774
+msgid "This plugin require WooCommerce active to run!"
+msgstr "Ce plugin requiert que WooCommerce soit actif pour fonctionner!"
+
+#: apg-sms.php:813 includes/cuadro-informacion.php:44
+#, php-format
+msgid "Please, rate %s:"
+msgstr "Veuillez noter% s:"
+
+#: apg-sms.php:820
+#, php-format
+msgid "Please, update your %s. It's very important!"
+msgstr "Veuillez mettre à jour votre% s. C'est très important!"
+
+#: apg-sms.php:820
+msgid "settings"
+msgstr "Réglages"
+
+#: includes/cuadro-informacion.php:5
+msgid "If you enjoyed and find helpful this plugin, please make a donation:"
+msgstr "Si vous avez aimé et trouvé utile ce plugin, faites un don:"
+
+#: includes/cuadro-informacion.php:17
+msgid "Follow us:"
+msgstr "Suivez-nous:"
+
+#: includes/cuadro-informacion.php:23
+msgid "More plugins:"
+msgstr "Plus de plugins:"
+
+#: includes/cuadro-informacion.php:31
+msgid "Contact with us:"
+msgstr "En contact avec nous:"
+
+#: includes/cuadro-informacion.php:37
+msgid "Documentation and Support:"
+msgstr "Documentation et support:"
+
+#: includes/formulario.php:5
+msgid "APG SMS Notifications Options."
+msgstr "Options de notifications SMS d'APG."
+
+#. Traducciones ocultas
+#: includes/formulario.php:11
+msgid "account Sid"
+msgstr "Compte Sid"
+
+#: includes/formulario.php:12
+msgid "Account Sid:"
+msgstr "Compte Sid"
+
+#: includes/formulario.php:13
+msgid "authentication Token"
+msgstr "Jeton d'authentification"
+
+#: includes/formulario.php:14
+msgid "Authentication Token:"
+msgstr "Jeton d'authentification:"
+
+#: includes/formulario.php:15
+msgid "key"
+msgstr "clé"
+
+#: includes/formulario.php:16
+msgid "Key:"
+msgstr "clé:"
+
+#: includes/formulario.php:17
+msgid "authentication key"
+msgstr "Clé d'authentification"
+
+#: includes/formulario.php:18
+msgid "Authentication key:"
+msgstr "Clé d'authentification:"
+
+#: includes/formulario.php:19 includes/formulario.php:23
+msgid "sender ID"
+msgstr "ID de l'expéditeur"
+
+#: includes/formulario.php:20 includes/formulario.php:24
+msgid "Sender ID:"
+msgstr "ID de l'expéditeur:"
+
+#: includes/formulario.php:21
+msgid "route"
+msgstr "chemin"
+
+#: includes/formulario.php:22
+msgid "Route:"
+msgstr "Chemin:"
+
+#: includes/formulario.php:25
+msgid "username"
+msgstr "Nom d'utilisateur"
+
+#: includes/formulario.php:26
+msgid "Username:"
+msgstr "Nom d'utilisateur:"
+
+#: includes/formulario.php:27
+msgid "password"
+msgstr "Mot de passe"
+
+#: includes/formulario.php:28
+msgid "Password:"
+msgstr "Mot de passe:"
+
+#: includes/formulario.php:29
+msgid "mobile number"
+msgstr "numéro de mobile"
+
+#: includes/formulario.php:30 includes/admin/proveedores.php:121
+msgid "Mobile number:"
+msgstr "numéro de mobile:"
+
+#: includes/formulario.php:31
+msgid "client"
+msgstr "client"
+
+#: includes/formulario.php:32
+msgid "Client:"
+msgstr "Client:"
+
+#: includes/formulario.php:33
+msgid "authentication ID"
+msgstr "ID d'authentification"
+
+#: includes/formulario.php:34
+msgid "Authentication ID:"
+msgstr "ID d'authentification:"
+
+#: includes/formulario.php:35
+msgid "project"
+msgstr "projet"
+
+#: includes/formulario.php:36
+msgid "Project:"
+msgstr "Projet:"
+
+#: includes/formulario.php:55
+msgid ""
+"Add to WooCommerce the possibility to send <abbr title=\"Short Message "
+"Service\" lang=\"en\">SMS</abbr> notifications to the client each time you "
+"change the order status. Notifies the owner, if desired, when the store has "
+"a new order. You can also send customer notes."
+msgstr ""
+"Ajoutez à WooCommerce la possibilité d'envoyer des notifications <abbr title "
+"= \"Service de messages courts\" lang = \"en\"> SMS </ abbr> au client "
+"chaque fois que vous changez le statut de la commande. Notifie le "
+"propriétaire, si désiré, lorsque le magasin a une nouvelle commande. Vous "
+"pouvez également envoyer des notes de clients."
+
+#: includes/formulario.php:66
+msgid "Select your SMS gateway"
+msgstr "Sélectionnez votre passerelle SMS"
+
+#: includes/formulario.php:206 includes/formulario.php:221
+#, php-format
+msgid "The %s for your account in %s"
+msgstr "Le% s pour votre compte dans% s"
+
+#: includes/formulario.php:209
+msgid "Default"
+msgstr "Défaut"
+
+#: includes/formulario.php:231
+msgid "Your mobile number:"
+msgstr "Votre numéro de mobile:"
+
+#: includes/formulario.php:233
+msgid ""
+"The mobile number registered in your SMS gateway account and where you "
+"receive the SMS messages"
+msgstr ""
+"Le numéro de téléphone mobile enregistré dans votre compte passerelle SMS et "
+"où vous recevez les messages SMS"
+
+#: includes/formulario.php:238
+msgid "New order notification:"
+msgstr "Nouvelle notification de commande:"
+
+#: includes/formulario.php:240
+msgid "Check if you want to receive a SMS message when there's a new order"
+msgstr ""
+"Vérifiez si vous souhaitez recevoir un message SMS lorsqu'il ya une nouvelle "
+"commande"
+
+#: includes/formulario.php:245
+msgid ""
+"Send international <abbr title=\"Short Message Service\" lang=\"en\">"
+"SMS</abbr>?:"
+msgstr ""
+"Envoyer international <abbr title = \"Service de messages courts\" lang = "
+"\"en\"> SMS </ abbr> ?:"
+
+#: includes/formulario.php:247
+msgid "Check if you want to send international SMS messages"
+msgstr "Cochez si vous souhaitez envoyer des SMS internationaux"
+
+#: includes/formulario.php:252
+msgid ""
+"Send <abbr title=\"Short Message Service\" lang=\"en\">SMS</abbr> to "
+"shipping mobile?:"
+msgstr ""
+"Envoyer <abbr title = \"Service de messages courts\" lang = \"en\"> SMS </ "
+"abbr> à l'expédition mobile ?:"
+
+#: includes/formulario.php:254
+msgid ""
+"Check if you want to send SMS messages to shipping mobile numbers, only if "
+"it is different from billing mobile number"
+msgstr ""
+"Cochez si vous souhaitez envoyer des messages SMS à des numéros mobiles "
+"d'expédition, uniquement si elle est différente de la facturation du numéro "
+"de mobile"
+
+#: includes/formulario.php:259
+msgid "Shipping mobile field:"
+msgstr "Champ mobile de livraison:"
+
+#: includes/formulario.php:261
+msgid "Select the shipping mobile field"
+msgstr "Sélectionnez le champ mobile d'expédition"
+
+#: includes/formulario.php:282
+msgid "Custom Order Statuses & Actions:"
+msgstr "État des commandes personnalisées et actions:"
+
+#: includes/formulario.php:284
+msgid "Select your own statuses."
+msgstr "Sélectionnez vos propres statuts."
+
+#: includes/formulario.php:365
+#, php-format
+msgid "%s state custom message:"
+msgstr "%s état message personnalisé:"
+
+#: includes/formulario.php:366 includes/formulario.php:382
+#: includes/formulario.php:389 includes/formulario.php:396
+#: includes/formulario.php:403 includes/formulario.php:410
+msgid ""
+"You can customize your message. Remember that you can use this variables: "
+"%id%, %order_key%, %billing_first_name%, %billing_last_name%, "
+"%billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, "
+"%billing_postcode%, %billing_country%, %billing_state%, %billing_email%, "
+"%billing_phone%, %shipping_first_name%, %shipping_last_name%, "
+"%shipping_company%, %shipping_address_1%, %shipping_address_2%, "
+"%shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, "
+"%shipping_method%, %shipping_method_title%, %payment_method%, "
+"%payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, "
+"%order_shipping%, %order_shipping_tax%, %order_total%, %status%, "
+"%prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, "
+"%display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, "
+"%customer_note%, %post_status%, %shop_name%, %order_product% and %note%."
+msgstr ""
+"Vous pouvez personnaliser votre message. N'oubliez pas que vous pouvez "
+"utiliser les variables suivantes:% id%,% order_key%,% billing_first_name%,% "
+"billing_last_name%,% billing_company%,% billing_address_1%,% "
+"billing_address_2%,% billing_city%,% billing_postcode%,% billing_country%,% "
+"billing_state %,% Shipping_address_1%,% shipping_address_2%,% shipping_city%,"
+"% shipping_postcode%,% shipping_country%,% shipping_state%,% "
+"shipping_method%,% % Shipping_method_title%,% payment_method%,% "
+"payment_method_title%,% order_discount%,% cart_discount%,% order_tax%,% "
+"order_shipping%,% order_shipping_tax%,% order_total%,% status%,% "
+"prices_include_tax%,% display_totals_ex_tax %,% Display_cart_ex_tax%,% "
+"order_date%,% modified_date%,% customer_message%,% customer_note%,% "
+"post_status%,% shop_name%,% order_product% et% note%."
+
+#: includes/formulario.php:373
+msgid "Custom variables:"
+msgstr "Variables personnalisées:"
+
+#: includes/formulario.php:375
+msgid ""
+"You can add your own variables. Each variable must be entered onto a new "
+"line without percentage character ( % ). Example: <code>"
+"_custom_variable_name</code><br /><code>_another_variable_name</code>."
+msgstr ""
+"Vous pouvez ajouter vos propres variables. Chaque variable doit être saisie "
+"sur une nouvelle ligne sans caractère de pourcentage (%). Exemple: <code> "
+"_custom_variable_name </ code> <br /> <code> _un autre nom_variable </ code>."
+
+#: includes/formulario.php:380
+msgid "Owner custom message:"
+msgstr "Message personnalisé du propriétaire:"
+
+#: includes/formulario.php:383
+#, php-format
+msgid "Order No. %s received on "
+msgstr "Numéro de commande% s reçu le"
+
+#: includes/formulario.php:387
+msgid "Order received custom message:"
+msgstr "Ordre reçu message personnalisé:"
+
+#: includes/formulario.php:390
+#, php-format
+msgid "Your order No. %s is received on %s. Thank you for shopping with us!"
+msgstr ""
+"Votre numéro de commande% s est reçu sur% s. Merci de faire vos achats chez "
+"nous!"
+
+#: includes/formulario.php:394
+msgid "Order processing custom message:"
+msgstr "Traitement des commandes message personnalisé:"
+
+#: includes/formulario.php:397 includes/formulario.php:404
+#, php-format
+msgid "Thank you for shopping with us! Your order No. %s is now: "
+msgstr ""
+"Merci de faire vos achats avec nous! Votre numéro de commande% s est "
+"maintenant:"
+
+#: includes/formulario.php:401
+msgid "Order completed custom message:"
+msgstr "Commander un message personnalisé:"
+
+#: includes/formulario.php:408
+msgid "Notes custom message:"
+msgstr "Message personnalisé Notes:"
+
+#: includes/formulario.php:411
+#, php-format
+msgid "A note has just been added to your order No. %s: "
+msgstr "Une note vient d'être ajoutée à votre commande n °% s:"
+
+#: includes/formulario.php:415
+msgid "Send debug information?:"
+msgstr "Envoyer des informations de débogage ?:"
+
+#: includes/formulario.php:417
+msgid "Check if you want to receive debug information from your SMS gateway"
+msgstr ""
+"Vérifiez si vous souhaitez recevoir des informations de débogage de votre "
+"passerelle SMS"
+
+#: includes/formulario.php:422
+msgid "email address:"
+msgstr "adresse e-mail:"
+
+#: includes/formulario.php:424
+msgid "Add an email address where you want to receive the debug information"
+msgstr ""
+"Ajoutez une adresse e-mail où vous souhaitez recevoir les informations de "
+"débogage"
+
+#: includes/formulario.php:429
+msgid "Save Changes"
+msgstr "Sauvegarder les modifications"
+
+#: includes/admin/proveedores.php:122
+msgid "Message: "
+msgstr "Message: "
+
+#: includes/admin/proveedores.php:123
+msgid "Gateway answer: "
+msgstr "Passerelle réponse:"
+
+#. Name of the plugin
+msgid "WooCommerce - APG SMS Notifications"
+msgstr "WooCommerce - Notifications SMS de l'APG"
+
+#. Description of the plugin
+msgid ""
+"Add to WooCommerce SMS notifications to your clients for order status "
+"changes. Also you can receive an SMS message when the shop get a new order "
+"and select if you want to send international SMS. The plugin add the "
+"international dial code automatically to the client phone number."
+msgstr ""
+"Ajoute à WooCommerce des notifications SMS à vos clients pour les "
+"changements d'état de commande. En outre, vous pouvez recevoir un message "
+"SMS lorsque le magasin obtenir un nouvel ordre et sélectionnez si vous "
+"souhaitez envoyer des SMS internationaux. Le plugin ajoute automatiquement "
+"le numéro de téléphone international au numéro de téléphone du client."
+
+#. URI of the plugin
+msgid "https://wordpress.org/plugins/woocommerce-apg-sms-notifications/"
+msgstr "https://wordpress.org/plugins/woocommerce-apg-sms-notifications/"
+
+#. Author of the plugin
+msgid "Art Project Group"
+msgstr "Art Project Group"
+
+#. Author URI of the plugin
+msgid "http://artprojectgroup.es/"
+msgstr "http://artprojectgroup.es/"

@@ -4,7 +4,7 @@ Donate link: http://artprojectgroup.es/tienda/donacion
 Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Clickatell, Clockwork, BulkSMS, OPEN DND, Moreify, MSG91, mVaayoo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, Custom Order Statuses & Actions, WooCommerce Order Status & Actions Manager, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro, WPML
 Requires at least: 3.8
 Tested up to: 4.7
-Stable tag: 2.7.11
+Stable tag: 2.8
 WC requires at least: 2.1
 WC tested up to: 2.7
 License: GPLv3
@@ -57,6 +57,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 = Traducciones =
 * Español ([**Art Project Group**](http://artprojectgroup.es/)).
 * English ([**Art Project Group**](http://artprojectgroup.es/)).
+* French ([**Studios Jurdan**](http://www.jurdan.biz)).
 
 = Soporte técnico =
 **Art Project Group** te ofrece [**Soporte técnico**](http://wcprojectgroup.es/tienda/ticket-de-soporte) para configurar o instalar ***WooCommerce - APG SMS Notifications***.
@@ -109,6 +110,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 1. Captura de pantalla de WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.8 =
+* Arreglo de distintos errores.
+* Traducción idioma francés gracias a ([**Studios Jurdan**](http://www.jurdan.biz)).
 = 2.7.11 =
 * Actualización de la URL de la API de BulkSMS.
 = 2.7.10 =
@@ -294,12 +298,14 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 * Versión inicial.
 
 == Upgrade Notice ==
-= 2.7.11 =
-* Actualización de la URL de la API de BulkSMS.
+= 2.8 =
+* Arreglo de distintos errores.
+* Traducción idioma francés gracias a ([**Studios Jurdan**](http://www.jurdan.biz)).
 
 ==Traducciones ==
 * *English*: by [**Art Project Group**](http://artprojectgroup.es/) (default language).
 * *Español*: por [**Art Project Group**](http://artprojectgroup.es/).
+* *French*: pour ([**Studios Jurdan**](http://www.jurdan.biz)).
 
 == Soporte técnico ==
 Dado que **WooCommerce - APG SMS Notifications** es totalmente gratuito, **Art Project Group** sólo proporciona el servicio de [**Soporte técnico**](http://wcprojectgroup.es/tienda/ticket-de-soporte) previo pago. En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.
