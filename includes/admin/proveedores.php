@@ -47,6 +47,9 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 		case "moreify":
 			$respuesta = wp_remote_get( "https://members.moreify.com/api/v1/sendSms?project=" . $configuracion['proyecto_moreify'] . "&password=" . $configuracion['identificador_moreify'] . "&phonenumber=" . $telefono . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) );
 			break;
+		case "nexmo":
+			$respuesta = wp_remote_get( "https://rest.nexmo.com/sms/json?api_key=".$configuracion['clave_nexmo']."&api_secret=".$configuracion['identificador_nexmo']."&from=NEXMO&to=".$telefono."&text=".apg_sms_codifica_el_mensaje( $mensaje ));
+			break;
 		case "twilio":
 			$argumentos['header'] = "Accept-Charset: utf-8\r\n";
 			$argumentos['body'] = array( 
@@ -148,6 +151,7 @@ function apg_sms_prefijo( $servicio ) {
 		"plivo",
 		"springedge",
 		"moreify",
+		"nexmo",
 	);
 	
 	return in_array( $servicio, $prefijo );

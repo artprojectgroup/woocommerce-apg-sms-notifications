@@ -88,6 +88,7 @@
 				"plivo" 				=> "Plivo",
 				"springedge" 		=> "Spring Edge",
 				"moreify" 			=> "Moreify",
+				"nexmo" => "Nexmo"
 			);
 			asort( $proveedores, SORT_NATURAL | SORT_FLAG_CASE ); //Ordena alfabeticamente los proveedores
             foreach ( $proveedores as $valor => $proveedor ) {
@@ -193,6 +194,10 @@
 			"moreify" 			=> array( 
 				"proyecto_moreify"					=> 'project',
 				"identificador_moreify" 			=> 'authentication Token',
+			),
+			"nexmo" 			=> array( 
+				"clave_nexmo"					=> 'key',
+				"identificador_nexmo" 			=> 'authentication Token',
 			),
 		);
 	  
