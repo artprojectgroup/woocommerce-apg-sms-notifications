@@ -27,7 +27,7 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 			$respuesta = wp_remote_get( "https://api.clockworksms.com/http/send.aspx?key=" . $configuracion['identificador_clockwork'] . "&to=" . $telefono . "&content=" . apg_sms_normaliza_mensaje( $mensaje ) );
 			break;
 		case "bulksms":
-			$respuesta = wp_remote_post( "https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0?username=" . urlencode( $configuracion['usuario_bulksms'] ) . "&password=" . urlencode( $configuracion['contrasena_bulksms'] ) . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&msisdn=" . urlencode( $telefono ) );
+			$respuesta = wp_remote_post( "http://usa.bulksms.com/eapi/submission/send_sms/2/2.0?username=" . urlencode( $configuracion['usuario_bulksms'] ) . "&password=" . urlencode( $configuracion['contrasena_bulksms'] ) . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&msisdn=" . urlencode( $telefono ) );
 			break;
 		case "open_dnd":
 			$respuesta = wp_remote_get( "http://txn.opendnd.in/pushsms.php?username=" . $configuracion['usuario_open_dnd'] . "&password=" . $configuracion['contrasena_open_dnd'] . "&message=" . apg_sms_codifica_el_mensaje( apg_sms_normaliza_mensaje( $mensaje ) ) . "&sender=" . $configuracion['identificador_open_dnd'] . "&numbers=" . $telefono );
@@ -46,6 +46,9 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 			break;			
 		case "moreify":
 			$respuesta = wp_remote_get( "https://members.moreify.com/api/v1/sendSms?project=" . $configuracion['proyecto_moreify'] . "&password=" . $configuracion['identificador_moreify'] . "&phonenumber=" . $telefono . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) );
+			break;
+		case "nexmo":
+			$respuesta = wp_remote_get( "https://rest.nexmo.com/sms/json?api_key=" . $configuracion['clave_nexmo'] . "&api_secret=" . $configuracion['identificador_nexmo'] . "&from=NEXMO&to=" . $telefono . "&text=" . apg_sms_codifica_el_mensaje( $mensaje ) );
 			break;
 		case "twilio":
 			$argumentos['header'] = "Accept-Charset: utf-8\r\n";
@@ -148,6 +151,7 @@ function apg_sms_prefijo( $servicio ) {
 		"plivo",
 		"springedge",
 		"moreify",
+		"nexmo",
 	);
 	
 	return in_array( $servicio, $prefijo );

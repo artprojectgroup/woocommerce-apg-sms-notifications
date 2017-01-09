@@ -67,7 +67,7 @@
         <td class="forminp forminp-number"><select class="wc-enhanced-select servicio" id="apg_sms_settings[servicio]" name="apg_sms_settings[servicio]" style="width: 450px;" tabindex="<?php echo $tab++; ?>">
             <?php
 			$proveedores = array( 
-				"voipstunt" 			=> "VoipStunt", 
+				"voipstunt" 		=> "VoipStunt", 
 				"voipbusterpro" 	=> "VoipBusterPro", 
 				"voipbuster" 		=> "VoipBuster", 
 				"smsdiscount" 		=> "SMS Discount", 
@@ -75,19 +75,21 @@
 				"solutions_infini" 	=> "Solutions Infini", 
 				"twilio" 			=> "Twilio", 
 				"clickatell" 		=> "Clickatell", 
-				"clockwork" 			=> "Clockwork", 
+				"clockwork" 		=> "Clockwork", 
 				"bulksms" 			=> "BulkSMS", 
 				"open_dnd" 			=> "OPEN DND", 
-				"msg91" 				=> "MSG91", 
+				"msg91" 			=> "MSG91", 
 				"mvaayoo" 			=> "mVaayoo", 
 				"esebun" 			=> "Esebun Business ( Enterprise & Developers only )",
 				"isms" 				=> "iSMS Malaysia",
 				"smslane" 			=> "SMS Lane ( Transactional SMS only )",
 				"smscountry" 		=> "SMS Country",
 				"labsmobile" 		=> "LabsMobile Spain",
-				"plivo" 				=> "Plivo",
+				"plivo" 			=> "Plivo",
 				"springedge" 		=> "Spring Edge",
 				"moreify" 			=> "Moreify",
+				"nexmo"				=> "Nexmo",
+
 			);
 			asort( $proveedores, SORT_NATURAL | SORT_FLAG_CASE ); //Ordena alfabeticamente los proveedores
             foreach ( $proveedores as $valor => $proveedor ) {
@@ -133,7 +135,7 @@
 				"usuario_clickatell" 				=> 'username',
 				"contrasena_clickatell" 			=> 'password',
 			),
-			"clockwork" 			=> array( 
+			"clockwork" 		=> array( 
 				"identificador_clockwork" 			=> 'key',
 			),
 			"bulksms" 			=> array( 
@@ -145,7 +147,7 @@
 				"usuario_open_dnd" 					=> 'username',
 				"contrasena_open_dnd" 				=> 'password',
 			),
-			"msg91" 				=> array( 
+			"msg91" 			=> array( 
 				"clave_msg91" 						=> 'authentication key',
 				"identificador_msg91" 				=> 'sender ID',
 				"ruta_msg91" 						=> 'route',
@@ -193,6 +195,10 @@
 			"moreify" 			=> array( 
 				"proyecto_moreify"					=> 'project',
 				"identificador_moreify" 			=> 'authentication Token',
+			),
+			"nexmo" 			=> array( 
+ 				"clave_nexmo"						=> 'key',
+				"identificador_nexmo"				=> 'authentication Token',
 			),
 		);
 	  
