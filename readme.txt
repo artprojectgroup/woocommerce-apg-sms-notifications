@@ -112,7 +112,7 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 
 == Changelog ==
 = 2.9 =
-* Added support for Nexmo.
+* Added support for Nexmo **Modification devised by [Gine](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/1)**.
 * BulkSMS URL API updated.
 = 2.8 =
 * Fixed various errors.
