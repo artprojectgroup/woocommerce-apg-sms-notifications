@@ -65,7 +65,7 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 				'mobiles' 	=> $telefono,
 				'message' 	=> apg_sms_codifica_el_mensaje( apg_sms_normaliza_mensaje( $mensaje ) ),
 				'sender' 	=> $configuracion['identificador_msg91'],
-				'route' 		=> $configuracion['ruta_msg91']
+				'route' 	=> $configuracion['ruta_msg91']
 			 );
 			$respuesta = wp_remote_post( "http://control.msg91.com/sendhttp.php", $argumentos );
 			break;
@@ -88,7 +88,7 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 				'receipientno' 	=> $telefono,
 				'msgtxt' 		=> $mensaje,
 				'dcs' 			=> "0",
-				'state' 			=> "4",
+				'state' 		=> "4",
 			 );
 			$respuesta = wp_remote_post( "http://api.mVaayoo.com/mvaayooapi/MessageCompose", $argumentos );
 			break;
@@ -99,7 +99,7 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 				'mobilenumber' 	=> $telefono,
 				'sid' 			=> $configuracion['sid_smscountry'],
 				'message' 		=> $mensaje,
-				'mtype' 			=> "N",
+				'mtype' 		=> "N",
 				'DR' 			=> "Y",
 			 );
 			$respuesta = wp_remote_post( "http://api.smscountry.com/SMSCwebservice_bulk.aspx", $argumentos );
@@ -107,7 +107,7 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 		case "plivo":
 			$argumentos['headers'] = array(
 				'Authorization'	=> 'Basic ' . base64_encode( $configuracion['usuario_plivo'] . ":" . $configuracion['clave_plivo'] ),
-				'Connection'		=> 'close',
+				'Connection'	=> 'close',
 				'Content-Type'	=> 'application/json',
 			);
 			$argumentos['body'] = json_encode( array(
