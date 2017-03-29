@@ -1,6 +1,6 @@
 === WooCommerce - APG SMS Notifications ===
 Contributors: artprojectgroup
-Donate link: http://artprojectgroup.es/tienda/donacion
+Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, OPEN DND, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, Custom Order Statuses & Actions, WooCommerce Order Status & Actions Manager, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro, WPML
 Requires at least: 3.8
 Tested up to: 4.7.3
@@ -57,29 +57,29 @@ Add to your WooCommerce store SMS notifications to your customers when order sta
 * Once setup is fully automated.
 
 = Translations =
-* Español ([**Art Project Group**](http://artprojectgroup.es/)).
-* English ([**Art Project Group**](http://artprojectgroup.es/)).
+* Español ([**Art Project Group**](https://artprojectgroup.es/)).
+* English ([**Art Project Group**](https://artprojectgroup.es/)).
 * French ([**Studios Jurdan**](http://www.jurdan.biz)).
 
 = Technical support =
-**Art Project Group** offers [**Technical support**](http://wcprojectgroup.es/tienda/ticket-de-soporte) to configure or install ***WooCommerce - APG SMS Notifications***.
+**Art Project Group** offers [**Technical support**](https://wcprojectgroup.es/tienda/ticket-de-soporte) to configure or install ***WooCommerce - APG SMS Notifications***.
 
 = Origin =
 **WooCommerce - APG SMS Notifications** it has been programmed from the [Chirag Vora](https://profiles.wordpress.org/chirag740) request to add to WooCommerce the ability to send notifications about the order status through SMS messages.
 
 = More information =
-On our official website you can learn more about [**WooCommerce - APG SMS Notifications**](http://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-sms-notifications). 
+On our official website you can learn more about [**WooCommerce - APG SMS Notifications**](https://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-sms-notifications). 
 
 = Comments =
 Don’t forget to leave us your comment on:
 
-* [WooCommerce - APG SMS Notifications](http://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-sms-notifications) on Art Project Group.
+* [WooCommerce - APG SMS Notifications](https://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-sms-notifications) on Art Project Group.
 * [Art Project Group](https://www.facebook.com/artprojectgroup) on Facebook.
 * [@artprojectgroup](https://twitter.com/artprojectgroup) on Twitter.
 * [+ArtProjectGroupES](https://plus.google.com/+ArtProjectGroupES/) on Google+.
 
 = More plugins =
-Remember that you can find more [plugins for WordPress](http://artprojectgroup.es/plugins-para-wordpress) and more [plugins for WooCommerce](http://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce) on [Art Project Group](http://artprojectgroup.es) and our profile on [WordPress](https://profiles.wordpress.org/artprojectgroup/).
+Remember that you can find more [plugins for WordPress](https://artprojectgroup.es/plugins-para-wordpress) and more [plugins for WooCommerce](https://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce) on [Art Project Group](https://artprojectgroup.es) and our profile on [WordPress](https://profiles.wordpress.org/artprojectgroup/).
 
 = GitHub =
 You can follow the development of this plugin on [Github](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications).
@@ -91,7 +91,7 @@ You can follow the development of this plugin on [Github](https://github.com/art
  * Search **WooCommerce - APG SMS Notifications** in the search engine available on *Plugins -> Add New* and press *Install Now* button.
 2. Activate plugin through *Plugins* menu on WordPress Administration Panel.
 3. Set up plugin on *WooCommerce -> SMS Notifications* or through *Settings* button.
-4. Ready, now you can enjoy it, and if you like it and find it useful, make a [*donation*](http://artprojectgroup.es/tienda/donacion).
+4. Ready, now you can enjoy it, and if you like it and find it useful, make a [*donation*](https://artprojectgroup.es/tienda/donacion).
 
 == Frequently asked questions ==
 = How do you set? =
@@ -104,7 +104,7 @@ It should specify whether we want, or not, to receive SMS notifications for each
 Finally it must be customized, if desired, the messages to be sent by SMS.
 
 = Support =
-If you need help to configuring or installing **WooCommerce - APG SMS Notifications**, **Art Project Group** offers its service [**Technical Support**](http://wcprojectgroup.es/tienda/ticket-de-soporte). 
+If you need help to configuring or installing **WooCommerce - APG SMS Notifications**, **Art Project Group** offers its service [**Technical Support**](https://wcprojectgroup.es/tienda/ticket-de-soporte). 
 
 *In any case **Art Project Group** provides any kind of free technical support.*
 
@@ -315,15 +315,15 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 * Added support for Twizo **Update sponsored by [Twizo](https://www.twizo.com)**.
 
 == Translations ==
-* *English*: by [**Art Project Group**](http://artprojectgroup.es/) (default language).
-* *Español*: por [**Art Project Group**](http://artprojectgroup.es/).
+* *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).
+* *Español*: por [**Art Project Group**](https://artprojectgroup.es/).
 * *French*: pour ([**Studios Jurdan**](http://www.jurdan.biz)).
 
 == Support ==
-Since **WooCommerce - APG SMS Notifications** is totally free, **Art Project Group** only provides payment [**Technical Support**](http://wcprojectgroup.es/tienda/ticket-de-soporte) service. In any case **Art Project Group** provide any kind of free technical support.
+Since **WooCommerce - APG SMS Notifications** is totally free, **Art Project Group** only provides payment [**Technical Support**](https://wcprojectgroup.es/tienda/ticket-de-soporte) service. In any case **Art Project Group** provide any kind of free technical support.
 
 == Donation ==
-Did you liked and you have proved useful **WooCommerce - APG SMS Notifications** on your website? We would appreciate a [small donation](http://artprojectgroup.es/tienda/donacion) that will help us to continue improving this plugin and create more plugins totally free for the entire WordPress community.
+Did you liked and you have proved useful **WooCommerce - APG SMS Notifications** on your website? We would appreciate a [small donation](https://artprojectgroup.es/tienda/donacion) that will help us to continue improving this plugin and create more plugins totally free for the entire WordPress community.
 
 == Thanks ==
 * To [Chirag Vora](https://profiles.wordpress.org/chirag740) for having inspired to create **WooCommerce - APG SMS Notifications**.
