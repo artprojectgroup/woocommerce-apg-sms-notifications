@@ -1,6 +1,8 @@
 <?php
 //Envía el mensaje SMS
 function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
+	global $apg_sms;
+	
 	switch ( $configuracion['servicio'] ) {
 		case "voipstunt":
 			$respuesta = wp_remote_get( "https://www.voipstunt.com/myaccount/sendsms.php?username=" . $configuracion['usuario_voipstunt'] . "&password=" . $configuracion['contrasena_voipstunt'] . "&from=" . $configuracion['telefono'] . "&to=" . $telefono . "&text=" . apg_sms_codifica_el_mensaje( $mensaje ) );
@@ -118,6 +120,23 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 			) );
 			$respuesta = wp_remote_post( "https://api.plivo.com/v1/Account/" . $configuracion['usuario_plivo'] . "/Message/", $argumentos );
 			break;
+		case "twizo":
+			$contenido = json_encode( array(
+				'recipients'	=> array( $telefono ),
+				'body'			=> $mensaje,
+				'sender'		=> $configuracion['identificador_twizo'],
+				'tag'			=> 'APG SMS Notifications',
+			) );
+			$argumentos['headers'] = array(
+				'Authorization'	=> "Basic " . base64_encode( "twizo:" . $configuracion['clave_twizo'] ),
+				'Accept'		=> 'application/json',
+				'Content-Type'	=> 'application/json; charset=utf8',
+				'Content-Length'=> strlen($contenido),
+				'method'		=> 'POST',
+			);
+			$argumentos['body'] = $contenido;
+			$respuesta = wp_remote_post( "https://" . $configuracion['servidor_twizo'] . "/v1/sms/submitsimple", $argumentos );
+			break;
 	}
 
 	if ( isset( $configuracion['debug'] ) && $configuracion['debug'] == "1" && isset( $configuracion['campo_debug'] ) ) {
@@ -152,6 +171,7 @@ function apg_sms_prefijo( $servicio ) {
 		"springedge",
 		"moreify",
 		"nexmo",
+		"twizo",
 	);
 	
 	return in_array( $servicio, $prefijo );

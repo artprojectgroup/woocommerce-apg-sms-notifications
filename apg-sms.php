@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.10.1
+Version: 2.11
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
-Author URI: http://artprojectgroup.es/
+Author URI: https://artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 4.7.2
+Tested up to: 4.7.3
 
 Text Domain: apg_sms
 Domain Path: /languages
@@ -82,7 +82,8 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 	//Comprobamos si está instalado y activo WPML
 	$wpml_activo = function_exists( 'icl_object_id' );
 	
-	function apg_sms_inicializacion() {
+	//Actualiza las traducciones de los mensajes SMS
+	function apg_registra_wpml( $configuracion ) {
 		global $wpml_activo;
 		
 		//Registramos los textos en WPML
@@ -99,9 +100,13 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			do_action( 'wpml_register_single_string', 'apg_sms', 'mensaje_completado', $configuracion['mensaje_completado'] );
 			do_action( 'wpml_register_single_string', 'apg_sms', 'mensaje_nota', $configuracion['mensaje_nota'] );
 		}
-		
-		//Cargamos los proveedores SMS
-		include_once( 'includes/admin/proveedores.php' );
+	}
+	
+	//Inicializamos las traducciones y los proveedores
+	function apg_sms_inicializacion() {
+		global $configuracion;
+
+		apg_registra_wpml( $configuracion );
 	}
 	add_action( 'init', 'apg_sms_inicializacion' );
 
@@ -128,7 +133,8 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 	function apg_sms_registra_opciones() {
 		global $configuracion;
 	
-		register_setting( 'apg_sms_settings_group', 'apg_sms_settings' );
+		register_setting( 'apg_sms_settings_group', 'apg_sms_settings', 'apg_sms_update' );
+		$configuracion = get_option( 'apg_sms_settings' );
 
 		if ( ( class_exists( 'WC_SA' ) || class_exists( 'AppZab_Woo_Advance_Order_Status' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) && isset( $configuracion['estados_personalizados'] ) ) { //Comprueba la existencia de plugins de estado personalizado
 			foreach ( $configuracion['estados_personalizados'] as $estado ) {
@@ -137,10 +143,19 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		}
 	}
 	add_action( 'admin_init', 'apg_sms_registra_opciones' );
+	
+	function apg_sms_update( $configuracion ) {
+		apg_registra_wpml( $configuracion );
+		
+		return $configuracion;
+	}
 
 	//Procesa el SMS
 	function apg_sms_procesa_estados( $pedido, $notificacion = false ) {
 		global $configuracion, $wpml_activo;
+		
+		//Cargamos los proveedores SMS
+		include_once( 'includes/admin/proveedores.php' );
 
 		$pedido				= new WC_Order( $pedido );
 		$estado				= $pedido->status;
@@ -233,6 +248,9 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 	//Envía las notas de cliente por SMS
 	function apg_sms_procesa_notas( $datos ) {
 		global $configuracion, $wpml_activo;
+		
+		//Cargamos los proveedores SMS
+		include_once( 'includes/admin/proveedores.php' );
 	
 		$pedido					= new WC_Order( $datos['order_id'] );
 	
