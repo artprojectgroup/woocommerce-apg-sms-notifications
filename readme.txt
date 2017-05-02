@@ -3,10 +3,10 @@ Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, OPEN DND, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, Custom Order Statuses & Actions, WooCommerce Order Status & Actions Manager, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro, WPML
 Requires at least: 3.8
-Tested up to: 4.7.3
-Stable tag: 2.11
+Tested up to: 4.7.4
+Stable tag: 2.12
 WC requires at least: 2.1
-WC tested up to: 3.0
+WC tested up to: 3.0.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -51,6 +51,7 @@ Add to your WooCommerce store SMS notifications to your customers when order sta
 * Automatically inset the international prefix number, if it’s necessary, to the customer’s phone number.
 * Also notified by SMS the customer notes.
 * All messages are customizable.
+* You can choose which messages to send.
 * Supports a large number of variables to personalize our messages: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.
 * You can add your own custom variables.
 * Has *apg_sms_message* filter to easy customization of SMS messages from third-party plugins. 
@@ -112,6 +113,11 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 1. Screenshot of WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.12 =
+* Adjust to optimize WooCommerce 3.0 compatibility.
+* New option to select the BulkSMS API URL.
+* Added Twizo sponsorship.
+* Updated screenshot.
 = 2.11 =
 * Fixed WPML compatibility.
 * Added support for Twizo **Update sponsored by [Twizo](https://www.twizo.com)**.
@@ -121,12 +127,12 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 * Added notification option to multiple owners’ phone **Update sponsored by [Jeff Chambliss](http://www.stickertalk.com/)**.
 = 2.9 =
 * Added support for Nexmo **Modification devised by [Gine](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/1)**.
-* BulkSMS URL API updated.
+* BulkSMS API URL updated.
 = 2.8 =
 * Fixed various errors.
 * French language translation thanks to ([**Studios Jurdan**](http://www.jurdan.biz)).
 = 2.7.11 =
-* BulkSMS URL API updated.
+* BulkSMS API URL updated.
 = 2.7.10 =
 * Added new option to send debug information.
 = 2.7.9.2 =
@@ -310,9 +316,11 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 * Initial version.
 
 == Upgrade Notice ==
-= 2.11 =
-* Fixed WPML compatibility.
-* Added support for Twizo **Update sponsored by [Twizo](https://www.twizo.com)**.
+= 2.12 =
+* Adjust to optimize WooCommerce 3.0 compatibility.
+* New option to select the BulkSMS API URL.
+* Added Twizo sponsorship.
+* Updated screenshot.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).
