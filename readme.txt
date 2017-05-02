@@ -116,6 +116,8 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 = 2.12 =
 * Adjust to optimize WooCommerce 3.0 compatibility.
 * New option to select the BulkSMS API URL.
+* New option to select the messages to send.
+* New option to send the full information from order products.
 * Added Twizo sponsorship.
 * Updated screenshot.
 = 2.11 =
@@ -319,6 +321,8 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 = 2.12 =
 * Adjust to optimize WooCommerce 3.0 compatibility.
 * New option to select the BulkSMS API URL.
+* New option to select the messages to send.
+* New option to send the full information from order products.
 * Added Twizo sponsorship.
 * Updated screenshot.
 
