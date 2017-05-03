@@ -467,7 +467,7 @@
 				} else {
 					$chequea	= '';
 				}
-				$texto = ( $valor == 'todos' && !$chequeado ) ? ' selected="selected"' : '';
+				$texto = ( !isset( $configuracion['mensajes'] ) && $valor == 'todos' && !$chequeado ) ? ' selected="selected"' : '';
 				echo '<option value="' . $valor . '"' . $chequea . $texto . '>' . $mensaje . '</option>' . PHP_EOL;
 			}
 		?>

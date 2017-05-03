@@ -9,7 +9,7 @@ Requires at least: 3.8
 
 Tested up to: 4.7.5
 
-Stable tag: 2.12.1.1
+Stable tag: 2.12.1.2
 
 WC requires at least: 2.1
 
@@ -119,6 +119,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.12.1.2
+* Actualización de la URL de la API de BulkSMS.
+
 ### 2.12.1.1
 * Actualización de la URL de la API de BulkSMS.
 
