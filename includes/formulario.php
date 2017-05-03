@@ -5,7 +5,6 @@
     <?php _e( 'APG SMS Notifications Options.', 'apg_sms' ); ?>
   </h2>
   <?php 
-	settings_errors(); 
 	$tab = 1;
 	//Traducciones ocultas    
 	__( 'account Sid', 'apg_sms' );

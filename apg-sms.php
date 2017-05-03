@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.12
+Version: 2.12.1
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: https://artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 4.7.4
+Tested up to: 4.7.5
 
 Text Domain: apg_sms
 Domain Path: /languages
@@ -181,11 +181,16 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			}
 		}
 	
-		$telefono				= apg_sms_procesa_el_telefono( $pedido, get_post_meta( $numero_de_pedido, '_billing_phone', false ), $configuracion['servicio'] );
-		$telefono_envio			= apg_sms_procesa_el_telefono( $pedido, get_post_meta( $numero_de_pedido, $configuracion['campo_envio'], false ), $configuracion['servicio'], false, true );
+		$billing_country		= is_callable( array( $pedido, 'get_billing_country' ) ) ? $pedido->get_billing_country() : $pedido->billing_country;
+		$billing_phone			= is_callable( array( $pedido, 'get_billing_phone' ) ) ? $pedido->get_billing_phone() : $pedido->billing_phone;
+		$shipping_country		= is_callable( array( $pedido, 'get_shipping_country' ) ) ? $pedido->get_shipping_country() : $pedido->shipping_country;
+		$campo_envio			= get_post_meta( $numero_de_pedido, $configuracion['campo_envio'], false );
+		$campo_envio			= ( isset( $campo_envio[0] ) ) ? $campo_envio[0] : '';
+		$telefono				= apg_sms_procesa_el_telefono( $pedido, $billing_phone, $configuracion['servicio'] );
+		$telefono_envio			= apg_sms_procesa_el_telefono( $pedido, $campo_envio, $configuracion['servicio'], false, true );
 		$enviar_envio			= ( $telefono != $telefono_envio && isset( $configuracion['envio'] ) && $configuracion['envio'] == 1 ) ? true : false;
-		$internacional			= ( get_post_meta( $numero_de_pedido, '_billing_country', false ) && ( WC()->countries->get_base_country() != get_post_meta( $numero_de_pedido, '_billing_country', false ) ) ) ? true : false;
-		$internacional_envio	= ( get_post_meta( $numero_de_pedido, '_shipping_country', false ) && ( WC()->countries->get_base_country() != get_post_meta( $numero_de_pedido, '_shipping_country', false ) ) ) ? true : false;
+		$internacional			= ( $billing_country && ( WC()->countries->get_base_country() != $billing_country ) ) ? true : false;
+		$internacional_envio	= ( $shipping_country && ( WC()->countries->get_base_country() != $shipping_country ) ) ? true : false;
 		//Teléfono propietario
 		if ( strpos( $configuracion['telefono'], "|" ) ) {
 			$administradores = explode( "|", $configuracion['telefono'] ); //Existe más de uno
@@ -270,12 +275,16 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 	
 		$numero_de_pedido		= $datos['order_id'];
 		$pedido					= new WC_Order( $numero_de_pedido );
-	
-		$telefono				= apg_sms_procesa_el_telefono( $pedido, get_post_meta( $numero_de_pedido, '_billing_phone', false ), $configuracion['servicio'] );
-		$telefono_envio			= apg_sms_procesa_el_telefono( $pedido, get_post_meta( $numero_de_pedido, $configuracion['campo_envio'], false ), $configuracion['servicio'], false, true );
+		$billing_country		= is_callable( array( $pedido, 'get_billing_country' ) ) ? $pedido->get_billing_country() : $pedido->billing_country;
+		$billing_phone			= is_callable( array( $pedido, 'get_billing_phone' ) ) ? $pedido->get_billing_phone() : $pedido->billing_phone;
+		$shipping_country		= is_callable( array( $pedido, 'get_shipping_country' ) ) ? $pedido->get_shipping_country() : $pedido->shipping_country;	
+		$campo_envio			= get_post_meta( $numero_de_pedido, $configuracion['campo_envio'], false );
+		$campo_envio			= ( isset( $campo_envio[0] ) ) ? $campo_envio[0] : '';
+		$telefono				= apg_sms_procesa_el_telefono( $pedido, $billing_phone, $configuracion['servicio'] );
+		$telefono_envio			= apg_sms_procesa_el_telefono( $pedido, $campo_envio, $configuracion['servicio'], false, true );
 		$enviar_envio			= ( isset( $configuracion['envio'] ) && $telefono != $telefono_envio && $configuracion['envio'] == 1 ) ? true : false;
-		$internacional			= ( get_post_meta( $numero_de_pedido, '_billing_country', false ) && ( WC()->countries->get_base_country() != get_post_meta( $numero_de_pedido, '_billing_country', false ) ) ) ? true : false;
-		$internacional_envio	= ( get_post_meta( $numero_de_pedido, '_shipping_country', false ) && ( WC()->countries->get_base_country() != get_post_meta( $numero_de_pedido, '_shipping_country', false ) ) ) ? true : false;
+		$internacional			= ( $billing_country && ( WC()->countries->get_base_country() != $billing_country ) ) ? true : false;
+		$internacional_envio	= ( $shipping_country && ( WC()->countries->get_base_country() != $shipping_country ) ) ? true : false;
 
 		//WPML
 		if ( function_exists( 'icl_register_string' ) || !$wpml_activo ) { //Versión anterior a la 3.2
@@ -402,13 +411,15 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 	//Procesa el teléfono y le añade, si lo necesita, el prefijo
 	function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietario = false, $envio = false ) {
 		$numero_de_pedido	= is_callable( array( $pedido, 'get_id' ) ) ? $pedido->get_id() : $pedido->id;
+		$billing_country	= is_callable( array( $pedido, 'get_billing_country' ) ) ? $pedido->get_billing_country() : $pedido->billing_country;
+		$shipping_country	= is_callable( array( $pedido, 'get_shipping_country' ) ) ? $pedido->get_shipping_country() : $pedido->shipping_country;
 		$prefijo			= apg_sms_prefijo( $servicio );
 		$telefono			= str_replace( array( '+','-' ), '', filter_var( $telefono, FILTER_SANITIZE_NUMBER_INT ) );
 		if ( !$propietario ) {
-			if ( !$envio && get_post_meta( $numero_de_pedido, '_billing_country', false ) && ( WC()->countries->get_base_country() != get_post_meta( $numero_de_pedido, '_billing_country', false ) || $prefijo ) ) {
-				$prefijo_internacional = apg_sms_dame_prefijo_pais( get_post_meta( $numero_de_pedido, '_billing_country', false ) ); //Teléfono de facturación
-			} else if ( $envio && get_post_meta( $numero_de_pedido, '_shipping_country', false ) && ( WC()->countries->get_base_country() != get_post_meta( $numero_de_pedido, '_shipping_country', false ) || $prefijo ) ) {
-				$prefijo_internacional = apg_sms_dame_prefijo_pais( get_post_meta( $numero_de_pedido, '_shipping_country', false ) ); //Teléfono de envío
+			if ( !$envio && $billing_country && ( WC()->countries->get_base_country() != $billing_country || $prefijo ) ) {
+				$prefijo_internacional = apg_sms_dame_prefijo_pais( $billing_country ); //Teléfono de facturación
+			} else if ( $envio && $shipping_country && ( WC()->countries->get_base_country() != $shipping_country || $prefijo ) ) {
+				$prefijo_internacional = apg_sms_dame_prefijo_pais( $shipping_country ); //Teléfono de envío
 			}
 		} else if ( $propietario && $prefijo ) {
 			$prefijo_internacional = apg_sms_dame_prefijo_pais( WC()->countries->get_base_country() );
