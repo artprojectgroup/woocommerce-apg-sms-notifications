@@ -2,39 +2,39 @@
 
 <div class="wrap woocommerce">
   <h2>
-    <?php _e( 'APG SMS Notifications Options.', 'apg_sms' ); ?>
+    <?php _e( 'APG SMS Notifications Options.', 'woocommerce-apg-sms-notifications' ); ?>
   </h2>
   <?php 
 	$tab = 1;
 	//Traducciones ocultas    
-	__( 'account Sid', 'apg_sms' );
-	__( 'Account Sid:', 'apg_sms' );
-	__( 'authentication Token', 'apg_sms' );
-	__( 'Authentication Token:', 'apg_sms' );
-	__( 'key', 'apg_sms' );
-	__( 'Key:', 'apg_sms' );
-	__( 'authentication key', 'apg_sms' );
-	__( 'Authentication key:', 'apg_sms' );
-	__( 'sender ID', 'apg_sms' );
-	__( 'Sender ID:', 'apg_sms' );
-	__( 'route', 'apg_sms' );
-	__( 'Route:', 'apg_sms' );
-	__( 'sender ID', 'apg_sms' );
-	__( 'Sender ID:', 'apg_sms' );
-	__( 'username', 'apg_sms' );
-	__( 'Username:', 'apg_sms' );
-	__( 'password', 'apg_sms' );
-	__( 'Password:', 'apg_sms' );
-	__( 'mobile number', 'apg_sms' );
-	__( 'Mobile number:', 'apg_sms' );
-	__( 'client', 'apg_sms' );
-	__( 'Client:', 'apg_sms' );
-	__( 'authentication ID', 'apg_sms' );
-	__( 'Authentication ID:', 'apg_sms' );
-	__( 'project', 'apg_sms' );
-	__( 'Project:', 'apg_sms' );
-	__( 'host', 'apg_sms' );
-	__( 'Host:', 'apg_sms' );
+	__( 'account Sid', 'woocommerce-apg-sms-notifications' );
+	__( 'Account Sid:', 'woocommerce-apg-sms-notifications' );
+	__( 'authentication Token', 'woocommerce-apg-sms-notifications' );
+	__( 'Authentication Token:', 'woocommerce-apg-sms-notifications' );
+	__( 'key', 'woocommerce-apg-sms-notifications' );
+	__( 'Key:', 'woocommerce-apg-sms-notifications' );
+	__( 'authentication key', 'woocommerce-apg-sms-notifications' );
+	__( 'Authentication key:', 'woocommerce-apg-sms-notifications' );
+	__( 'sender ID', 'woocommerce-apg-sms-notifications' );
+	__( 'Sender ID:', 'woocommerce-apg-sms-notifications' );
+	__( 'route', 'woocommerce-apg-sms-notifications' );
+	__( 'Route:', 'woocommerce-apg-sms-notifications' );
+	__( 'sender ID', 'woocommerce-apg-sms-notifications' );
+	__( 'Sender ID:', 'woocommerce-apg-sms-notifications' );
+	__( 'username', 'woocommerce-apg-sms-notifications' );
+	__( 'Username:', 'woocommerce-apg-sms-notifications' );
+	__( 'password', 'woocommerce-apg-sms-notifications' );
+	__( 'Password:', 'woocommerce-apg-sms-notifications' );
+	__( 'mobile number', 'woocommerce-apg-sms-notifications' );
+	__( 'Mobile number:', 'woocommerce-apg-sms-notifications' );
+	__( 'client', 'woocommerce-apg-sms-notifications' );
+	__( 'Client:', 'woocommerce-apg-sms-notifications' );
+	__( 'authentication ID', 'woocommerce-apg-sms-notifications' );
+	__( 'Authentication ID:', 'woocommerce-apg-sms-notifications' );
+	__( 'project', 'woocommerce-apg-sms-notifications' );
+	__( 'Project:', 'woocommerce-apg-sms-notifications' );
+	__( 'host', 'woocommerce-apg-sms-notifications' );
+	__( 'Host:', 'woocommerce-apg-sms-notifications' );
 	
 	//WPML
 	if ( function_exists( 'icl_register_string' ) || !$wpml_activo ) { //Versión anterior a la 3.2
@@ -53,20 +53,20 @@
   ?>
   <h3><a href="<?php echo $apg_sms['plugin_url']; ?>" title="Art Project Group"><?php echo $apg_sms['plugin']; ?></a></h3>
   <p>
-    <?php _e( 'Add to WooCommerce the possibility to send <abbr title="Short Message Service" lang="en">SMS</abbr> notifications to the client each time you change the order status. Notifies the owner, if desired, when the store has a new order. You can also send customer notes.', 'apg_sms' ); ?>
+    <?php _e( 'Add to WooCommerce the possibility to send <abbr title="Short Message Service" lang="en">SMS</abbr> notifications to the client each time you change the order status. Notifies the owner, if desired, when the store has a new order. You can also send customer notes.', 'woocommerce-apg-sms-notifications' ); ?>
   </p>
   <?php include( 'cuadro-informacion.php' ); ?>
   <form method="post" action="options.php">
     <?php settings_fields( 'apg_sms_settings_group' ); ?>
     <div class="cabecera"> <a href="<?php echo $apg_sms['plugin_url']; ?>" title="<?php echo $apg_sms['plugin']; ?>" target="_blank"><img src="<?php echo plugins_url( '../assets/images/cabecera.jpg', __FILE__ ); ?>" class="imagen" alt="<?php echo $apg_sms['plugin']; ?>" /></a> </div>
-	  <h4><?php _e( "Sponsored by:", "apg_sms" ); ?></h4>
+	  <h4><?php _e( 'Sponsored by:', 'woocommerce-apg-sms-notifications' ); ?></h4>
     <div class="banner"> <a href="https://www.twizo.com/pricing/" title="Twizo" target="_blank"><img src="<?php echo plugins_url( '../assets/images/twizo.png', __FILE__ ); ?>" class="imagen" alt="Twizo" /></a> </div>
     <table class="form-table apg-table">
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[servicio]">
-            <?php _e( '<abbr title="Short Message Service" lang="en">SMS</abbr> gateway:', 'apg_sms' ); ?>
+            <?php _e( '<abbr title="Short Message Service" lang="en">SMS</abbr> gateway:', 'woocommerce-apg-sms-notifications' ); ?>
           </label>
-          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Select your SMS gateway', 'apg_sms' ); ?>"></span> </th>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Select your SMS gateway', 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
         <td class="forminp forminp-number"><select class="wc-enhanced-select servicio" id="apg_sms_settings[servicio]" name="apg_sms_settings[servicio]" style="width: 450px;" tabindex="<?php echo $tab++; ?>">
             <?php
 			$proveedores = array( 
@@ -221,14 +221,18 @@
 		//Pinta los campos de los proveedores
 		foreach ( $proveedores as $valor => $proveedor ) {
 			foreach ( $proveedores_campos[$valor] as $valor_campo => $campo ) {
-				if ( $valor_campo == "ruta_msg91" ) {
+				if ( $valor_campo == "ruta_msg91" ) { //MSG91
 					echo '
       <tr valign="top" class="' . $valor . '"><!-- ' . $proveedor . ' -->
-        <th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . __( ucfirst( $campo ) . ":", "apg_sms" ) . '</label>
-          <span class="woocommerce-help-tip" data-tip="' . sprintf( __( "The %s for your account in %s", "apg_sms" ), __( $campo, "apg_sms" ), $proveedor ) . '" src="' . plugins_url(  "woocommerce/assets/images/help.png" ) . '" height="16" width="16" /> </th>
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . __( ucfirst( $campo ) . ':', 'woocommerce-apg-sms-notifications' ) . '</label>
+          <span class="woocommerce-help-tip" data-tip="' . sprintf( __( 'The %s for your account in %s', 'woocommerce-apg-sms-notifications' ), __( $campo, 'woocommerce-apg-sms-notifications' ), $proveedor ) . '" src="' . plugins_url(  "woocommerce/assets/images/help.png" ) . '" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><select class="wc-enhanced-select" id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" tabindex="' . $tab++ . '">
 					';
-					$opciones = array( "default" => __( "Default", "apg_sms" ), 1 => 1, 4 => 4 );
+					$opciones = array( 
+						"default"	=> __( 'Default', 'woocommerce-apg-sms-notifications' ), 
+						1			=> 1, 
+						4			=> 4
+					);
 					foreach ( $opciones as $valor => $opcion ) {
 						$chequea = ( isset( $configuracion['ruta_msg91'] ) && $configuracion['ruta_msg91'] == $valor ) ? ' selected="selected"' : '';
 				  		echo '<option value="' . $valor . '"' . $chequea . '>' . $opcion . '</option>' . PHP_EOL;
@@ -236,19 +240,19 @@
 					echo '          </select></td>
       </tr>
 					';
-				} else if ( $valor_campo == "servidor_bulksms" ) {
+				} else if ( $valor_campo == "servidor_bulksms" ) { //BulkSMS
 					echo '
       <tr valign="top" class="' . $valor . '"><!-- ' . $proveedor . ' -->
-        <th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . __( ucfirst( $campo ) . ":", "apg_sms" ) . '</label>
-          <span class="woocommerce-help-tip" data-tip="' . sprintf( __( "The %s for your account in %s", "apg_sms" ), __( $campo, "apg_sms" ), $proveedor ) . '" src="' . plugins_url(  "woocommerce/assets/images/help.png" ) . '" height="16" width="16" /> </th>
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . __( ucfirst( $campo ) . ':', 'woocommerce-apg-sms-notifications' ) . '</label>
+          <span class="woocommerce-help-tip" data-tip="' . sprintf( __( 'The %s for your account in %s', 'woocommerce-apg-sms-notifications' ), __( $campo, 'woocommerce-apg-sms-notifications' ), $proveedor ) . '" src="' . plugins_url(  "woocommerce/assets/images/help.png" ) . '" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><select class="wc-enhanced-select" id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" tabindex="' . $tab++ . '">
 					';
 					$opciones = array( 
-						"bulksms.vsms.net"		=> __( "International", "apg_sms" ), 
-						"www.bulksms.co.uk"		=> __( "UK", "apg_sms" ),
-						"usa.bulksms.com"		=> __( "USA", "apg_sms" ),
-						"bulksms.2way.co.za"	=> __( "South Africa", "apg_sms" ),
-						"bulksms.com.es"		=> __( "Spain", "apg_sms" ),
+						"bulksms.vsms.net"		=> __( 'International', 'woocommerce-apg-sms-notifications' ), 
+						"www.bulksms.co.uk"		=> __( 'UK', 'woocommerce-apg-sms-notifications' ),
+						"usa.bulksms.com"		=> __( 'USA', 'woocommerce-apg-sms-notifications' ),
+						"bulksms.2way.co.za"	=> __( 'South Africa', 'woocommerce-apg-sms-notifications' ),
+						"bulksms.com.es"		=> __( 'Spain', 'woocommerce-apg-sms-notifications' ),
 					);
 					foreach ( $opciones as $valor => $opcion ) {
 						$chequea = ( isset( $configuracion['servidor_bulksms'] ) && $configuracion['servidor_bulksms'] == $valor ) ? ' selected="selected"' : '';
@@ -257,16 +261,16 @@
 					echo '          </select></td>
       </tr>
 					';
-				} else if ( $valor_campo == "servidor_twizo" ) {
+				} else if ( $valor_campo == "servidor_twizo" ) { //Twizo
 					echo '
       <tr valign="top" class="' . $valor . '"><!-- ' . $proveedor . ' -->
-        <th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . __( ucfirst( $campo ) . ":", "apg_sms" ) . '</label>
-          <span class="woocommerce-help-tip" data-tip="' . sprintf( __( "The %s for your account in %s", "apg_sms" ), __( $campo, "apg_sms" ), $proveedor ) . '" src="' . plugins_url(  "woocommerce/assets/images/help.png" ) . '" height="16" width="16" /> </th>
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . __( ucfirst( $campo ) . ':', 'woocommerce-apg-sms-notifications' ) . '</label>
+          <span class="woocommerce-help-tip" data-tip="' . sprintf( __( 'The %s for your account in %s', 'woocommerce-apg-sms-notifications' ), __( $campo, 'woocommerce-apg-sms-notifications' ), $proveedor ) . '" src="' . plugins_url(  "woocommerce/assets/images/help.png" ) . '" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><select class="wc-enhanced-select" id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" tabindex="' . $tab++ . '">
 					';
 					$opciones = array( 
-						"api-asia-01.twizo.com"	=> __( "Singapore", "apg_sms" ), 
-						"api-eu-01.twizo.com"	=> __( "Germany", "apg_sms" ), 
+						"api-asia-01.twizo.com"	=> __( 'Singapore', 'woocommerce-apg-sms-notifications' ), 
+						"api-eu-01.twizo.com"	=> __( 'Germany', 'woocommerce-apg-sms-notifications' ), 
 					);
 					foreach ( $opciones as $valor => $opcion ) {
 						$chequea = ( isset( $configuracion['servidor_twizo'] ) && $configuracion['servidor_twizo'] == $valor ) ? ' selected="selected"' : '';
@@ -275,11 +279,11 @@
 					echo '          </select></td>
       </tr>
 					';
-				} else {
+				} else { //Genérico
 					echo '
       <tr valign="top" class="' . $valor . '"><!-- ' . $proveedor . ' -->
-        <th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . __( ucfirst( $campo ) . ":", "apg_sms" ) . '</label>
-          <span class="woocommerce-help-tip" data-tip="' . sprintf( __( "The %s for your account in %s", "apg_sms" ), __( $campo, "apg_sms" ), $proveedor ) . '" src="' . plugins_url(  "woocommerce/assets/images/help.png" ) . '" height="16" width="16" /> </th>
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . __( ucfirst( $campo ) . ':', 'woocommerce-apg-sms-notifications' ) . '</label>
+          <span class="woocommerce-help-tip" data-tip="' . sprintf( __( 'The %s for your account in %s', 'woocommerce-apg-sms-notifications' ), __( $campo, 'woocommerce-apg-sms-notifications' ), $proveedor ) . '" src="' . plugins_url(  "woocommerce/assets/images/help.png" ) . '" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" size="50" value="' . ( isset( $configuracion[$valor_campo] ) ? $configuracion[$valor_campo] : '' ) . '" tabindex="' . $tab++ . '" /></td>
       </tr>
 					';
@@ -289,44 +293,44 @@
       ?>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[telefono]">
-            <?php _e( 'Your mobile number:', 'apg_sms' ); ?>
+            <?php _e( 'Your mobile number:', 'woocommerce-apg-sms-notifications' ); ?>
           </label>
-          <span class="woocommerce-help-tip" data-tip="<?php _e( 'The mobile number registered in your SMS gateway account and where you receive the SMS messages. You can add multiple mobile numbers separeted by | character. Example: xxxxxxxxx|yyyyyyyyy', 'apg_sms' ); ?>"></span> </th>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'The mobile number registered in your SMS gateway account and where you receive the SMS messages. You can add multiple mobile numbers separeted by | character. Example: xxxxxxxxx|yyyyyyyyy', 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
         <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[telefono]" name="apg_sms_settings[telefono]" size="50" value="<?php echo ( isset( $configuracion['telefono'] ) ? $configuracion['telefono'] : '' ); ?>" tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[notificacion]">
-            <?php _e( 'New order notification:', 'apg_sms' ); ?>
+            <?php _e( 'New order notification:', 'woocommerce-apg-sms-notifications' ); ?>
           </label>
-          <span class="woocommerce-help-tip" data-tip="<?php _e( "Check if you want to receive a SMS message when there's a new order", 'apg_sms' ); ?>"></span> </th>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( "Check if you want to receive a SMS message when there's a new order", 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
         <td class="forminp forminp-number"><input id="apg_sms_settings[notificacion]" name="apg_sms_settings[notificacion]" type="checkbox" value="1" <?php echo ( isset( $configuracion['notificacion'] ) && $configuracion['notificacion'] == "1" ? 'checked="checked"' : '' ); ?> tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[internacional]">
-            <?php _e( 'Send international <abbr title="Short Message Service" lang="en">SMS</abbr>?:', 'apg_sms' ); ?>
+            <?php _e( 'Send international <abbr title="Short Message Service" lang="en">SMS</abbr>?:', 'woocommerce-apg-sms-notifications' ); ?>
           </label>
-          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Check if you want to send international SMS messages', 'apg_sms' ); ?>"></span> </th>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Check if you want to send international SMS messages', 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
         <td class="forminp forminp-number"><input id="apg_sms_settings[internacional]" name="apg_sms_settings[internacional]" type="checkbox" value="1" <?php echo ( isset( $configuracion['internacional'] ) && $configuracion['internacional'] == "1" ? 'checked="checked"' : '' ); ?> tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[envio]">
-            <?php _e( 'Send <abbr title="Short Message Service" lang="en">SMS</abbr> to shipping mobile?:', 'apg_sms' ); ?>
+            <?php _e( 'Send <abbr title="Short Message Service" lang="en">SMS</abbr> to shipping mobile?:', 'woocommerce-apg-sms-notifications' ); ?>
           </label>
-          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Check if you want to send SMS messages to shipping mobile numbers, only if it is different from billing mobile number', 'apg_sms' ); ?>"></span> </th>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Check if you want to send SMS messages to shipping mobile numbers, only if it is different from billing mobile number', 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
         <td class="forminp forminp-number"><input id="apg_sms_settings[envio]" name="apg_sms_settings[envio]" type="checkbox" value="1" <?php echo ( isset( $configuracion['envio'] ) && $configuracion['envio'] == "1" ? 'checked="checked"' : '' ); ?> tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[productos]">
-            <?php _e( 'order_product variable full details:', 'apg_sms' ); ?>
+            <?php _e( 'order_product variable full details:', 'woocommerce-apg-sms-notifications' ); ?>
           </label>
-          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Check if you want to send the SMS messages with full order product information', 'apg_sms' ); ?>"></span> </th>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Check if you want to send the SMS messages with full order product information', 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
         <td class="forminp forminp-number"><input id="apg_sms_settings[productos]" name="apg_sms_settings[productos]" type="checkbox" value="1" <?php echo ( isset( $configuracion['productos'] ) && $configuracion['productos'] == "1" ? 'checked="checked"' : '' ); ?> tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
       <tr valign="top" class="campo_envio">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[campo_envio]">
-            <?php _e( 'Shipping mobile field:', 'apg_sms' ); ?>
+            <?php _e( 'Shipping mobile field:', 'woocommerce-apg-sms-notifications' ); ?>
           </label>
-          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Select the shipping mobile field', 'apg_sms' ); ?>"></span> </th>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Select the shipping mobile field', 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
         <td class="forminp forminp-number"><select id="apg_sms_settings[campo_envio]" name="apg_sms_settings[campo_envio]" class="wc-enhanced-select" tabindex="<?php echo $tab++; ?>">
         <?php
 			$pais	= new WC_Countries();
@@ -347,9 +351,9 @@
       <?php if ( class_exists( 'WC_SA' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : //Comprueba la existencia de los plugins de estado personalizado ?>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[estados_personalizados]">
-            <?php _e( 'Custom Order Statuses & Actions:', 'apg_sms' ); ?>
+            <?php _e( 'Custom Order Statuses & Actions:', 'woocommerce-apg-sms-notifications' ); ?>
           </label>
-          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Select your own statuses.', 'apg_sms' ); ?>"></span> </th>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Select your own statuses.', 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
         <td class="forminp forminp-number"><select multiple="multiple" class="wc-enhanced-select multiselect estados_personalizados" id="apg_sms_settings[estados_personalizados]" name="apg_sms_settings[estados_personalizados][]" style="width: 450px;" tabindex="<?php echo $tab++; ?>">
             <?php
 				if ( class_exists( 'WC_SA' ) ) { //WooCommerce Order Status & Actions Manager
@@ -430,34 +434,34 @@
       </tr>
       <?php foreach ( $lista_de_estados as $estados_personalizados ) : ?>
       <tr valign="top" class="<?php echo $estados_personalizados; ?>"><!-- <?php echo ucfirst( $estados_personalizados ); ?> -->
-        <th scope="row" class="titledesc"> <label for="apg_sms_settings[<?php echo $estados_personalizados; ?>]"> <?php echo sprintf( __( '%s state custom message:', 'apg_sms' ), ucfirst( $estados_personalizados ) ); ?> </label>
-          <span class="woocommerce-help-tip" data-tip="<?php _e( 'You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.', 'apg_sms' ); ?>"></span> </th>
+        <th scope="row" class="titledesc"> <label for="apg_sms_settings[<?php echo $estados_personalizados; ?>]"> <?php echo sprintf( __( '%s state custom message:', 'woocommerce-apg-sms-notifications' ), ucfirst( $estados_personalizados ) ); ?> </label>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.', 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
         <td class="forminp forminp-number"><textarea id="apg_sms_settings[<?php echo $estados_personalizados; ?>]" name="apg_sms_settings[<?php echo $estados_personalizados; ?>]" cols="50" rows="5" tabindex="<?php echo $tab++; ?>"><?php echo stripcslashes( isset( $configuracion[$estados_personalizados] ) ? $configuracion[$estados_personalizados] : "" ); ?></textarea></td>
       </tr>
       <?php endforeach; ?>
       <?php endif; ?>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[variables]">
-            <?php _e( 'Custom variables:', 'apg_sms' ); ?>
+            <?php _e( 'Custom variables:', 'woocommerce-apg-sms-notifications' ); ?>
           </label>
-          <span class="woocommerce-help-tip" data-tip="<?php _e( 'You can add your own variables. Each variable must be entered onto a new line without percentage character ( % ). Example: <code>_custom_variable_name</code><br /><code>_another_variable_name</code>.', 'apg_sms' ); ?>"></span> </th>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'You can add your own variables. Each variable must be entered onto a new line without percentage character ( % ). Example: <code>_custom_variable_name</code><br /><code>_another_variable_name</code>.', 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
         <td class="forminp forminp-number"><textarea id="apg_sms_settings[variables]" name="apg_sms_settings[variables]" cols="50" rows="5" tabindex="<?php echo $tab++; ?>"><?php echo stripcslashes( isset( $configuracion['variables'] ) ? $configuracion['variables'] : '' ); ?></textarea></td>
       </tr>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[productos]">
-            <?php _e( 'Send only this messages:', 'apg_sms' ); ?>
+            <?php _e( 'Send only this messages:', 'woocommerce-apg-sms-notifications' ); ?>
           </label>
-          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Select what messages do you want to send', 'apg_sms' ); ?>"></span> </th>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Select what messages do you want to send', 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
         <td class="forminp forminp-number">
         <select multiple="multiple" class="wc-enhanced-select multiselect" id="apg_sms_settings[mensajes]" name="apg_sms_settings[mensajes][]" style="width: 450px;" tabindex="<?php echo $tab++; ?>">
         <?php
 			$valores = array(
-				'todos'					=> __( 'All messages', 'apg_sms' ),
-				'mensaje_pedido'		=> __( 'Owner custom message', 'apg_sms' ),
-				'mensaje_recibido'		=> __( 'Order received custom message', 'apg_sms' ),
-				'mensaje_procesando'	=> __( 'Order processing custom message', 'apg_sms' ),
-				'mensaje_completado'	=> __( 'Order completed custom message', 'apg_sms' ),
-				'mensaje_nota'			=> __( 'Notes custom message', 'apg_sms' ),
+				'todos'					=> __( 'All messages', 'woocommerce-apg-sms-notifications' ),
+				'mensaje_pedido'		=> __( 'Owner custom message', 'woocommerce-apg-sms-notifications' ),
+				'mensaje_recibido'		=> __( 'Order received custom message', 'woocommerce-apg-sms-notifications' ),
+				'mensaje_procesando'	=> __( 'Order processing custom message', 'woocommerce-apg-sms-notifications' ),
+				'mensaje_completado'	=> __( 'Order completed custom message', 'woocommerce-apg-sms-notifications' ),
+				'mensaje_nota'			=> __( 'Notes custom message', 'woocommerce-apg-sms-notifications' ),
 			);
 			$chequeado = false;
 			foreach ( $valores as $valor => $mensaje ) {
@@ -475,56 +479,56 @@
       </tr>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[mensaje_pedido]">
-            <?php _e( 'Owner custom message', 'apg_sms' ); ?>:
+            <?php _e( 'Owner custom message', 'woocommerce-apg-sms-notifications' ); ?>:
           </label>
-          <span class="woocommerce-help-tip" data-tip="<?php _e( 'You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.', 'apg_sms' ); ?>"></span> </th>
-        <td class="forminp forminp-number"><textarea id="apg_sms_settings[mensaje_pedido]" name="apg_sms_settings[mensaje_pedido]" cols="50" rows="5" tabindex="<?php echo $tab++; ?>"><?php echo stripcslashes( !empty( $mensaje_pedido ) ? $mensaje_pedido : sprintf( __( "Order No. %s received on ", 'apg_sms' ), "%id%" ) . "%shop_name%" . "." ); ?></textarea></td>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.', 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
+        <td class="forminp forminp-number"><textarea id="apg_sms_settings[mensaje_pedido]" name="apg_sms_settings[mensaje_pedido]" cols="50" rows="5" tabindex="<?php echo $tab++; ?>"><?php echo stripcslashes( !empty( $mensaje_pedido ) ? $mensaje_pedido : sprintf( __( "Order No. %s received on ", 'woocommerce-apg-sms-notifications' ), "%id%" ) . "%shop_name%" . "." ); ?></textarea></td>
       </tr>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[mensaje_recibido]">
-            <?php _e( 'Order received custom message', 'apg_sms' ); ?>:
+            <?php _e( 'Order received custom message', 'woocommerce-apg-sms-notifications' ); ?>:
           </label>
-          <span class="woocommerce-help-tip" data-tip="<?php _e( 'You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.', 'apg_sms' ); ?>"></span> </th>
-        <td class="forminp forminp-number"><textarea id="apg_sms_settings[mensaje_recibido]" name="apg_sms_settings[mensaje_recibido]" cols="50" rows="5" tabindex="<?php echo $tab++; ?>"><?php echo stripcslashes( !empty( $mensaje_recibido ) ? $mensaje_recibido : sprintf( __( 'Your order No. %s is received on %s. Thank you for shopping with us!', 'apg_sms' ), "%id%", "%shop_name%" ) ); ?></textarea></td>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.', 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
+        <td class="forminp forminp-number"><textarea id="apg_sms_settings[mensaje_recibido]" name="apg_sms_settings[mensaje_recibido]" cols="50" rows="5" tabindex="<?php echo $tab++; ?>"><?php echo stripcslashes( !empty( $mensaje_recibido ) ? $mensaje_recibido : sprintf( __( 'Your order No. %s is received on %s. Thank you for shopping with us!', 'woocommerce-apg-sms-notifications' ), "%id%", "%shop_name%" ) ); ?></textarea></td>
       </tr>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[mensaje_procesando]">
-            <?php _e( 'Order processing custom message', 'apg_sms' ); ?>:
+            <?php _e( 'Order processing custom message', 'woocommerce-apg-sms-notifications' ); ?>:
           </label>
-          <span class="woocommerce-help-tip" data-tip="<?php _e( 'You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.', 'apg_sms' ); ?>"></span> </th>
-        <td class="forminp forminp-number"><textarea id="apg_sms_settings[mensaje_procesando]" name="apg_sms_settings[mensaje_procesando]" cols="50" rows="5" tabindex="<?php echo $tab++; ?>"><?php echo stripcslashes( !empty( $mensaje_procesando ) ? $mensaje_procesando : sprintf( __( 'Thank you for shopping with us! Your order No. %s is now: ', 'apg_sms' ), "%id%" ) . __( 'Processing', 'apg_sms' ) . "." ); ?></textarea></td>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.', 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
+        <td class="forminp forminp-number"><textarea id="apg_sms_settings[mensaje_procesando]" name="apg_sms_settings[mensaje_procesando]" cols="50" rows="5" tabindex="<?php echo $tab++; ?>"><?php echo stripcslashes( !empty( $mensaje_procesando ) ? $mensaje_procesando : sprintf( __( 'Thank you for shopping with us! Your order No. %s is now: ', 'woocommerce-apg-sms-notifications' ), "%id%" ) . __( 'Processing', 'woocommerce-apg-sms-notifications' ) . "." ); ?></textarea></td>
       </tr>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[mensaje_completado]">
-            <?php _e( 'Order completed custom message', 'apg_sms' ); ?>:
+            <?php _e( 'Order completed custom message', 'woocommerce-apg-sms-notifications' ); ?>:
           </label>
-          <span class="woocommerce-help-tip" data-tip="<?php _e( 'You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.', 'apg_sms' ); ?>"></span> </th>
-        <td class="forminp forminp-number"><textarea id="apg_sms_settings[mensaje_completado]" name="apg_sms_settings[mensaje_completado]" cols="50" rows="5" tabindex="<?php echo $tab++; ?>"><?php echo stripcslashes( !empty( $mensaje_completado ) ? $mensaje_completado : sprintf( __( 'Thank you for shopping with us! Your order No. %s is now: ', 'apg_sms' ), "%id%" ) . __( 'Completed', 'apg_sms' ) . "." ); ?></textarea></td>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.', 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
+        <td class="forminp forminp-number"><textarea id="apg_sms_settings[mensaje_completado]" name="apg_sms_settings[mensaje_completado]" cols="50" rows="5" tabindex="<?php echo $tab++; ?>"><?php echo stripcslashes( !empty( $mensaje_completado ) ? $mensaje_completado : sprintf( __( 'Thank you for shopping with us! Your order No. %s is now: ', 'woocommerce-apg-sms-notifications' ), "%id%" ) . __( 'Completed', 'woocommerce-apg-sms-notifications' ) . "." ); ?></textarea></td>
       </tr>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[mensaje_nota]">
-            <?php _e( 'Notes custom message', 'apg_sms' ); ?>:
+            <?php _e( 'Notes custom message', 'woocommerce-apg-sms-notifications' ); ?>:
           </label>
-          <span class="woocommerce-help-tip" data-tip="<?php _e( 'You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.', 'apg_sms' ); ?>"></span> </th>
-        <td class="forminp forminp-number"><textarea id="apg_sms_settings[mensaje_nota]" name="apg_sms_settings[mensaje_nota]" cols="50" rows="5" tabindex="<?php echo $tab++; ?>"><?php echo stripcslashes( !empty( $mensaje_nota ) ? $mensaje_nota : sprintf( __( 'A note has just been added to your order No. %s: ', 'apg_sms' ), "%id%" ) . "%note%" ); ?></textarea></td>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.', 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
+        <td class="forminp forminp-number"><textarea id="apg_sms_settings[mensaje_nota]" name="apg_sms_settings[mensaje_nota]" cols="50" rows="5" tabindex="<?php echo $tab++; ?>"><?php echo stripcslashes( !empty( $mensaje_nota ) ? $mensaje_nota : sprintf( __( 'A note has just been added to your order No. %s: ', 'woocommerce-apg-sms-notifications' ), "%id%" ) . "%note%" ); ?></textarea></td>
       </tr>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[debug]">
-            <?php _e( 'Send debug information?:', 'apg_sms' ); ?>
+            <?php _e( 'Send debug information?:', 'woocommerce-apg-sms-notifications' ); ?>
           </label>
-          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Check if you want to receive debug information from your SMS gateway', 'apg_sms' ); ?>"></span> </th>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Check if you want to receive debug information from your SMS gateway', 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
         <td class="forminp forminp-number"><input id="apg_sms_settings[debug]" name="apg_sms_settings[debug]" type="checkbox" class="debug" value="1" <?php echo ( isset( $configuracion['debug'] ) && $configuracion['debug'] == "1" ? 'checked="checked"' : '' ); ?> tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
       <tr valign="top" class="campo_debug">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[campo_debug]">
-            <?php _e( 'email address:', 'apg_sms' ); ?>
+            <?php _e( 'email address:', 'woocommerce-apg-sms-notifications' ); ?>
           </label>
-          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Add an email address where you want to receive the debug information', 'apg_sms' ); ?>"></span> </th>
+          <span class="woocommerce-help-tip" data-tip="<?php _e( 'Add an email address where you want to receive the debug information', 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
         <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[campo_debug]" name="apg_sms_settings[campo_debug]" size="50" value="<?php echo ( isset( $configuracion['campo_debug'] ) ? $configuracion['campo_debug'] : '' ); ?>" tabindex="<?php echo $tab++; ?>" /></td>
       </tr>
     </table>
     <p class="submit">
-      <input class="button-primary" type="submit" value="<?php _e( 'Save Changes', 'apg_sms' ); ?>"  name="submit" id="submit" tabindex="<?php echo $tab++; ?>" />
+      <input class="button-primary" type="submit" value="<?php _e( 'Save Changes', 'woocommerce-apg-sms-notifications' ); ?>"  name="submit" id="submit" tabindex="<?php echo $tab++; ?>" />
     </p>
   </form>
 </div>

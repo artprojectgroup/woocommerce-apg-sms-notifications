@@ -7,13 +7,13 @@ Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, 
 
 Requires at least: 3.8
 
-Tested up to: 4.7.5
+Tested up to: 4.8
 
-Stable tag: 2.12.1.2
+Stable tag: 2.12.1.3
 
 WC requires at least: 2.1
 
-WC tested up to: 3.0.5
+WC tested up to: 3.1
 
 License: GPLv3
 
@@ -119,6 +119,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.12.1.3
+* Arreglo de localización.
+
 ### 2.12.1.2
 * Actualización de la URL de la API de BulkSMS.
 
