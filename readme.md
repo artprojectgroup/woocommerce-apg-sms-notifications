@@ -141,7 +141,7 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 
 ### 2.11
 * Arreglo de compatibilidad con WPML.
-* Añadido soporte para Twizo **Actualización patrocinada por [Twizo](https://www.twizo.com)**.
+* Añadido soporte para Twizo. **Actualización patrocinada por [Twizo](https://www.twizo.com)**.
 
 ### 2.10.1
 * Soporte para instalaciones multisitio.
@@ -155,7 +155,7 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 
 ### 2.8
 * Arreglo de distintos errores.
-* Traducción idioma francés gracias a ([**Studios Jurdan**](http://www.jurdan.biz)).
+* Traducción idioma francés gracias a [**Studios Jurdan**](http://www.jurdan.biz).
 
 ### 2.7.11
 * Actualización de la URL de la API de BulkSMS.
@@ -190,9 +190,6 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 * Arreglo de la carga de la hoja de estilo.
 
 ### 2.7.8
-* Actualización del soporte para WooCommerce Order Status & Actions Manager.
-
-### 2.7.7
 * Actualización del soporte para WooCommerce Order Status & Actions Manager.
 
 ### 2.7.7

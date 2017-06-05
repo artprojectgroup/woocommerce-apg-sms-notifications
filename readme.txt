@@ -130,7 +130,7 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 * Updated screenshot.
 = 2.11 =
 * Fixed WPML compatibility.
-* Added support for Twizo **Update sponsored by [Twizo](https://www.twizo.com)**.
+* Added support for Twizo. **Update sponsored by [Twizo](https://www.twizo.com)**.
 = 2.10.1 =
 * Support for multisite installation.
 = 2.10 =
@@ -140,7 +140,7 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 * BulkSMS API URL updated.
 = 2.8 =
 * Fixed various errors.
-* French language translation thanks to ([**Studios Jurdan**](http://www.jurdan.biz)).
+* French language translation thanks to [**Studios Jurdan**](http://www.jurdan.biz).
 = 2.7.11 =
 * BulkSMS API URL updated.
 = 2.7.10 =
@@ -171,7 +171,7 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 * Updated font package. New Google+ icon.
 * Updated translations.
 = 2.7.6 =
-* Added suppor for WPML. **Modification requested on [WordPress.org](https://wordpress.org/support/topic/wpml-compatibility-66)**.
+* Added support for WPML. **Modification requested on [WordPress.org](https://wordpress.org/support/topic/wpml-compatibility-66)**.
 * Added support for Spring Edge. **Update sponsored by [Spring Edge](http://springedge.com/)**.
 = 2.7.5.1 =
 * Fixed small JavaScript bug that not select correctly the configured provider.
@@ -288,7 +288,7 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 = 0.8.6 =
 * Fixed message enconding.
 = 0.8.5 =
-* Modificaciones menores del código.
+* Minor code fixes.
 = 0.8.4 =
 * Fixed font icons bug.
 = 0.8.3 =
@@ -319,9 +319,9 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 = 0.3.1 =
 * Fixed small bug in the code.
 = 0.3 =
-* Improved code that checks the international code.
+* Added support for customer notes.
 = 0.2 =
-* Mejorado el código que comprueba el código internacional.
+* Improved code that checks the international code.
 = 0.1 =
 * Initial version.
 
