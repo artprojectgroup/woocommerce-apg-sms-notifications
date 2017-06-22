@@ -93,6 +93,7 @@
 				"moreify" 			=> "Moreify",
 				"nexmo"				=> "Nexmo",
 				"twizo"				=> "Twizo",
+				"msgwow"			=> "MSGWOW",
 			);
 			asort( $proveedores, SORT_NATURAL | SORT_FLAG_CASE ); //Ordena alfabeticamente los proveedores
 			$chequeado = false;
@@ -216,70 +217,60 @@
  				"identificador_twizo"				=> 'sender ID',
 				"servidor_twizo"					=> 'host',
 			),
+			"msgwow" 			=> array( 
+ 				"clave_msgwow"						=> 'key',
+ 				"identificador_msgwow"				=> 'sender ID',
+				"ruta_msgwow" 						=> 'route',
+				"servidor_msgwow"					=> 'host',
+			),
 		);
-	  
+		
+		$proveedores_opciones = array(
+			"ruta_msg91"		=> array(
+				"default"				=> __( 'Default', 'woocommerce-apg-sms-notifications' ), 
+				1						=> 1, 
+				4						=> 4
+			),
+			"servidor_bulksms"	=> array(
+				"bulksms.vsms.net"		=> __( 'International', 'woocommerce-apg-sms-notifications' ), 
+				"www.bulksms.co.uk"		=> __( 'UK', 'woocommerce-apg-sms-notifications' ),
+				"usa.bulksms.com"		=> __( 'USA', 'woocommerce-apg-sms-notifications' ),
+				"bulksms.2way.co.za"	=> __( 'South Africa', 'woocommerce-apg-sms-notifications' ),
+				"bulksms.com.es"		=> __( 'Spain', 'woocommerce-apg-sms-notifications' ),
+			),
+			"servidor_twizo"	=> array(
+				"api-asia-01.twizo.com"	=> __( 'Singapore', 'woocommerce-apg-sms-notifications' ), 
+				"api-eu-01.twizo.com"	=> __( 'Germany', 'woocommerce-apg-sms-notifications' ), 
+			),
+			"ruta_msgwow"		=> array(
+				1						=> 1, 
+				4						=> 4
+			),
+			"servidor_msgwow"	=> array(
+				"0"						=> __( 'International', 'woocommerce-apg-sms-notifications' ), 
+				"1"						=> __( 'USA', 'woocommerce-apg-sms-notifications' ), 
+				"91"					=> __( 'India', 'woocommerce-apg-sms-notifications' ), 
+			),
+		);
+
 		//Pinta los campos de los proveedores
 		foreach ( $proveedores as $valor => $proveedor ) {
 			foreach ( $proveedores_campos[$valor] as $valor_campo => $campo ) {
-				if ( $valor_campo == "ruta_msg91" ) { //MSG91
+				if ( array_key_exists( $valor_campo, $proveedores_opciones ) ) { //Campo select
 					echo '
       <tr valign="top" class="' . $valor . '"><!-- ' . $proveedor . ' -->
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . __( ucfirst( $campo ) . ':', 'woocommerce-apg-sms-notifications' ) . '</label>
           <span class="woocommerce-help-tip" data-tip="' . sprintf( __( 'The %s for your account in %s', 'woocommerce-apg-sms-notifications' ), __( $campo, 'woocommerce-apg-sms-notifications' ), $proveedor ) . '" src="' . plugins_url(  "woocommerce/assets/images/help.png" ) . '" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><select class="wc-enhanced-select" id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" tabindex="' . $tab++ . '">
 					';
-					$opciones = array( 
-						"default"	=> __( 'Default', 'woocommerce-apg-sms-notifications' ), 
-						1			=> 1, 
-						4			=> 4
-					);
-					foreach ( $opciones as $valor => $opcion ) {
-						$chequea = ( isset( $configuracion['ruta_msg91'] ) && $configuracion['ruta_msg91'] == $valor ) ? ' selected="selected"' : '';
+					foreach ( $proveedores_opciones[$valor_campo] as $valor => $opcion ) {
+						$chequea = ( isset( $configuracion[$valor_campo] ) && $configuracion[$valor_campo] == $valor ) ? ' selected="selected"' : '';
 				  		echo '<option value="' . $valor . '"' . $chequea . '>' . $opcion . '</option>' . PHP_EOL;
 					}
 					echo '          </select></td>
       </tr>
 					';
-				} else if ( $valor_campo == "servidor_bulksms" ) { //BulkSMS
-					echo '
-      <tr valign="top" class="' . $valor . '"><!-- ' . $proveedor . ' -->
-        <th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . __( ucfirst( $campo ) . ':', 'woocommerce-apg-sms-notifications' ) . '</label>
-          <span class="woocommerce-help-tip" data-tip="' . sprintf( __( 'The %s for your account in %s', 'woocommerce-apg-sms-notifications' ), __( $campo, 'woocommerce-apg-sms-notifications' ), $proveedor ) . '" src="' . plugins_url(  "woocommerce/assets/images/help.png" ) . '" height="16" width="16" /> </th>
-        <td class="forminp forminp-number"><select class="wc-enhanced-select" id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" tabindex="' . $tab++ . '">
-					';
-					$opciones = array( 
-						"bulksms.vsms.net"		=> __( 'International', 'woocommerce-apg-sms-notifications' ), 
-						"www.bulksms.co.uk"		=> __( 'UK', 'woocommerce-apg-sms-notifications' ),
-						"usa.bulksms.com"		=> __( 'USA', 'woocommerce-apg-sms-notifications' ),
-						"bulksms.2way.co.za"	=> __( 'South Africa', 'woocommerce-apg-sms-notifications' ),
-						"bulksms.com.es"		=> __( 'Spain', 'woocommerce-apg-sms-notifications' ),
-					);
-					foreach ( $opciones as $valor => $opcion ) {
-						$chequea = ( isset( $configuracion['servidor_bulksms'] ) && $configuracion['servidor_bulksms'] == $valor ) ? ' selected="selected"' : '';
-				  		echo '<option value="' . $valor . '"' . $chequea . '>' . $opcion . '</option>' . PHP_EOL;
-					}
-					echo '          </select></td>
-      </tr>
-					';
-				} else if ( $valor_campo == "servidor_twizo" ) { //Twizo
-					echo '
-      <tr valign="top" class="' . $valor . '"><!-- ' . $proveedor . ' -->
-        <th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . __( ucfirst( $campo ) . ':', 'woocommerce-apg-sms-notifications' ) . '</label>
-          <span class="woocommerce-help-tip" data-tip="' . sprintf( __( 'The %s for your account in %s', 'woocommerce-apg-sms-notifications' ), __( $campo, 'woocommerce-apg-sms-notifications' ), $proveedor ) . '" src="' . plugins_url(  "woocommerce/assets/images/help.png" ) . '" height="16" width="16" /> </th>
-        <td class="forminp forminp-number"><select class="wc-enhanced-select" id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" tabindex="' . $tab++ . '">
-					';
-					$opciones = array( 
-						"api-asia-01.twizo.com"	=> __( 'Singapore', 'woocommerce-apg-sms-notifications' ), 
-						"api-eu-01.twizo.com"	=> __( 'Germany', 'woocommerce-apg-sms-notifications' ), 
-					);
-					foreach ( $opciones as $valor => $opcion ) {
-						$chequea = ( isset( $configuracion['servidor_twizo'] ) && $configuracion['servidor_twizo'] == $valor ) ? ' selected="selected"' : '';
-				  		echo '<option value="' . $valor . '"' . $chequea . '>' . $opcion . '</option>' . PHP_EOL;
-					}
-					echo '          </select></td>
-      </tr>
-					';
-				} else { //Genérico
+				} else { //Campo input
 					echo '
       <tr valign="top" class="' . $valor . '"><!-- ' . $proveedor . ' -->
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . __( ucfirst( $campo ) . ':', 'woocommerce-apg-sms-notifications' ) . '</label>

@@ -1,10 +1,10 @@
 === WooCommerce - APG SMS Notifications ===
 Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
-Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, OPEN DND, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, Custom Order Statuses & Actions, WooCommerce Order Status & Actions Manager, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro, WPML
+Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, OPEN DND, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Custom Order Statuses & Actions, WooCommerce Order Status & Actions Manager, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro, WPML
 Requires at least: 3.8
-Tested up to: 4.8
-Stable tag: 2.12.1.3
+Tested up to: 4.9
+Stable tag: 2.13
 WC requires at least: 2.1
 WC tested up to: 3.1
 License: GPLv3
@@ -27,6 +27,7 @@ Add to your WooCommerce store SMS notifications to your customers when order sta
  * [LabsMobile Spain](http://www.labsmobile.com/es).
  * [Moreify](https://www.moreify.com/).
  * [MSG91](https://msg91.com/).
+ * [MSGWOW](http://msgwow.com).
  * [mVaayoo](http://www.mvaayoo.com/).
  * [Nexmo](https://www.nexmo.com).
  * [OPEN DND](http://www.opendnd.in/).
@@ -113,6 +114,8 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 1. Screenshot of WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.13 =
+* Added support for MSGWOW. **Update sponsored by [MSGWOW](http://msgwow.com)**.
 = 2.12.1.3 =
 * Fixed localization.
 = 2.12.1.2 =
@@ -326,8 +329,8 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 * Initial version.
 
 == Upgrade Notice ==
-= 2.12.1.3 =
-* Fixed localization.
+= 2.13 =
+* Added support for MSGWOW. **Update sponsored by [MSGWOW](http://msgwow.com)**.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).

@@ -49,6 +49,9 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 		case "nexmo":
 			$respuesta = wp_remote_get( "https://rest.nexmo.com/sms/json?api_key=" . $configuracion['clave_nexmo'] . "&api_secret=" . $configuracion['identificador_nexmo'] . "&from=NEXMO&to=" . $telefono . "&text=" . apg_sms_codifica_el_mensaje( $mensaje ) );
 			break;
+		case "msgwow":
+			$respuesta = wp_remote_get( "https://my.msgwow.com/api/v2/sendsms?authkey=" . $configuracion['clave_msgwow'] . "&mobiles=" . $telefono . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&sender=" . $configuracion['identificador_msgwow'] . "&route=" . $configuracion['ruta_msgwow'] . "&country=" . $configuracion['servidor_msgwow'] );
+			break;
 		case "bulksms":
 			$argumentos['body'] = array( 
 				'username' 	=> $configuracion['usuario_bulksms'],
