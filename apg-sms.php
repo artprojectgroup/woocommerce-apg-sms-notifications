@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.13
+Version: 2.13.0.1
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: https://artprojectgroup.es/
@@ -416,9 +416,9 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		$prefijo			= apg_sms_prefijo( $servicio );
 		$telefono			= str_replace( array( '+','-' ), '', filter_var( $telefono, FILTER_SANITIZE_NUMBER_INT ) );
 		if ( !$propietario ) {
-			if ( !$envio && $billing_country && ( WC()->countries->get_base_country() != $billing_country || $prefijo ) ) {
+			if ( ( !$envio && $billing_country && ( WC()->countries->get_base_country() != $billing_country ) || $prefijo ) ) {
 				$prefijo_internacional = apg_sms_dame_prefijo_pais( $billing_country ); //Teléfono de facturación
-			} else if ( $envio && $shipping_country && ( WC()->countries->get_base_country() != $shipping_country || $prefijo ) ) {
+			} else if ( ( $envio && $shipping_country && ( WC()->countries->get_base_country() != $shipping_country ) || $prefijo ) ) {
 				$prefijo_internacional = apg_sms_dame_prefijo_pais( $shipping_country ); //Teléfono de envío
 			}
 		} else if ( $propietario && $prefijo ) {
@@ -438,7 +438,9 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			$telefono = "+" . $telefono;
 		} else if ( $servicio == "isms" && isset( $prefijo_internacional ) ) {
 			$telefono = "00" . preg_replace( '/\+/', '', $telefono );
-		}
+		} /*else if ( $servicio == "labsmobile" && !isset( $prefijo_internacional ) ) {
+			$telefono = apg_sms_dame_prefijo_pais( WC()->countries->get_base_country() ) . $telefono;
+		}*/
 	
 		return $telefono;
 	}

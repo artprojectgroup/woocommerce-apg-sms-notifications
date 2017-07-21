@@ -9,11 +9,11 @@ Requires at least: 3.8
 
 Tested up to: 4.9
 
-Stable tag: 2.13
+Stable tag: 2.13.0.1
 
 WC requires at least: 2.1
 
-WC tested up to: 3.1
+WC tested up to: 3.1.1
 
 License: GPLv3
 
@@ -120,6 +120,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.130.1
+* Arreglo del código internacional para LabsMobile.
+
 ### 2.13
 * Añadido soporte para MSGWOW. **Actualización patrocinada por [MSGWOW](http://msgwow.com)**.
 
