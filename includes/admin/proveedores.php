@@ -186,4 +186,3 @@ function apg_sms_prefijo( $servicio ) {
 	
 	return in_array( $servicio, $prefijo );
 }
-?>
