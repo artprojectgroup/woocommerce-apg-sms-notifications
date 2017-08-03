@@ -169,6 +169,11 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		} else if ( isset( $configuracion['mensajes']) && $estado == 'completed' && ( !in_array( "todos", $configuracion['mensajes'] ) && !in_array( "mensaje_completado", $configuracion['mensajes'] ) ) ) {
 			return;
 		}
+
+		//Permitir que otros plugins impidan que se envíe el SMS
+		if ( !apply_filters( 'apg_sms_send_message', true, $pedido ) ) {
+			return;
+		}
 		
 		$nombres_de_estado	= array( 
 			'on-hold'		=> 'Recibido', 
@@ -921,4 +926,3 @@ function apg_sms_desinstalar() {
 	delete_transient( 'apg_sms_plugin' );
 }
 register_uninstall_hook( __FILE__, 'apg_sms_desinstalar' );
-?>
