@@ -156,34 +156,3 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 		wp_mail( $configuracion['campo_debug'], 'WooCommerce - APG SMS Notifications', $correo, 'charset=UTF-8' . "\r\n" ); 
 	}
 }
-
-
-//Mira si necesita el prefijo telefónico internacional
-function apg_sms_prefijo( $servicio ) {
-	$prefijo = array( 
-		"voipstunt", 
-		"voipbusterpro", 
-		"voipbuster", 
-		"smsdiscount", 
-		"sipdiscount", 
-		"clockwork", 
-		"clickatell", 
-		"bulksms", 
-		"msg91", 
-		"twilio", 
-		"mvaayoo", 
-		"esebun", 
-		"isms", 
-		"smslane",
-		"smscountry",
-		"labsmobile",
-		"plivo",
-		"springedge",
-		"moreify",
-		"nexmo",
-		"twizo",
-	);
-	
-	return in_array( $servicio, $prefijo );
-}
-?>
