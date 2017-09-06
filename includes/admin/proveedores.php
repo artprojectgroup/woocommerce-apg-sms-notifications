@@ -54,11 +54,13 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 			break;
 		case "bulksms":
 			$argumentos['body'] = array( 
-				'username' 	=> $configuracion['usuario_bulksms'],
-				'password' 	=> $configuracion['contrasena_bulksms'],
-				'message' 	=> bin2hex( mb_convert_encoding( $mensaje, "UTF-16", "UTF-8" ) ),
-				'msisdn' 	=> $telefono,
-				'dca' 		=> '16bit',
+				'username' 					=> $configuracion['usuario_bulksms'],
+				'password' 					=> $configuracion['contrasena_bulksms'],
+				'message' 					=> bin2hex( mb_convert_encoding( $mensaje, "UTF-16", "UTF-8" ) ),
+				'msisdn' 					=> $telefono,
+				'dca' 						=> '16bit',
+				'allow_concat_text_sms'		=> '1',
+                'concat_text_sms_max_parts'	=> '6',
 			 );
 			$respuesta = wp_remote_post( "http://" . $configuracion['servidor_bulksms'] . "/eapi/submission/send_sms/2/2.0", $argumentos );
 			break;

@@ -355,7 +355,7 @@
 							$estados_personalizados = new WC_SA_Status( $clave );
 							if ( $estados_personalizados->email_notification ) {
 								$chequea = '';
-								if ( $configuracion['estados_personalizados'] ) {
+								if ( isset( $configuracion['estados_personalizados'] ) ) {
 									foreach ( $configuracion['estados_personalizados'] as $estado_personalizado ) {
 										if ( $estado_personalizado == $estado->label ) {
 											$chequea = ' selected="selected"';
@@ -380,13 +380,13 @@
 					);
 					if ( isset( $GLOBALS['advorder_lite_orderstatus'] ) ) { //WooCommerce Advance Order Status
 						$lista_de_estados = ( array ) $GLOBALS['advorder_lite_orderstatus']->get_terms( 'shop_order_status', array( 
-							'hide_empty' => 0, 
-							'orderby' => 'id' 
+							'hide_empty'	=> 0, 
+							'orderby'		=> 'id' 
 						) );
 					} else {
 						$lista_de_estados = ( array ) get_terms( 'shop_order_status', array( 
-							'hide_empty' => 0, 
-							'orderby' => 'id' 
+							'hide_empty'	=> 0, 
+							'orderby'		=> 'id' 
 						) );
 					}
 					$lista_nueva = array();

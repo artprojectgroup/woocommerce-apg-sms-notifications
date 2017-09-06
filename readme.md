@@ -9,11 +9,11 @@ Requires at least: 3.8
 
 Tested up to: 4.9
 
-Stable tag: 2.13.0.2
+Stable tag: 2.13.0.3
 
 WC requires at least: 2.1
 
-WC tested up to: 3.1.2
+WC tested up to: 3.2
 
 License: GPLv3
 
@@ -120,6 +120,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.13.0.3
+* Actualización de los argumentos de BulkSMS API.
+
 ### 2.13.0.2
 * Añadido el filtro *apg_sms_send_message* para impedir el envío de mensajes SMS desde plugins de terceros. **Modificación ideada por [Marco Almeida](http://www.webdados.pt/)**.
 
