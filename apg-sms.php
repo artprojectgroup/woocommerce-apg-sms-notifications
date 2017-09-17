@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.13.0.3
+Version: 2.13.1
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: https://artprojectgroup.es/
@@ -159,9 +159,6 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 	function apg_sms_procesa_estados( $pedido, $notificacion = false ) {
 		global $configuracion, $wpml_activo;
 		
-		//Cargamos los proveedores SMS
-		include_once( 'includes/admin/proveedores.php' );
-
 		$numero_de_pedido	= $pedido;
 		$pedido				= new WC_Order( $numero_de_pedido );
 		$estado				= is_callable( array( $pedido, 'get_status' ) ) ? $pedido->get_status() : $pedido->status;
@@ -225,6 +222,8 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			$mensaje_completado	= apply_filters( 'wpml_translate_single_string', $configuracion['mensaje_completado'], 'apg_sms', 'mensaje_completado' );
 		}
 		
+		//Cargamos los proveedores SMS
+		include_once( 'includes/admin/proveedores.php' );
 		//Envía el SMS
 		if ( $estado == 'Recibido' ) {
 			if ( isset( $configuracion['notificacion'] ) && $configuracion['notificacion'] == 1 ) {
@@ -278,9 +277,6 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		if ( isset( $configuracion['mensajes']) && ( !in_array( "todos", $configuracion['mensajes'] ) && !in_array( "mensaje_nota", $configuracion['mensajes'] ) ) ) {
 			return;
 		}
-		
-		//Cargamos los proveedores SMS
-		include_once( 'includes/admin/proveedores.php' );
 	
 		$numero_de_pedido		= $datos['order_id'];
 		$pedido					= new WC_Order( $numero_de_pedido );
@@ -302,6 +298,8 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			$mensaje_nota		= apply_filters( 'wpml_translate_single_string', $configuracion['mensaje_nota'], 'apg_sms', 'mensaje_nota' );
 		}
 		
+		//Cargamos los proveedores SMS
+		include_once( 'includes/admin/proveedores.php' );		
 		//Envía el SMS
 		if ( !$internacional || ( isset( $configuracion['internacional'] ) && $configuracion['internacional'] == 1 ) ) {
 			apg_sms_envia_sms( $configuracion, $telefono, apg_sms_procesa_variables( $mensaje_nota, $pedido, $configuracion['variables'], wptexturize( $datos['customer_note'] ) ) ); //Mensaje para el teléfono de facturación

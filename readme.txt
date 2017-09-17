@@ -4,7 +4,7 @@ Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, OPEN DND, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Custom Order Statuses & Actions, WooCommerce Order Status & Actions Manager, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro, WPML
 Requires at least: 3.8
 Tested up to: 4.9
-Stable tag: 2.13.0.3
+Stable tag: 2.13.0.4
 WC requires at least: 2.1
 WC tested up to: 3.2
 License: GPLv3
@@ -55,7 +55,9 @@ Add to your WooCommerce store SMS notifications to your customers when order sta
 * You can choose which messages to send.
 * Supports a large number of variables to personalize our messages: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.
 * You can add your own custom variables.
-* Has *apg_sms_message* filter to easy customization of SMS messages from third-party plugins. 
+* Has *apg_sms_message* filter to facilitate the customization of SMS messages from third-party plugins.
+* Has *apg_sms_send_message* filter to prevent sending the SMS messages from third-party plugins.
+* Has *apg_sms_phone_process* and *apg_sms_phone_return* filters to facilitate the phone number process from third-party plugins.
 * Once setup is fully automated.
 
 = Translations =
@@ -114,6 +116,10 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 1. Screenshot of WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.13.1 =
+* Added filters * apg_sms_phone_process* and * apg_sms_phone_return* to facilitate the phone number process from third-party plugins. **Modification devised by [Marco Almeida](http://www.webdados.pt/)**.
+* BulkSMS API arguments fixed.
+* Fixed configuration form.
 = 2.13.0.3 =
 * BulkSMS API arguments updated.
 = 2.13.0.2 =
@@ -335,8 +341,10 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 * Initial version.
 
 == Upgrade Notice ==
-= 2.13.0.3 =
-* BulkSMS API arguments updated.
+= 2.13.1 =
+* Added filters * apg_sms_phone_process* and * apg_sms_phone_return* to facilitate the phone number process from third-party plugins. **Modification devised by [Marco Almeida](http://www.webdados.pt/)**.
+* BulkSMS API arguments fixed.
+* Fixed configuration form.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).

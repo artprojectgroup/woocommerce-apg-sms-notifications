@@ -9,7 +9,7 @@ Requires at least: 3.8
 
 Tested up to: 4.9
 
-Stable tag: 2.13.0.3
+Stable tag: 2.13.0.4
 
 WC requires at least: 2.1
 
@@ -64,7 +64,9 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 * Puedes elegir qué mensajes enviar.
 * Soporta gran cantidad de variables para personalizar nuestros mensajes: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% y %note%.
 * Puedes añadir tus propias variables personalizadas.
-* Dispone del filtro *apg_sms_message* para facilitar la personalización de los mensajes SMS desde plugins de terceros. 
+* Dispone del filtro *apg_sms_message* para facilitar la personalización de los mensajes SMS desde plugins de terceros.
+* Dispone del filtro *apg_sms_send_message* para impedir el envío de los mensajes SMS desde plugins de terceros.
+* Dispone de los filtros *apg_sms_phone_process* y *apg_sms_phone_return* para facilitar el procesamiento del número de teléfono desde plugins de terceros.
 * Una vez configurado es totalmente automático.
 
 ### Traducciones
@@ -120,6 +122,11 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.13.1
+* Añadidos los filtros *apg_sms_phone_process* y *apg_sms_phone_return* para facilitar el procesamiento del número de teléfono desde plugins de terceros. **Modificación ideada por [Marco Almeida](http://www.webdados.pt/)**.
+* Arreglo de los argumentos de BulkSMS API.
+* Arreglo del formulario de configuración.
+
 ### 2.13.0.3
 * Actualización de los argumentos de BulkSMS API.
 

@@ -135,37 +135,41 @@ function apg_sms_codifica_el_mensaje( $mensaje ) {
 
 //Procesa el teléfono y le añade, si lo necesita, el prefijo
 function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietario = false, $envio = false ) {
-	$numero_de_pedido	= is_callable( array( $pedido, 'get_id' ) ) ? $pedido->get_id() : $pedido->id;
-	$billing_country	= is_callable( array( $pedido, 'get_billing_country' ) ) ? $pedido->get_billing_country() : $pedido->billing_country;
-	$shipping_country	= is_callable( array( $pedido, 'get_shipping_country' ) ) ? $pedido->get_shipping_country() : $pedido->shipping_country;
-	$prefijo			= apg_sms_prefijo( $servicio );
-	$telefono			= str_replace( array( '+','-' ), '', filter_var( $telefono, FILTER_SANITIZE_NUMBER_INT ) );
-	if ( !$propietario ) {
-		if ( ( !$envio && $billing_country && ( WC()->countries->get_base_country() != $billing_country ) || $prefijo ) ) {
-			$prefijo_internacional = apg_sms_dame_prefijo_pais( $billing_country ); //Teléfono de facturación
-		} else if ( ( $envio && $shipping_country && ( WC()->countries->get_base_country() != $shipping_country ) || $prefijo ) ) {
-			$prefijo_internacional = apg_sms_dame_prefijo_pais( $shipping_country ); //Teléfono de envío
+	//Permitir que otros plugins impidan que se procese el número de teléfono
+	if ( apply_filters( 'apg_sms_phone_process', true, $pedido, $telefono, $servicio, $propietario, $envio ) ) {
+		$numero_de_pedido	= is_callable( array( $pedido, 'get_id' ) ) ? $pedido->get_id() : $pedido->id;
+		$billing_country	= is_callable( array( $pedido, 'get_billing_country' ) ) ? $pedido->get_billing_country() : $pedido->billing_country;
+		$shipping_country	= is_callable( array( $pedido, 'get_shipping_country' ) ) ? $pedido->get_shipping_country() : $pedido->shipping_country;
+		$prefijo			= apg_sms_prefijo( $servicio );
+		$telefono			= str_replace( array( '+','-' ), '', filter_var( $telefono, FILTER_SANITIZE_NUMBER_INT ) );
+		if ( !$propietario ) {
+			if ( ( !$envio && $billing_country && ( WC()->countries->get_base_country() != $billing_country ) || $prefijo ) ) {
+				$prefijo_internacional = apg_sms_dame_prefijo_pais( $billing_country ); //Teléfono de facturación
+			} else if ( ( $envio && $shipping_country && ( WC()->countries->get_base_country() != $shipping_country ) || $prefijo ) ) {
+				$prefijo_internacional = apg_sms_dame_prefijo_pais( $shipping_country ); //Teléfono de envío
+			}
+		} else if ( $propietario && $prefijo ) {
+			$prefijo_internacional = apg_sms_dame_prefijo_pais( WC()->countries->get_base_country() );
 		}
-	} else if ( $propietario && $prefijo ) {
-		$prefijo_internacional = apg_sms_dame_prefijo_pais( WC()->countries->get_base_country() );
-	}
 
-	preg_match( "/(\d{1,4})[0-9.\- ]+/", $telefono, $prefijo_telefonico );
-	if ( empty( $prefijo_telefonico ) ) {
-		return;
-	}
-	if ( isset( $prefijo_internacional ) ) {
-		if ( strpos( $prefijo_telefonico[1], $prefijo_internacional ) === false ) {
-			$telefono = $prefijo_internacional . $telefono;
+		preg_match( "/(\d{1,4})[0-9.\- ]+/", $telefono, $prefijo_telefonico );
+		if ( empty( $prefijo_telefonico ) ) {
+			return;
+		}
+		if ( isset( $prefijo_internacional ) ) {
+			if ( strpos( $prefijo_telefonico[1], $prefijo_internacional ) === false ) {
+				$telefono = $prefijo_internacional . $telefono;
+			}
+		}
+		if ( ( $servicio == "moreify" || $servicio == "twilio" ) && strpos( $prefijo[1], "+" ) === false ) {
+			$telefono = "+" . $telefono;
+		} else if ( $servicio == "isms" && isset( $prefijo_internacional ) ) {
+			$telefono = "00" . preg_replace( '/\+/', '', $telefono );
 		}
 	}
-	if ( ( $servicio == "moreify" || $servicio == "twilio" ) && strpos( $prefijo[1], "+" ) === false ) {
-		$telefono = "+" . $telefono;
-	} else if ( $servicio == "isms" && isset( $prefijo_internacional ) ) {
-		$telefono = "00" . preg_replace( '/\+/', '', $telefono );
-	} 
 	
-	return $telefono;
+	//Permitir que otros plugins modifiquen el teléfono devuelto
+	return apply_filters( 'apg_sms_phone_return', $telefono, $pedido, $telefono, $servicio, $propietario, $envio );
 }
 
 //Procesa las variables
@@ -280,7 +284,8 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 			$mensaje = str_replace( "%" . $variable . "%", $nombre, $mensaje );
 		}
 	}
-
+	
+	//Permitir que otros plugins modifiquen el mensaje devuelto
 	return apply_filters( 'apg_sms_message' , $mensaje , $numero_de_pedido );
 }
 

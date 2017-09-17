@@ -1,8 +1,6 @@
 <?php
 //Envía el mensaje SMS
 function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
-	global $apg_sms;
-	
 	switch ( $configuracion['servicio'] ) {
 		case "voipstunt":
 			$respuesta = wp_remote_get( "https://www.voipstunt.com/myaccount/sendsms.php?username=" . $configuracion['usuario_voipstunt'] . "&password=" . $configuracion['contrasena_voipstunt'] . "&from=" . $configuracion['telefono'] . "&to=" . $telefono . "&text=" . apg_sms_codifica_el_mensaje( $mensaje ) );
@@ -56,9 +54,8 @@ function apg_sms_envia_sms( $configuracion, $telefono, $mensaje ) {
 			$argumentos['body'] = array( 
 				'username' 					=> $configuracion['usuario_bulksms'],
 				'password' 					=> $configuracion['contrasena_bulksms'],
-				'message' 					=> bin2hex( mb_convert_encoding( $mensaje, "UTF-16", "UTF-8" ) ),
+				'message' 					=> $mensaje,
 				'msisdn' 					=> $telefono,
-				'dca' 						=> '16bit',
 				'allow_concat_text_sms'		=> '1',
                 'concat_text_sms_max_parts'	=> '6',
 			 );

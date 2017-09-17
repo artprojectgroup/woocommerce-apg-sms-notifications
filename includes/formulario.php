@@ -229,7 +229,7 @@
 			"ruta_msg91"		=> array(
 				"default"				=> __( 'Default', 'woocommerce-apg-sms-notifications' ), 
 				1						=> 1, 
-				4						=> 4
+				4						=> 4,
 			),
 			"servidor_bulksms"	=> array(
 				"bulksms.vsms.net"		=> __( 'International', 'woocommerce-apg-sms-notifications' ), 
@@ -244,7 +244,7 @@
 			),
 			"ruta_msgwow"		=> array(
 				1						=> 1, 
-				4						=> 4
+				4						=> 4,
 			),
 			"servidor_msgwow"	=> array(
 				"0"						=> __( 'International', 'woocommerce-apg-sms-notifications' ), 
@@ -263,9 +263,9 @@
           <span class="woocommerce-help-tip" data-tip="' . sprintf( __( 'The %s for your account in %s', 'woocommerce-apg-sms-notifications' ), __( $campo, 'woocommerce-apg-sms-notifications' ), $proveedor ) . '" src="' . plugins_url(  "woocommerce/assets/images/help.png" ) . '" height="16" width="16" /> </th>
         <td class="forminp forminp-number"><select class="wc-enhanced-select" id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" tabindex="' . $tab++ . '">
 					';
-					foreach ( $proveedores_opciones[$valor_campo] as $valor => $opcion ) {
-						$chequea = ( isset( $configuracion[$valor_campo] ) && $configuracion[$valor_campo] == $valor ) ? ' selected="selected"' : '';
-				  		echo '<option value="' . $valor . '"' . $chequea . '>' . $opcion . '</option>' . PHP_EOL;
+					foreach ( $proveedores_opciones[$valor_campo] as $valor_opcion => $opcion ) {
+						$chequea = ( isset( $configuracion[$valor_campo] ) && $configuracion[$valor_campo] == $valor_opcion ) ? ' selected="selected"' : '';
+				  		echo '<option value="' . $valor_opcion . '"' . $chequea . '>' . $opcion . '</option>' . PHP_EOL;
 					}
 					echo '          </select></td>
       </tr>
@@ -339,7 +339,7 @@
 		?>
         </select></td>
       </tr>
-      <?php if ( class_exists( 'WC_SA' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : //Comprueba la existencia de los plugins de estado personalizado ?>
+      <?php if ( class_exists( 'WC_SA' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) || class_exists( 'WC_Order_Status_Manager' ) ) : //Comprueba la existencia de los plugins de estado personalizado ?>
       <tr valign="top">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[estados_personalizados]">
             <?php _e( 'Custom Order Statuses & Actions:', 'woocommerce-apg-sms-notifications' ); ?>
@@ -383,6 +383,15 @@
 							'hide_empty'	=> 0, 
 							'orderby'		=> 'id' 
 						) );
+					} else if ( class_exists( 'WC_Order_Status_Manager' ) ) { //WooCommerce Order Status Manager
+						/*
+						$lista_de_estados = ( array ) get_terms( 'wc_order_status', array( 
+							'hide_empty'	=> 0, 
+							'orderby'		=> 'id' 
+						) );
+						print_r($lista_de_estados);
+						//$lista_de_estados = wc_order_status_manager_get_order_status_posts( array() );
+						*/
 					} else {
 						$lista_de_estados = ( array ) get_terms( 'shop_order_status', array( 
 							'hide_empty'	=> 0, 
@@ -390,31 +399,33 @@
 						) );
 					}
 					$lista_nueva = array();
-					foreach( $lista_de_estados as $estado ) {
-						$estado_nombre = str_replace( "wc-", "", $estado->slug );
-						if ( !in_array( $estado_nombre, $estados_originales ) ) {
-							$muestra_estado = false;
-							$estados_personalizados = get_option( 'taxonomy_' . $estado->term_id, false );
-							if ( $estados_personalizados && ( isset( $estados_personalizados['woocommerce_woo_advance_order_status_email'] ) ) && (  '1' == $estados_personalizados['woocommerce_woo_advance_order_status_email'] || 'yes' == $estados_personalizados['woocommerce_woo_advance_order_status_email'] ) ) {
-								$muestra_estado = true;
-							}
-							if ( get_option( 'az_custom_order_status_meta_' . $estado->slug, true ) ) { //WooCommerce Advance Order Status
-								$estados_personalizados = get_option( 'az_custom_order_status_meta_' . $estado->slug, true );
-								if ( $estados_personalizados ) { //Ya no hay que controlar si se notifica por correo electrónico o no
+					if ( isset( $lista_de_estados) ) {
+						foreach( $lista_de_estados as $estado ) {
+							$estado_nombre = str_replace( "wc-", "", $estado->slug );
+							if ( !in_array( $estado_nombre, $estados_originales ) ) {
+								$muestra_estado = false;
+								$estados_personalizados = get_option( 'taxonomy_' . $estado->term_id, false );
+								if ( $estados_personalizados && ( isset( $estados_personalizados['woocommerce_woo_advance_order_status_email'] ) ) && (  '1' == $estados_personalizados['woocommerce_woo_advance_order_status_email'] || 'yes' == $estados_personalizados['woocommerce_woo_advance_order_status_email'] ) ) {
 									$muestra_estado = true;
 								}
-							}
-							if ( $muestra_estado ) {
-								$chequea = '';
-								if ( isset( $configuracion['estados_personalizados'] ) ) {
-									foreach ( $configuracion['estados_personalizados'] as $estado_personalizado ) {
-										if ( $estado_personalizado == $estado_nombre ) {
-											$chequea = ' selected="selected"';
-										}
+								if ( get_option( 'az_custom_order_status_meta_' . $estado->slug, true ) ) { //WooCommerce Advance Order Status
+									$estados_personalizados = get_option( 'az_custom_order_status_meta_' . $estado->slug, true );
+									if ( $estados_personalizados ) { //Ya no hay que controlar si se notifica por correo electrónico o no
+										$muestra_estado = true;
 									}
 								}
-								echo '<option value="' . $estado_nombre . '"' . $chequea . '>' . $estado->name . '</option>' . PHP_EOL;
-								$lista_nueva[] = $estado_nombre;
+								if ( $muestra_estado ) {
+									$chequea = '';
+									if ( isset( $configuracion['estados_personalizados'] ) ) {
+										foreach ( $configuracion['estados_personalizados'] as $estado_personalizado ) {
+											if ( $estado_personalizado == $estado_nombre ) {
+												$chequea = ' selected="selected"';
+											}
+										}
+									}
+									echo '<option value="' . $estado_nombre . '"' . $chequea . '>' . $estado->name . '</option>' . PHP_EOL;
+									$lista_nueva[] = $estado_nombre;
+								}
 							}
 						}
 					}
