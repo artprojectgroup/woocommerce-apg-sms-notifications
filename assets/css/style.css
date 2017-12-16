@@ -24,6 +24,8 @@ table.apg-table, .cabecera, .banner {
 }
 .estrellas .star-rating .star {
 	font-size: 18px;
+}
+div.informacion .estrellas .star-rating .star {
 	color: #fff;
 }
 div.informacion .genericon, div.informacion .estrellas .star-rating .star, div.informacion .artprojectgroup {

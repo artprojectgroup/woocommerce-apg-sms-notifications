@@ -120,7 +120,7 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 * Small fixes.
 * Header updated.
 * Stylesheet updated.
-* Screenshot update.
+* Screenshot updated.
 = 2.13.1 =
 * Added filters *apg_sms_phone_process* and *apg_sms_phone_return* to facilitate the phone number process from third-party plugins. **Modification devised by [Marco Almeida](http://www.webdados.pt/)**.
 * BulkSMS API arguments fixed.
@@ -346,10 +346,11 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 * Initial version.
 
 == Upgrade Notice ==
-= 2.13.1 =
-* Added filters *apg_sms_phone_process* and *apg_sms_phone_return* to facilitate the phone number process from third-party plugins. **Modification devised by [Marco Almeida](http://www.webdados.pt/)**.
-* BulkSMS API arguments fixed.
-* Fixed configuration form.
+= 2.13.1.1 =
+* Small fixes.
+* Header updated.
+* Stylesheet updated.
+* Screenshot updated.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).
