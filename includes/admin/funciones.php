@@ -142,6 +142,9 @@ function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietari
 		$shipping_country	= is_callable( array( $pedido, 'get_shipping_country' ) ) ? $pedido->get_shipping_country() : $pedido->shipping_country;
 		$prefijo			= apg_sms_prefijo( $servicio );
 		$telefono			= str_replace( array( '+','-' ), '', filter_var( $telefono, FILTER_SANITIZE_NUMBER_INT ) );
+		if ( substr( $telefono, 0, 2 ) == '00' ) { //Código propuesto por Marco Almeida (https://wordpress.org/support/topic/problems-sending-to-international-numbers-via-plivo/)
+			$telefono = substr( $telefono, 2 );
+		}
 		if ( !$propietario ) {
 			if ( ( !$envio && $billing_country && ( WC()->countries->get_base_country() != $billing_country ) || $prefijo ) ) {
 				$prefijo_internacional = apg_sms_dame_prefijo_pais( $billing_country ); //Teléfono de facturación
@@ -159,6 +162,11 @@ function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietari
 		if ( isset( $prefijo_internacional ) ) {
 			if ( strpos( $prefijo_telefonico[1], $prefijo_internacional ) === false ) {
 				$telefono = $prefijo_internacional . $telefono;
+				if ( $servicio == "twizo" ) { //Código propuesto por Arnoud Dolleman
+					$telefono = $prefijo_internacional . ltrim( $telefono, '0' );
+       			} else {
+           			$telefono = $prefijo_internacional . $telefono;
+       			}
 			}
 		}
 		if ( ( $servicio == "moreify" || $servicio == "twilio" ) && strpos( $prefijo[1], "+" ) === false ) {
@@ -174,7 +182,7 @@ function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietari
 
 //Procesa las variables
 function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) {
-	global $configuracion;
+	global $apg_sms_settings;
 
 	$apg_sms = array( 
 		"id", 
@@ -268,7 +276,7 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 		} else if ( $variable == "order_product" ) {
 			$nombre		= '';
 			$productos	= $pedido->get_items();
-			if ( !isset( $configuracion['productos'] ) || $configuracion['productos'] != 1 ) {
+			if ( !isset( $apg_sms_settings['productos'] ) || $apg_sms_settings['productos'] != 1 ) {
 				$nombre = $productos[key( $productos )]['name'];
 				if ( strlen( $nombre ) > 10 ) {
 					$nombre = substr( $nombre, 0, 10 ) . "...";
