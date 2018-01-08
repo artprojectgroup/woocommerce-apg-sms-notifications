@@ -7,9 +7,9 @@ Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, 
 
 Requires at least: 3.8
 
-Tested up to: 4.9.1
+Tested up to: 5.0
 
-Stable tag: 2.13.1.1
+Stable tag: 2.13.1.2
 
 WC requires at least: 2.1
 
@@ -122,6 +122,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.13.1.2
+* Arreglo del prefijo internacional duplicado.
+
 ### 2.13.1.1
 * Pequeños arreglos.
 * Actualización de cabecera.

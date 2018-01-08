@@ -135,13 +135,15 @@ function apg_sms_codifica_el_mensaje( $mensaje ) {
 
 //Procesa el teléfono y le añade, si lo necesita, el prefijo
 function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietario = false, $envio = false ) {
-	//Permitir que otros plugins impidan que se procese el número de teléfono
+	if ( empty( $telefono ) ) { //Control
+		return;
+	}
+	//Permite que otros plugins impidan que se procese el número de teléfono
 	if ( apply_filters( 'apg_sms_phone_process', true, $pedido, $telefono, $servicio, $propietario, $envio ) ) {
-		$numero_de_pedido	= is_callable( array( $pedido, 'get_id' ) ) ? $pedido->get_id() : $pedido->id;
 		$billing_country	= is_callable( array( $pedido, 'get_billing_country' ) ) ? $pedido->get_billing_country() : $pedido->billing_country;
 		$shipping_country	= is_callable( array( $pedido, 'get_shipping_country' ) ) ? $pedido->get_shipping_country() : $pedido->shipping_country;
 		$prefijo			= apg_sms_prefijo( $servicio );
-		$telefono			= str_replace( array( '+','-' ), '', filter_var( $telefono, FILTER_SANITIZE_NUMBER_INT ) );
+		$telefono			= str_replace( array( '+', '-' ), '', filter_var( $telefono, FILTER_SANITIZE_NUMBER_INT ) );
 		if ( substr( $telefono, 0, 2 ) == '00' ) { //Código propuesto por Marco Almeida (https://wordpress.org/support/topic/problems-sending-to-international-numbers-via-plivo/)
 			$telefono = substr( $telefono, 2 );
 		}
@@ -156,12 +158,11 @@ function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietari
 		}
 
 		preg_match( "/(\d{1,4})[0-9.\- ]+/", $telefono, $prefijo_telefonico );
-		if ( empty( $prefijo_telefonico ) ) {
+		if ( empty( $prefijo_telefonico ) ) { //Control
 			return;
 		}
 		if ( isset( $prefijo_internacional ) ) {
 			if ( strpos( $prefijo_telefonico[1], $prefijo_internacional ) === false ) {
-				$telefono = $prefijo_internacional . $telefono;
 				if ( $servicio == "twizo" ) { //Código propuesto por Arnoud Dolleman
 					$telefono = $prefijo_internacional . ltrim( $telefono, '0' );
        			} else {
@@ -198,7 +199,8 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 		"post_status", 
 		"shop_name", 
 		"note", 
-		"order_product" 
+		"order_product",
+		"shipping_method", 
 	);
 	$apg_sms_variables = array( //Hay que añadirles un guión
 		"order_key", 
@@ -222,7 +224,6 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 		"shipping_postcode", 
 		"shipping_country", 
 		"shipping_state", 
-		"shipping_method", 
 		"shipping_method_title", 
 		"payment_method", 
 		"payment_method_title", 
@@ -240,8 +241,9 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 
 	$numero_de_pedido		= is_callable( array( $pedido, 'get_id' ) ) ? $pedido->get_id() : $pedido->id;
 	$variables_de_pedido	= get_post_custom( $numero_de_pedido ); //WooCommerce 2.1
-
+	
 	preg_match_all( "/%(.*?)%/", $mensaje, $busqueda );
+
 	foreach ( $busqueda[1] as $variable ) { 
 		$variable = strtolower( $variable );
 
@@ -255,11 +257,14 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 			"shop_name", 
 			"note", 
 			"id", 
-			"order_product" 
+			"order_product",
+			"order_discount", 
+			"shipping_method_title", 
 		);
+		
 		if ( !in_array( $variable, $especiales ) ) {
 			if ( in_array( $variable, $apg_sms ) ) {
-				$mensaje = str_replace( "%" . $variable . "%", is_callable( array( $pedido, 'get_' . $variable ) ) ? $pedido->{'get_' . $variable . '()'} : $pedido->$variable, $mensaje ); //Variables estándar - Objeto
+				$mensaje = str_replace( "%" . $variable . "%", is_callable( array( $pedido, 'get_' . $variable ) ) ? $pedido->{'get_' . $variable}() : $pedido->$variable, $mensaje ); //Variables estándar - Objeto
 			} else if ( in_array( $variable, $apg_sms_variables ) ) {
 				$mensaje = str_replace( "%" . $variable . "%", $variables_de_pedido["_" . $variable][0], $mensaje ); //Variables estándar - Array
 			} else if ( isset( $variables_de_pedido[$variable] ) || in_array( $variable, $variables_personalizadas ) ) {
@@ -273,6 +278,10 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 			$mensaje = str_replace( "%" . $variable . "%", $nota, $mensaje );
 		} else if ( $variable == "id" ) {
 			$mensaje = str_replace( "%" . $variable . "%", $pedido->get_order_number(), $mensaje );
+		} else if ( $variable == "order_discount" ) {
+			$mensaje = str_replace( "%" . $variable . "%", $pedido->get_discount_total(), $mensaje );
+		} else if ( $variable == "shipping_method_title" ) {
+			$mensaje = str_replace( "%" . $variable . "%", $pedido->get_shipping_method(), $mensaje );
 		} else if ( $variable == "order_product" ) {
 			$nombre		= '';
 			$productos	= $pedido->get_items();
