@@ -4,7 +4,7 @@ Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, OPEN DND, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Custom Order Statuses & Actions, WooCommerce Order Status & Actions Manager, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro, WPML
 Requires at least: 3.8
 Tested up to: 5.0
-Stable tag: 2.13.1.2
+Stable tag: 2.13.2
 WC requires at least: 2.1
 WC tested up to: 3.3
 License: GPLv3
@@ -47,7 +47,7 @@ Add to your WooCommerce store SMS notifications to your customers when order sta
 * Possibility to send, or not, international SMS.
 * Possibility to notify to shipping phone number, if it’s different from the billing phone number.
 * 100% compatible with [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS).
-* Support custom status from [WooCommerce Order Status & Actions Manager](http://codecanyon.net/item/woocommerce-order-status-actions-manager/6392174?ref=apgmijas) and [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931?ref=apgmijas) plugins.
+* Support custom status from [WooCommerce Order Status & Actions Manager](http://codecanyon.net/item/woocommerce-order-status-actions-manager/6392174?ref=apgmijas), [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931?ref=apgmijas) and [WooCommerce Order Status Manager](https://woocommerce.com/products/woocommerce-order-status-manager/) plugins.
 * Support for custom order numbers from [WooCommerce Sequential Order Numbers Pro](http://www.woothemes.com/products/sequential-order-numbers-pro/) plugin.
 * Automatically inset the international prefix number, if it’s necessary, to the customer’s phone number.
 * Also notified by SMS the customer notes.
@@ -116,6 +116,9 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 1. Screenshot of WooCommerce - APG SMS Notifications.
 
 == Changelog ==
+= 2.13.2 =
+* Small fixes.
+* Added support for custom states from [WooCommerce Order Status Manager](https://woocommerce.com/products/woocommerce-order-status-manager/) plugin.
 = 2.13.1.2 =
 * Fixed duplicate international prefix.
 = 2.13.1.1 =
@@ -243,7 +246,7 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 * New links and icons.
 * New screenshot. 
 = 2.3 =
-* Support for iSMS Malaysia. **Update sponsored by [Wan Nur Izzati](http://profiles.wordpress.org/wniizzati/)**.
+* Support for iSMS Malaysia. **Update sponsored by [Wan Nur Izzati](https://profiles.wordpress.org/wniizzati/)**.
 = 2.2.2.2 =
 * Changing the plugin URL in Art Project Group.
 = 2.2.2.1 =
@@ -254,7 +257,7 @@ If you need help to configuring or installing **WooCommerce - APG SMS Notificati
 * Fixed an error in Twilio.
 * Fixed an error on processing the owner phone number.
 = 2.2 =
-* Adde support for custom states from [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931?ref=apgmijas) plugin.
+* Added support for custom states from [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931?ref=apgmijas) plugin.
 * Added support for custom order states from [WooCommerce Sequential Order Numbers Pro](http://www.woothemes.com/products/sequential-order-numbers-pro/) plugin.
 * Fixed bug that erased all settings when disable the plugin.
 * Minor correction that prevents the occurrence of an error code when information about the plugin was collected.

@@ -162,12 +162,8 @@ function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietari
 			return;
 		}
 		if ( isset( $prefijo_internacional ) ) {
-			if ( strpos( $prefijo_telefonico[1], $prefijo_internacional ) === false ) {
-				if ( $servicio == "twizo" ) { //Código propuesto por Arnoud Dolleman
-					$telefono = $prefijo_internacional . ltrim( $telefono, '0' );
-       			} else {
-           			$telefono = $prefijo_internacional . $telefono;
-       			}
+			if ( strpos( strval( $prefijo_telefonico[1] ) , strval( $prefijo_internacional ) ) === false ) {
+				$telefono = $prefijo_internacional . ltrim( $telefono, '0' );
 			}
 		}
 		if ( ( $servicio == "moreify" || $servicio == "twilio" ) && strpos( $prefijo[1], "+" ) === false ) {
