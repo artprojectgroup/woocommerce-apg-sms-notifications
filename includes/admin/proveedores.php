@@ -152,6 +152,6 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
 		$correo	= __( 'Mobile number:', 'woocommerce-apg-sms-notifications' ) . "\r\n" . $telefono . "\r\n\r\n";
 		$correo	.= __( 'Message: ', 'woocommerce-apg-sms-notifications' ) . "\r\n" . $mensaje . "\r\n\r\n"; 
 		$correo	.= __( 'Gateway answer: ', 'woocommerce-apg-sms-notifications' ) . "\r\n" . print_r( $respuesta, true );
-		wp_mail( $apg_sms_settings['campo_debug'], 'WooCommerce - APG SMS Notifications', $correo, 'charset=UTF-8' . "\r\n" ); 
+		wp_mail( $apg_sms_settings['campo_debug'], 'WC - APG SMS Notifications', $correo, 'charset=UTF-8' . "\r\n" ); 
 	}
 }

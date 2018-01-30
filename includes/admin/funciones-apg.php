@@ -4,11 +4,11 @@ define( 'DIRECCION_apg_sms', plugin_basename( __FILE__ ) );
 
 //Definimos las variables
 $apg_sms = array( 	
-	'plugin' 		=> 'WooCommerce - APG SMS Notifications', 
+	'plugin' 		=> 'WC - APG SMS Notifications', 
 	'plugin_uri' 	=> 'woocommerce-apg-sms-notifications', 
 	'donacion' 		=> 'https://artprojectgroup.es/tienda/donacion',
 	'soporte' 		=> 'https://artprojectgroup.es/tienda/ticket-de-soporte',
-	'plugin_url' 	=> 'https://artprojectgroup.es/plugins-para-wordpress/plugins-para-woocommerce/woocommerce-apg-sms-notifications', 
+	'plugin_url' 	=> 'https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-sms-notifications', 
 	'ajustes' 		=> 'admin.php?page=apg_sms', 
 	'puntuacion' 	=> 'https://wordpress.org/support/view/plugin-reviews/woocommerce-apg-sms-notifications' 
 );

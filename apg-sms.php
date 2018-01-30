@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: WooCommerce - APG SMS Notifications
-Version: 2.13.2.1
+Plugin Name: WC - APG SMS Notifications
+Version: 2.13.3
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: https://artprojectgroup.es/
@@ -14,7 +14,7 @@ WC tested up to: 3.3
 Text Domain: woocommerce-apg-sms-notifications
 Domain Path: /languages
 
-@package WooCommerce - APG SMS Notifications
+@package WC - APG SMS Notifications
 @category Core
 @author Art Project Group
 */
