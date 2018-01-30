@@ -9,7 +9,7 @@ Requires at least: 3.8
 
 Tested up to: 5.0
 
-Stable tag: 2.13.2
+Stable tag: 2.13.2.1
 
 WC requires at least: 2.1
 
@@ -122,6 +122,9 @@ Si necesitas ayuda para configurar o instalar **WooCommerce - APG SMS Notificati
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.13.2.1
+* Pequeños arreglos.
+
 ### 2.13.2
 * Pequeños arreglos.
 * Añadido soporte de los estados personalizados del plugin [WooCommerce Order Status Manager](https://woocommerce.com/products/woocommerce-order-status-manager/).

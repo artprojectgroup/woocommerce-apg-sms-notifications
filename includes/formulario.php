@@ -319,7 +319,6 @@
 				if ( class_exists( 'WC_SA' ) ) { //WooCommerce Order Status & Actions Manager
 					$lista_de_estados_temporal = array();
 					$lista_de_estados = wc_sa_get_statuses();
-					print_r($lista_de_estados);
 					foreach ( $lista_de_estados as $clave => $estado ) {
 						if ( $estado->label ) {
 							$estados_personalizados = new WC_SA_Status( $clave );
