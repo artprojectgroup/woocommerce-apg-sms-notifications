@@ -1,7 +1,4 @@
 <?php
-//Definimos constantes
-define( 'DIRECCION_apg_sms', plugin_basename( __FILE__ ) );
-
 //Definimos las variables
 $apg_sms = array( 	
 	'plugin' 		=> 'WC - APG SMS Notifications', 
@@ -102,7 +99,7 @@ function apg_sms_actualizacion() {
 function apg_sms_muestra_mensaje() {
 	global $apg_sms_settings;
 
-	wp_register_style( 'apg_sms_hoja_de_estilo', plugins_url( 'assets/css/style.css', __FILE__ ) ); //Carga la hoja de estilo
+	wp_register_style( 'apg_sms_hoja_de_estilo', plugins_url( 'assets/css/style.css', DIRECCION_apg_sms ) ); //Carga la hoja de estilo
 	wp_enqueue_style( 'apg_sms_hoja_de_estilo' ); //Carga la hoja de estilo
 
 	/*if ( !isset( $apg_sms_settings['mensaje_pedido'] ) || !isset( $apg_sms_settings['mensaje_nota'] ) ) { //Comprueba si hay que mostrar el mensaje de actualización

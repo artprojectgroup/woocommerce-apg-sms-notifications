@@ -4,9 +4,9 @@ Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, OPEN DND, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Custom Order Statuses & Actions, WooCommerce Order Status & Actions Manager, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro, WPML
 Requires at least: 3.8
 Tested up to: 5.0
-Stable tag: 2.13.3
+Stable tag: 2.13.3.1
 WC requires at least: 2.1
-WC tested up to: 3.3
+WC tested up to: 3.3.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -118,6 +118,8 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 1. Screenshot of WC - APG SMS Notifications.
 
 == Changelog ==
+= 2.13.3.1 =
+* Small fixes.
 = 2.13.3 = 
 * Renaming the plugin: from WooCommerce - APG SMS Notifications to WC - APG SMS Notifications.
 = 2.13.2.1 =
@@ -357,8 +359,8 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 * Initial version.
 
 == Upgrade Notice ==
-= 2.13.3 = 
-* Renaming the plugin: from WooCommerce - APG SMS Notifications to WC - APG SMS Notifications.
+= 2.13.3.1 =
+* Small fixes.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).
