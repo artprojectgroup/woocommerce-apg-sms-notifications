@@ -575,14 +575,3 @@ function apg_sms_dame_prefijo_pais( $pais = '' ) {
 
 	return ( $pais == '' ) ? $paises : ( isset( $paises[$pais] ) ? $paises[$pais] : '' );
 }
-
-//Busca en el array de plugins
-function in_array_especial( $encuentra , $plugins ) {
-	foreach( $plugins as $plugin ) {
-		if ( stripos( $plugin , $encuentra ) !== false ) {
-			return true;
-		}
-	}
-
-	return false;
-}

@@ -3,13 +3,13 @@ Contributors: artprojectgroup
 
 Donate link: https://artprojectgroup.es/tienda/donacion
 
-Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, OPEN DND, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Custom Order Statuses & Actions, WooCommerce Order Status & Actions Manager, WooCommerce Advance Order Status, WooCommerce Sequential Order Numbers Pro, WPML
+Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, OPEN DND, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, WooCommerce Sequential Order Numbers Pro, WPML
 
 Requires at least: 3.8
 
 Tested up to: 5.0
 
-Stable tag: 2.13.3.1
+Stable tag: 2.14
 
 WC requires at least: 2.1
 
@@ -58,12 +58,13 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 * Posibilidad de enviar, o no, SMS internacionales.
 * Posibilidad de notificar al número de teléfono de envío, si es distinto del número de teléfono de facturación.
 * 100% compatible con [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS).
-* Soporte de los estados personalizados de los plugin [WooCommerce Order Status & Actions Manager](http://codecanyon.net/item/woocommerce-order-status-actions-manager/6392174?ref=apgmijas), [WooCommerce Advance Order Status](http://codecanyon.net/item/woocommerce-advance-order-status/6222931?ref=apgmijas) y [WooCommerce Order Status Manager](https://woocommerce.com/products/woocommerce-order-status-manager/).
+* Soporte para los estados de pedido personalizados.
 * Soporte para los números de pedido personalizados del plugin [WooCommerce Sequential Order Numbers Pro](http://www.woothemes.com/products/sequential-order-numbers-pro/).
 * Inserta de forma automática el código telefónico internacional, si es necesario, al número de teléfono del cliente.
 * También notifica por SMS las notas a los clientes.
 * Todos los mensajes son personalizables.
 * Puedes elegir qué mensajes enviar.
+* Puedes temporizar cada X horas el mensaje para pedidos en espera.
 * Soporta gran cantidad de variables para personalizar nuestros mensajes: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% y %note%.
 * Puedes añadir tus propias variables personalizadas.
 * Dispone del filtro *apg_sms_message* para facilitar la personalización de los mensajes SMS desde plugins de terceros.
@@ -124,6 +125,13 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.14
+* Pequeños arreglos.
+* Reescrito control de mensajes a enviar.
+* Reescrito el formulario de configuración.
+* Reescrita la gestión de estados de pedido personalizados.
+* Añadido temporizador para los mensajes del estado en espera. **Actualización patrocinada por [Be-Wide Online Solutions](https://www.be-wide.com)**.
+
 ### 2.13.3.1
 * Pequeños arreglos.
 
