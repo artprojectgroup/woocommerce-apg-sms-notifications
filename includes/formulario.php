@@ -105,14 +105,14 @@
       </tr>
       <tr valign="top" class="mensaje_recibido">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[mensaje_recibido]">
-            <?php _e( 'Order received custom message', 'woocommerce-apg-sms-notifications' ); ?>:
+            <?php _e( 'Order on-hold custom message', 'woocommerce-apg-sms-notifications' ); ?>:
           </label>
           <span class="woocommerce-help-tip" data-tip="<?php _e( 'You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.', 'woocommerce-apg-sms-notifications' ); ?>"></span> </th>
         <td class="forminp forminp-number"><textarea id="apg_sms_settings[mensaje_recibido]" name="apg_sms_settings[mensaje_recibido]" cols="50" rows="5" tabindex="<?php echo $tab++; ?>"><?php echo stripcslashes( !empty( $mensaje_recibido ) ? $mensaje_recibido : sprintf( __( 'Your order No. %s is received on %s. Thank you for shopping with us!', 'woocommerce-apg-sms-notifications' ), "%id%", "%shop_name%" ) ); ?></textarea></td>
       </tr>
       <tr valign="top" class="mensaje_recibido">
         <th scope="row" class="titledesc"> <label for="apg_sms_settings[temporizador]">
-            <?php _e( 'Order received timer', 'woocommerce-apg-sms-notifications' ); ?>:
+            <?php _e( 'Order on-hold timer', 'woocommerce-apg-sms-notifications' ); ?>:
           </label>
           <span class="woocommerce-help-tip" data-tip="<?php _e( 'You can timer this message every X hours. Leave blank to disable.', 'woocommerce-apg-sms-notifications' ); ?>" /> </th>
         <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[temporizador]" name="apg_sms_settings[temporizador]" size="50" value="<?php echo ( isset( $apg_sms_settings['temporizador'] ) ? $apg_sms_settings['temporizador'] : '' ); ?>" tabindex="<?php echo $tab++; ?>" /></td>
