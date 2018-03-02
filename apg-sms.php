@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WC - APG SMS Notifications
-Version: 2.14.0.3
+Version: 2.14.0.4
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: https://artprojectgroup.es/
@@ -9,7 +9,7 @@ Author: Art Project Group
 Requires at least: 3.8
 Tested up to: 5.0
 WC requires at least: 2.1
-WC tested up to: 3.3.2
+WC tested up to: 3.3.3
 
 Text Domain: woocommerce-apg-sms-notifications
 Domain Path: /languages
@@ -218,7 +218,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 				$mensaje = apg_sms_procesa_variables( $apg_sms_settings[$estado], $pedido, $apg_sms_settings['variables'] );
 		}
 
-		if ( isset( $mensaje ) && ( !$internacional || ( isset( $apg_sms_settings['internacional'] ) && $apg_sms_settings['internacional'] == 1 ) ) ) {
+		if ( isset( $mensaje ) && ( !$internacional || ( isset( $apg_sms_settings['internacional'] ) && $apg_sms_settings['internacional'] == 1 ) ) && !$notificacion ) {
 			apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ); //Mensaje para el teléfono de facturación
 			if ( $enviar_envio ) {
 				apg_sms_envia_sms( $apg_sms_settings, $telefono_envio, $mensaje ); //Mensaje para el teléfono de envío
@@ -241,7 +241,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		
 		$pedidos = wc_get_orders( array(
 			'limit'			=> -1,
-			'date_created'	=> '<' . strtotime( '-' . absint( $apg_sms_settings['temporizador'] ) * 60 . ' MINUTES', current_time( 'timestamp' ) ),
+			'date_created'	=> '<' . ( time() - ( absint( $apg_sms_settings['temporizador'] ) * 60 * 60 ) - 1 ),
 			'status'		=> 'on-hold',
 		) );
 
