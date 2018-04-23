@@ -245,8 +245,8 @@ function apg_sms_campos_de_proveedores( $listado_de_proveedores, $campos_de_prov
 			if ( array_key_exists( $valor_campo, $opciones_de_proveedores ) ) { //Campo select
 				echo '
   <tr valign="top" class="' . $valor . '"><!-- ' . $proveedor . ' -->
-	<th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' .ucfirst( $campo ) . ':' . '</label>
-	  <span class="woocommerce-help-tip" data-tip="' . sprintf( __( 'The %s for your account in %s', 'woocommerce-apg-sms-notifications' ), $campo, $proveedor ) . '" /> </th>
+	<th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' .ucfirst( $campo ) . ':' . '
+	  <span class="woocommerce-help-tip" data-tip="' . sprintf( __( 'The %s for your account in %s', 'woocommerce-apg-sms-notifications' ), $campo, $proveedor ) . '"></span></label></th>
 	<td class="forminp forminp-number"><select class="wc-enhanced-select" id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" tabindex="' . $tab++ . '">
 				';
 				foreach ( $opciones_de_proveedores[$valor_campo] as $valor_opcion => $opcion ) {
@@ -259,8 +259,8 @@ function apg_sms_campos_de_proveedores( $listado_de_proveedores, $campos_de_prov
 			} else { //Campo input
 				echo '
   <tr valign="top" class="' . $valor . '"><!-- ' . $proveedor . ' -->
-	<th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . ucfirst( $campo ) . ':' . '</label>
-	  <span class="woocommerce-help-tip" data-tip="' . sprintf( __( 'The %s for your account in %s', 'woocommerce-apg-sms-notifications' ), $campo, $proveedor ) . '" /> </th>
+	<th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . ucfirst( $campo ) . ':' . '
+	  <span class="woocommerce-help-tip" data-tip="' . sprintf( __( 'The %s for your account in %s', 'woocommerce-apg-sms-notifications' ), $campo, $proveedor ) . '"></span></label></th>
 	<td class="forminp forminp-number"><input type="text" id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" size="50" value="' . ( isset( $apg_sms_settings[$valor_campo] ) ? $apg_sms_settings[$valor_campo] : '' ) . '" tabindex="' . $tab++ . '" /></td>
   </tr>
 				';

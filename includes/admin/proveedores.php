@@ -42,7 +42,8 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
 			$respuesta = wp_remote_post( "http://control.msg91.com/sendhttp.php", $argumentos );
 			break;
 		case "msgwow":
-			$respuesta = wp_remote_get( "https://my.msgwow.com/api/v2/sendsms?authkey=" . $apg_sms_settings['clave_msgwow'] . "&mobiles=" . $telefono . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&sender=" . $apg_sms_settings['identificador_msgwow'] . "&route=" . $apg_sms_settings['ruta_msgwow'] . "&country=" . $apg_sms_settings['servidor_msgwow'] );
+			$respuesta = wp_remote_get( "http://my.msgwow.com/api/sendhttp.php?authkey=" . $apg_sms_settings['clave_msgwow'] . "&mobiles=" . $telefono . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&sender=" . $apg_sms_settings['identificador_msgwow'] . "&route=" . $apg_sms_settings['ruta_msgwow'] . "&country=" . $apg_sms_settings['servidor_msgwow'] );
+			//$respuesta = wp_remote_get( "https://my.msgwow.com/api/v2/sendsms?authkey=" . $apg_sms_settings['clave_msgwow'] . "&mobiles=" . $telefono . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&sender=" . $apg_sms_settings['identificador_msgwow'] . "&route=" . $apg_sms_settings['ruta_msgwow'] . "&country=" . $apg_sms_settings['servidor_msgwow'] );
 			break;
 		case "mvaayoo":
 			$argumentos['body'] = array( 
