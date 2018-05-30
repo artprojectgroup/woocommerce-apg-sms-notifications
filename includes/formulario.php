@@ -86,7 +86,7 @@
 				<td class="forminp forminp-number"><input id="apg_sms_settings[productos]" name="apg_sms_settings[productos]" type="checkbox" value="1" <?php echo ( isset( $apg_sms_settings['productos'] ) && $apg_sms_settings['productos'] == "1" ) ? 'checked="checked"' : ''; ?> tabindex="
 					<?php echo $tab++; ?>" /></td>
 			</tr>
-			<?php if ( class_exists( 'WC_SA' ) || function_exists( 'AppZab_woo_advance_order_status_init' ) || class_exists( 'WC_Order_Status_Manager' ) || isset( $GLOBALS['advorder_lite_orderstatus'] ) ) : //Comprueba la existencia de los plugins de estado personalizado ?>
+			<?php if ( !empty( $listado_de_estados ) ) : //Comprueba la existencia de estados personalizados ?>
 			<tr valign="top">
 				<th scope="row" class="titledesc">
 					<label for="apg_sms_settings[estados_personalizados]">

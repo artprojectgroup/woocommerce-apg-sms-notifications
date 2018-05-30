@@ -67,8 +67,9 @@ div.informacion a {
 	text-decoration: none;
 	color: #fff;
 }
-table.apg-table select, table.apg-table textarea {
-	width: 100% !important;
+table.apg-table .select2-container, table.apg-table textarea, table.apg-table input[type=text] {
+    min-width: 400px;
+    max-width: 100%;
 }
 table.apg-table textarea {
 	min-height: 200px;

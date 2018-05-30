@@ -26,7 +26,7 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
 			$respuesta = wp_remote_get( "https://www.isms.com.my/isms_send.php?un=" . $apg_sms_settings['usuario_isms'] . "&pwd=" . $apg_sms_settings['contrasena_isms'] . "&dstno=" . $telefono . "&msg=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&type=2" . "&sendid=" . $apg_sms_settings['telefono_isms'] );
 			break;
 		case "labsmobile":
-			$respuesta = wp_remote_get( "https://api.labsmobile.com/get/send.php?client=" . $apg_sms_settings['identificador_labsmobile'] . "&username=" . $apg_sms_settings['usuario_labsmobile'] . "&password=" . $apg_sms_settings['contrasena_labsmobile'] . "&msisdn=" . $telefono . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&sender=" . $apg_sms_settings['sid_labsmobile'] );
+			$respuesta = wp_remote_get( "https://api.labsmobile.com/get/send.php?client=" . $apg_sms_settings['identificador_labsmobile'] . "&username=" . $apg_sms_settings['usuario_labsmobile'] . "&password=" . $apg_sms_settings['contrasena_labsmobile'] . "&msisdn=" . $telefono . "&message=" . apg_sms_codifica_el_mensaje( apg_sms_normaliza_mensaje( $mensaje ) ) . "&sender=" . $apg_sms_settings['sid_labsmobile'] );
 			break;			
 		case "moreify":
 			$respuesta = wp_remote_get( "https://members.moreify.com/api/v1/sendSms?project=" . $apg_sms_settings['proyecto_moreify'] . "&password=" . $apg_sms_settings['identificador_moreify'] . "&phonenumber=" . $telefono . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) );
