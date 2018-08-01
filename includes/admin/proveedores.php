@@ -76,6 +76,28 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
 			) );
 			$respuesta = wp_remote_post( "https://api.plivo.com/v1/Account/" . $apg_sms_settings['usuario_plivo'] . "/Message/", $argumentos );
 			break;
+		case "routee":
+			$argumentos['headers'] = array(
+				'Authorization'	=> 'Basic ' . base64_encode( $apg_sms_settings['usuario_routee'] . ":" . $apg_sms_settings['contrasena_routee'] ),
+				'Content-Type'	=> 'application/x-www-form-urlencoded',
+			);
+			$argumentos['body'] = array(
+				'grant_type'	=> 'client_credentials',
+			);
+			$respuesta = wp_remote_post( "https://auth.routee.net/oauth/token", $argumentos );
+			$routee = json_decode( $respuesta['body'] );
+			
+			$argumentos['headers'] = array(
+				'Authorization'	=> 'Bearer ' . $routee->access_token,
+				'Content-Type'	=> 'application/json',
+			);
+			$argumentos['body'] = json_encode( array(
+				'body'			=> $mensaje,
+				'to'			=> $telefono,
+				'from'			=> $apg_sms_settings['identificador_routee'],
+			) );
+			$respuesta = wp_remote_post( "https://connect.routee.net/sms", $argumentos );
+			break;
 		case "sipdiscount":
 			$respuesta = wp_remote_get( "https://www.sipdiscount.com/myaccount/sendsms.php?username=" . $apg_sms_settings['usuario_sipdiscount'] . "&password=" . $apg_sms_settings['contrasena_sipdiscount'] . "&from=" . $apg_sms_settings['telefono'] . "&to=" . $telefono . "&text=" . apg_sms_codifica_el_mensaje( $mensaje ) );
 			break;

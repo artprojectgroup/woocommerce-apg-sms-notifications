@@ -34,6 +34,7 @@ $listado_de_proveedores = array(
 	"nexmo"				=> "Nexmo",
 	"open_dnd" 			=> "OPEN DND", 
 	"plivo" 			=> "Plivo",
+	"routee" 			=> "Routee",
 	"sipdiscount" 		=> "SIP Discount", 
 	"smscountry" 		=> "SMS Country",
 	"smsdiscount" 		=> "SMS Discount", 
@@ -44,7 +45,7 @@ $listado_de_proveedores = array(
 	"twizo"				=> "Twizo",
 	"voipbuster" 		=> "VoipBuster", 
 	"voipbusterpro" 	=> "VoipBusterPro", 
-	"voipstunt" 		=> "VoipStunt", 
+	"voipstunt" 		=> "VoipStunt",
 );
 asort( $listado_de_proveedores, SORT_NATURAL | SORT_FLAG_CASE ); //Ordena alfabeticamente los proveedores
 
@@ -113,6 +114,11 @@ $campos_de_proveedores = array(
 		"clave_plivo"						=> __( 'authentication Token', 'woocommerce-apg-sms-notifications' ),
 		"identificador_plivo"				=> __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
 	),
+	"routee"			=> array( 
+		"usuario_routee" 					=> __( 'application ID', 'woocommerce-apg-sms-notifications' ),
+		"contrasena_routee"					=> __( 'application secret', 'woocommerce-apg-sms-notifications' ),
+		"identificador_routee"				=> __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
+	), 
 	"sipdiscount"		=> array( 
 		"usuario_sipdiscount" 				=> __( 'username', 'woocommerce-apg-sms-notifications' ),
 		"contrasena_sipdiscount"			=> __( 'password', 'woocommerce-apg-sms-notifications' ),
