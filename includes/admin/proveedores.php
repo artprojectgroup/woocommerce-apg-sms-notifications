@@ -28,6 +28,9 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
 		case "labsmobile":
 			$respuesta = wp_remote_get( "https://api.labsmobile.com/get/send.php?client=" . $apg_sms_settings['identificador_labsmobile'] . "&username=" . $apg_sms_settings['usuario_labsmobile'] . "&password=" . $apg_sms_settings['contrasena_labsmobile'] . "&msisdn=" . $telefono . "&message=" . apg_sms_codifica_el_mensaje( apg_sms_normaliza_mensaje( $mensaje ) ) . "&sender=" . $apg_sms_settings['sid_labsmobile'] );
 			break;			
+		case "moplet":
+			$respuesta = wp_remote_get( "http://sms.moplet.com/api/sendhttp.php?authkey=" . $apg_sms_settings['clave_moplet'] . "&mobiles=" . $telefono . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&sender=" . $apg_sms_settings['identificador_moplet'] . "&route=" . $apg_sms_settings['ruta_moplet'] . "&country=" . $apg_sms_settings['servidor_moplet'] );
+			break;
 		case "moreify":
 			$respuesta = wp_remote_get( "https://members.moreify.com/api/v1/sendSms?project=" . $apg_sms_settings['proyecto_moreify'] . "&password=" . $apg_sms_settings['identificador_moreify'] . "&phonenumber=" . $telefono . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) );
 			break;

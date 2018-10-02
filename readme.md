@@ -9,11 +9,11 @@ Requires at least: 3.8
 
 Tested up to: 5.0
 
-Stable tag: 2.15
+Stable tag: 2.16
 
 WC requires at least: 2.1
 
-WC tested up to: 3.4.4
+WC tested up to: 3.5
 
 License: GPLv3
 
@@ -36,6 +36,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * [Esebun Business (Enterprise & Developers only)](http://www.bz.esebun.com/).
  * [iSMS Malaysia](http://www.isms.com.my/).
  * [LabsMobile Spain](http://www.labsmobile.com/es).
+ * [Moplet](https://moplet.com).
  * [Moreify](https://www.moreify.com/).
  * [MSG91](https://msg91.com/).
  * [MSGWOW](http://msgwow.com).
@@ -126,6 +127,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.16
+* Añadido soporte para Moplet. **Actualización patrocinada por [Moplet](https://moplet.com)**.
+
 ### 2.15
 * Añadido soporte para Routee. **Actualización patrocinada por [Routee](https://www.routee.net)**.
 

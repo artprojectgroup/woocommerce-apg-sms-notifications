@@ -27,6 +27,7 @@ $listado_de_proveedores = array(
 	"esebun" 			=> "Esebun Business ( Enterprise & Developers only )",
 	"isms" 				=> "iSMS Malaysia",
 	"labsmobile" 		=> "LabsMobile Spain",
+	"moplet" 			=> "Moplet",
 	"moreify" 			=> "Moreify",
 	"msg91" 			=> "MSG91", 
 	"msgwow"			=> "MSGWOW",
@@ -79,6 +80,12 @@ $campos_de_proveedores = array(
 		"usuario_labsmobile"				=> __( 'username', 'woocommerce-apg-sms-notifications' ),
 		"contrasena_labsmobile"				=> __( 'password', 'woocommerce-apg-sms-notifications' ),
 		"sid_labsmobile"					=> __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
+	),
+	"moplet" 			=> array( 
+		"clave_moplet" 						=> __( 'authentication key', 'woocommerce-apg-sms-notifications' ),
+		"identificador_moplet" 				=> __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
+		"ruta_moplet" 						=> __( 'route', 'woocommerce-apg-sms-notifications' ),
+		"servidor_moplet" 					=> __( 'host', 'woocommerce-apg-sms-notifications' ),
 	),
 	"moreify" 			=> array( 
 		"proyecto_moreify"					=> __( 'project', 'woocommerce-apg-sms-notifications' ),
@@ -171,11 +178,6 @@ $campos_de_proveedores = array(
 
 //Opciones de campos de selección de los proveedores
 $opciones_de_proveedores = array(
-	"ruta_msg91"		=> array(
-		"default"				=> __( 'Default', 'woocommerce-apg-sms-notifications' ), 
-		1						=> 1, 
-		4						=> 4,
-	),
 	"servidor_bulksms"	=> array(
 		"bulksms.vsms.net"		=> __( 'International', 'woocommerce-apg-sms-notifications' ), 
 		"www.bulksms.co.uk"		=> __( 'UK', 'woocommerce-apg-sms-notifications' ),
@@ -183,9 +185,19 @@ $opciones_de_proveedores = array(
 		"bulksms.2way.co.za"	=> __( 'South Africa', 'woocommerce-apg-sms-notifications' ),
 		"bulksms.com.es"		=> __( 'Spain', 'woocommerce-apg-sms-notifications' ),
 	),
-	"servidor_twizo"	=> array(
-		"api-asia-01.twizo.com"	=> __( 'Singapore', 'woocommerce-apg-sms-notifications' ), 
-		"api-eu-01.twizo.com"	=> __( 'Germany', 'woocommerce-apg-sms-notifications' ), 
+	"servidor_moplet"	=> array(
+		"0"						=> __( 'International', 'woocommerce-apg-sms-notifications' ), 
+		"1"						=> __( 'USA', 'woocommerce-apg-sms-notifications' ), 
+		"91"					=> __( 'India', 'woocommerce-apg-sms-notifications' ),
+	),	
+	"ruta_moplet"		=> array(
+		1						=> 1, 
+		4						=> 4,
+	),
+	"ruta_msg91"		=> array(
+		"default"				=> __( 'Default', 'woocommerce-apg-sms-notifications' ), 
+		1						=> 1, 
+		4						=> 4,
 	),
 	"ruta_msgwow"		=> array(
 		1						=> 1, 
@@ -195,6 +207,10 @@ $opciones_de_proveedores = array(
 		"0"						=> __( 'International', 'woocommerce-apg-sms-notifications' ), 
 		"1"						=> __( 'USA', 'woocommerce-apg-sms-notifications' ), 
 		"91"					=> __( 'India', 'woocommerce-apg-sms-notifications' ), 
+	),	
+	"servidor_twizo"	=> array(
+		"api-asia-01.twizo.com"	=> __( 'Singapore', 'woocommerce-apg-sms-notifications' ), 
+		"api-eu-01.twizo.com"	=> __( 'Germany', 'woocommerce-apg-sms-notifications' ), 
 	),
 );
 
