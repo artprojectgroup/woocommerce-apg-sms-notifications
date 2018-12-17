@@ -137,17 +137,20 @@ function apg_sms_codifica_el_mensaje( $mensaje ) {
 
 //Procesa el teléfono y le añade, si lo necesita, el prefijo
 function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietario = false, $envio = false ) {
-	if ( empty( $telefono ) ) { //Control
-		return;
+	$telefono_procesado = $telefono;
+	
+	if ( empty( $telefono_procesado ) ) { //Control
+		return apply_filters( 'apg_sms_phone_return', $telefono_procesado, $pedido, $telefono, $servicio, $propietario, $envio );
 	}
+	
 	//Permite que otros plugins impidan que se procese el número de teléfono
 	if ( apply_filters( 'apg_sms_phone_process', true, $pedido, $telefono, $servicio, $propietario, $envio ) ) {
-		$billing_country	= is_callable( array( $pedido, 'get_billing_country' ) ) ? $pedido->get_billing_country() : $pedido->billing_country;
-		$shipping_country	= is_callable( array( $pedido, 'get_shipping_country' ) ) ? $pedido->get_shipping_country() : $pedido->shipping_country;
-		$prefijo			= apg_sms_prefijo( $servicio );
-		$telefono			= str_replace( array( '+', '-' ), '', filter_var( $telefono, FILTER_SANITIZE_NUMBER_INT ) );
-		if ( substr( $telefono, 0, 2 ) == '00' ) { //Código propuesto por Marco Almeida (https://wordpress.org/support/topic/problems-sending-to-international-numbers-via-plivo/)
-			$telefono = substr( $telefono, 2 );
+		$billing_country		= is_callable( array( $pedido, 'get_billing_country' ) ) ? $pedido->get_billing_country() : $pedido->billing_country;
+		$shipping_country		= is_callable( array( $pedido, 'get_shipping_country' ) ) ? $pedido->get_shipping_country() : $pedido->shipping_country;
+		$prefijo				= apg_sms_prefijo( $servicio );
+		$telefono_procesado		= str_replace( array( '+', '-' ), '', filter_var( $telefono, FILTER_SANITIZE_NUMBER_INT ) );
+		if ( substr( $telefono_procesado, 0, 2 ) == '00' ) { //Código propuesto por Marco Almeida (https://wordpress.org/support/topic/problems-sending-to-international-numbers-via-plivo/)
+			$telefono_procesado = substr( $telefono_procesado, 2 );
 		}
 		if ( !$propietario ) {
 			if ( ( !$envio && $billing_country && ( WC()->countries->get_base_country() != $billing_country ) || $prefijo ) ) {
@@ -159,24 +162,24 @@ function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietari
 			$prefijo_internacional = apg_sms_dame_prefijo_pais( WC()->countries->get_base_country() );
 		}
 
-		preg_match( "/(\d{1,4})[0-9.\- ]+/", $telefono, $prefijo_telefonico );
+		preg_match( "/(\d{1,4})[0-9.\- ]+/", $telefono_procesado, $prefijo_telefonico );
 		if ( empty( $prefijo_telefonico ) ) { //Control
 			return;
 		}
 		if ( isset( $prefijo_internacional ) ) {
 			if ( strpos( strval( $prefijo_telefonico[1] ) , strval( $prefijo_internacional ) ) === false ) {
-				$telefono = $prefijo_internacional . ltrim( $telefono, '0' );
+				$telefono_procesado = $prefijo_internacional . ltrim( $telefono_procesado, '0' );
 			}
 		}
 		if ( ( $servicio == "moreify" || $servicio == "twilio" ) && strpos( $prefijo[1], "+" ) === false ) {
-			$telefono = "+" . $telefono;
+			$telefono_procesado = "+" . $telefono_procesado;
 		} else if ( $servicio == "isms" && isset( $prefijo_internacional ) ) {
-			$telefono = "00" . preg_replace( '/\+/', '', $telefono );
+			$telefono_procesado = "00" . preg_replace( '/\+/', '', $telefono_procesado );
 		}
 	}
 	
 	//Permitir que otros plugins modifiquen el teléfono devuelto
-	return apply_filters( 'apg_sms_phone_return', $telefono, $pedido, $telefono, $servicio, $propietario, $envio );
+	return apply_filters( 'apg_sms_phone_return', $telefono_procesado, $pedido, $telefono, $servicio, $propietario, $envio );
 }
 
 //Procesa las variables

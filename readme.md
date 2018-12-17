@@ -7,13 +7,13 @@ Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, 
 
 Requires at least: 3.8
 
-Tested up to: 5.0
+Tested up to: 5.0.1
 
-Stable tag: 2.16
+Stable tag: 2.16.1
 
 WC requires at least: 2.1
 
-WC tested up to: 3.5
+WC tested up to: 3.5.2
 
 License: GPLv3
 
@@ -59,6 +59,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 * Posibilidad de informar al propietario o propietarios de la tienda sobre nuevos pedidos.
 * Posibilidad de enviar, o no, SMS internacionales.
 * Posibilidad de notificar al número de teléfono de envío, si es distinto del número de teléfono de facturación.
+* Posibilidad de notificar 
 * 100% compatible con [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS).
 * Soporte para los estados de pedido personalizados.
 * Soporte para los números de pedido personalizados del plugin [WooCommerce Sequential Order Numbers Pro](http://www.woothemes.com/products/sequential-order-numbers-pro/).
@@ -72,6 +73,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 * Dispone del filtro *apg_sms_message* para facilitar la personalización de los mensajes SMS desde plugins de terceros.
 * Dispone del filtro *apg_sms_send_message* para impedir el envío de los mensajes SMS desde plugins de terceros.
 * Dispone de los filtros *apg_sms_phone_process* y *apg_sms_phone_return* para facilitar el procesamiento del número de teléfono desde plugins de terceros.
+* Posibilidad de notificar a múltiples números de teléfono vía filtro *apg_sms_phone_return*.
 * Una vez configurado es totalmente automático.
 
 ### Traducciones
@@ -127,6 +129,10 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.16.1
+* Pequeños arreglos.
+* Añadido soporte para múltiples números de teléfono vía filtro *apg_sms_phone_return*. **Actualización patrocinada por [HaitiPay](https://haitipay.com)**.
+
 ### 2.16
 * Añadido soporte para Moplet. **Actualización patrocinada por [Moplet](https://moplet.com)**.
 

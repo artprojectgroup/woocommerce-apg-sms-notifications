@@ -1,15 +1,15 @@
 <?php
 /*
 Plugin Name: WC - APG SMS Notifications
-Version: 2.16
+Version: 2.16.1
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: https://artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 5.0
+Tested up to: 5.0.1
 WC requires at least: 2.1
-WC tested up to: 3.5
+WC tested up to: 3.5.2
 
 Text Domain: woocommerce-apg-sms-notifications
 Domain Path: /languages
@@ -172,7 +172,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		//Cargamos los proveedores SMS
 		include_once( 'includes/admin/proveedores.php' );
 		//Envía el SMS
-		switch( $estado){
+		switch( $estado ) {
 			case 'on-hold': //Pedido en espera
 				if ( !!array_intersect( array( "todos", "mensaje_pedido" ), $apg_sms_settings['mensajes'] ) && isset( $apg_sms_settings['notificacion'] ) && $apg_sms_settings['notificacion'] == 1 && !$notificacion ) {
 					if ( !is_array( $telefono_propietario ) ) {
@@ -220,7 +220,13 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		}
 
 		if ( isset( $mensaje ) && ( !$internacional || ( isset( $apg_sms_settings['internacional'] ) && $apg_sms_settings['internacional'] == 1 ) ) && !$notificacion ) {
-			apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ); //Mensaje para el teléfono de facturación
+			if ( !is_array( $telefono ) ) {
+				apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ); //Mensaje para el teléfono de facturación
+			} else {
+				foreach( $telefono as $cliente ) {
+					apg_sms_envia_sms( $apg_sms_settings, $cliente, $mensaje ); //Mensaje para los teléfonos recibidos
+				}
+			}
 			if ( $enviar_envio ) {
 				apg_sms_envia_sms( $apg_sms_settings, $telefono_envio, $mensaje ); //Mensaje para el teléfono de envío
 			}
@@ -300,7 +306,13 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		include_once( 'includes/admin/proveedores.php' );		
 		//Envía el SMS
 		if ( !$internacional || ( isset( $apg_sms_settings['internacional'] ) && $apg_sms_settings['internacional'] == 1 ) ) {
-			apg_sms_envia_sms( $apg_sms_settings, $telefono, apg_sms_procesa_variables( $mensaje_nota, $pedido, $apg_sms_settings['variables'], wptexturize( $datos['customer_note'] ) ) ); //Mensaje para el teléfono de facturación
+			if ( !is_array( $telefono ) ) {
+				apg_sms_envia_sms( $apg_sms_settings, $telefono, apg_sms_procesa_variables( $mensaje_nota, $pedido, $apg_sms_settings['variables'], wptexturize( $datos['customer_note'] ) ) ); //Mensaje para el teléfono de facturación
+			} else {
+				foreach( $telefono as $cliente ) {
+					apg_sms_envia_sms( $apg_sms_settings, $cliente, apg_sms_procesa_variables( $mensaje_nota, $pedido, $apg_sms_settings['variables'], wptexturize( $datos['customer_note'] ) ) ); //Mensaje para los teléfonos recibidos
+				}
+			}
 			if ( $enviar_envio ) {
 				apg_sms_envia_sms( $apg_sms_settings, $telefono_envio, apg_sms_procesa_variables( $mensaje_nota, $pedido, $apg_sms_settings['variables'], wptexturize( $datos['customer_note'] ) ) ); //Mensaje para el teléfono de envío
 			}

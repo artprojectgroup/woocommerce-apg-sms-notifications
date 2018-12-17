@@ -67,9 +67,15 @@ div.informacion a {
 	text-decoration: none;
 	color: #fff;
 }
+.woocommerce table.form-table.apg-table .select2-container {
+    min-width: auto!important;
+}
 table.apg-table .select2-container, table.apg-table textarea, table.apg-table input[type=text] {
-    min-width: 400px;
+    min-width: auto;
     max-width: 100%;
+}
+table.apg-table td.horas .select2-container {
+    max-width: 49.41%!important;
 }
 table.apg-table textarea {
 	min-height: 200px;

@@ -3,10 +3,10 @@ Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, OPEN DND, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, WooCommerce Sequential Order Numbers Pro, WPML
 Requires at least: 3.8
-Tested up to: 5.0
-Stable tag: 2.16
+Tested up to: 5.0.1
+Stable tag: 2.16.1
 WC requires at least: 2.1
-WC tested up to: 3.5
+WC tested up to: 3.5.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -63,6 +63,7 @@ Add to your WooCommerce store SMS notifications to your customers when order sta
 * Has *apg_sms_message* filter to facilitate the customization of SMS messages from third-party plugins.
 * Has *apg_sms_send_message* filter to prevent sending the SMS messages from third-party plugins.
 * Has *apg_sms_phone_process* and *apg_sms_phone_return* filters to facilitate the phone number process from third-party plugins.
+* Possibility to notify multiple phone numbers via filter *apg_sms_phone_return*.
 * Once setup is fully automated.
 
 = Translations =
@@ -121,6 +122,9 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 1. Screenshot of WC - APG SMS Notifications.
 
 == Changelog ==
+= 2.16.1 =
+* Small fixes.
+* Added support for multiple phone numbers via filter *apg_sms_phone_return*. **Update sponsored by [HaitiPay](https://haitipay.com)**.
 = 2.16 =
 * Added support for Moplet. **Update sponsored by [Moplet](https://moplet.com)**.
 = 2.15 =
@@ -390,8 +394,9 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 * Initial version.
 
 == Upgrade Notice ==
-= 2.16 =
-* Added support for Moplet. **Update sponsored by [Moplet](https://moplet.com)**.
+= 2.16.1 =
+* Small fixes.
+* Added support for multiple phone numbers via filter *apg_sms_phone_return*. **Update sponsored by [HaitiPay](https://haitipay.com)**.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).
