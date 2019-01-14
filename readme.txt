@@ -3,10 +3,10 @@ Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, OPEN DND, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, WooCommerce Sequential Order Numbers Pro, WPML
 Requires at least: 3.8
-Tested up to: 5.0.1
-Stable tag: 2.16.1
+Tested up to: 5.1
+Stable tag: 2.16.1.1
 WC requires at least: 2.1
-WC tested up to: 3.5.2
+WC tested up to: 3.5.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -61,6 +61,7 @@ Add to your WooCommerce store SMS notifications to your customers when order sta
 * Supports a large number of variables to personalize our messages: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.
 * You can add your own custom variables.
 * Has *apg_sms_message* filter to facilitate the customization of SMS messages from third-party plugins.
+* Has *apg_sms_message_return* filter to facilitate the customization of messages once they have been encoded from third-party plugins.
 * Has *apg_sms_send_message* filter to prevent sending the SMS messages from third-party plugins.
 * Has *apg_sms_phone_process* and *apg_sms_phone_return* filters to facilitate the phone number process from third-party plugins.
 * Possibility to notify multiple phone numbers via filter *apg_sms_phone_return*.
@@ -122,6 +123,8 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 1. Screenshot of WC - APG SMS Notifications.
 
 == Changelog ==
+= 2.16.1.1 =
+* Added *apg_sms_message_return* filter.
 = 2.16.1 =
 * Small fixes.
 * Added support for multiple phone numbers via filter *apg_sms_phone_return*. **Update sponsored by [HaitiPay](https://haitipay.com)**.
@@ -394,9 +397,8 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 * Initial version.
 
 == Upgrade Notice ==
-= 2.16.1 =
-* Small fixes.
-* Added support for multiple phone numbers via filter *apg_sms_phone_return*. **Update sponsored by [HaitiPay](https://haitipay.com)**.
+= 2.16.1.1 =
+* Added *apg_sms_message_return* filter.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).
