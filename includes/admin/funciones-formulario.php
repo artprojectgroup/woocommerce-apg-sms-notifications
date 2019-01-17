@@ -28,6 +28,7 @@ $listado_de_proveedores = array(
 	"isms" 				=> "iSMS Malaysia",
 	"labsmobile" 		=> "LabsMobile Spain",
 	"moplet" 			=> "Moplet",
+	"mobtexting" 		=> "MobTexting",
 	"moreify" 			=> "Moreify",
 	"msg91" 			=> "MSG91", 
 	"msgwow"			=> "MSGWOW",
@@ -147,6 +148,10 @@ $campos_de_proveedores = array(
 	"solutions_infini" 	=> array( 
 		"clave_solutions_infini" 			=> __( 'key', 'woocommerce-apg-sms-notifications' ),
 		"identificador_solutions_infini" 	=> __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
+	),
+	"mobtexting" 	=> array( 
+		"clave_mobtexting" 			=> __( 'key', 'woocommerce-apg-sms-notifications' ),
+		"identificador_mobtexting" 	=> __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
 	),
 	"springedge" 		=> array( 
 		"clave_springedge" 					=> __( 'key', 'woocommerce-apg-sms-notifications' ),

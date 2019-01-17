@@ -134,6 +134,10 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
 		case "solutions_infini":
 			$respuesta = wp_remote_get( "http://alerts.sinfini.com/api/web2sms.php?workingkey=" . $apg_sms_settings['clave_solutions_infini'] . "&to=" . $telefono . "&sender=" . $apg_sms_settings['identificador_solutions_infini'] . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) );
 			break;
+		case "mobtexting":
+			$respuesta = wp_remote_get( "http://portal.mobtexting.com/api/v2/sms/send?access_token=" . $apg_sms_settings['clave_mobtexting'] . "&to=" . $telefono . "&service=T&sender=" . $apg_sms_settings['identificador_mobtexting'] . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) );
+			break;
+
 		case "springedge":
 			$respuesta = wp_remote_get( "http://instantalerts.co/api/web/send/?apikey=" . $apg_sms_settings['clave_springedge'] . "&sender=" . $apg_sms_settings['identificador_springedge'] . "&to=" . $telefono . "&message=" . apg_sms_codifica_el_mensaje( $mensaje ) . "&format=json" );
 			break;			

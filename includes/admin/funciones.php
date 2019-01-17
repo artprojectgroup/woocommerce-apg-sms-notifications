@@ -17,6 +17,7 @@ function apg_sms_prefijo( $servicio ) {
 		"routee",
 		"sipdiscount", 
 		"smscountry",
+		'mobtexting',
 		"smsdiscount", 
 		"smslane",
 		"springedge",		
@@ -132,7 +133,7 @@ function apg_sms_normaliza_mensaje( $mensaje ) {
 
 //Codifica el mensaje
 function apg_sms_codifica_el_mensaje( $mensaje ) {
-	return apply_filters( 'apg_sms_message_return', urlencode( html_entity_decode( $mensaje, ENT_QUOTES, "UTF-8" ) ), $mensaje);
+	return urlencode( html_entity_decode( $mensaje, ENT_QUOTES, "UTF-8" ) );
 }
 
 //Procesa el teléfono y le añade, si lo necesita, el prefijo
