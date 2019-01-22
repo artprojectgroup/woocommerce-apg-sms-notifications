@@ -3,17 +3,17 @@ Contributors: artprojectgroup
 
 Donate link: https://artprojectgroup.es/tienda/donacion
 
-Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, OPEN DND, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, WooCommerce Sequential Order Numbers Pro, WPML
+Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, OPEN DND, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, WooCommerce Sequential Order Numbers Pro, WPML
 
 Requires at least: 3.8
 
 Tested up to: 5.1
 
-Stable tag: 2.16.1.1
+Stable tag: 2.17
 
 WC requires at least: 2.1
 
-WC tested up to: 3.5.3
+WC tested up to: 3.5.4
 
 License: GPLv3
 
@@ -36,6 +36,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * [Esebun Business (Enterprise & Developers only)](http://www.bz.esebun.com/).
  * [iSMS Malaysia](http://www.isms.com.my/).
  * [LabsMobile Spain](http://www.labsmobile.com/es).
+ * [MobTexting](https://www.mobtexting.com).
  * [Moplet](https://moplet.com).
  * [Moreify](https://www.moreify.com/).
  * [MSG91](https://msg91.com/).
@@ -130,6 +131,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.17
+* Added support for MobTexting. **Modificación ideada por [laxman-ka](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/3)**.
+
 ### 2.16.1.1
 * Añadido el filtro *apg_sms_message_return*.
 

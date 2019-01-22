@@ -8,6 +8,7 @@ function apg_sms_prefijo( $servicio ) {
 		"esebun", 
 		"isms", 
 		"labsmobile",
+		"mobtexting",
 		"moplet",
 		"moreify",
 		"msg91", 

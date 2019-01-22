@@ -21,13 +21,14 @@ if ( function_exists( 'icl_register_string' ) || !$wpml_activo ) { //Versión an
 
 //Listado de proveedores SMS
 $listado_de_proveedores = array( 
-	"bulksms" 			=> "BulkSMS", 
+	"bulksms"			=> "BulkSMS", 
 	"clickatell" 		=> "Clickatell", 
 	"clockwork" 		=> "Clockwork", 
-	"esebun" 			=> "Esebun Business ( Enterprise & Developers only )",
-	"isms" 				=> "iSMS Malaysia",
-	"labsmobile" 		=> "LabsMobile Spain",
-	"moplet" 			=> "Moplet",
+	"esebun"			=> "Esebun Business ( Enterprise & Developers only )",
+	"isms"				=> "iSMS Malaysia",
+	"labsmobile"		=> "LabsMobile Spain",
+	"mobtexting"		=> "MobTexting",
+    "moplet" 			=> "Moplet",
 	"moreify" 			=> "Moreify",
 	"msg91" 			=> "MSG91", 
 	"msgwow"			=> "MSGWOW",
@@ -75,11 +76,15 @@ $campos_de_proveedores = array(
 		"contrasena_isms" 					=> __( 'password', 'woocommerce-apg-sms-notifications' ),
 		"telefono_isms" 					=> __( 'mobile number', 'woocommerce-apg-sms-notifications' ),
 	),
-	"labsmobile"       => array(
+	"labsmobile"		=> array(
 		"identificador_labsmobile"			=> __( 'client', 'woocommerce-apg-sms-notifications' ),
 		"usuario_labsmobile"				=> __( 'username', 'woocommerce-apg-sms-notifications' ),
 		"contrasena_labsmobile"				=> __( 'password', 'woocommerce-apg-sms-notifications' ),
 		"sid_labsmobile"					=> __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
+	),
+	"mobtexting"		=> array( 
+		"clave_mobtexting"					=> __( 'key', 'woocommerce-apg-sms-notifications' ),
+		"identificador_mobtexting"			=> __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
 	),
 	"moplet" 			=> array( 
 		"clave_moplet" 						=> __( 'authentication key', 'woocommerce-apg-sms-notifications' ),
