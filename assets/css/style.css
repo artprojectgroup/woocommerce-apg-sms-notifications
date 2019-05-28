@@ -1,7 +1,7 @@
 @charset "UTF-8";
 @import url(../fonts/stylesheet.css);
 /*General*/
-table.apg-table, .cabecera, .banner {
+table.apg-table, .cabecera {
 	clear: none;
 	width: 79%;
 	max-width: 586px;

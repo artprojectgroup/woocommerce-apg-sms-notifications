@@ -7,13 +7,13 @@ Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, 
 
 Requires at least: 3.8
 
-Tested up to: 5.1
+Tested up to: 5.2
 
-Stable tag: 2.17
+Stable tag: 2.17.1
 
 WC requires at least: 2.1
 
-WC tested up to: 3.5.4
+WC tested up to: 3.6
 
 License: GPLv3
 
@@ -131,8 +131,10 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.17.1
+
 ### 2.17
-* Added support for MobTexting. **Modificación ideada por [laxman-ka](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/3)**.
+* Añadido soporte para MobTexting. **Modificación ideada por [laxman-ka](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/3)**.
 
 ### 2.16.1.1
 * Añadido el filtro *apg_sms_message_return*.

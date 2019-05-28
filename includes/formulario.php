@@ -4,8 +4,6 @@
 	<h2>
 		<?php _e( 'APG SMS Notifications Options.', 'woocommerce-apg-sms-notifications' ); ?>
 	</h2>
-	<?php 
-  ?>
 	<h3><a href="<?php echo $apg_sms['plugin_url']; ?>" title="Art Project Group"><?php echo $apg_sms['plugin']; ?></a></h3>
 	<p>
 		<?php _e( 'Add to WooCommerce the possibility to send <abbr title="Short Message Service" lang="en">SMS</abbr> notifications to the client each time you change the order status. Notifies the owner, if desired, when the store has a new order. You can also send customer notes.', 'woocommerce-apg-sms-notifications' ); ?>

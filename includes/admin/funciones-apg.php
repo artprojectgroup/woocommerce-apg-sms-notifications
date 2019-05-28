@@ -88,25 +88,12 @@ function apg_sms_plugin( $nombre ) {
 	return '<a title="' . sprintf( __( 'Please, rate %s:', 'woocommerce-apg-sms-notifications' ), $apg_sms['plugin'] ) . '" href="' . $apg_sms['puntuacion'] . '?rate=5#postform" class="estrellas">' . $estrellas . '</a>';
 }
 
-//Muestra el mensaje de actualización
-function apg_sms_actualizacion() {
-	global $apg_sms;
-	
-	echo '<div class="error fade" id="message"><h3>' . $apg_sms['plugin'] . '</h3><h4>' . sprintf( __( "Please, update your %s. It's very important!", 'woocommerce-apg-sms-notifications' ), '<a href="' . $apg_sms['ajustes'] . '" title="' . __( 'Settings', 'woocommerce-apg-sms-notifications' ) . '">' . __( 'settings', 'woocommerce-apg-sms-notifications' ) . '</a>' ) . '</h4></div>';
-}
-
-//Carga las hojas de estilo
-function apg_sms_muestra_mensaje() {
-	global $apg_sms_settings;
-
+//Hoja de estilo
+function apg_sms_estilo() {
 	wp_register_style( 'apg_sms_hoja_de_estilo', plugins_url( 'assets/css/style.css', DIRECCION_apg_sms ) ); //Carga la hoja de estilo
 	wp_enqueue_style( 'apg_sms_hoja_de_estilo' ); //Carga la hoja de estilo
-
-	/*if ( !isset( $apg_sms_settings['mensaje_pedido'] ) || !isset( $apg_sms_settings['mensaje_nota'] ) ) { //Comprueba si hay que mostrar el mensaje de actualización
-		add_action( 'admin_notices', 'apg_sms_actualizacion' );
-	}*/
 }
-add_action( 'admin_init', 'apg_sms_muestra_mensaje' );
+add_action( 'admin_enqueue_scripts', 'apg_sms_estilo' );
 
 //Eliminamos todo rastro del plugin al desinstalarlo
 function apg_sms_desinstalar() {
