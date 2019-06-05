@@ -122,6 +122,15 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
 		case "smsdiscount":
 			$respuesta = wp_remote_get( "https://www.smsdiscount.com/myaccount/sendsms.php?username=" . $apg_sms_settings['usuario_smsdiscount'] . "&password=" . $apg_sms_settings['contrasena_smsdiscount'] . "&from=" . $apg_sms_settings['telefono'] . "&to=" . $telefono . "&text=" . apg_sms_codifica_el_mensaje( $mensaje ) );
 			break;
+        case "smsgateway_rbsoft":
+            $argumentos['body'] = array(
+                'key' 	    => $apg_sms_settings['clave_smsgateway_rbsoft'],
+                'number'    => $telefono,
+                'message' 	=> $mensaje,
+                'devices' 	=> $apg_sms_settings['identificador_smsgateway_rbsoft'],
+             );
+            $respuesta = wp_remote_post( "{$apg_sms_settings['servidor_smsgateway_rbsoft']}/services/send.php", $argumentos );
+            break;
 		case "smslane":
 			$argumentos['body'] = array( 
 				'user' 		=> $apg_sms_settings['usuario_smslane'],

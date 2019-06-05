@@ -39,7 +39,8 @@ $listado_de_proveedores = array(
 	"routee" 			=> "Routee",
 	"sipdiscount" 		=> "SIP Discount", 
 	"smscountry" 		=> "SMS Country",
-	"smsdiscount" 		=> "SMS Discount", 
+	"smsdiscount" 		=> "SMS Discount",
+    "smsgateway_rbsoft" => "SMS Gateway from RBSoft",
 	"smslane" 			=> "SMS Lane ( Transactional SMS only )",
 	"solutions_infini" 	=> "Solutions Infini", 
 	"springedge" 		=> "Spring Edge",
@@ -143,7 +144,12 @@ $campos_de_proveedores = array(
 	"smsdiscount"		=> array( 
 		"usuario_smsdiscount" 				=> __( 'username', 'woocommerce-apg-sms-notifications' ),
 		"contrasena_smsdiscount"			=> __( 'password', 'woocommerce-apg-sms-notifications' ),
-	), 
+	),
+    "smsgateway_rbsoft" => array(
+        "servidor_smsgateway_rbsoft" 		=> __( 'server', 'woocommerce-apg-sms-notifications' ),
+        "clave_smsgateway_rbsoft" 			=> __( 'API Key', 'woocommerce-apg-sms-notifications' ),
+        "identificador_smsgateway_rbsoft"	=> __( 'device ID', 'woocommerce-apg-sms-notifications' ),
+    ),
 	"smslane" 			=> array( 
 		"usuario_smslane" 					=> __( 'username', 'woocommerce-apg-sms-notifications' ),
 		"contrasena_smslane" 				=> __( 'password', 'woocommerce-apg-sms-notifications' ),
