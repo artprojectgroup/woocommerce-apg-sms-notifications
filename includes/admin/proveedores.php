@@ -2,6 +2,19 @@
 //Envía el mensaje SMS
 function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
 	switch ( $apg_sms_settings['servicio'] ) {
+		case "bulkgate":
+			$url = 'https://portal.bulkgate.com/api/1.0/simple/transactional';
+			$url = add_query_arg( array(
+				'application_id'    => urlencode( $apg_sms_settings['usuario_bulkgate'] ),
+				'application_token' => urlencode( $apg_sms_settings['clave_bulkgate'] ),
+				'number'            => urlencode( $telefono ),
+				'text'              => apg_sms_codifica_el_mensaje( $mensaje ), //Already URL Encoded in apg_sms_codifica_el_mensaje
+				'unicode'           => 1, //We should make this a setting
+				'sender_id'         => urlencode( 'gText' ), //We should make this a setting
+				'sender_id_value'   => urlencode( $apg_sms_settings['identificador_bulkgate'] ),
+			), $url );
+			$respuesta = wp_remote_get( $url );
+			break;
 		case "bulksms":
 			$argumentos['body'] = array( 
 				'username' 					=> $apg_sms_settings['usuario_bulksms'],
