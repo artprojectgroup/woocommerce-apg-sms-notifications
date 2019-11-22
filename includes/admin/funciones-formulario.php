@@ -21,6 +21,7 @@ if ( function_exists( 'icl_register_string' ) || !$wpml_activo ) { //Versión an
 
 //Listado de proveedores SMS
 $listado_de_proveedores = array( 
+	"bulkgate"			=> "BulkGate", 
 	"bulksms"			=> "BulkSMS", 
 	"clickatell" 		=> "Clickatell", 
 	"clockwork" 		=> "Clockwork", 
@@ -28,7 +29,7 @@ $listado_de_proveedores = array(
 	"isms"				=> "iSMS Malaysia",
 	"labsmobile"		=> "LabsMobile Spain",
 	"mobtexting"		=> "MobTexting",
-    "moplet" 			=> "Moplet",
+	"moplet" 			=> "Moplet",
 	"moreify" 			=> "Moreify",
 	"msg91" 			=> "MSG91", 
 	"msgwow"			=> "MSGWOW",
@@ -53,6 +54,11 @@ asort( $listado_de_proveedores, SORT_NATURAL | SORT_FLAG_CASE ); //Ordena alfabe
 
 //Campos necesarios para cada proveedor
 $campos_de_proveedores = array( 
+	"bulkgate"				=> array(
+		"usuario_bulkgate"       => __( 'Application ID', 'woocommerce-apg-sms-notifications' ),
+		"clave_bulkgate"         => __( 'Application Token', 'woocommerce-apg-sms-notifications' ),
+		"identificador_bulkgate" => __( 'Sender ID', 'woocommerce-apg-sms-notifications' ),
+	),
 	"bulksms" 			=> array( 
 		"usuario_bulksms" 					=> __( 'username', 'woocommerce-apg-sms-notifications' ),
 		"contrasena_bulksms" 				=> __( 'password', 'woocommerce-apg-sms-notifications' ),
