@@ -1,7 +1,8 @@
 <?php
 //Comprueba si necesita el prefijo telefónico internacional
 function apg_sms_prefijo( $servicio ) {
-	$prefijo = array( 
+	$prefijo = array(
+		"bulkgate",
 		"bulksms", 
 		"clickatell", 
 		"clockwork", 
