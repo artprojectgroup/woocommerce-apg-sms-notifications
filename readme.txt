@@ -1,12 +1,12 @@
 === WC - APG SMS Notifications ===
 Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
-Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, OPEN DND, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, WooCommerce Sequential Order Numbers Pro, WPML
+Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, Adlinks Labs, BulkGate, WooCommerce Sequential Order Numbers Pro, WPML
 Requires at least: 3.8
-Tested up to: 5.2
-Stable tag: 2.17.1
+Tested up to: 5.4
+Stable tag: 2.18
 WC requires at least: 2.1
-WC tested up to: 3.6
+WC tested up to: 3.8.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -21,6 +21,8 @@ Add to your WooCommerce store SMS notifications to your customers when order sta
 
 = Features =
 * Support multiple SMS gateways:
+ * [Adlinks Labs](http://adlinks.websmsc.com/).
+ * [BulkGate](https://www.bulkgate.com/).
  * [BulkSMS](http://www.bulksms.com/).
  * [Clickatell](https://www.clickatell.com/).
  * [Clockwork](https://www.clockworksms.com/).
@@ -34,7 +36,6 @@ Add to your WooCommerce store SMS notifications to your customers when order sta
  * [MSGWOW](http://msgwow.com).
  * [mVaayoo](http://www.mvaayoo.com/).
  * [Nexmo](https://www.nexmo.com).
- * [OPEN DND](http://www.opendnd.in/).
  * [Plivo](https://www.plivo.com/).
  * [Routee](https://www.routee.net).
  * [SIP Discount](https://www.sipdiscount.com/dashboard).
@@ -124,6 +125,10 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 1. Screenshot of WC - APG SMS Notifications.
 
 == Changelog ==
+= 2.18 =
+* Added support for Adlinks Labs. **Update sponsored by [Adlinks Labs](http://adlinks.websmsc.com/)**.
+* Added support for BulkGate. **Modification devised by [webdados](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/5)**.
+* Removed support for Open DND.
 = 2.17.1 =
 * Small fixes.
 = 2.17 =
@@ -402,8 +407,9 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 * Initial version.
 
 == Upgrade Notice ==
-= 2.17.1 =
-* Small fixes.
+* Added support for Adlinks Labs. **Update sponsored by [Adlinks Labs](http://adlinks.websmsc.com/)**.
+* Added support for BulkGate. **Modification devised by [webdados](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/5)**.
+* Removed support for Open DND.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).

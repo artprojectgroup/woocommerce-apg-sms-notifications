@@ -1,7 +1,9 @@
 <?php
 //Comprueba si necesita el prefijo telefónico internacional
 function apg_sms_prefijo( $servicio ) {
-	$prefijo = array( 
+	$prefijo = [ 
+		"adlinks", 
+		"bulkgate", 
 		"bulksms", 
 		"clickatell", 
 		"clockwork", 
@@ -26,14 +28,14 @@ function apg_sms_prefijo( $servicio ) {
 		"voipbuster", 
 		"voipbusterpro", 
 		"voipstunt", 
-	);
+	];
 	
 	return in_array( $servicio, $prefijo );
 }
 
 //Normalizamos el texto
 function apg_sms_normaliza_mensaje( $mensaje ) {
-	$reemplazo = array( 
+	$reemplazo = [ 
 		'Š'			=> 'S', 
 		'š'			=> 's', 
 		'Đ'			=> 'Dj', 
@@ -124,7 +126,7 @@ function apg_sms_normaliza_mensaje( $mensaje ) {
 		"¡"			=> "", 
 		"?"			=> ".", 
 		"¿"			=> "" 
-	);
+	];
 
 	$mensaje = str_replace( array_keys( $reemplazo ), array_values( $reemplazo ), $mensaje );
 
@@ -146,10 +148,10 @@ function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietari
 	
 	//Permite que otros plugins impidan que se procese el número de teléfono
 	if ( apply_filters( 'apg_sms_phone_process', true, $pedido, $telefono, $servicio, $propietario, $envio ) ) {
-		$billing_country		= is_callable( array( $pedido, 'get_billing_country' ) ) ? $pedido->get_billing_country() : $pedido->billing_country;
-		$shipping_country		= is_callable( array( $pedido, 'get_shipping_country' ) ) ? $pedido->get_shipping_country() : $pedido->shipping_country;
+		$billing_country		= is_callable( [ $pedido, 'get_billing_country' ] ) ? $pedido->get_billing_country() : $pedido->billing_country;
+		$shipping_country		= is_callable( [ $pedido, 'get_shipping_country' ] ) ? $pedido->get_shipping_country() : $pedido->shipping_country;
 		$prefijo				= apg_sms_prefijo( $servicio );
-		$telefono_procesado		= str_replace( array( '+', '-' ), '', filter_var( $telefono, FILTER_SANITIZE_NUMBER_INT ) );
+		$telefono_procesado		= str_replace( [ '+', '-' ], '', filter_var( $telefono, FILTER_SANITIZE_NUMBER_INT ) );
 		if ( substr( $telefono_procesado, 0, 2 ) == '00' ) { //Código propuesto por Marco Almeida (https://wordpress.org/support/topic/problems-sending-to-international-numbers-via-plivo/)
 			$telefono_procesado = substr( $telefono_procesado, 2 );
 		}
@@ -187,7 +189,7 @@ function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietari
 function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) {
 	global $apg_sms_settings;
 
-	$apg_sms = array( 
+	$apg_sms = [ 
 		"id", 
 		"status", 
 		"prices_include_tax", 
@@ -203,8 +205,8 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 		"note", 
 		"order_product",
 		"shipping_method", 
-	);
-	$apg_sms_variables = array( //Hay que añadirles un guión
+	];
+	$apg_sms_variables = [ //Hay que añadirles un guión
 		"order_key", 
 		"billing_first_name", 
 		"billing_last_name", 
@@ -235,13 +237,13 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 		"order_shipping", 
 		"order_shipping_tax", 
 		"order_total" 
-	);
-	$variables_personalizadas = explode( "\n", str_replace( array( 
+	];
+	$variables_personalizadas = explode( "\n", str_replace( [ 
 		"\r\n", 
 		"\r" 
-	), "\n", $variables ) );
+	], "\n", $variables ) );
 
-	$numero_de_pedido		= is_callable( array( $pedido, 'get_id' ) ) ? $pedido->get_id() : $pedido->id;
+	$numero_de_pedido		= is_callable( [ $pedido, 'get_id' ] ) ? $pedido->get_id() : $pedido->id;
 	$variables_de_pedido	= get_post_custom( $numero_de_pedido ); //WooCommerce 2.1
 	
 	preg_match_all( "/%(.*?)%/", $mensaje, $busqueda );
@@ -253,7 +255,7 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 			continue;
 		}
 
-		$especiales = array(  //Variables especiales (no éstandar y no personalizadas)
+		$especiales = [  //Variables especiales (no éstandar y no personalizadas)
 			"order_date", 
 			"modified_date", 
 			"shop_name", 
@@ -262,11 +264,11 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 			"order_product",
 			"order_discount", 
 			"shipping_method_title", 
-		);
+		];
 		
 		if ( !in_array( $variable, $especiales ) ) {
 			if ( in_array( $variable, $apg_sms ) ) {
-				$mensaje = str_replace( "%" . $variable . "%", is_callable( array( $pedido, 'get_' . $variable ) ) ? $pedido->{'get_' . $variable}() : $pedido->$variable, $mensaje ); //Variables estándar - Objeto
+				$mensaje = str_replace( "%" . $variable . "%", is_callable( [ $pedido, 'get_' . $variable ] ) ? $pedido->{'get_' . $variable}() : $pedido->$variable, $mensaje ); //Variables estándar - Objeto
 			} else if ( in_array( $variable, $apg_sms_variables ) ) {
 				$mensaje = str_replace( "%" . $variable . "%", $variables_de_pedido["_" . $variable][0], $mensaje ); //Variables estándar - Array
 			} else if ( isset( $variables_de_pedido[$variable] ) || in_array( $variable, $variables_personalizadas ) ) {
@@ -287,8 +289,8 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 		} else if ( $variable == "order_product" ) {
 			$nombre		= '';
 			$productos	= $pedido->get_items();
-			if ( !isset( $apg_sms_settings['productos'] ) || $apg_sms_settings['productos'] != 1 ) {
-				$nombre = $productos[key( $productos )]['name'];
+			if ( !isset( $apg_sms_settings[ 'productos' ] ) || $apg_sms_settings[ 'productos' ] != 1 ) {
+				$nombre = $productos[key( $productos )][ 'name' ];
 				if ( strlen( $nombre ) > 10 ) {
 					$nombre = substr( $nombre, 0, 10 ) . "...";
 				}
@@ -297,7 +299,7 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 				}
 			} else {
 				foreach ( $productos as $producto ) {
-					$nombre .= $producto['quantity'] . " x " . $producto['name'] . "\r\n";
+					$nombre .= $producto[ 'quantity' ] . " x " . $producto[ 'name' ] . "\r\n";
 				}
 			}
 			$mensaje = str_replace( "%" . $variable . "%", $nombre, $mensaje );
@@ -310,7 +312,7 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 
 //Devuelve el código de prefijo del país
 function apg_sms_dame_prefijo_pais( $pais = '' ) {
-	$paises = array( 
+	$paises = [ 
 		'AC' => '247', 
 		'AD' => '376', 
 		'AE' => '971', 
@@ -577,7 +579,7 @@ function apg_sms_dame_prefijo_pais( $pais = '' ) {
 		'ZA' => '27', 
 		'ZM' => '260', 
 		'ZW' => '263' 
-	);
+	];
 
 	return ( $pais == '' ) ? $paises : ( isset( $paises[$pais] ) ? $paises[$pais] : '' );
 }
