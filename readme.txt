@@ -4,9 +4,9 @@ Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, Adlinks Labs, BulkGate, WooCommerce Sequential Order Numbers Pro, WPML
 Requires at least: 3.8
 Tested up to: 5.4
-Stable tag: 2.18
+Stable tag: 2.18.1
 WC requires at least: 2.1
-WC tested up to: 3.8.1
+WC tested up to: 3.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -89,7 +89,6 @@ Don’t forget to leave us your comment on:
 * [WC - APG SMS Notifications](https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-sms-notifications) on Art Project Group.
 * [Art Project Group](https://www.facebook.com/artprojectgroup) on Facebook.
 * [@artprojectgroup](https://twitter.com/artprojectgroup) on Twitter.
-* [+ArtProjectGroupES](https://plus.google.com/+ArtProjectGroupES/) on Google+.
 
 = More plugins =
 Remember that you can find more [plugins for WordPress](https://artprojectgroup.es/plugins-para-wordpress) and more [plugins for WooCommerce](https://artprojectgroup.es/plugins-para-woocommerce) on [Art Project Group](https://artprojectgroup.es) and our profile on [WordPress](https://profiles.wordpress.org/artprojectgroup/).
@@ -125,6 +124,8 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 1. Screenshot of WC - APG SMS Notifications.
 
 == Changelog ==
+= 2.18.1 =
+* Small fixes.
 = 2.18 =
 * Added support for Adlinks Labs. **Update sponsored by [Adlinks Labs](http://adlinks.websmsc.com/)**.
 * Added support for BulkGate. **Modification devised by [webdados](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/5)**.
@@ -407,9 +408,8 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 * Initial version.
 
 == Upgrade Notice ==
-* Added support for Adlinks Labs. **Update sponsored by [Adlinks Labs](http://adlinks.websmsc.com/)**.
-* Added support for BulkGate. **Modification devised by [webdados](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/5)**.
-* Removed support for Open DND.
+= 2.18.1 =
+* Small fixes.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).

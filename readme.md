@@ -9,11 +9,11 @@ Requires at least: 3.8
 
 Tested up to: 5.4
 
-Stable tag: 2.18
+Stable tag: 2.18.1
 
 WC requires at least: 2.1
 
-WC tested up to: 3.8.1
+WC tested up to: 3.9
 
 License: GPLv3
 
@@ -99,7 +99,6 @@ No olvides dejarnos tu comentario en:
 * [WC - APG SMS Notifications](https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-sms-notifications) en Art Project Group.
 * [Art Project Group](https://www.facebook.com/artprojectgroup) en Facebook.
 * [@artprojectgroup](https://twitter.com/artprojectgroup) en Twitter.
-* [+ArtProjectGroupES](https://plus.google.com/+ArtProjectGroupES/) en Google+.
 
 ### Más plugins
 Recuerda que puedes encontrar más [plugins para WordPress](https://artprojectgroup.es/plugins-para-wordpress) y más [plugins para WooCommerce](https://artprojectgroup.es/plugins-para-woocommerce) en [Art Project Group](https://artprojectgroup.es) y en nuestro perfil en [WordPress](https://profiles.wordpress.org/artprojectgroup/).
@@ -132,6 +131,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.18.1
+* Small fixes.
+
 ### 2.18
 * Añadido soporte para Adlinks Labs. **Actualización patrocinada por [Adlinks Labs](http://adlinks.websmsc.com/)**.
 * Añadido soporte para BulkGate. **Modificación ideada por [webdados](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/5)**.
