@@ -77,7 +77,6 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
 			break;
 		case "labsmobile":
  			$url						= add_query_arg( [
- 				'client'					=> $apg_sms_settings[ 'identificador_labsmobile' ],
  				'username'					=> $apg_sms_settings[ 'usuario_labsmobile' ],
  				'password'					=> $apg_sms_settings[ 'contrasena_labsmobile' ],
  				'msisdn'					=> $telefono,
@@ -86,7 +85,7 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
  			], 'https://api.labsmobile.com/get/send.php' );
  			$respuesta					= wp_remote_get( $url );
 			break;			
-		case "mobtexting":
+        case "mobtexting":
  			$url						= add_query_arg( [
  				'access_token'				=> $apg_sms_settings[ 'clave_mobtexting' ],
  				'to'						=> $telefono,

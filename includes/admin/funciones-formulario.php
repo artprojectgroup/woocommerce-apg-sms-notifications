@@ -88,7 +88,6 @@ $campos_de_proveedores = [
 		"telefono_isms" 					=> __( 'mobile number', 'woocommerce-apg-sms-notifications' ),
 	],
 	"labsmobile"		=> [
-		"identificador_labsmobile"			=> __( 'client', 'woocommerce-apg-sms-notifications' ),
 		"usuario_labsmobile"				=> __( 'username', 'woocommerce-apg-sms-notifications' ),
 		"contrasena_labsmobile"				=> __( 'password', 'woocommerce-apg-sms-notifications' ),
 		"sid_labsmobile"					=> __( 'sender ID', 'woocommerce-apg-sms-notifications' ),

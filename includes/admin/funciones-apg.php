@@ -88,7 +88,7 @@ function apg_sms_plugin( $nombre ) {
 
 //Hoja de estilo
 function apg_sms_estilo() {
-	if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'apg_sms' ) !== false ) {
+	if ( strpos( $_SERVER[ 'REQUEST_URI' ], 'apg_sms' ) !== false || strpos( $_SERVER[ 'REQUEST_URI' ], 'plugins.php' ) !== false ) {
 		wp_register_style( 'apg_sms_hoja_de_estilo', plugins_url( 'assets/css/style.css', DIRECCION_apg_sms ) ); //Carga la hoja de estilo
 		wp_enqueue_style( 'apg_sms_hoja_de_estilo' ); //Carga la hoja de estilo
 	}

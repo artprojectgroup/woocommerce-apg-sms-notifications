@@ -4,9 +4,9 @@ Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, Adlinks Labs, BulkGate, WooCommerce Sequential Order Numbers Pro, WPML
 Requires at least: 3.8
 Tested up to: 5.4
-Stable tag: 2.18.1
+Stable tag: 2.18.2
 WC requires at least: 2.1
-WC tested up to: 3.9
+WC tested up to: 4.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,8 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 1. Screenshot of WC - APG SMS Notifications.
 
 == Changelog ==
+= 2.18.2 =
+* Small fixes for LabsMobile Spain.
 = 2.18.1 =
 * Small fixes.
 = 2.18 =
@@ -408,8 +410,8 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 * Initial version.
 
 == Upgrade Notice ==
-= 2.18.1 =
-* Small fixes.
+= 2.18.2 =
+* Small fixes for LabsMobile Spain.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).

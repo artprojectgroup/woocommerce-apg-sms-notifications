@@ -9,11 +9,11 @@ Requires at least: 3.8
 
 Tested up to: 5.4
 
-Stable tag: 2.18.1
+Stable tag: 2.18.2
 
 WC requires at least: 2.1
 
-WC tested up to: 3.9
+WC tested up to: 4.09
 
 License: GPLv3
 
@@ -132,7 +132,10 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 
 ## Changelog
 ### 2.18.1
-* Small fixes.
+* Pequeños arreglos para LabsMobile Spain.
+
+### 2.18.1
+* Pequeños arreglos.
 
 ### 2.18
 * Añadido soporte para Adlinks Labs. **Actualización patrocinada por [Adlinks Labs](http://adlinks.websmsc.com/)**.
