@@ -5,18 +5,26 @@ global $apg_sms_settings, $wpml_activo;
 $tab = 1;
 
 //WPML
-if ( function_exists( 'icl_register_string' ) || !$wpml_activo ) { //Versión anterior a la 3.2
-	$mensaje_pedido		= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_pedido', $apg_sms_settings[ 'mensaje_pedido' ] ) : $apg_sms_settings[ 'mensaje_pedido' ];
-	$mensaje_recibido	= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_recibido', $apg_sms_settings[ 'mensaje_recibido' ] ) : $apg_sms_settings[ 'mensaje_recibido' ];
-	$mensaje_procesando	= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_procesando', $apg_sms_settings[ 'mensaje_procesando' ] ) : $apg_sms_settings[ 'mensaje_procesando' ];
-	$mensaje_completado	= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_completado', $apg_sms_settings[ 'mensaje_completado' ] ) : $apg_sms_settings[ 'mensaje_completado' ];
-	$mensaje_nota		= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_nota', $apg_sms_settings[ 'mensaje_nota' ] ) : $apg_sms_settings[ 'mensaje_nota' ];
-} else if ( $wpml_activo ) { //Versión 3.2 o superior
-	$mensaje_pedido		= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_pedido' ], 'apg_sms', 'mensaje_pedido' );
-	$mensaje_recibido	= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_recibido' ], 'apg_sms', 'mensaje_recibido' );
-	$mensaje_procesando	= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_procesando' ], 'apg_sms', 'mensaje_procesando' );
-	$mensaje_completado	= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_completado' ], 'apg_sms', 'mensaje_completado' );
-	$mensaje_nota		= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_nota' ], 'apg_sms', 'mensaje_nota' );
+if ( $apg_sms_settings ) {
+    if ( function_exists( 'icl_register_string' ) || !$wpml_activo ) { //Versión anterior a la 3.2
+        $mensaje_pedido		= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_pedido', $apg_sms_settings[ 'mensaje_pedido' ] ) : $apg_sms_settings[ 'mensaje_pedido' ];
+        $mensaje_fallido	= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_fallido', $apg_sms_settings[ 'mensaje_fallido' ] ) : $apg_sms_settings[ 'mensaje_fallido' ];
+        $mensaje_recibido	= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_recibido', $apg_sms_settings[ 'mensaje_recibido' ] ) : $apg_sms_settings[ 'mensaje_recibido' ];
+        $mensaje_procesando	= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_procesando', $apg_sms_settings[ 'mensaje_procesando' ] ) : $apg_sms_settings[ 'mensaje_procesando' ];
+        $mensaje_completado	= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_completado', $apg_sms_settings[ 'mensaje_completado' ] ) : $apg_sms_settings[ 'mensaje_completado' ];
+        $mensaje_devuelto	= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_devuelto', $apg_sms_settings[ 'mensaje_devuelto' ] ) : $apg_sms_settings[ 'mensaje_devuelto' ];
+        $mensaje_cancelado	= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_cancelado', $apg_sms_settings[ 'mensaje_cancelado' ] ) : $apg_sms_settings[ 'mensaje_cancelado' ];
+        $mensaje_nota		= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_nota', $apg_sms_settings[ 'mensaje_nota' ] ) : $apg_sms_settings[ 'mensaje_nota' ];
+    } else if ( $wpml_activo ) { //Versión 3.2 o superior
+        $mensaje_pedido		= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_pedido' ], 'apg_sms', 'mensaje_pedido' );
+        $mensaje_fallido	= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_fallido' ], 'apg_sms', 'mensaje_fallido' );
+        $mensaje_recibido	= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_recibido' ], 'apg_sms', 'mensaje_recibido' );
+        $mensaje_procesando	= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_procesando' ], 'apg_sms', 'mensaje_procesando' );
+        $mensaje_completado	= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_completado' ], 'apg_sms', 'mensaje_completado' );
+        $mensaje_devuelto	= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_devuelto' ], 'apg_sms', 'mensaje_devuelto' );
+        $mensaje_cancelado	= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_cancelado' ], 'apg_sms', 'mensaje_cancelado' );
+        $mensaje_nota		= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_nota' ], 'apg_sms', 'mensaje_nota' );
+    }
 }
 
 //Listado de proveedores SMS
@@ -252,9 +260,13 @@ $listado_de_estados = $listado_de_estados_temporal;
 $listado_de_mensajes = [
 	'todos'					=> __( 'All messages', 'woocommerce-apg-sms-notifications' ),
 	'mensaje_pedido'		=> __( 'Owner custom message', 'woocommerce-apg-sms-notifications' ),
+	'mensaje_pendiente'		=> __( 'Order pending custom message', 'woocommerce-apg-sms-notifications' ),
+	'mensaje_fallido'		=> __( 'Order failed custom message', 'woocommerce-apg-sms-notifications' ),
 	'mensaje_recibido'		=> __( 'Order on-hold custom message', 'woocommerce-apg-sms-notifications' ),
 	'mensaje_procesando'	=> __( 'Order processing custom message', 'woocommerce-apg-sms-notifications' ),
 	'mensaje_completado'	=> __( 'Order completed custom message', 'woocommerce-apg-sms-notifications' ),
+	'mensaje_devuelto'		=> __( 'Order refunded custom message', 'woocommerce-apg-sms-notifications' ),
+	'mensaje_cancelado'		=> __( 'Order cancelled custom message', 'woocommerce-apg-sms-notifications' ),
 	'mensaje_nota'			=> __( 'Notes custom message', 'woocommerce-apg-sms-notifications' ),
 ];
 
@@ -361,4 +373,57 @@ function apg_sms_listado_de_mensajes( $listado_de_mensajes ) {
 		$texto = ( !isset( $apg_sms_settings[ 'mensajes' ] ) && $valor == 'todos' && !$chequeado ) ? ' selected="selected"' : '';
 		echo '<option value="' . $valor . '"' . $chequea . $texto . '>' . $mensaje . '</option>' . PHP_EOL;
 	}
+}
+
+
+/*
+Pinta los campos de mensajes
+*/
+function apg_sms_campo_de_mensaje_personalizado( $campo, $campo_cliente, $listado_de_mensajes ) {
+    global $tab;
+    
+    //Listado de mensajes personalizados
+    $listado_de_mensajes_personalizados = [
+        'mensaje_pedido'		=> __( 'Order No. %s received on ', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_pendiente'		=> __( 'Thank you for shopping with us! Your order No. %s is now: ', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_fallido'		=> __( 'Thank you for shopping with us! Your order No. %s is now: ', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_recibido'		=> __( 'Your order No. %s is received on %s. Thank you for shopping with us!', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_procesando'	=> __( 'Thank you for shopping with us! Your order No. %s is now: ', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_completado'	=> __( 'Thank you for shopping with us! Your order No. %s is now: ', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_devuelto'		=> __( 'Thank you for shopping with us! Your order No. %s is now: ', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_cancelado'		=> __( 'Thank you for shopping with us! Your order No. %s is now: ', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_nota'			=> __( 'A note has just been added to your order No. %s: ', 'woocommerce-apg-sms-notifications' ),
+    ];
+
+    //Listado de textos personalizados
+    $listado_de_textos_personalizados = [
+        'mensaje_pendiente'		=> __( 'Pending', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_fallido'		=> __( 'Failed', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_procesando'	=> __( 'Processing', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_completado'	=> __( 'Completed', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_devuelto'		=> __( 'Refunded', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_cancelado'		=> __( 'Cancelled', 'woocommerce-apg-sms-notifications' ),
+    ];
+
+    if ( $campo == 'mensaje_pedido'  ) {
+        $texto  = stripcslashes( !empty( $campo_cliente ) ? $campo_cliente : sprintf( __( $listado_de_mensajes_personalizados[ $campo ], 'woocommerce-apg-sms-notifications' ), "%id%" ) . "%shop_name%" . "." );
+    } elseif ( $campo == 'mensaje_recibido'  ) {
+        $texto  = stripcslashes( !empty( $campo_cliente ) ? $campo_cliente : sprintf( __( $listado_de_mensajes_personalizados[ $campo ], 'woocommerce-apg-sms-notifications' ), "%id%", "%shop_name%" ) );
+    } elseif ( $campo == 'mensaje_nota'  ) {
+        $texto  = stripcslashes( !empty( $campo_cliente ) ? $campo_cliente : sprintf( __( $listado_de_mensajes_personalizados[ $campo ], 'woocommerce-apg-sms-notifications' ), "%id%" ) . "%note%" );
+    } else {
+        $texto  = stripcslashes( !empty( $campo_cliente ) ? $campo_cliente : sprintf( __( $listado_de_mensajes_personalizados[ $campo ], 'woocommerce-apg-sms-notifications' ), "%id%" ) . __( $listado_de_textos_personalizados[ $campo ], 'woocommerce-apg-sms-notifications' ) . "." );
+    }
+    
+    echo'
+        <tr valign="top" class="' . $campo . '">
+            <th scope="row" class="titledesc">
+                <label for="apg_sms_settings[' . $campo . ']">
+                    ' . __( $listado_de_mensajes[ $campo ], 'woocommerce-apg-sms-notifications' ) .':
+                    <span class="woocommerce-help-tip" data-tip="'. __( "You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.", "woocommerce-apg-sms-notifications" ) . '"></span>
+                </label>
+            </th>
+            <td class="forminp forminp-number"><textarea id="apg_sms_settings[' . $campo . ']" name="apg_sms_settings[' . $campo . ']" cols="50" rows="5" tabindex="' . $tab++ . '">' .$texto . '</textarea>
+            </td>
+        </tr>';
 }
