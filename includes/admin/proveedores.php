@@ -19,7 +19,7 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
  				'application_token'			=> $apg_sms_settings[ 'clave_bulkgate' ],
  				'number'					=> $telefono,
  				'text'						=> apg_sms_codifica_el_mensaje( $mensaje ),
- 				'unicode'					=> 1,
+ 				'unicode'					=> intval( $apg_sms_settings[ 'unicode_bulkgate' ] ),
  				'sender_id'					=> 'gText',
  				'sender_id_value'			=> $apg_sms_settings[ 'identificador_bulkgate' ],
  			], 'https://portal.bulkgate.com/api/1.0/simple/transactional' );
