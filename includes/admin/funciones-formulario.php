@@ -71,6 +71,7 @@ $campos_de_proveedores = [
  		"usuario_bulkgate"					=> __( 'application ID', 'woocommerce-apg-sms-notifications' ),
  		"clave_bulkgate"					=> __( 'authentication Token', 'woocommerce-apg-sms-notifications' ),
  		"identificador_bulkgate"			=> __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
+ 		"unicode_bulkgate"			        => __( 'unicode', 'woocommerce-apg-sms-notifications' ),
  	],
 	"bulksms" 			=> [ 
 		"usuario_bulksms" 					=> __( 'username', 'woocommerce-apg-sms-notifications' ),
@@ -233,6 +234,10 @@ $opciones_de_proveedores = [
 	"servidor_twizo"	=> [
 		"api-asia-01.twizo.com"	=> __( 'Singapore', 'woocommerce-apg-sms-notifications' ), 
 		"api-eu-01.twizo.com"	=> __( 'Germany', 'woocommerce-apg-sms-notifications' ), 
+	],
+	"unicode_bulkgate"  => [
+		1                       => __( 'Yes', 'woocommerce-apg-sms-notifications' ),
+		0                       => __( 'No', 'woocommerce-apg-sms-notifications' ),
 	],
 ];
 
