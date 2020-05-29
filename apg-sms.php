@@ -315,7 +315,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			//Solo enviamos si no ha cambiado de estado
 			if ( $estado == 'on-hold' ) {
 				$retraso_enviado = get_post_meta( $numero_de_pedido, 'apg_sms_retraso_enviado', true );
-				if ( intval( $retraso_enviado ) == -1 &&  ) {
+				if ( intval( $retraso_enviado ) == -1 ) {
 					update_post_meta( $numero_de_pedido, 'apg_sms_retraso_enviado', 1 );
 					apg_sms_procesa_estados( $numero_de_pedido, false );
 				}
