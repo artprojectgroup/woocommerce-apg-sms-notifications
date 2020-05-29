@@ -152,10 +152,24 @@
             ?> 
 			<tr valign="top" class="mensaje_recibido">
 				<th scope="row" class="titledesc">
+					<label for="apg_sms_settings[retraso_onhold]">
+						<?php _e( 'Order on-hold delay (minutes)', 'woocommerce-apg-sms-notifications' ); ?>:
+					</label>
+					<span class="woocommerce-help-tip" data-tip="<?php _e( 'Send this message after X minutes, if the order is still on-hold, instead of sending it immediately.', 'woocommerce-apg-sms-notifications' ); ?>"/>
+				</th>
+				<td class="forminp forminp-number">
+					<input type="text" id="apg_sms_settings[retraso_onhold]" name="apg_sms_settings[retraso_onhold]" size="50" value="<?php echo ( isset( $apg_sms_settings[ 'retraso_onhold' ] ) ) ? $apg_sms_settings[ 'retraso_onhold' ] : ''; ?>" tabindex="<?php echo $tab++; ?>"/>
+				</td>
+			</tr>
+			<tr valign="top" class="mensaje_recibido">
+				<th scope="row" class="titledesc">
 					<label for="apg_sms_settings[temporizador]">
-						<?php _e( 'Order on-hold timer', 'woocommerce-apg-sms-notifications' ); ?>:
-						<span class="woocommerce-help-tip" data-tip="<?php _e( 'You can timer this message every X hours. Leave blank to disable.', 'woocommerce-apg-sms-notifications' ); ?>"/> </th>
-				<td class="forminp forminp-number"><input type="text" id="apg_sms_settings[temporizador]" name="apg_sms_settings[temporizador]" size="50" value="<?php echo ( isset( $apg_sms_settings[ 'temporizador' ] ) ) ? $apg_sms_settings[ 'temporizador' ] : ''; ?>" tabindex="<?php echo $tab++; ?>"/>
+						<?php _e( 'Order on-hold timer (hours)', 'woocommerce-apg-sms-notifications' ); ?>:
+					</label>
+					<span class="woocommerce-help-tip" data-tip="<?php _e( 'You can timer this message every X hours. Leave blank to disable.', 'woocommerce-apg-sms-notifications' ); ?>"/>
+				</th>
+				<td class="forminp forminp-number">
+					<input type="text" id="apg_sms_settings[temporizador]" name="apg_sms_settings[temporizador]" size="50" value="<?php echo ( isset( $apg_sms_settings[ 'temporizador' ] ) ) ? $apg_sms_settings[ 'temporizador' ] : ''; ?>" tabindex="<?php echo $tab++; ?>"/>
 				</td>
 			</tr>
             <?php 
