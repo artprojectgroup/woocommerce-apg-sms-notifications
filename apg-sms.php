@@ -311,10 +311,14 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 	function apg_sms_retraso( $numero_de_pedido ) {
 		global $apg_sms_settings;
 		if ( $pedido = wc_get_order( intval( $numero_de_pedido ) ) ) {
-			$retraso_enviado = get_post_meta( $numero_de_pedido, 'apg_sms_retraso_enviado', true );
-			if ( intval( $retraso_enviado ) == -1 ) {
-				update_post_meta( $numero_de_pedido, 'apg_sms_retraso_enviado', 1 );
-				apg_sms_procesa_estados( $numero_de_pedido, false );
+			$estado = is_callable( [ $pedido, 'get_status' ] ) ? $pedido->get_status() : $pedido->status;
+			//Solo enviamos si no ha cambiado de estado
+			if ( $estado == 'on-hold' ) {
+				$retraso_enviado = get_post_meta( $numero_de_pedido, 'apg_sms_retraso_enviado', true );
+				if ( intval( $retraso_enviado ) == -1 &&  ) {
+					update_post_meta( $numero_de_pedido, 'apg_sms_retraso_enviado', 1 );
+					apg_sms_procesa_estados( $numero_de_pedido, false );
+				}
 			}
 		}
 	}
