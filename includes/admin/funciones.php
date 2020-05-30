@@ -28,7 +28,7 @@ function apg_sms_prefijo( $servicio ) {
 		"voipbuster", 
 		"voipbusterpro", 
 		"voipstunt", 
-	];
+    ];
 	
 	return in_array( $servicio, $prefijo );
 }
@@ -126,7 +126,7 @@ function apg_sms_normaliza_mensaje( $mensaje ) {
 		"¡"			=> "", 
 		"?"			=> ".", 
 		"¿"			=> "" 
-	];
+    ];
 
 	$mensaje = str_replace( array_keys( $reemplazo ), array_values( $reemplazo ), $mensaje );
 
@@ -165,16 +165,16 @@ function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietari
 			$prefijo_internacional = apg_sms_dame_prefijo_pais( WC()->countries->get_base_country() );
 		}
 
-		preg_match( "/(\d{1,4})[0-9.\- ]+/", $telefono_procesado, $prefijo_telefonico );
+		preg_match( "/(\d{1,4})[0-9.\-]+/", $telefono_procesado, $prefijo_telefonico );
 		if ( empty( $prefijo_telefonico ) ) { //Control
 			return;
 		}
 		if ( isset( $prefijo_internacional ) ) {
-			if ( strpos( strval( $prefijo_telefonico[1] ) , strval( $prefijo_internacional ) ) === false ) {
+			if ( strpos( strval( $prefijo_telefonico[ 1 ] ) , strval( $prefijo_internacional ) ) === false ) {
 				$telefono_procesado = $prefijo_internacional . ltrim( $telefono_procesado, '0' );
 			}
 		}
-		if ( ( $servicio == "moreify" || $servicio == "twilio" ) && strpos( $prefijo[1], "+" ) === false ) {
+		if ( ( $servicio == "moreify" || $servicio == "twilio" ) && strpos( $prefijo[ 1 ], "+" ) === false ) {
 			$telefono_procesado = "+" . $telefono_procesado;
 		} else if ( $servicio == "isms" && isset( $prefijo_internacional ) ) {
 			$telefono_procesado = "00" . preg_replace( '/\+/', '', $telefono_procesado );
@@ -205,7 +205,7 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 		"note", 
 		"order_product",
 		"shipping_method", 
-	];
+    ];
 	$apg_sms_variables = [ //Hay que añadirles un guión
 		"order_key", 
 		"billing_first_name", 
@@ -237,18 +237,18 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 		"order_shipping", 
 		"order_shipping_tax", 
 		"order_total" 
-	];
+    ];
 	$variables_personalizadas = explode( "\n", str_replace( [ 
 		"\r\n", 
 		"\r" 
-	], "\n", $variables ) );
+    ], "\n", $variables ) );
 
 	$numero_de_pedido		= is_callable( [ $pedido, 'get_id' ] ) ? $pedido->get_id() : $pedido->id;
 	$variables_de_pedido	= get_post_custom( $numero_de_pedido ); //WooCommerce 2.1
 	
 	preg_match_all( "/%(.*?)%/", $mensaje, $busqueda );
 
-	foreach ( $busqueda[1] as $variable ) { 
+	foreach ( $busqueda[ 1 ] as $variable ) { 
 		$variable = strtolower( $variable );
 
 		if ( !in_array( $variable, $apg_sms ) && !in_array( $variable, $apg_sms_variables ) && !in_array( $variable, $variables_personalizadas ) ) {
@@ -264,15 +264,15 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 			"order_product",
 			"order_discount", 
 			"shipping_method_title", 
-		];
+        ];
 		
 		if ( !in_array( $variable, $especiales ) ) {
 			if ( in_array( $variable, $apg_sms ) ) {
 				$mensaje = str_replace( "%" . $variable . "%", is_callable( [ $pedido, 'get_' . $variable ] ) ? $pedido->{'get_' . $variable}() : $pedido->$variable, $mensaje ); //Variables estándar - Objeto
 			} else if ( in_array( $variable, $apg_sms_variables ) ) {
-				$mensaje = str_replace( "%" . $variable . "%", $variables_de_pedido["_" . $variable][0], $mensaje ); //Variables estándar - Array
-			} else if ( isset( $variables_de_pedido[$variable] ) || in_array( $variable, $variables_personalizadas ) ) {
-				$mensaje = str_replace( "%" . $variable . "%", $variables_de_pedido[$variable][0], $mensaje ); //Variables de pedido y personalizadas
+				$mensaje = str_replace( "%" . $variable . "%", $variables_de_pedido[ "_" . $variable ][ 0 ], $mensaje ); //Variables estándar - Array
+			} else if ( isset( $variables_de_pedido[ $variable ] ) || in_array( $variable, $variables_personalizadas ) ) {
+				$mensaje = str_replace( "%" . $variable . "%", $variables_de_pedido[ $variable ][ 0 ], $mensaje ); //Variables de pedido y personalizadas
 			}
 		} else if ( $variable == "order_date" || $variable == "modified_date" ) {
 			$mensaje = str_replace( "%" . $variable . "%", date_i18n( woocommerce_date_format(), strtotime( $pedido->$variable ) ), $mensaje );
@@ -290,7 +290,7 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 			$nombre		= '';
 			$productos	= $pedido->get_items();
 			if ( !isset( $apg_sms_settings[ 'productos' ] ) || $apg_sms_settings[ 'productos' ] != 1 ) {
-				$nombre = $productos[key( $productos )][ 'name' ];
+				$nombre = $productos[ key( $productos ) ][ 'name' ];
 				if ( strlen( $nombre ) > 10 ) {
 					$nombre = substr( $nombre, 0, 10 ) . "...";
 				}
@@ -579,7 +579,7 @@ function apg_sms_dame_prefijo_pais( $pais = '' ) {
 		'ZA' => '27', 
 		'ZM' => '260', 
 		'ZW' => '263' 
-	];
+    ];
 
-	return ( $pais == '' ) ? $paises : ( isset( $paises[$pais] ) ? $paises[$pais] : '' );
+	return ( $pais == '' ) ? $paises : ( isset( $paises[ $pais ] ) ? $paises[ $pais ] : '' );
 }

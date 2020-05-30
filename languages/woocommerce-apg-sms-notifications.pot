@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce - APG SMS Notifications\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-05 16:18+0000\n"
+"POT-Creation-Date: 2020-05-30 08:51+0000\n"
 "POT-Revision-Date: Wed Aug 10 2016 13:38:05 GMT+0200 (CEST)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -31,7 +31,7 @@ msgstr ""
 msgid "SMS Notifications"
 msgstr ""
 
-#: apg-sms.php:388
+#: apg-sms.php:414
 msgid "This plugin require WooCommerce active to run!"
 msgstr ""
 
@@ -170,7 +170,7 @@ msgstr ""
 msgid "%s state custom message:"
 msgstr ""
 
-#: includes/formulario.php:107 includes/admin/funciones-formulario.php:423
+#: includes/formulario.php:107 includes/admin/funciones-formulario.php:433
 msgid ""
 "You can customize your message. Remember that you can use this variables: "
 "%id%, %order_key%, %billing_first_name%, %billing_last_name%, "
@@ -207,30 +207,40 @@ msgid "Select what messages do you want to send"
 msgstr ""
 
 #: includes/formulario.php:156
-msgid "Order on-hold timer"
+msgid "Order on-hold delay (minutes)"
 msgstr ""
 
 #: includes/formulario.php:157
+msgid ""
+"Send this message after X minutes, if the order is still on-hold, instead of "
+"sending it immediately."
+msgstr ""
+
+#: includes/formulario.php:166
+msgid "Order on-hold timer (hours)"
+msgstr ""
+
+#: includes/formulario.php:167
 msgid "You can timer this message every X hours. Leave blank to disable."
 msgstr ""
 
-#: includes/formulario.php:184
+#: includes/formulario.php:196
 msgid "Send debug information?:"
 msgstr ""
 
-#: includes/formulario.php:185
+#: includes/formulario.php:197
 msgid "Check if you want to receive debug information from your SMS gateway"
 msgstr ""
 
-#: includes/formulario.php:194
+#: includes/formulario.php:206
 msgid "email address:"
 msgstr ""
 
-#: includes/formulario.php:195
+#: includes/formulario.php:207
 msgid "Add an email address where you want to receive the debug information"
 msgstr ""
 
-#: includes/formulario.php:203
+#: includes/formulario.php:215
 msgid "Save Changes"
 msgstr ""
 
@@ -246,256 +256,267 @@ msgstr ""
 msgid "Gateway answer: "
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:66
-#: includes/admin/funciones-formulario.php:108
-#: includes/admin/funciones-formulario.php:118
+#: includes/admin/funciones-formulario.php:71
+#: includes/admin/funciones-formulario.php:114
+#: includes/admin/funciones-formulario.php:124
 msgid "authentication key"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:67
-#: includes/admin/funciones-formulario.php:110
-#: includes/admin/funciones-formulario.php:120
-#: includes/admin/funciones-formulario.php:125
+#: includes/admin/funciones-formulario.php:72
+#: includes/admin/funciones-formulario.php:116
+#: includes/admin/funciones-formulario.php:126
+#: includes/admin/funciones-formulario.php:131
 msgid "route"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:68
 #: includes/admin/funciones-formulario.php:73
-#: includes/admin/funciones-formulario.php:81
-#: includes/admin/funciones-formulario.php:91
-#: includes/admin/funciones-formulario.php:101
-#: includes/admin/funciones-formulario.php:105
-#: includes/admin/funciones-formulario.php:109
-#: includes/admin/funciones-formulario.php:119
-#: includes/admin/funciones-formulario.php:124
-#: includes/admin/funciones-formulario.php:131
-#: includes/admin/funciones-formulario.php:140
-#: includes/admin/funciones-formulario.php:145
-#: includes/admin/funciones-formulario.php:154
-#: includes/admin/funciones-formulario.php:163
-#: includes/admin/funciones-formulario.php:167
-#: includes/admin/funciones-formulario.php:171
-#: includes/admin/funciones-formulario.php:180
+#: includes/admin/funciones-formulario.php:78
+#: includes/admin/funciones-formulario.php:87
+#: includes/admin/funciones-formulario.php:97
+#: includes/admin/funciones-formulario.php:107
+#: includes/admin/funciones-formulario.php:111
+#: includes/admin/funciones-formulario.php:115
+#: includes/admin/funciones-formulario.php:125
+#: includes/admin/funciones-formulario.php:130
+#: includes/admin/funciones-formulario.php:137
+#: includes/admin/funciones-formulario.php:146
+#: includes/admin/funciones-formulario.php:151
+#: includes/admin/funciones-formulario.php:160
+#: includes/admin/funciones-formulario.php:169
+#: includes/admin/funciones-formulario.php:173
+#: includes/admin/funciones-formulario.php:177
+#: includes/admin/funciones-formulario.php:186
 msgid "sender ID"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:71
-#: includes/admin/funciones-formulario.php:143
+#: includes/admin/funciones-formulario.php:76
+#: includes/admin/funciones-formulario.php:149
 msgid "application ID"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:72
-#: includes/admin/funciones-formulario.php:115
-#: includes/admin/funciones-formulario.php:135
-#: includes/admin/funciones-formulario.php:139
-#: includes/admin/funciones-formulario.php:175
+#: includes/admin/funciones-formulario.php:77
+#: includes/admin/funciones-formulario.php:121
+#: includes/admin/funciones-formulario.php:141
+#: includes/admin/funciones-formulario.php:145
+#: includes/admin/funciones-formulario.php:181
 msgid "authentication Token"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:76
+#: includes/admin/funciones-formulario.php:79
+msgid "unicode"
+msgstr ""
+
 #: includes/admin/funciones-formulario.php:82
-#: includes/admin/funciones-formulario.php:89
-#: includes/admin/funciones-formulario.php:94
-#: includes/admin/funciones-formulario.php:99
-#: includes/admin/funciones-formulario.php:129
-#: includes/admin/funciones-formulario.php:148
-#: includes/admin/funciones-formulario.php:152
-#: includes/admin/funciones-formulario.php:157
-#: includes/admin/funciones-formulario.php:161
-#: includes/admin/funciones-formulario.php:184
-#: includes/admin/funciones-formulario.php:188
-#: includes/admin/funciones-formulario.php:192
+#: includes/admin/funciones-formulario.php:88
+#: includes/admin/funciones-formulario.php:95
+#: includes/admin/funciones-formulario.php:100
+#: includes/admin/funciones-formulario.php:105
+#: includes/admin/funciones-formulario.php:135
+#: includes/admin/funciones-formulario.php:154
+#: includes/admin/funciones-formulario.php:158
+#: includes/admin/funciones-formulario.php:163
+#: includes/admin/funciones-formulario.php:167
+#: includes/admin/funciones-formulario.php:190
+#: includes/admin/funciones-formulario.php:194
+#: includes/admin/funciones-formulario.php:198
 msgid "username"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:77
 #: includes/admin/funciones-formulario.php:83
-#: includes/admin/funciones-formulario.php:90
-#: includes/admin/funciones-formulario.php:95
-#: includes/admin/funciones-formulario.php:100
-#: includes/admin/funciones-formulario.php:130
-#: includes/admin/funciones-formulario.php:149
-#: includes/admin/funciones-formulario.php:153
-#: includes/admin/funciones-formulario.php:158
-#: includes/admin/funciones-formulario.php:162
-#: includes/admin/funciones-formulario.php:185
-#: includes/admin/funciones-formulario.php:189
-#: includes/admin/funciones-formulario.php:193
+#: includes/admin/funciones-formulario.php:89
+#: includes/admin/funciones-formulario.php:96
+#: includes/admin/funciones-formulario.php:101
+#: includes/admin/funciones-formulario.php:106
+#: includes/admin/funciones-formulario.php:136
+#: includes/admin/funciones-formulario.php:155
+#: includes/admin/funciones-formulario.php:159
+#: includes/admin/funciones-formulario.php:164
+#: includes/admin/funciones-formulario.php:168
+#: includes/admin/funciones-formulario.php:191
+#: includes/admin/funciones-formulario.php:195
+#: includes/admin/funciones-formulario.php:199
 msgid "password"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:78
-#: includes/admin/funciones-formulario.php:111
-#: includes/admin/funciones-formulario.php:126
-#: includes/admin/funciones-formulario.php:181
+#: includes/admin/funciones-formulario.php:84
+#: includes/admin/funciones-formulario.php:117
+#: includes/admin/funciones-formulario.php:132
+#: includes/admin/funciones-formulario.php:187
 msgid "host"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:86
-#: includes/admin/funciones-formulario.php:104
-#: includes/admin/funciones-formulario.php:123
-#: includes/admin/funciones-formulario.php:134
-#: includes/admin/funciones-formulario.php:166
-#: includes/admin/funciones-formulario.php:170
-#: includes/admin/funciones-formulario.php:179
+#: includes/admin/funciones-formulario.php:92
+#: includes/admin/funciones-formulario.php:110
+#: includes/admin/funciones-formulario.php:129
+#: includes/admin/funciones-formulario.php:140
+#: includes/admin/funciones-formulario.php:172
+#: includes/admin/funciones-formulario.php:176
+#: includes/admin/funciones-formulario.php:185
 msgid "key"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:96
-#: includes/admin/funciones-formulario.php:176
+#: includes/admin/funciones-formulario.php:102
+#: includes/admin/funciones-formulario.php:182
 msgid "mobile number"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:114
+#: includes/admin/funciones-formulario.php:120
 msgid "project"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:138
+#: includes/admin/funciones-formulario.php:144
 msgid "authentication ID"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:144
+#: includes/admin/funciones-formulario.php:150
 msgid "application secret"
 msgstr ""
 
-#. Traducciones ocultas
-#: includes/admin/funciones-formulario.php:174
+#: includes/admin/funciones-formulario.php:180
 msgid "account Sid"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:204
-#: includes/admin/funciones-formulario.php:211
-#: includes/admin/funciones-formulario.php:229
+#: includes/admin/funciones-formulario.php:210
+#: includes/admin/funciones-formulario.php:217
+#: includes/admin/funciones-formulario.php:235
 msgid "International"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:205
+#: includes/admin/funciones-formulario.php:211
 msgid "UK"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:206
 #: includes/admin/funciones-formulario.php:212
-#: includes/admin/funciones-formulario.php:230
+#: includes/admin/funciones-formulario.php:218
+#: includes/admin/funciones-formulario.php:236
 msgid "USA"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:207
+#: includes/admin/funciones-formulario.php:213
 msgid "South Africa"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:208
+#: includes/admin/funciones-formulario.php:214
 msgid "Spain"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:213
-#: includes/admin/funciones-formulario.php:231
+#: includes/admin/funciones-formulario.php:219
+#: includes/admin/funciones-formulario.php:237
 msgid "India"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:220
+#: includes/admin/funciones-formulario.php:226
 msgid "Default"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:234
+#: includes/admin/funciones-formulario.php:240
 msgid "Singapore"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:235
+#: includes/admin/funciones-formulario.php:241
 msgid "Germany"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:261
+#: includes/admin/funciones-formulario.php:244
+msgid "Yes"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:245
+msgid "No"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:271
 msgid "All messages"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:262
+#: includes/admin/funciones-formulario.php:272
 msgid "Owner custom message"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:263
+#: includes/admin/funciones-formulario.php:273
 msgid "Order pending custom message"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:264
+#: includes/admin/funciones-formulario.php:274
 msgid "Order failed custom message"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:265
+#: includes/admin/funciones-formulario.php:275
 msgid "Order on-hold custom message"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:266
+#: includes/admin/funciones-formulario.php:276
 msgid "Order processing custom message"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:267
+#: includes/admin/funciones-formulario.php:277
 msgid "Order completed custom message"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:268
+#: includes/admin/funciones-formulario.php:278
 msgid "Order refunded custom message"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:269
+#: includes/admin/funciones-formulario.php:279
 msgid "Order cancelled custom message"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:270
+#: includes/admin/funciones-formulario.php:280
 msgid "Notes custom message"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:297
-#: includes/admin/funciones-formulario.php:311
+#: includes/admin/funciones-formulario.php:307
+#: includes/admin/funciones-formulario.php:321
 #, php-format
 msgid "The %s for your account in %s"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:387
+#: includes/admin/funciones-formulario.php:397
 #, php-format
 msgid "Order No. %s received on "
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:388
-#: includes/admin/funciones-formulario.php:389
-#: includes/admin/funciones-formulario.php:391
-#: includes/admin/funciones-formulario.php:392
-#: includes/admin/funciones-formulario.php:393
-#: includes/admin/funciones-formulario.php:394
+#: includes/admin/funciones-formulario.php:398
+#: includes/admin/funciones-formulario.php:399
+#: includes/admin/funciones-formulario.php:401
+#: includes/admin/funciones-formulario.php:402
+#: includes/admin/funciones-formulario.php:403
+#: includes/admin/funciones-formulario.php:404
 #, php-format
 msgid "Thank you for shopping with us! Your order No. %s is now: "
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:390
+#: includes/admin/funciones-formulario.php:400
 #, php-format
 msgid "Your order No. %s is received on %s. Thank you for shopping with us!"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:395
+#: includes/admin/funciones-formulario.php:405
 #, php-format
 msgid "A note has just been added to your order No. %s: "
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:400
+#: includes/admin/funciones-formulario.php:410
 msgid "Pending"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:401
+#: includes/admin/funciones-formulario.php:411
 msgid "Failed"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:402
+#: includes/admin/funciones-formulario.php:412
 msgid "Processing"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:403
+#: includes/admin/funciones-formulario.php:413
 msgid "Completed"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:404
+#: includes/admin/funciones-formulario.php:414
 msgid "Refunded"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:405
+#: includes/admin/funciones-formulario.php:415
 msgid "Cancelled"
 msgstr ""
 

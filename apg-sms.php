@@ -1,15 +1,15 @@
 <?php
 /*
 Plugin Name: WC - APG SMS Notifications
-Version: 2.19
+Version: 2.20
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: https://artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 5.4
+Tested up to: 5.5
 WC requires at least: 2.1
-WC tested up to: 4.0.1
+WC tested up to: 4.2
 
 Text Domain: woocommerce-apg-sms-notifications
 Domain Path: /languages
@@ -156,9 +156,9 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		$campo_envio			= ( isset( $campo_envio[0] ) ) ? $campo_envio[0] : '';
 		$telefono				= apg_sms_procesa_el_telefono( $pedido, $billing_phone, $apg_sms_settings[ 'servicio' ] );
 		$telefono_envio			= apg_sms_procesa_el_telefono( $pedido, $campo_envio, $apg_sms_settings[ 'servicio' ], false, true );
-		$enviar_envio			= ( $telefono != $telefono_envio && isset( $apg_sms_settings[ 'envio' ] ) && $apg_sms_settings[ 'envio' ] == 1 ) ? true : false;
-		$internacional			= ( $billing_country && ( WC()->countries->get_base_country() != $billing_country ) ) ? true : false;
-		$internacional_envio	= ( $shipping_country && ( WC()->countries->get_base_country() != $shipping_country ) ) ? true : false;
+		$enviar_envio			= ( !empty( $telefono_envio ) && $telefono != $telefono_envio && isset( $apg_sms_settings[ 'envio' ] ) && $apg_sms_settings[ 'envio' ] == 1 ) ? true : false;
+		$internacional			= ( isset( $billing_country ) && ( WC()->countries->get_base_country() != $billing_country ) ) ? true : false;
+		$internacional_envio	= ( isset( $shipping_country ) && ( WC()->countries->get_base_country() != $shipping_country ) ) ? true : false;
         
 		//Teléfono propietario
 		if ( strpos( $apg_sms_settings[ 'telefono' ], "|" ) ) {
@@ -213,8 +213,14 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 					//Limpia el temporizador para pedidos recibidos
 					wp_clear_scheduled_hook( 'apg_sms_ejecuta_el_temporizador' );
 
-					$mensaje = apg_sms_procesa_variables( $mensaje_recibido, $pedido, $apg_sms_settings[ 'variables' ] ); //Mensaje para el cliente
-
+                    //Retardo para pedidos recibidos
+ 					if ( isset( $apg_sms_settings[ 'retardo' ] ) && $apg_sms_settings[ 'retardo' ] > 0 && ( ! intval( get_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', true ) ) == 1 ) ) {
+ 						wp_schedule_single_event( time() + ( absint( $apg_sms_settings[ 'retardo' ] ) * 60 ), 'apg_sms_ejecuta_el_retraso', [ $numero_de_pedido ] );
+ 						update_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', -1 );
+ 					} else { //Envío normal
+ 						$mensaje = apg_sms_procesa_variables( $mensaje_recibido, $pedido, $apg_sms_settings[ 'variables' ] ); //Mensaje para el cliente
+ 					}
+                    
 					//Temporizador para pedidos recibidos
 					if ( isset( $apg_sms_settings[ 'temporizador' ] ) && $apg_sms_settings[ 'temporizador' ] > 0 ) {
 						wp_schedule_single_event( time() + ( absint( $apg_sms_settings[ 'temporizador' ] ) * 60 * 60 ), 'apg_sms_ejecuta_el_temporizador' );
@@ -286,8 +292,6 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		}
 	}
 	add_action( 'woocommerce_order_status_on-hold', 'apg_sms_procesa_estados', 10 ); //Funciona cuando el pedido es marcado como recibido
-	add_action( 'woocommerce_order_status_pending_to_on-hold_notification', 'apg_sms_procesa_estados', 10 );
-	add_action( 'woocommerce_order_status_failed_to_on-hold_notification', 'apg_sms_procesa_estados', 10 );
 	add_action( 'woocommerce_order_status_pending', 'apg_sms_procesa_estados', 10 ); //Funciona cuando el pedido es marcado como pendiente
 	add_action( 'woocommerce_order_status_failed', 'apg_sms_procesa_estados', 10 ); //Funciona cuando el pedido es marcado como fallido
 	add_action( 'woocommerce_order_status_processing', 'apg_sms_procesa_estados', 10 ); //Funciona cuando el pedido es marcado como procesando
@@ -300,6 +304,28 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 	}
 	add_action( 'woocommerce_order_status_pending_to_processing_notification', 'apg_sms_notificacion', 10 ); //Funciona cuando el pedido es marcado directamente como procesando
 	
+    //Retraso
+ 	function apg_sms_retardo( $numero_de_pedido ) {
+ 		global $apg_sms_settings;
+        
+ 		if ( $pedido = wc_get_order( intval( $numero_de_pedido ) ) ) {
+ 			$retraso_enviado    = get_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', true );
+ 			$estado             = is_callable( [ $pedido, 'get_status' ] ) ? $pedido->get_status() : $pedido->status;
+ 			if ( intval( $retraso_enviado ) == -1 ) {		 			//Solo enviamos si no ha cambiado de estado
+ 				update_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', 1 );		 			
+                if ( $estado == 'on-hold' ) {
+                    apg_sms_procesa_estados( $numero_de_pedido, false );		 				
+                    $retraso_enviado    = get_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', true );
+                    if ( intval( $retraso_enviado ) == -1 ) {
+                        update_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', 1 );
+                        apg_sms_procesa_estados( $numero_de_pedido, false );
+                    }
+                }
+            }
+        }
+    }
+ 	add_action( 'apg_sms_ejecuta_el_retraso', 'apg_sms_retardo' );
+    
 	//Temporizador
 	function apg_sms_temporizador() {
 		global $apg_sms_settings;

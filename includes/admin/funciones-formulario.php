@@ -6,24 +6,29 @@ $tab = 1;
 
 //WPML
 if ( $apg_sms_settings ) {
+    $mensajes   = [
+        'mensaje_pedido',
+        'mensaje_fallido',
+        'mensaje_recibido',
+        'mensaje_procesando',
+        'mensaje_completado',
+        'mensaje_devuelto',
+        'mensaje_cancelado',
+        'mensaje_nota'
+    ];
+    
     if ( function_exists( 'icl_register_string' ) || !$wpml_activo ) { //Versión anterior a la 3.2
-        $mensaje_pedido		= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_pedido', $apg_sms_settings[ 'mensaje_pedido' ] ) : $apg_sms_settings[ 'mensaje_pedido' ];
-        $mensaje_fallido	= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_fallido', $apg_sms_settings[ 'mensaje_fallido' ] ) : $apg_sms_settings[ 'mensaje_fallido' ];
-        $mensaje_recibido	= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_recibido', $apg_sms_settings[ 'mensaje_recibido' ] ) : $apg_sms_settings[ 'mensaje_recibido' ];
-        $mensaje_procesando	= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_procesando', $apg_sms_settings[ 'mensaje_procesando' ] ) : $apg_sms_settings[ 'mensaje_procesando' ];
-        $mensaje_completado	= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_completado', $apg_sms_settings[ 'mensaje_completado' ] ) : $apg_sms_settings[ 'mensaje_completado' ];
-        $mensaje_devuelto	= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_devuelto', $apg_sms_settings[ 'mensaje_devuelto' ] ) : $apg_sms_settings[ 'mensaje_devuelto' ];
-        $mensaje_cancelado	= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_cancelado', $apg_sms_settings[ 'mensaje_cancelado' ] ) : $apg_sms_settings[ 'mensaje_cancelado' ];
-        $mensaje_nota		= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_nota', $apg_sms_settings[ 'mensaje_nota' ] ) : $apg_sms_settings[ 'mensaje_nota' ];
+        foreach( $mensajes as $mensaje ) {
+            if ( isset( $apg_sms_settings[ $mensaje ] ) ) {
+                $$mensaje		= ( $wpml_activo ) ? icl_translate( 'apg_sms', $mensaje, $apg_sms_settings[ $mensaje ] ) : $apg_sms_settings[ $mensaje ];
+            }
+        }
     } else if ( $wpml_activo ) { //Versión 3.2 o superior
-        $mensaje_pedido		= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_pedido' ], 'apg_sms', 'mensaje_pedido' );
-        $mensaje_fallido	= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_fallido' ], 'apg_sms', 'mensaje_fallido' );
-        $mensaje_recibido	= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_recibido' ], 'apg_sms', 'mensaje_recibido' );
-        $mensaje_procesando	= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_procesando' ], 'apg_sms', 'mensaje_procesando' );
-        $mensaje_completado	= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_completado' ], 'apg_sms', 'mensaje_completado' );
-        $mensaje_devuelto	= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_devuelto' ], 'apg_sms', 'mensaje_devuelto' );
-        $mensaje_cancelado	= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_cancelado' ], 'apg_sms', 'mensaje_cancelado' );
-        $mensaje_nota		= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ 'mensaje_nota' ], 'apg_sms', 'mensaje_nota' );
+        foreach( $mensajes as $mensaje ) {
+            if ( isset( $apg_sms_settings[ $mensaje ] ) ) {
+                $$mensaje		= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ $mensaje ], 'apg_sms', $mensaje );
+            }
+        }
     }
 }
 
@@ -71,7 +76,8 @@ $campos_de_proveedores = [
  		"usuario_bulkgate"					=> __( 'application ID', 'woocommerce-apg-sms-notifications' ),
  		"clave_bulkgate"					=> __( 'authentication Token', 'woocommerce-apg-sms-notifications' ),
  		"identificador_bulkgate"			=> __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
- 	],
+ 		"unicode_bulkgate"			        => __( 'unicode', 'woocommerce-apg-sms-notifications' ),
+    ],
 	"bulksms" 			=> [ 
 		"usuario_bulksms" 					=> __( 'username', 'woocommerce-apg-sms-notifications' ),
 		"contrasena_bulksms" 				=> __( 'password', 'woocommerce-apg-sms-notifications' ),
@@ -234,6 +240,10 @@ $opciones_de_proveedores = [
 		"api-asia-01.twizo.com"	=> __( 'Singapore', 'woocommerce-apg-sms-notifications' ), 
 		"api-eu-01.twizo.com"	=> __( 'Germany', 'woocommerce-apg-sms-notifications' ), 
 	],
+    "unicode_bulkgate"  => [
+ 		1                       => __( 'Yes', 'woocommerce-apg-sms-notifications' ),
+ 		0                       => __( 'No', 'woocommerce-apg-sms-notifications' ),
+ 	],
 ];
 
 //Listado de estados de pedidos
