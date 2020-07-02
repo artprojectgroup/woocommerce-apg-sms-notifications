@@ -3,13 +3,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce - APG SMS Notifications\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-26 09:21+0000\n"
+"POT-Creation-Date: 2020-05-30 08:51+0000\n"
 "POT-Revision-Date: Wed Aug 10 2016 13:38:05 GMT+0200 (CEST)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,25 +21,17 @@ msgstr ""
 "_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
 "esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
-"X-Generator: Loco - https://localise.biz/"
+"X-Generator: Loco https://localise.biz/"
 
-#: apg-sms.php:74
+#: apg-sms.php:84
 msgid "APG SMS Notifications"
 msgstr ""
 
-#: apg-sms.php:74
+#: apg-sms.php:84
 msgid "SMS Notifications"
 msgstr ""
 
-#: apg-sms.php:130 apg-sms.php:188 includes/formulario.php:471
-msgid "Processing"
-msgstr ""
-
-#: apg-sms.php:131 apg-sms.php:199 includes/formulario.php:478
-msgid "Completed"
-msgstr ""
-
-#: apg-sms.php:269
+#: apg-sms.php:414
 msgid "This plugin require WooCommerce active to run!"
 msgstr ""
 
@@ -47,7 +39,7 @@ msgstr ""
 msgid "If you enjoyed and find helpful this plugin, please make a donation:"
 msgstr ""
 
-#: includes/cuadro-informacion.php:7 includes/admin/funciones-apg.php:27
+#: includes/cuadro-informacion.php:7 includes/admin/funciones-apg.php:24
 msgid "Make a donation by "
 msgstr ""
 
@@ -55,10 +47,8 @@ msgstr ""
 msgid "Follow us:"
 msgstr ""
 
-#: includes/cuadro-informacion.php:19 includes/cuadro-informacion.php:19
-#: includes/cuadro-informacion.php:19 includes/cuadro-informacion.php:19
-#: includes/admin/funciones-apg.php:29 includes/admin/funciones-apg.php:29
-#: includes/admin/funciones-apg.php:29 includes/admin/funciones-apg.php:29
+#: includes/cuadro-informacion.php:19 includes/admin/funciones-apg.php:26
+#: includes/admin/funciones-apg.php:26 includes/admin/funciones-apg.php:26
 msgid "Follow us on "
 msgstr ""
 
@@ -66,7 +56,7 @@ msgstr ""
 msgid "More plugins:"
 msgstr ""
 
-#: includes/cuadro-informacion.php:25 includes/admin/funciones-apg.php:30
+#: includes/cuadro-informacion.php:25 includes/admin/funciones-apg.php:27
 msgid "More plugins on "
 msgstr ""
 
@@ -74,8 +64,8 @@ msgstr ""
 msgid "Contact with us:"
 msgstr ""
 
-#: includes/cuadro-informacion.php:33 includes/cuadro-informacion.php:33
-#: includes/admin/funciones-apg.php:31 includes/admin/funciones-apg.php:31
+#: includes/cuadro-informacion.php:33 includes/admin/funciones-apg.php:28
+#: includes/admin/funciones-apg.php:28
 msgid "Contact with us by "
 msgstr ""
 
@@ -83,11 +73,11 @@ msgstr ""
 msgid "Documentation and Support:"
 msgstr ""
 
-#: includes/cuadro-informacion.php:39 includes/admin/funciones-apg.php:45
+#: includes/cuadro-informacion.php:39 includes/admin/funciones-apg.php:42
 msgid "Support"
 msgstr ""
 
-#: includes/cuadro-informacion.php:44 includes/admin/funciones-apg.php:91
+#: includes/cuadro-informacion.php:44 includes/admin/funciones-apg.php:86
 #, php-format
 msgid "Please, rate %s:"
 msgstr ""
@@ -96,7 +86,7 @@ msgstr ""
 msgid "APG SMS Notifications Options."
 msgstr ""
 
-#: includes/formulario.php:27
+#: includes/formulario.php:9
 msgid ""
 "Add to WooCommerce the possibility to send <abbr title=\"Short Message "
 "Service\" lang=\"en\">SMS</abbr> notifications to the client each time you "
@@ -104,205 +94,83 @@ msgid ""
 "a new order. You can also send customer notes."
 msgstr ""
 
-#: includes/formulario.php:36
+#: includes/formulario.php:19
 msgid "<abbr title=\"Short Message Service\" lang=\"en\">SMS</abbr> gateway:"
 msgstr ""
 
-#: includes/formulario.php:38
+#: includes/formulario.php:20
 msgid "Select your SMS gateway"
 msgstr ""
 
-#: includes/formulario.php:85 includes/formulario.php:89
-#: includes/formulario.php:93 includes/formulario.php:97
-#: includes/formulario.php:101 includes/formulario.php:115
-#: includes/formulario.php:122 includes/formulario.php:128
-#: includes/formulario.php:137 includes/formulario.php:142
-#: includes/formulario.php:147 includes/formulario.php:152
-#: includes/formulario.php:157 includes/formulario.php:163
-msgid "username"
-msgstr ""
-
-#: includes/formulario.php:86 includes/formulario.php:90
-#: includes/formulario.php:94 includes/formulario.php:98
-#: includes/formulario.php:102 includes/formulario.php:116
-#: includes/formulario.php:123 includes/formulario.php:129
-#: includes/formulario.php:138 includes/formulario.php:143
-#: includes/formulario.php:148 includes/formulario.php:153
-#: includes/formulario.php:158 includes/formulario.php:164
-msgid "password"
-msgstr ""
-
-#: includes/formulario.php:105 includes/formulario.php:119
-#: includes/formulario.php:173 includes/formulario.php:181
-#: includes/formulario.php:185 includes/formulario.php:190
-msgid "key"
-msgstr ""
-
-#: includes/formulario.php:106 includes/formulario.php:114
-#: includes/formulario.php:127 includes/formulario.php:133
-#: includes/formulario.php:139 includes/formulario.php:144
-#: includes/formulario.php:154 includes/formulario.php:159
-#: includes/formulario.php:165 includes/formulario.php:170
-#: includes/formulario.php:174 includes/formulario.php:186
-#: includes/formulario.php:191
-msgid "sender ID"
-msgstr ""
-
-#. Traducciones ocultas
-#: includes/formulario.php:109
-msgid "account Sid"
-msgstr ""
-
-#: includes/formulario.php:110 includes/formulario.php:169
-#: includes/formulario.php:178 includes/formulario.php:182
-msgid "authentication Token"
-msgstr ""
-
-#: includes/formulario.php:111 includes/formulario.php:149
-msgid "mobile number"
-msgstr ""
-
-#: includes/formulario.php:124 includes/formulario.php:187
-#: includes/formulario.php:193
-msgid "host"
-msgstr ""
-
-#: includes/formulario.php:132
-msgid "authentication key"
-msgstr ""
-
-#: includes/formulario.php:134 includes/formulario.php:192
-msgid "route"
-msgstr ""
-
-#: includes/formulario.php:162
-msgid "client"
-msgstr ""
-
-#: includes/formulario.php:168
-msgid "authentication ID"
-msgstr ""
-
-#: includes/formulario.php:177
-msgid "project"
-msgstr ""
-
-#: includes/formulario.php:199
-msgid "Default"
-msgstr ""
-
-#: includes/formulario.php:204 includes/formulario.php:219
-msgid "International"
-msgstr ""
-
-#: includes/formulario.php:205
-msgid "UK"
-msgstr ""
-
-#: includes/formulario.php:206 includes/formulario.php:220
-msgid "USA"
-msgstr ""
-
-#: includes/formulario.php:207
-msgid "South Africa"
-msgstr ""
-
-#: includes/formulario.php:208
-msgid "Spain"
-msgstr ""
-
-#: includes/formulario.php:211
-msgid "Singapore"
-msgstr ""
-
-#: includes/formulario.php:212
-msgid "Germany"
-msgstr ""
-
-#: includes/formulario.php:221
-msgid "India"
-msgstr ""
-
-#: includes/formulario.php:232 includes/formulario.php:246
-#, php-format
-msgid "The %s for your account in %s"
-msgstr ""
-
-#: includes/formulario.php:256
+#: includes/formulario.php:33
 msgid "Your mobile number:"
 msgstr ""
 
-#: includes/formulario.php:258
+#: includes/formulario.php:34
 msgid ""
 "The mobile number registered in your SMS gateway account and where you "
 "receive the SMS messages. You can add multiple mobile numbers separeted by | "
 "character. Example: xxxxxxxxx|yyyyyyyyy"
 msgstr ""
 
-#: includes/formulario.php:263
+#: includes/formulario.php:42
 msgid "New order notification:"
 msgstr ""
 
-#: includes/formulario.php:265
-msgid "Check if you want to receive a SMS message when there's a new order"
-msgstr ""
-
-#: includes/formulario.php:270
+#: includes/formulario.php:48
 msgid ""
 "Send international <abbr title=\"Short Message Service\" lang=\"en\">"
 "SMS</abbr>?:"
 msgstr ""
 
-#: includes/formulario.php:272
+#: includes/formulario.php:49
 msgid "Check if you want to send international SMS messages"
 msgstr ""
 
-#: includes/formulario.php:277
+#: includes/formulario.php:57
 msgid ""
 "Send <abbr title=\"Short Message Service\" lang=\"en\">SMS</abbr> to "
 "shipping mobile?:"
 msgstr ""
 
-#: includes/formulario.php:279
+#: includes/formulario.php:58
 msgid ""
 "Check if you want to send SMS messages to shipping mobile numbers, only if "
 "it is different from billing mobile number"
 msgstr ""
 
-#: includes/formulario.php:284
+#: includes/formulario.php:67
+msgid "Shipping mobile field:"
+msgstr ""
+
+#: includes/formulario.php:68
+msgid "Select the shipping mobile field"
+msgstr ""
+
+#: includes/formulario.php:80
 msgid "order_product variable full details:"
 msgstr ""
 
-#: includes/formulario.php:286
+#: includes/formulario.php:81
 msgid ""
 "Check if you want to send the SMS messages with full order product "
 "information"
 msgstr ""
 
-#: includes/formulario.php:291
-msgid "Shipping mobile field:"
-msgstr ""
-
-#: includes/formulario.php:293
-msgid "Select the shipping mobile field"
-msgstr ""
-
-#: includes/formulario.php:314
+#: includes/formulario.php:91
 msgid "Custom Order Statuses & Actions:"
 msgstr ""
 
-#: includes/formulario.php:316
+#: includes/formulario.php:92
 msgid "Select your own statuses."
 msgstr ""
 
-#: includes/formulario.php:409
+#: includes/formulario.php:106
 #, php-format
 msgid "%s state custom message:"
 msgstr ""
 
-#: includes/formulario.php:410 includes/formulario.php:456
-#: includes/formulario.php:463 includes/formulario.php:470
-#: includes/formulario.php:477 includes/formulario.php:484
+#: includes/formulario.php:107 includes/admin/funciones-formulario.php:433
 msgid ""
 "You can customize your message. Remember that you can use this variables: "
 "%id%, %order_key%, %billing_first_name%, %billing_last_name%, "
@@ -319,124 +187,353 @@ msgid ""
 "%customer_note%, %post_status%, %shop_name%, %order_product% and %note%."
 msgstr ""
 
-#: includes/formulario.php:417
+#: includes/formulario.php:118
 msgid "Custom variables:"
 msgstr ""
 
-#: includes/formulario.php:419
+#: includes/formulario.php:119
 msgid ""
 "You can add your own variables. Each variable must be entered onto a new "
 "line without percentage character ( % ). Example: <code>"
 "_custom_variable_name</code><br /><code>_another_variable_name</code>."
 msgstr ""
 
-#: includes/formulario.php:424
+#: includes/formulario.php:128
 msgid "Send only this messages:"
 msgstr ""
 
-#: includes/formulario.php:426
+#: includes/formulario.php:129
 msgid "Select what messages do you want to send"
 msgstr ""
 
-#: includes/formulario.php:431
+#: includes/formulario.php:156
+msgid "Order on-hold delay (minutes)"
+msgstr ""
+
+#: includes/formulario.php:157
+msgid ""
+"Send this message after X minutes, if the order is still on-hold, instead of "
+"sending it immediately."
+msgstr ""
+
+#: includes/formulario.php:166
+msgid "Order on-hold timer (hours)"
+msgstr ""
+
+#: includes/formulario.php:167
+msgid "You can timer this message every X hours. Leave blank to disable."
+msgstr ""
+
+#: includes/formulario.php:196
+msgid "Send debug information?:"
+msgstr ""
+
+#: includes/formulario.php:197
+msgid "Check if you want to receive debug information from your SMS gateway"
+msgstr ""
+
+#: includes/formulario.php:206
+msgid "email address:"
+msgstr ""
+
+#: includes/formulario.php:207
+msgid "Add an email address where you want to receive the debug information"
+msgstr ""
+
+#: includes/formulario.php:215
+msgid "Save Changes"
+msgstr ""
+
+#: includes/admin/proveedores.php:318
+msgid "Mobile number:"
+msgstr ""
+
+#: includes/admin/proveedores.php:319
+msgid "Message: "
+msgstr ""
+
+#: includes/admin/proveedores.php:320
+msgid "Gateway answer: "
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:71
+#: includes/admin/funciones-formulario.php:114
+#: includes/admin/funciones-formulario.php:124
+msgid "authentication key"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:72
+#: includes/admin/funciones-formulario.php:116
+#: includes/admin/funciones-formulario.php:126
+#: includes/admin/funciones-formulario.php:131
+msgid "route"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:73
+#: includes/admin/funciones-formulario.php:78
+#: includes/admin/funciones-formulario.php:87
+#: includes/admin/funciones-formulario.php:97
+#: includes/admin/funciones-formulario.php:107
+#: includes/admin/funciones-formulario.php:111
+#: includes/admin/funciones-formulario.php:115
+#: includes/admin/funciones-formulario.php:125
+#: includes/admin/funciones-formulario.php:130
+#: includes/admin/funciones-formulario.php:137
+#: includes/admin/funciones-formulario.php:146
+#: includes/admin/funciones-formulario.php:151
+#: includes/admin/funciones-formulario.php:160
+#: includes/admin/funciones-formulario.php:169
+#: includes/admin/funciones-formulario.php:173
+#: includes/admin/funciones-formulario.php:177
+#: includes/admin/funciones-formulario.php:186
+msgid "sender ID"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:76
+#: includes/admin/funciones-formulario.php:149
+msgid "application ID"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:77
+#: includes/admin/funciones-formulario.php:121
+#: includes/admin/funciones-formulario.php:141
+#: includes/admin/funciones-formulario.php:145
+#: includes/admin/funciones-formulario.php:181
+msgid "authentication Token"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:79
+msgid "unicode"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:82
+#: includes/admin/funciones-formulario.php:88
+#: includes/admin/funciones-formulario.php:95
+#: includes/admin/funciones-formulario.php:100
+#: includes/admin/funciones-formulario.php:105
+#: includes/admin/funciones-formulario.php:135
+#: includes/admin/funciones-formulario.php:154
+#: includes/admin/funciones-formulario.php:158
+#: includes/admin/funciones-formulario.php:163
+#: includes/admin/funciones-formulario.php:167
+#: includes/admin/funciones-formulario.php:190
+#: includes/admin/funciones-formulario.php:194
+#: includes/admin/funciones-formulario.php:198
+msgid "username"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:83
+#: includes/admin/funciones-formulario.php:89
+#: includes/admin/funciones-formulario.php:96
+#: includes/admin/funciones-formulario.php:101
+#: includes/admin/funciones-formulario.php:106
+#: includes/admin/funciones-formulario.php:136
+#: includes/admin/funciones-formulario.php:155
+#: includes/admin/funciones-formulario.php:159
+#: includes/admin/funciones-formulario.php:164
+#: includes/admin/funciones-formulario.php:168
+#: includes/admin/funciones-formulario.php:191
+#: includes/admin/funciones-formulario.php:195
+#: includes/admin/funciones-formulario.php:199
+msgid "password"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:84
+#: includes/admin/funciones-formulario.php:117
+#: includes/admin/funciones-formulario.php:132
+#: includes/admin/funciones-formulario.php:187
+msgid "host"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:92
+#: includes/admin/funciones-formulario.php:110
+#: includes/admin/funciones-formulario.php:129
+#: includes/admin/funciones-formulario.php:140
+#: includes/admin/funciones-formulario.php:172
+#: includes/admin/funciones-formulario.php:176
+#: includes/admin/funciones-formulario.php:185
+msgid "key"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:102
+#: includes/admin/funciones-formulario.php:182
+msgid "mobile number"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:120
+msgid "project"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:144
+msgid "authentication ID"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:150
+msgid "application secret"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:180
+msgid "account Sid"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:210
+#: includes/admin/funciones-formulario.php:217
+#: includes/admin/funciones-formulario.php:235
+msgid "International"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:211
+msgid "UK"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:212
+#: includes/admin/funciones-formulario.php:218
+#: includes/admin/funciones-formulario.php:236
+msgid "USA"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:213
+msgid "South Africa"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:214
+msgid "Spain"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:219
+#: includes/admin/funciones-formulario.php:237
+msgid "India"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:226
+msgid "Default"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:240
+msgid "Singapore"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:241
+msgid "Germany"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:244
+msgid "Yes"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:245
+msgid "No"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:271
 msgid "All messages"
 msgstr ""
 
-#: includes/formulario.php:432 includes/formulario.php:454
+#: includes/admin/funciones-formulario.php:272
 msgid "Owner custom message"
 msgstr ""
 
-#: includes/formulario.php:433 includes/formulario.php:461
-msgid "Order received custom message"
+#: includes/admin/funciones-formulario.php:273
+msgid "Order pending custom message"
 msgstr ""
 
-#: includes/formulario.php:434 includes/formulario.php:468
+#: includes/admin/funciones-formulario.php:274
+msgid "Order failed custom message"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:275
+msgid "Order on-hold custom message"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:276
 msgid "Order processing custom message"
 msgstr ""
 
-#: includes/formulario.php:435 includes/formulario.php:475
+#: includes/admin/funciones-formulario.php:277
 msgid "Order completed custom message"
 msgstr ""
 
-#: includes/formulario.php:436 includes/formulario.php:482
+#: includes/admin/funciones-formulario.php:278
+msgid "Order refunded custom message"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:279
+msgid "Order cancelled custom message"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:280
 msgid "Notes custom message"
 msgstr ""
 
-#: includes/formulario.php:457
+#: includes/admin/funciones-formulario.php:307
+#: includes/admin/funciones-formulario.php:321
+#, php-format
+msgid "The %s for your account in %s"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:397
 #, php-format
 msgid "Order No. %s received on "
 msgstr ""
 
-#: includes/formulario.php:464
-#, php-format
-msgid "Your order No. %s is received on %s. Thank you for shopping with us!"
-msgstr ""
-
-#: includes/formulario.php:471 includes/formulario.php:478
+#: includes/admin/funciones-formulario.php:398
+#: includes/admin/funciones-formulario.php:399
+#: includes/admin/funciones-formulario.php:401
+#: includes/admin/funciones-formulario.php:402
+#: includes/admin/funciones-formulario.php:403
+#: includes/admin/funciones-formulario.php:404
 #, php-format
 msgid "Thank you for shopping with us! Your order No. %s is now: "
 msgstr ""
 
-#: includes/formulario.php:485
+#: includes/admin/funciones-formulario.php:400
+#, php-format
+msgid "Your order No. %s is received on %s. Thank you for shopping with us!"
+msgstr ""
+
+#: includes/admin/funciones-formulario.php:405
 #, php-format
 msgid "A note has just been added to your order No. %s: "
 msgstr ""
 
-#: includes/formulario.php:489
-msgid "Send debug information?:"
+#: includes/admin/funciones-formulario.php:410
+msgid "Pending"
 msgstr ""
 
-#: includes/formulario.php:491
-msgid "Check if you want to receive debug information from your SMS gateway"
+#: includes/admin/funciones-formulario.php:411
+msgid "Failed"
 msgstr ""
 
-#: includes/formulario.php:496
-msgid "email address:"
+#: includes/admin/funciones-formulario.php:412
+msgid "Processing"
 msgstr ""
 
-#: includes/formulario.php:498
-msgid "Add an email address where you want to receive the debug information"
+#: includes/admin/funciones-formulario.php:413
+msgid "Completed"
 msgstr ""
 
-#: includes/formulario.php:503
-msgid "Save Changes"
+#: includes/admin/funciones-formulario.php:414
+msgid "Refunded"
 msgstr ""
 
-#: includes/admin/funciones-apg.php:44
+#: includes/admin/funciones-formulario.php:415
+msgid "Cancelled"
+msgstr ""
+
+#: includes/admin/funciones-apg.php:41
 msgid "Settings of "
 msgstr ""
 
-#: includes/admin/funciones-apg.php:44 includes/admin/funciones-apg.php:98
+#: includes/admin/funciones-apg.php:41
 msgid "Settings"
 msgstr ""
 
-#: includes/admin/funciones-apg.php:45
+#: includes/admin/funciones-apg.php:42
 msgid "Support of "
 msgstr ""
 
-#: includes/admin/funciones-apg.php:98
-#, php-format
-msgid "Please, update your %s. It's very important!"
-msgstr ""
-
-#: includes/admin/funciones-apg.php:98
-msgid "settings"
-msgstr ""
-
-#: includes/admin/proveedores.php:152
-msgid "Mobile number:"
-msgstr ""
-
-#: includes/admin/proveedores.php:153
-msgid "Message: "
-msgstr ""
-
-#: includes/admin/proveedores.php:154
-msgid "Gateway answer: "
-msgstr ""
-
 #. Name of the plugin
-msgid "WooCommerce - APG SMS Notifications"
+msgid "WC - APG SMS Notifications"
 msgstr ""
 
 #. Description of the plugin

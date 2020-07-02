@@ -1,12 +1,12 @@
 === WC - APG SMS Notifications ===
 Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
-Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, OPEN DND, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, WooCommerce Sequential Order Numbers Pro, WPML
+Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, Adlinks Labs, BulkGate, WooCommerce Sequential Order Numbers Pro, WPML
 Requires at least: 3.8
-Tested up to: 5.2
-Stable tag: 2.17.1
+Tested up to: 5.5
+Stable tag: 2.20
 WC requires at least: 2.1
-WC tested up to: 3.6
+WC tested up to: 4.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -21,6 +21,8 @@ Add to your WooCommerce store SMS notifications to your customers when order sta
 
 = Features =
 * Support multiple SMS gateways:
+ * [Adlinks Labs](http://adlinks.websmsc.com/).
+ * [BulkGate](https://www.bulkgate.com/).
  * [BulkSMS](http://www.bulksms.com/).
  * [Clickatell](https://www.clickatell.com/).
  * [Clockwork](https://www.clockworksms.com/).
@@ -34,7 +36,6 @@ Add to your WooCommerce store SMS notifications to your customers when order sta
  * [MSGWOW](http://msgwow.com).
  * [mVaayoo](http://www.mvaayoo.com/).
  * [Nexmo](https://www.nexmo.com).
- * [OPEN DND](http://www.opendnd.in/).
  * [Plivo](https://www.plivo.com/).
  * [Routee](https://www.routee.net).
  * [SIP Discount](https://www.sipdiscount.com/dashboard).
@@ -59,6 +60,7 @@ Add to your WooCommerce store SMS notifications to your customers when order sta
 * Also notified by SMS the customer notes.
 * All messages are customizable.
 * You can choose which messages to send.
+* You can delay X minutes the message for on-hold orders. 
 * You can timer every X hours the message for on-hold orders.
 * Supports a large number of variables to personalize our messages: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.
 * You can add your own custom variables.
@@ -89,7 +91,6 @@ Don’t forget to leave us your comment on:
 * [WC - APG SMS Notifications](https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-sms-notifications) on Art Project Group.
 * [Art Project Group](https://www.facebook.com/artprojectgroup) on Facebook.
 * [@artprojectgroup](https://twitter.com/artprojectgroup) on Twitter.
-* [+ArtProjectGroupES](https://plus.google.com/+ArtProjectGroupES/) on Google+.
 
 = More plugins =
 Remember that you can find more [plugins for WordPress](https://artprojectgroup.es/plugins-para-wordpress) and more [plugins for WooCommerce](https://artprojectgroup.es/plugins-para-woocommerce) on [Art Project Group](https://artprojectgroup.es) and our profile on [WordPress](https://profiles.wordpress.org/artprojectgroup/).
@@ -125,6 +126,20 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 1. Screenshot of WC - APG SMS Notifications.
 
 == Changelog ==
+= 2.20 =
+* Small fixes.
+* Now you can delay X minutes the message for on-hold orders. **Modification devised by [webdados](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/8)**.
+* Added unicode selection support to BulkGate. **Modification devised by [webdados](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/6)**.
+= 2.19 =
+* Added support for pending, failed, canceled and refund order statuses.
+= 2.18.2 =
+* Small fixes for LabsMobile Spain.
+= 2.18.1 =
+* Small fixes.
+= 2.18 =
+* Added support for Adlinks Labs. **Update sponsored by [Adlinks Labs](http://adlinks.websmsc.com/)**.
+* Added support for BulkGate. **Modification devised by [webdados](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/5)**.
+* Removed support for Open DND.
 = 2.17.1 =
 * Small fixes.
 = 2.17 =
@@ -403,8 +418,10 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 * Initial version.
 
 == Upgrade Notice ==
-= 2.17.1 =
+= 2.20 =
 * Small fixes.
+* Now you can delay X minutes the message for on-hold orders. **Modification devised by [webdados](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/8)**.
+* Added unicode selection support to BulkGate. **Modification devised by [webdados](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/6)**.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).
