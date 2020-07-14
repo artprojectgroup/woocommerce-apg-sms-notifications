@@ -13,6 +13,16 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
  			], 'http://adlinks.websmsc.com/api/sendhttp.php' );
  			$respuesta					= wp_remote_get( $url );
 			break;
+		case "altiria":
+            $url                        = add_query_arg( [
+ 				'cmd'                      => 'sendsms',
+ 				'login'                    => $apg_sms_settings[ 'usuario_altiria' ],
+ 				'passwd'                   => $apg_sms_settings[ 'contrasena_altiria' ],
+ 				'dest'                     => $telefono,
+ 				'msg'                      => apg_sms_codifica_el_mensaje( $mensaje ),
+ 			], 'http://www.altiria.net/api/http' );
+ 			$respuesta					= wp_remote_post( $url );
+			break;
 		case "bulkgate":
  			$url						= add_query_arg( [
  				'application_id'			=> $apg_sms_settings[ 'usuario_bulkgate' ],

@@ -3,17 +3,17 @@ Contributors: artprojectgroup
 
 Donate link: https://artprojectgroup.es/tienda/donacion
 
-Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, Adlinks Labs, BulkGate, WooCommerce Sequential Order Numbers Pro, WPML
+Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, Adlinks Labs, BulkGate, WooCommerce Sequential Order Numbers Pro, WPML, Altiria
 
 Requires at least: 3.8
 
 Tested up to: 5.5
 
-Stable tag: 2.20
+Stable tag: 2.21
 
 WC requires at least: 2.1
 
-WC tested up to: 4.2
+WC tested up to: 4.3
 
 License: GPLv3
 
@@ -31,6 +31,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 ### Características
 * Soporte de múltiples proveedores SMS:
  * [Adlinks Labs](http://adlinks.websmsc.com/).
+ * [Altiria](https://www.altiria.com/).
  * [BulkGate](https://www.bulkgate.com/).
  * [BulkSMS](http://www.bulksms.com/).
  * [Clickatell](https://www.clickatell.com/).
@@ -132,6 +133,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.21
+* Añadido soporte para Altiria. **Actualización patrocinada por [Altiria](https://www.altiria.com/)**.
+
 ### 2.20
 * Pequeños arreglos.
 * Ahora puedes retrasar X minutos el mensaje para pedidos en espera. **Modificación ideada por [webdados](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/8)**.

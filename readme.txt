@@ -1,12 +1,12 @@
 === WC - APG SMS Notifications ===
 Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
-Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, Adlinks Labs, BulkGate, WooCommerce Sequential Order Numbers Pro, WPML
+Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, Adlinks Labs, BulkGate, WooCommerce Sequential Order Numbers Pro, WPML, Altiria
 Requires at least: 3.8
 Tested up to: 5.5
-Stable tag: 2.20
+Stable tag: 2.21
 WC requires at least: 2.1
-WC tested up to: 4.2
+WC tested up to: 4.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -22,6 +22,7 @@ Add to your WooCommerce store SMS notifications to your customers when order sta
 = Features =
 * Support multiple SMS gateways:
  * [Adlinks Labs](http://adlinks.websmsc.com/).
+ * [Altiria](https://www.altiria.com/).
  * [BulkGate](https://www.bulkgate.com/).
  * [BulkSMS](http://www.bulksms.com/).
  * [Clickatell](https://www.clickatell.com/).
@@ -125,6 +126,8 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 1. Screenshot of WC - APG SMS Notifications.
 
 == Changelog ==
+= 2.21 =
+* Added support for Altiria. **Update sponsored by [Altiria](https://www.altiria.com/)**.
 = 2.20 =
 * Small fixes.
 * Now you can delay X minutes the message for on-hold orders. **Modification devised by [webdados](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/8)**.
@@ -417,10 +420,8 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 * Initial version.
 
 == Upgrade Notice ==
-= 2.20 =
-* Small fixes.
-* Now you can delay X minutes the message for on-hold orders. **Modification devised by [webdados](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/8)**.
-* Added unicode selection support to BulkGate. **Modification devised by [webdados](https://github.com/artprojectgroup/woocommerce-apg-sms-notifications/pull/6)**.
+= 2.21 =
+* Added support for Altiria. **Update sponsored by [Altiria](https://www.altiria.com/)**.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).

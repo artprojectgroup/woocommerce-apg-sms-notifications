@@ -35,6 +35,7 @@ if ( $apg_sms_settings ) {
 //Listado de proveedores SMS
 $listado_de_proveedores = [ 
 	"adlinks"			=> "Adlinks Labs", 
+	"altiria"			=> "Altiria", 
 	"bulkgate"			=> "BulkGate", 
 	"bulksms"			=> "BulkSMS", 
 	"clickatell" 		=> "Clickatell", 
@@ -71,6 +72,10 @@ $campos_de_proveedores = [
  		"usuario_adlinks"					=> __( 'authentication key', 'woocommerce-apg-sms-notifications' ),
  		"ruta_adlinks"						=> __( 'route', 'woocommerce-apg-sms-notifications' ),
  		"identificador_adlinks"				=> __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
+ 	],
+	"altiria"			=> [
+ 		"usuario_altiria"					=> __( 'username', 'woocommerce-apg-sms-notifications' ),
+ 		"contrasena_altiria"				=> __( 'password', 'woocommerce-apg-sms-notifications' ),
  	],
 	"bulkgate"			=> [
  		"usuario_bulkgate"					=> __( 'application ID', 'woocommerce-apg-sms-notifications' ),

@@ -3,6 +3,7 @@
 function apg_sms_prefijo( $servicio ) {
 	$prefijo = [ 
 		"adlinks", 
+		"altiria", 
 		"bulkgate", 
 		"bulksms", 
 		"clickatell", 
