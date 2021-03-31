@@ -21,6 +21,7 @@ function apg_sms_prefijo( $servicio ) {
 		"routee",
 		"sipdiscount", 
 		"smscountry",
+		"smsbox",
 		"smsdiscount", 
 		"smslane",
 		"springedge",		

@@ -50,6 +50,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * [Routee](https://www.routee.net).
  * [SIP Discount](https://www.sipdiscount.com/dashboard).
  * [SMS Discount](https://www.smsdiscount.com/dashboard).
+ * [SMSBox](https:///www.smsbox.com).
  * [SMS Country](http://www.smscountry.com/).
  * [SMS Lane (Transactional SMS only)](http://www.smslane.com).
  * [Solutions Infini](http://www.solutionsinfini.com/).

@@ -54,6 +54,7 @@ $listado_de_proveedores = [
 	"routee" 			=> "Routee",
 	"sipdiscount" 		=> "SIP Discount", 
 	"smscountry" 		=> "SMS Country",
+	"smsbox" 		    => "SMSBox", 
 	"smsdiscount" 		=> "SMS Discount", 
 	"smslane" 			=> "SMS Lane ( Transactional SMS only )",
 	"solutions_infini" 	=> "Solutions Infini", 
@@ -164,6 +165,12 @@ $campos_de_proveedores = [
 		"contrasena_smscountry" 			=> __( 'password', 'woocommerce-apg-sms-notifications' ),
 		"sid_smscountry" 					=> __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
 	],
+	"smsbox"		=> [ 
+		"usuario_smsbox" 			    	=> __( 'username', 'woocommerce-apg-sms-notifications' ),
+		"contrasena_smsbox"			        => __( 'password', 'woocommerce-apg-sms-notifications' ),
+		"customerid_smsbox"			        => __( 'customer ID', 'woocommerce-apg-sms-notifications' ),
+		"sendername_smsbox"			        => __( 'sender Name', 'woocommerce-apg-sms-notifications' ),
+	], 
 	"smsdiscount"		=> [ 
 		"usuario_smsdiscount" 				=> __( 'username', 'woocommerce-apg-sms-notifications' ),
 		"contrasena_smsdiscount"			=> __( 'password', 'woocommerce-apg-sms-notifications' ),
