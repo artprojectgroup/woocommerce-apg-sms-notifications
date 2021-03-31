@@ -232,11 +232,10 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
 					'customerId'				=> $apg_sms_settings[ 'customerid_smsbox' ],
 					'senderText'				=> $apg_sms_settings[ 'sendername_smsbox' ],
 					'recipientNumbers'			=> $telefono,
+					'messageBody'				=> apg_sms_codifica_el_mensaje( $mensaje ),
 					'isBlink'			=> false,
 					'isFlash'			=> false,
 					'defDate'			=> '',
-				   
-					'messageBody'						=> apg_sms_codifica_el_mensaje( $mensaje ),
 				], 'https://www.smsbox.com/smsgateway/services/messaging.asmx/Http_SendSMS' );
 				$respuesta					= wp_remote_get( $url );
 			break;
