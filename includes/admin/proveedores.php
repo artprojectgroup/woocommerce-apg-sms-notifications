@@ -231,7 +231,7 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
 					'password'					=> $apg_sms_settings[ 'contrasena_smsbox' ],
 					'customerId'				=> $apg_sms_settings[ 'customerid_smsbox' ],
 					'senderText'				=> $apg_sms_settings[ 'sendername_smsbox' ],
-					'recipientNumbers'			=> $telefono,
+					'recipientNumbers'			=> implode('',explode($telefono, '+')),
 					'messageBody'				=> apg_sms_codifica_el_mensaje( $mensaje ),
 					'isBlink'			=> false,
 					'isFlash'			=> false,
