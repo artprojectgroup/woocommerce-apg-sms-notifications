@@ -229,15 +229,16 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
 				$url						= add_query_arg( [
 					'username'					=> $apg_sms_settings[ 'usuario_smsbox' ],
 					'password'					=> $apg_sms_settings[ 'contrasena_smsbox' ],
-					'customerid'				=> $apg_sms_settings[ 'customerid_smsbox' ],
-					'sendertext'				=> $apg_sms_settings[ 'sendername_smsbox' ],
-					'recipientnumbers'			=> implode('',explode($telefono, '+')),
-					'messagebody'				=> apg_sms_codifica_el_mensaje( $mensaje ),
-					'isblink'			=> false,
-					'isflash'			=> false,
-					'defdate'			=> ' ',
+					'customerId'				=> $apg_sms_settings[ 'customerid_smsbox' ],
+					'senderText'				=> $apg_sms_settings[ 'sendername_smsbox' ],
+					'recipientNumbers'			=> str_replace('','+',$telefono),
+					'messageBody'				=> apg_sms_codifica_el_mensaje( $mensaje ),
+					'isBlink'			=> 'false',
+					'isFlash'			=> 'false',
+					'defDate'			=> ' '
 				], 'https://www.smsbox.com/smsgateway/services/messaging.asmx/Http_SendSMS' );
 				$respuesta					= wp_remote_get( $url );
+				var_dump($respuesta);
 			break;
 		case "smsdiscount":
  			$url						= add_query_arg( [
