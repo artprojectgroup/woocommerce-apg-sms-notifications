@@ -227,15 +227,15 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
 			break;
 		case "smsbox":
 				$url					= add_query_arg( [
-					'username'			    => $apg_sms_settings[ 'usuario_smsbox' ],
-					'password'			    => $apg_sms_settings[ 'contrasena_smsbox' ],
-					'customerId'			=> $apg_sms_settings[ 'customerid_smsbox' ],
-					'senderText'			=> $apg_sms_settings[ 'sendername_smsbox' ],
-					'recipientNumbers'		=> str_replace('','+',$telefono),
-					'messageBody'			=> apg_sms_codifica_el_mensaje( $mensaje ),
-					'isBlink'		    	=> 'false',
-					'isFlash'			    => 'false',
-					'defDate'		    	=> ' '
+					'username'              => $apg_sms_settings[ 'usuario_smsbox' ],
+					'password'              => $apg_sms_settings[ 'contrasena_smsbox' ],
+					'customerId'            => $apg_sms_settings[ 'customerid_smsbox' ],
+					'senderText'            => $apg_sms_settings[ 'sendername_smsbox' ],
+					'recipientNumbers'      => str_replace('','+',$telefono),
+					'messageBody'           => apg_sms_codifica_el_mensaje( $mensaje ),
+					'isBlink'               => 'false',
+					'isFlash'               => 'false',
+					'defDate'               => ' '
 				], 'https://www.smsbox.com/smsgateway/services/messaging.asmx/Http_SendSMS' );
 				$respuesta					= wp_remote_get( $url );
 				var_dump($respuesta);
