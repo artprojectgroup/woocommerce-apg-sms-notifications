@@ -238,7 +238,6 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
 					'defDate'               => ' '
 				], 'https://www.smsbox.com/smsgateway/services/messaging.asmx/Http_SendSMS' );
 				$respuesta					= wp_remote_get( $url );
-				var_dump($respuesta);
 			break;
 		case "smsdiscount":
  			$url						= add_query_arg( [
