@@ -1,12 +1,12 @@
-=== WC - APG SMS Notifications ===
+S=== WC - APG SMS Notifications ===
 Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
-Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, Adlinks Labs, BulkGate, WooCommerce Sequential Order Numbers Pro, WPML, Altiria
+Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, Adlinks Labs, BulkGate, WooCommerce Sequential Order Numbers Pro, WPML, Altiria, sendSMS.ro
 Requires at least: 3.8
-Tested up to: 5.6
-Stable tag: 2.21
+Tested up to: 5.7
+Stable tag: 2.22
 WC requires at least: 2.1
-WC tested up to: 4.4
+WC tested up to: 5.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -39,6 +39,7 @@ Add to your WooCommerce store SMS notifications to your customers when order sta
  * [Nexmo](https://www.nexmo.com).
  * [Plivo](https://www.plivo.com/).
  * [Routee](https://www.routee.net).
+ * [sendSMS.ro](https://www.sendsms.ro/en/).
  * [SIP Discount](https://www.sipdiscount.com/dashboard).
  * [SMS Discount](https://www.smsdiscount.com/dashboard).
  * [SMS Country](http://www.smscountry.com/).
@@ -126,6 +127,10 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 1. Screenshot of WC - APG SMS Notifications.
 
 == Changelog ==
+= 2.22 =
+* Added support for sendSMS.ro. **Update sponsored by [sendSMS.ro](https://www.sendsms.ro/en/)**.
+* Clickatell API update.
+* SMS Lane (Transactional SMS only) API update.
 = 2.21 =
 * Added support for Altiria. **Update sponsored by [Altiria](https://www.altiria.com/)**.
 = 2.20 =
@@ -420,8 +425,10 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 * Initial version.
 
 == Upgrade Notice ==
-= 2.21 =
-* Added support for Altiria. **Update sponsored by [Altiria](https://www.altiria.com/)**.
+= 2.22 =
+* Added support for sendSMS.ro. **Update sponsored by [sendSMS.ro](https://www.sendsms.ro/en/)**.
+* Clickatell API update.
+* SMS Lane (Transactional SMS only) API update.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).

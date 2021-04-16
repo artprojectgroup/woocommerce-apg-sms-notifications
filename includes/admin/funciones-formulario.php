@@ -1,4 +1,7 @@
 <?php
+//Igual no deberías poder abrirme
+defined( 'ABSPATH' ) || exit;
+
 global $apg_sms_settings, $wpml_activo;
 
 //Control de tabulación
@@ -52,6 +55,7 @@ $listado_de_proveedores = [
 	"nexmo"				=> "Nexmo",
 	"plivo" 			=> "Plivo",
 	"routee" 			=> "Routee",
+	"sendsms"           => "sendSMS.ro",
 	"sipdiscount" 		=> "SIP Discount", 
 	"smscountry" 		=> "SMS Country",
 	"smsdiscount" 		=> "SMS Discount", 
@@ -67,7 +71,7 @@ $listado_de_proveedores = [
 asort( $listado_de_proveedores, SORT_NATURAL | SORT_FLAG_CASE ); //Ordena alfabeticamente los proveedores
 
 //Campos necesarios para cada proveedor
-$campos_de_proveedores = [
+$campos_de_proveedores      = [
 	"adlinks"			=> [
  		"usuario_adlinks"					=> __( 'authentication key', 'woocommerce-apg-sms-notifications' ),
  		"ruta_adlinks"						=> __( 'route', 'woocommerce-apg-sms-notifications' ),
@@ -89,9 +93,7 @@ $campos_de_proveedores = [
 		"servidor_bulksms"					=> __( 'host', 'woocommerce-apg-sms-notifications' ),
 	],
 	"clickatell" 		=> [ 
-		"identificador_clickatell" 			=> __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
-		"usuario_clickatell" 				=> __( 'username', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_clickatell" 			=> __( 'password', 'woocommerce-apg-sms-notifications' ),
+		"identificador_clickatell" 			=> __( 'key', 'woocommerce-apg-sms-notifications' ),
 	],
 	"clockwork" 		=> [ 
 		"identificador_clockwork" 			=> __( 'key', 'woocommerce-apg-sms-notifications' ),
@@ -155,6 +157,12 @@ $campos_de_proveedores = [
 		"contrasena_routee"					=> __( 'application secret', 'woocommerce-apg-sms-notifications' ),
 		"identificador_routee"				=> __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
 	], 
+	"sendsms"           => [ 
+		"usuario_sendsms"                   => __( 'username', 'woocommerce-apg-sms-notifications' ),
+		"contrasena_sendsms"                => __( 'password', 'woocommerce-apg-sms-notifications' ),
+		"short_sendsms"                     => __( 'short URL', 'woocommerce-apg-sms-notifications' ),
+		"gdpr_sendsms"                      => __( 'unsubscribe link', 'woocommerce-apg-sms-notifications' ),
+	], 
 	"sipdiscount"		=> [ 
 		"usuario_sipdiscount" 				=> __( 'username', 'woocommerce-apg-sms-notifications' ),
 		"contrasena_sipdiscount"			=> __( 'password', 'woocommerce-apg-sms-notifications' ),
@@ -169,8 +177,8 @@ $campos_de_proveedores = [
 		"contrasena_smsdiscount"			=> __( 'password', 'woocommerce-apg-sms-notifications' ),
 	], 
 	"smslane" 			=> [ 
-		"usuario_smslane" 					=> __( 'username', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_smslane" 				=> __( 'password', 'woocommerce-apg-sms-notifications' ),
+		"usuario_smslane" 					=> __( 'key', 'woocommerce-apg-sms-notifications' ),
+		"contrasena_smslane" 				=> __( 'client ID', 'woocommerce-apg-sms-notifications' ),
 		"sid_smslane" 						=> __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
 	],
 	"solutions_infini" 	=> [ 
@@ -206,7 +214,7 @@ $campos_de_proveedores = [
 ];
 
 //Opciones de campos de selección de los proveedores
-$opciones_de_proveedores = [
+$opciones_de_proveedores        = [
 	"ruta_adlinks"		=> [
 		1						=> 1, 
 		4						=> 4,
@@ -251,6 +259,12 @@ $opciones_de_proveedores = [
  	],
 ];
 
+//Campos de verificación
+$verificacion_de_proveedores    = [
+    "short_sendsms",
+    "gdpr_sendsms",
+];
+
 //Listado de estados de pedidos
 $listado_de_estados				= wc_get_order_statuses();
 $listado_de_estados_temporal	= [];
@@ -263,7 +277,7 @@ $estados_originales				= [
 	'refunded',
 	'cancelled',
 ];
-foreach( $listado_de_estados as $clave => $estado ) {
+foreach ( $listado_de_estados as $clave => $estado ) {
 	$nombre_de_estado = str_replace( "wc-", "", $clave );
 	if ( !in_array( $nombre_de_estado, $estados_originales ) ) {
 		$listado_de_estados_temporal[ $estado ] = $nombre_de_estado;
@@ -300,7 +314,7 @@ function apg_sms_listado_de_proveedores( $listado_de_proveedores ) {
 /*
 Pinta los campos de los proveedores
 */
-function apg_sms_campos_de_proveedores( $listado_de_proveedores, $campos_de_proveedores, $opciones_de_proveedores ) {
+function apg_sms_campos_de_proveedores( $listado_de_proveedores, $campos_de_proveedores, $opciones_de_proveedores, $verificacion_de_proveedores ) {
 	global $apg_sms_settings, $tab;
 	
 	foreach ( $listado_de_proveedores as $valor => $proveedor ) {
@@ -319,7 +333,16 @@ function apg_sms_campos_de_proveedores( $listado_de_proveedores, $campos_de_prov
 				echo '          </select></td>
   </tr>
 				';
-			} else { //Campo input
+			} elseif ( in_array( $valor_campo, $verificacion_de_proveedores ) ) { //Campo checkbox
+                $chequea = ( isset( $apg_sms_settings[$valor_campo] ) && $apg_sms_settings[$valor_campo] == 1 ) ? ' checked="checked"' : '';
+				echo '
+  <tr valign="top" class="' . $valor . '"><!-- ' . $proveedor . ' -->
+	<th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . ucfirst( $campo ) . ':' . '
+	  <span class="woocommerce-help-tip" data-tip="' . sprintf( __( 'The %s for your account in %s', 'woocommerce-apg-sms-notifications' ), $campo, $proveedor ) . '"></span></label></th>
+	<td class="forminp forminp-number"><input type="checkbox" id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" value="1"' . $chequea . ' tabindex="' . $tab++ . '" ></td>
+  </tr>
+				';
+            }else { //Campo input
 				echo '
   <tr valign="top" class="' . $valor . '"><!-- ' . $proveedor . ' -->
 	<th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . ucfirst( $campo ) . ':' . '

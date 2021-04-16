@@ -1,15 +1,15 @@
 <?php
 /*
 Plugin Name: WC - APG SMS Notifications
-Version: 2.21
+Version: 2.22
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: https://artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 5.6
+Tested up to: 5.7
 WC requires at least: 2.1
-WC tested up to: 4.4
+WC tested up to: 5.2
 
 Text Domain: woocommerce-apg-sms-notifications
 Domain Path: /languages
@@ -360,17 +360,6 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		$billing_country		= is_callable( [ $pedido, 'get_billing_country' ] ) ? $pedido->get_billing_country() : $pedido->billing_country;
 		$billing_phone			= is_callable( [ $pedido, 'get_billing_phone' ] ) ? $pedido->get_billing_phone() : $pedido->billing_phone;
 		$shipping_country		= is_callable( [ $pedido, 'get_shipping_country' ] ) ? $pedido->get_shipping_country() : $pedido->shipping_country;	
-		$campo_envio			= get_post_meta( $numero_de_pedido, $apg_sms_settings[ 'campo_envio' ], false );
-		$campo_envio			= ( isset( $campo_envio[0] ) ) ? $campo_envio[0] : '';
-		$telefono				= apg_sms_procesa_el_telefono( $pedido, $billing_phone, $apg_sms_settings[ 'servicio' ] );
-		$telefono_envio			= apg_sms_procesa_el_telefono( $pedido, $campo_envio, $apg_sms_settings[ 'servicio' ], false, true );
-		$enviar_envio			= ( isset( $apg_sms_settings[ 'envio' ] ) && $telefono != $telefono_envio && $apg_sms_settings[ 'envio' ] == 1 ) ? true : false;
-		$internacional			= ( $billing_country && ( WC()->countries->get_base_country() != $billing_country ) ) ? true : false;
-		$internacional_envio	= ( $shipping_country && ( WC()->countries->get_base_country() != $shipping_country ) ) ? true : false;
-		//Recoge datos del formulario de facturación
-		$billing_country		= is_callable( [ $pedido, 'get_billing_country' ] ) ? $pedido->get_billing_country() : $pedido->billing_country;
-		$billing_phone			= is_callable( [ $pedido, 'get_billing_phone' ] ) ? $pedido->get_billing_phone() : $pedido->billing_phone;
-		$shipping_country		= is_callable( [ $pedido, 'get_shipping_country' ] ) ? $pedido->get_shipping_country() : $pedido->shipping_country;
 		$campo_envio			= get_post_meta( $numero_de_pedido, $apg_sms_settings[ 'campo_envio' ], false );
 		$campo_envio			= ( isset( $campo_envio[0] ) ) ? $campo_envio[0] : '';
 		$telefono				= apg_sms_procesa_el_telefono( $pedido, $billing_phone, $apg_sms_settings[ 'servicio' ] );

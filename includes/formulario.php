@@ -26,7 +26,7 @@
 					</select>
 				</td>
 			</tr>
-			<?php apg_sms_campos_de_proveedores( $listado_de_proveedores, $campos_de_proveedores, $opciones_de_proveedores ); ?>
+			<?php apg_sms_campos_de_proveedores( $listado_de_proveedores, $campos_de_proveedores, $opciones_de_proveedores, $verificacion_de_proveedores ); ?>
 			<tr valign="top">
 				<th scope="row" class="titledesc">
 					<label for="apg_sms_settings[telefono]">

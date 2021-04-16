@@ -1,4 +1,7 @@
 <?php
+//Igual no deberías poder abrirme
+defined( 'ABSPATH' ) || exit;
+
 //Definimos las variables
 $apg_sms = [ 	
 	'plugin' 		=> 'WC - APG SMS Notifications', 
@@ -54,29 +57,21 @@ add_filter( "plugin_action_links_$plugin", 'apg_sms_enlace_de_ajustes' );
 function apg_sms_plugin( $nombre ) {
 	global $apg_sms;
 	
-	$argumentos	= ( object ) [ 
-		'slug'		=> $nombre 
-	];
-	$consulta	= [ 
-		'action'	=> 'plugin_information', 
-		'timeout'	=> 15, 
-		'request'	=> serialize( $argumentos )
-	];
 	$respuesta	= get_transient( 'apg_sms_plugin' );
 	if ( false === $respuesta ) {
-		$respuesta = wp_remote_post( 'https://api.wordpress.org/plugins/info/1.0/', [ 'body' => $consulta ] );
+		$respuesta = wp_remote_get( 'https://api.wordpress.org/plugins/info/1.2/?action=plugin_information&request[slug]=' . $nombre  );
 		set_transient( 'apg_sms_plugin', $respuesta, 24 * HOUR_IN_SECONDS );
 	}
 	if ( !is_wp_error( $respuesta ) ) {
-		$plugin = get_object_vars( unserialize( $respuesta[ 'body' ] ) );
+		$plugin = json_decode( wp_remote_retrieve_body( $respuesta ) );
 	} else {
-		$plugin[ 'rating' ] = 100;
+	   return '<a title="' . sprintf( __( 'Please, rate %s:', 'woocommerce-apg-sms-notifications' ), $apg_sms[ 'plugin' ] ) . '" href="' . $apg_sms[ 'puntuacion' ] . '?rate=5#postform" class="estrellas">' . __( 'Unknown rating', 'woocommerce-apg-sms-notifications' ) . '</a>';
 	}
 
-	$rating = [
-	   'rating'		=> $plugin[ 'rating' ],
+    $rating = [
+	   'rating'		=> $plugin->rating,
 	   'type'		=> 'percent',
-	   'number'		=> $plugin[ 'num_ratings' ],
+	   'number'		=> $plugin->num_ratings,
 	];
 	ob_start();
 	wp_star_rating( $rating );

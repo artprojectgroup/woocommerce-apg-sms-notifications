@@ -1,4 +1,7 @@
 <?php
+//Igual no deberías poder abrirme
+defined( 'ABSPATH' ) || exit;
+
 //Comprueba si necesita el prefijo telefónico internacional
 function apg_sms_prefijo( $servicio ) {
 	$prefijo = [ 
@@ -19,6 +22,7 @@ function apg_sms_prefijo( $servicio ) {
 		"nexmo",
 		"plivo",
 		"routee",
+		"sendsms",
 		"sipdiscount", 
 		"smscountry",
 		"smsdiscount", 

@@ -3,17 +3,17 @@ Contributors: artprojectgroup
 
 Donate link: https://artprojectgroup.es/tienda/donacion
 
-Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, Adlinks Labs, BulkGate, WooCommerce Sequential Order Numbers Pro, WPML, Altiria
+Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, Adlinks Labs, BulkGate, WooCommerce Sequential Order Numbers Pro, WPML, Altiria, sendSMS.ro
 
 Requires at least: 3.8
 
-Tested up to: 5.6
+Tested up to: 5.7
 
-Stable tag: 2.21
+Stable tag: 2.22
 
 WC requires at least: 2.1
 
-WC tested up to: 4.4
+WC tested up to: 5.2
 
 License: GPLv3
 
@@ -48,6 +48,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * [Nexmo](https://www.nexmo.com).
  * [Plivo](https://www.plivo.com/).
  * [Routee](https://www.routee.net).
+ * [sendSMS.ro](https://www.sendsms.ro/en/).
  * [SIP Discount](https://www.sipdiscount.com/dashboard).
  * [SMS Discount](https://www.smsdiscount.com/dashboard).
  * [SMS Country](http://www.smscountry.com/).
@@ -133,6 +134,11 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.22
+* Añadido soporte para sendSMS.ro. **Actualización patrocinada por [sendSMS.ro](https://www.sendsms.ro/en/)**.
+* Actualización de  API de Clickatell.
+* Actualización de API de SMS Lane (Transactional SMS only).
+
 ### 2.21
 * Añadido soporte para Altiria. **Actualización patrocinada por [Altiria](https://www.altiria.com/)**.
 

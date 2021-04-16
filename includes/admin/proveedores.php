@@ -1,4 +1,7 @@
 <?php
+//Igual no deberías poder abrirme
+defined( 'ABSPATH' ) || exit;
+
 //Envía el mensaje SMS
 function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
 	switch ( $apg_sms_settings[ 'servicio' ] ) {
@@ -48,12 +51,10 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
 			break;
 		case "clickatell":
  			$url						= add_query_arg( [
- 				'api_id'					=> $apg_sms_settings[ 'identificador_clickatell' ],
- 				'user'						=> $apg_sms_settings[ 'usuario_clickatell' ],
- 				'password'					=> $apg_sms_settings[ 'contrasena_clickatell' ],
+ 				'apiKey'					=> $apg_sms_settings[ 'identificador_clickatell' ],
  				'to'						=> $telefono,
- 				'text'						=> apg_sms_codifica_el_mensaje( $mensaje ),
- 			], 'https://api.clickatell.com/http/sendmsg' );
+ 				'content'					=> apg_sms_codifica_el_mensaje( $mensaje ),
+ 			], 'https://platform.clickatell.com/messages/http/send' );
  			$respuesta					= wp_remote_get( $url );
 			break;
 		case "clockwork":
@@ -203,6 +204,17 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
 			] );
 			$respuesta 					= wp_remote_post( "https://connect.routee.net/sms", $argumentos );
 			break;
+		case "sendsms":
+            $url						= add_query_arg( [
+                'action'                    => ( $apg_sms_settings[ 'gdpr_sendsms' ] == 1 ) ? 'message_send_gdpr' : 'message_send',
+                'username'					=> $apg_sms_settings[ 'usuario_sendsms' ],
+                'password'					=> urlencode( [ 'contrasena_sendsms' ] ),
+                'to'                        => $telefono,
+                'text'                      => apg_sms_codifica_el_mensaje( $mensaje ),
+                'short'                     => ( $apg_sms_settings[ 'short_sendsms' ] == 1 ) ? 'true' : 'false',
+            ], 'https://api.sendsms.ro/json' );
+ 			$respuesta					= wp_remote_get( $url );
+            break;
 		case "sipdiscount":
  			$url						= add_query_arg( [
  				'username'					=> $apg_sms_settings[ 'usuario_sipdiscount' ],
@@ -237,15 +249,13 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
 			break;
 		case "smslane":
 			$argumentos[ 'body' ] 		= [ 
-				'user' 						=> $apg_sms_settings[ 'usuario_smslane' ],
-				'password' 					=> $apg_sms_settings[ 'contrasena_smslane' ],
-				'msisdn' 					=> $telefono,
-				'sid' 						=> $apg_sms_settings[ 'sid_smslane' ],
-				'msg' 						=> $mensaje,
-				'fl' 						=> 0,
-				'gwid' 						=> 2,
+				'ApiKey' 					=> $apg_sms_settings[ 'usuario_smslane' ],
+				'ClientId' 					=> $apg_sms_settings[ 'contrasena_smslane' ],
+				'SenderId' 					=> $apg_sms_settings[ 'sid_smslane' ],
+				'Message'					=> $mensaje,
+				'MobileNumbers'				=> $telefono,
 			 ];
-			$respuesta 					= wp_remote_post( "https://smslane.com/vendorsms/pushsms.aspx", $argumentos );
+			$respuesta 					= wp_remote_post( "https://api.smslane.com/api/v2/SendSMS", $argumentos );
 			break;
 		case "solutions_infini":
  			$url						= add_query_arg( [
