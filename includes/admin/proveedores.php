@@ -247,6 +247,15 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
  			], 'https://www.sipdiscount.com/myaccount/sendsms.php' );
  			$respuesta					= wp_remote_get( $url );
 			break;
+        case "smsgateway_rbsoft":
+            $argumentos['body'] = array(
+                'key' 	    => $apg_sms_settings['clave_smsgateway_rbsoft'],
+                'number'    => $telefono,
+                'message' 	=> $mensaje,
+                'devices' 	=> $apg_sms_settings['identificador_smsgateway_rbsoft'],
+             );
+            $respuesta = wp_remote_post( "{$apg_sms_settings['servidor_smsgateway_rbsoft']}/services/send.php", $argumentos );
+            break;
 		case "smslane":
 			$argumentos[ 'body' ] 		= [ 
 				'ApiKey' 					=> $apg_sms_settings[ 'usuario_smslane' ],

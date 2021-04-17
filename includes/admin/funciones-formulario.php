@@ -58,7 +58,8 @@ $listado_de_proveedores = [
 	"sendsms"           => "sendSMS.ro",
 	"sipdiscount" 		=> "SIP Discount", 
 	"smscountry" 		=> "SMS Country",
-	"smsdiscount" 		=> "SMS Discount", 
+	"smsdiscount" 		=> "SMS Discount",
+    "smsgateway_rbsoft" => "SMS Gateway from RBSoft",
 	"smslane" 			=> "SMS Lane ( Transactional SMS only )",
 	"solutions_infini" 	=> "Solutions Infini", 
 	"springedge" 		=> "Spring Edge",
@@ -175,7 +176,12 @@ $campos_de_proveedores      = [
 	"smsdiscount"		=> [ 
 		"usuario_smsdiscount" 				=> __( 'username', 'woocommerce-apg-sms-notifications' ),
 		"contrasena_smsdiscount"			=> __( 'password', 'woocommerce-apg-sms-notifications' ),
-	], 
+	],
+    "smsgateway_rbsoft" => [
+        "servidor_smsgateway_rbsoft" 		=> __( 'server', 'woocommerce-apg-sms-notifications' ),
+        "clave_smsgateway_rbsoft" 			=> __( 'API Key', 'woocommerce-apg-sms-notifications' ),
+        "identificador_smsgateway_rbsoft"	=> __( 'device ID', 'woocommerce-apg-sms-notifications' ),
+	],
 	"smslane" 			=> [ 
 		"usuario_smslane" 					=> __( 'key', 'woocommerce-apg-sms-notifications' ),
 		"contrasena_smslane" 				=> __( 'client ID', 'woocommerce-apg-sms-notifications' ),

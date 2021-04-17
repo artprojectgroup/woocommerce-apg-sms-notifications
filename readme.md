@@ -52,6 +52,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * [SIP Discount](https://www.sipdiscount.com/dashboard).
  * [SMS Discount](https://www.smsdiscount.com/dashboard).
  * [SMS Country](http://www.smscountry.com/).
+ * [SMS Gateway from RBSoft](https://rbsoft.org/downloads/sms-gateway/).
  * [SMS Lane (Transactional SMS only)](http://www.smslane.com).
  * [Solutions Infini](http://www.solutionsinfini.com/).
  * [Spring Edge](http://springedge.com/).
