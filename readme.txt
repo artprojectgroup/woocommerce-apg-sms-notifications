@@ -1,12 +1,12 @@
 === WC - APG SMS Notifications ===
 Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
-Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, Adlinks Labs, BulkGate, WooCommerce Sequential Order Numbers Pro, WPML, Altiria, sendSMS.ro
+Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, Adlinks Labs, BulkGate, WooCommerce Sequential Order Numbers Pro, WPML, Altiria, sendSMS.ro, WhatsApp Message By WA Api
 Requires at least: 3.8
-Tested up to: 5.7
-Stable tag: 2.22
+Tested up to: 5.8
+Stable tag: 2.23
 WC requires at least: 2.1
-WC tested up to: 5.1
+WC tested up to: 5.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -51,6 +51,7 @@ Add to your WooCommerce store SMS notifications to your customers when order sta
  * [VoipBuster](https://www.voipbuster.com/dashboard).
  * [VoipBusterPro](https://www.voipbusterpro.com/dashboard).
  * [VoipStunt](https://www.voipstunt.com/dashboard).
+ * [WhatsApp Message By WA Api](https://waapi.co).
 * Possibility to inform the owner or owners the store about new orders.
 * Possibility to send, or not, international SMS.
 * Possibility to notify to shipping phone number, if it’s different from the billing phone number.
@@ -127,6 +128,8 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 1. Screenshot of WC - APG SMS Notifications.
 
 == Changelog ==
+= 2.23 =
+* Added support for WhatsApp Message By WA Api. **Update sponsored by [WhatsApp Message By WA Api](https://waapi.co)**.
 = 2.22 =
 * Added support for sendSMS.ro. **Update sponsored by [sendSMS.ro](https://www.sendsms.ro/en/)**.
 * Clickatell API update.
@@ -425,10 +428,8 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 * Initial version.
 
 == Upgrade Notice ==
-= 2.22 =
-* Added support for sendSMS.ro. **Update sponsored by [sendSMS.ro](https://www.sendsms.ro/en/)**.
-* Clickatell API update.
-* SMS Lane (Transactional SMS only) API update.
+= 2.23 =
+* Added support for WhatsApp Message By WA Api. **Update sponsored by [WhatsApp Message By WA Api](https://waapi.co)**.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).

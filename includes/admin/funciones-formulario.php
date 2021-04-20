@@ -67,6 +67,7 @@ $listado_de_proveedores = [
 	"voipbuster" 		=> "VoipBuster", 
 	"voipbusterpro" 	=> "VoipBusterPro", 
 	"voipstunt" 		=> "VoipStunt",
+    "waapi"             => "WhatsApp Message By WA Api",
 ];
 asort( $listado_de_proveedores, SORT_NATURAL | SORT_FLAG_CASE ); //Ordena alfabeticamente los proveedores
 
@@ -210,6 +211,11 @@ $campos_de_proveedores      = [
 	"voipstunt"			=> [ 
 		"usuario_voipstunt" 				=> __( 'username', 'woocommerce-apg-sms-notifications' ),
 		"contrasena_voipstunt" 				=> __( 'password', 'woocommerce-apg-sms-notifications' ),
+	], 
+	"waapi"             => [ 
+		"dominio_waapi"                     => __( 'API Domain', 'woocommerce-apg-sms-notifications' ),
+		"usuario_waapi"                     => __( 'client ID', 'woocommerce-apg-sms-notifications' ),
+		"contrasena_waapi"                  => __( 'instance ID', 'woocommerce-apg-sms-notifications' ),
 	], 
 ];
 

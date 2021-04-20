@@ -332,6 +332,16 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
  			], 'https://www.voipstunt.com/myaccount/sendsms.php' );
  			$respuesta					= wp_remote_get( $url );
 			break;
+		case "waapi":
+ 			$url						= add_query_arg( [
+ 				'client_id'					=> $apg_sms_settings[ 'usuario_waapi' ],
+ 				'instance'					=> $apg_sms_settings[ 'contrasena_waapi' ],
+				'type'						=> 'text',
+				'number'					=> $telefono,
+ 				'message'					=> apg_sms_codifica_el_mensaje( $mensaje ),
+ 			], $apg_sms_settings[ 'dominio_waapi' ] . "/api/send.php" );
+ 			$respuesta					= wp_remote_get( $url );
+			break;
 	}
 
 	if ( isset( $apg_sms_settings[ 'debug' ] ) && $apg_sms_settings[ 'debug' ] == "1" && isset( $apg_sms_settings[ 'campo_debug' ] ) ) {
