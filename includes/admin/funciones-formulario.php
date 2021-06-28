@@ -123,6 +123,7 @@ $campos_de_proveedores      = [
 		"identificador_moplet" 				=> __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
 		"ruta_moplet" 						=> __( 'route', 'woocommerce-apg-sms-notifications' ),
 		"servidor_moplet" 					=> __( 'host', 'woocommerce-apg-sms-notifications' ),
+		"dlt_moplet"                        => __( 'template ID', 'woocommerce-apg-sms-notifications' ),
 	],
 	"moreify" 			=> [ 
 		"proyecto_moreify"					=> __( 'project', 'woocommerce-apg-sms-notifications' ),
@@ -269,6 +270,7 @@ $opciones_de_proveedores        = [
 $verificacion_de_proveedores    = [
     "short_sendsms",
     "gdpr_sendsms",
+    "dlt_moplet",
 ];
 
 //Listado de estados de pedidos
@@ -340,12 +342,13 @@ function apg_sms_campos_de_proveedores( $listado_de_proveedores, $campos_de_prov
   </tr>
 				';
 			} elseif ( in_array( $valor_campo, $verificacion_de_proveedores ) ) { //Campo checkbox
-                $chequea = ( isset( $apg_sms_settings[$valor_campo] ) && $apg_sms_settings[$valor_campo] == 1 ) ? ' checked="checked"' : '';
+                $dlt        = ( strpos( $valor_campo, "dlt_" ) !== false ) ? ' class="dlt"' : '';
+                $chequea    = ( isset( $apg_sms_settings[$valor_campo] ) && $apg_sms_settings[$valor_campo] == 1 ) ? ' checked="checked"' : '';
 				echo '
   <tr valign="top" class="' . $valor . '"><!-- ' . $proveedor . ' -->
 	<th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . ucfirst( $campo ) . ':' . '
 	  <span class="woocommerce-help-tip" data-tip="' . sprintf( __( 'The %s for your account in %s', 'woocommerce-apg-sms-notifications' ), $campo, $proveedor ) . '"></span></label></th>
-	<td class="forminp forminp-number"><input type="checkbox" id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" value="1"' . $chequea . ' tabindex="' . $tab++ . '" ></td>
+	<td class="forminp forminp-number"><input type="checkbox"' . $dlt . ' id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" value="1"' . $chequea . ' tabindex="' . $tab++ . '" ></td>
   </tr>
 				';
             }else { //Campo input
@@ -419,7 +422,6 @@ function apg_sms_listado_de_mensajes( $listado_de_mensajes ) {
 	}
 }
 
-
 /*
 Pinta los campos de mensajes
 */
@@ -459,6 +461,22 @@ function apg_sms_campo_de_mensaje_personalizado( $campo, $campo_cliente, $listad
         $texto  = stripcslashes( !empty( $campo_cliente ) ? $campo_cliente : sprintf( __( $listado_de_mensajes_personalizados[ $campo ], 'woocommerce-apg-sms-notifications' ), "%id%" ) . __( $listado_de_textos_personalizados[ $campo ], 'woocommerce-apg-sms-notifications' ) . "." );
     }
     
+    //Listado de mensajes personalizados - DLT
+    $listado_de_mensajes_dlt = [
+        'todos'					=> __( 'All messages template ID', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_pedido'		=> __( 'Owner custom message template ID', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_pendiente'		=> __( 'Order pending custom message template ID', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_fallido'		=> __( 'Order failed custom message template ID', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_recibido'		=> __( 'Order on-hold custom message template ID', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_procesando'	=> __( 'Order processing custom message template ID', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_completado'	=> __( 'Order completed custom message template ID', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_devuelto'		=> __( 'Order refunded custom message template ID', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_cancelado'		=> __( 'Order cancelled custom message template ID', 'woocommerce-apg-sms-notifications' ),
+        'mensaje_nota'			=> __( 'Notes custom message template ID', 'woocommerce-apg-sms-notifications' ),
+    ];
+    
+    $texto_dlt  = ( isset( $apg_sms_settings[ 'dlt_' . $campo ] ) ) ? $apg_sms_settings[ 'dlt_' . $campo ] : '';
+    
     echo'
         <tr valign="top" class="' . $campo . '">
             <th scope="row" class="titledesc">
@@ -468,6 +486,16 @@ function apg_sms_campo_de_mensaje_personalizado( $campo, $campo_cliente, $listad
                 </label>
             </th>
             <td class="forminp forminp-number"><textarea id="apg_sms_settings[' . $campo . ']" name="apg_sms_settings[' . $campo . ']" cols="50" rows="5" tabindex="' . $tab++ . '">' .$texto . '</textarea>
+            </td>
+        </tr>
+        <tr valign="top" class="mensaje_dlt dlt_' . $campo . '">
+            <th scope="row" class="titledesc">
+                <label for="apg_sms_settings[dlt_' . $campo . ']">
+                    ' . __( $listado_de_mensajes_dlt[ $campo ], 'woocommerce-apg-sms-notifications' ) .':
+                    <span class="woocommerce-help-tip" data-tip="'. __( "Template ID for " . $listado_de_mensajes[ $campo ] ) . '"></span>
+                </label>
+            </th>
+            <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[dlt_' . $campo . ']" name="apg_sms_settings[dlt_' . $campo . ']" size="50" value="' . $texto_dlt . '" tabindex="' . $tab++ . '"/>
             </td>
         </tr>';
 }

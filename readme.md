@@ -9,11 +9,11 @@ Requires at least: 3.8
 
 Tested up to: 5.8
 
-Stable tag: 2.23
+Stable tag: 2.23.1
 
 WC requires at least: 2.1
 
-WC tested up to: 5.3
+WC tested up to: 5.5
 
 License: GPLv3
 
@@ -60,7 +60,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * [VoipBuster](https://www.voipbuster.com/dashboard).
  * [VoipBusterPro](https://www.voipbusterpro.com/dashboard).
  * [VoipStunt](https://www.voipstunt.com/dashboard).
- * [WhatsApp Message By WA Api](https://waapi.co).
+ * WhatsApp Message By WA Api.
 * Posibilidad de informar al propietario o propietarios de la tienda sobre nuevos pedidos.
 * Posibilidad de enviar, o no, SMS internacionales.
 * Posibilidad de notificar al número de teléfono de envío, si es distinto del número de teléfono de facturación.
@@ -135,6 +135,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.23.1
+* Añadido soporte para DLT (India) en Moplet. **Actualización patrocinada por [Moplet](https://moplet.com)**.
+
 ### 2.23
 * Añadido soporte para WhatsApp Message By WA Api. **Actualización patrocinada por [WhatsApp Message By WA Api](https://waapi.co)**.
 

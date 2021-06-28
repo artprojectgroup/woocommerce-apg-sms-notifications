@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 //Envía el mensaje SMS
-function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
+function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado ) {
 	switch ( $apg_sms_settings[ 'servicio' ] ) {
 		case "adlinks":
  			$url						= add_query_arg( [
@@ -107,14 +107,18 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje ) {
  			$respuesta					= wp_remote_get( $url );
 			break;
 		case "moplet":
- 			$url						= add_query_arg( [
+            $argumentos                 = [
  				'authkey'					=> $apg_sms_settings[ 'clave_moplet' ],
  				'mobiles'					=> $telefono,
  				'message'					=> apg_sms_codifica_el_mensaje( $mensaje ),
  				'sender'					=> $apg_sms_settings[ 'identificador_moplet' ],
  				'route'						=> $apg_sms_settings[ 'ruta_moplet' ],
  				'country'					=> $apg_sms_settings[ 'servidor_moplet' ],
- 			], 'http://sms.moplet.com/api/sendhttp.php' );
+            ];
+            if ( $apg_sms_settings[ 'dlt_moplet' ] ) { //Sólo si existe el valor
+ 				$argumentos[ 'DLT_TE_ID' ] = $apg_sms_settings[ 'dlt_' . $estado ];
+            }
+            $url						= add_query_arg( $argumentos, 'http://sms.moplet.com/api/sendhttp.php' );
  			$respuesta					= wp_remote_get( $url );
 			break;
 		case "moreify":

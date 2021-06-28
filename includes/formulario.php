@@ -243,6 +243,20 @@
 		};
 		control( $( '.servicio' ).val() );
 
+        //Muestra los campos DLT
+		$( '.mensaje_dlt' ).hide();
+		$( '.dlt' ).on( 'change', function () {
+			control_dlt( '.dlt' );
+		} );
+		var control_dlt = function ( capa ) {
+			if ( $( capa ).is( ':checked' ) ) {
+				$( '.mensaje_dlt' ).show();
+			} else {
+				$( '.mensaje_dlt' ).hide();
+			}
+		};
+		control_dlt( '.dlt' );
+                            
 		//Cambia los campos en función de los mensajes seleccionados
 		$( '.mensajes' ).on( 'change', function () {
 			control_mensajes( $( this ).val() );
