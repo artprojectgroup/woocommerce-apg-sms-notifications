@@ -9,11 +9,11 @@ Requires at least: 3.8
 
 Tested up to: 5.8
 
-Stable tag: 2.23.1
+Stable tag: 2.24
 
 WC requires at least: 2.1
 
-WC tested up to: 5.5
+WC tested up to: 5.5.1
 
 License: GPLv3
 
@@ -135,6 +135,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.24
+* Corregida una vulnerabilidad reportada.
+
 ### 2.23.1
 * Añadido soporte para DLT (India) en Moplet. **Actualización patrocinada por [Moplet](https://moplet.com)**.
 

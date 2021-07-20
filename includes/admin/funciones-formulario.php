@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit;
 global $apg_sms_settings, $wpml_activo;
 
 //Control de tabulación
-$tab = 1;
+$tab    = 1;
 
 //WPML
 if ( $apg_sms_settings ) {
@@ -20,7 +20,7 @@ if ( $apg_sms_settings ) {
         'mensaje_nota'
     ];
     
-    if ( function_exists( 'icl_register_string' ) || !$wpml_activo ) { //Versión anterior a la 3.2
+    if ( function_exists( 'icl_register_string' ) || ! $wpml_activo ) { //Versión anterior a la 3.2
         foreach( $mensajes as $mensaje ) {
             if ( isset( $apg_sms_settings[ $mensaje ] ) ) {
                 $$mensaje		= ( $wpml_activo ) ? icl_translate( 'apg_sms', $mensaje, $apg_sms_settings[ $mensaje ] ) : $apg_sms_settings[ $mensaje ];
@@ -287,7 +287,7 @@ $estados_originales				= [
 ];
 foreach ( $listado_de_estados as $clave => $estado ) {
 	$nombre_de_estado = str_replace( "wc-", "", $clave );
-	if ( !in_array( $nombre_de_estado, $estados_originales ) ) {
+	if ( ! in_array( $nombre_de_estado, $estados_originales ) ) {
 		$listado_de_estados_temporal[ $estado ] = $nombre_de_estado;
 	}
 }
@@ -351,12 +351,12 @@ function apg_sms_campos_de_proveedores( $listado_de_proveedores, $campos_de_prov
 	<td class="forminp forminp-number"><input type="checkbox"' . $dlt . ' id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" value="1"' . $chequea . ' tabindex="' . $tab++ . '" ></td>
   </tr>
 				';
-            }else { //Campo input
+            } else { //Campo input
 				echo '
   <tr valign="top" class="' . $valor . '"><!-- ' . $proveedor . ' -->
 	<th scope="row" class="titledesc"> <label for="apg_sms_settings[' . $valor_campo . ']">' . ucfirst( $campo ) . ':' . '
 	  <span class="woocommerce-help-tip" data-tip="' . sprintf( __( 'The %s for your account in %s', 'woocommerce-apg-sms-notifications' ), $campo, $proveedor ) . '"></span></label></th>
-	<td class="forminp forminp-number"><input type="text" id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" size="50" value="' . ( isset( $apg_sms_settings[$valor_campo] ) ? $apg_sms_settings[$valor_campo] : '' ) . '" tabindex="' . $tab++ . '" /></td>
+	<td class="forminp forminp-number"><input type="text" id="apg_sms_settings[' . $valor_campo . ']" name="apg_sms_settings[' . $valor_campo . ']" size="50" value="' . ( isset( $apg_sms_settings[$valor_campo] ) ? esc_attr( $apg_sms_settings[$valor_campo] ) : '' ) . '" tabindex="' . $tab++ . '" /></td>
   </tr>
 				';
 			}
@@ -417,7 +417,7 @@ function apg_sms_listado_de_mensajes( $listado_de_mensajes ) {
 		} else {
 			$chequea	= '';
 		}
-		$texto = ( !isset( $apg_sms_settings[ 'mensajes' ] ) && $valor == 'todos' && !$chequeado ) ? ' selected="selected"' : '';
+		$texto = ( ! isset( $apg_sms_settings[ 'mensajes' ] ) && $valor == 'todos' && ! $chequeado ) ? ' selected="selected"' : '';
 		echo '<option value="' . $valor . '"' . $chequea . $texto . '>' . $mensaje . '</option>' . PHP_EOL;
 	}
 }
@@ -452,13 +452,13 @@ function apg_sms_campo_de_mensaje_personalizado( $campo, $campo_cliente, $listad
     ];
 
     if ( $campo == 'mensaje_pedido'  ) {
-        $texto  = stripcslashes( !empty( $campo_cliente ) ? $campo_cliente : sprintf( __( $listado_de_mensajes_personalizados[ $campo ], 'woocommerce-apg-sms-notifications' ), "%id%" ) . "%shop_name%" . "." );
+        $texto  = stripcslashes( ! empty( $campo_cliente ) ? $campo_cliente : sprintf( __( $listado_de_mensajes_personalizados[ $campo ], 'woocommerce-apg-sms-notifications' ), "%id%" ) . "%shop_name%" . "." );
     } elseif ( $campo == 'mensaje_recibido'  ) {
-        $texto  = stripcslashes( !empty( $campo_cliente ) ? $campo_cliente : sprintf( __( $listado_de_mensajes_personalizados[ $campo ], 'woocommerce-apg-sms-notifications' ), "%id%", "%shop_name%" ) );
+        $texto  = stripcslashes( ! empty( $campo_cliente ) ? $campo_cliente : sprintf( __( $listado_de_mensajes_personalizados[ $campo ], 'woocommerce-apg-sms-notifications' ), "%id%", "%shop_name%" ) );
     } elseif ( $campo == 'mensaje_nota'  ) {
-        $texto  = stripcslashes( !empty( $campo_cliente ) ? $campo_cliente : sprintf( __( $listado_de_mensajes_personalizados[ $campo ], 'woocommerce-apg-sms-notifications' ), "%id%" ) . "%note%" );
+        $texto  = stripcslashes( ! empty( $campo_cliente ) ? $campo_cliente : sprintf( __( $listado_de_mensajes_personalizados[ $campo ], 'woocommerce-apg-sms-notifications' ), "%id%" ) . "%note%" );
     } else {
-        $texto  = stripcslashes( !empty( $campo_cliente ) ? $campo_cliente : sprintf( __( $listado_de_mensajes_personalizados[ $campo ], 'woocommerce-apg-sms-notifications' ), "%id%" ) . __( $listado_de_textos_personalizados[ $campo ], 'woocommerce-apg-sms-notifications' ) . "." );
+        $texto  = stripcslashes( ! empty( $campo_cliente ) ? $campo_cliente : sprintf( __( $listado_de_mensajes_personalizados[ $campo ], 'woocommerce-apg-sms-notifications' ), "%id%" ) . __( $listado_de_textos_personalizados[ $campo ], 'woocommerce-apg-sms-notifications' ) . "." );
     }
     
     //Listado de mensajes personalizados - DLT
@@ -477,7 +477,7 @@ function apg_sms_campo_de_mensaje_personalizado( $campo, $campo_cliente, $listad
     
     $texto_dlt  = ( isset( $apg_sms_settings[ 'dlt_' . $campo ] ) ) ? $apg_sms_settings[ 'dlt_' . $campo ] : '';
     
-    echo'
+    echo '
         <tr valign="top" class="' . $campo . '">
             <th scope="row" class="titledesc">
                 <label for="apg_sms_settings[' . $campo . ']">
@@ -485,7 +485,7 @@ function apg_sms_campo_de_mensaje_personalizado( $campo, $campo_cliente, $listad
                     <span class="woocommerce-help-tip" data-tip="'. __( "You can customize your message. Remember that you can use this variables: %id%, %order_key%, %billing_first_name%, %billing_last_name%, %billing_company%, %billing_address_1%, %billing_address_2%, %billing_city%, %billing_postcode%, %billing_country%, %billing_state%, %billing_email%, %billing_phone%, %shipping_first_name%, %shipping_last_name%, %shipping_company%, %shipping_address_1%, %shipping_address_2%, %shipping_city%, %shipping_postcode%, %shipping_country%, %shipping_state%, %shipping_method%, %shipping_method_title%, %payment_method%, %payment_method_title%, %order_discount%, %cart_discount%, %order_tax%, %order_shipping%, %order_shipping_tax%, %order_total%, %status%, %prices_include_tax%, %tax_display_cart%, %display_totals_ex_tax%, %display_cart_ex_tax%, %order_date%, %modified_date%, %customer_message%, %customer_note%, %post_status%, %shop_name%, %order_product% and %note%.", "woocommerce-apg-sms-notifications" ) . '"></span>
                 </label>
             </th>
-            <td class="forminp forminp-number"><textarea id="apg_sms_settings[' . $campo . ']" name="apg_sms_settings[' . $campo . ']" cols="50" rows="5" tabindex="' . $tab++ . '">' .$texto . '</textarea>
+            <td class="forminp forminp-number"><textarea id="apg_sms_settings[' . $campo . ']" name="apg_sms_settings[' . $campo . ']" cols="50" rows="5" tabindex="' . $tab++ . '">' . esc_textarea( $texto ) . '</textarea>
             </td>
         </tr>
         <tr valign="top" class="mensaje_dlt dlt_' . $campo . '">
@@ -495,7 +495,7 @@ function apg_sms_campo_de_mensaje_personalizado( $campo, $campo_cliente, $listad
                     <span class="woocommerce-help-tip" data-tip="'. __( "Template ID for " . $listado_de_mensajes[ $campo ] ) . '"></span>
                 </label>
             </th>
-            <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[dlt_' . $campo . ']" name="apg_sms_settings[dlt_' . $campo . ']" size="50" value="' . $texto_dlt . '" tabindex="' . $tab++ . '"/>
+            <td class="forminp forminp-number"><input type="text" id="apg_sms_settings[dlt_' . $campo . ']" name="apg_sms_settings[dlt_' . $campo . ']" size="50" value="' . esc_attr( $texto_dlt ) . '" tabindex="' . $tab++ . '"/>
             </td>
         </tr>';
 }

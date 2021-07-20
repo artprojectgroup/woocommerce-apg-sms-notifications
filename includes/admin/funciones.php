@@ -161,8 +161,8 @@ function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietari
 		if ( substr( $telefono_procesado, 0, 2 ) == '00' ) { //Código propuesto por Marco Almeida (https://wordpress.org/support/topic/problems-sending-to-international-numbers-via-plivo/)
 			$telefono_procesado = substr( $telefono_procesado, 2 );
 		}
-		if ( !$propietario ) {
-			if ( ( !$envio && $billing_country && ( WC()->countries->get_base_country() != $billing_country ) || $prefijo ) ) {
+		if ( ! $propietario ) {
+			if ( ( ! $envio && $billing_country && ( WC()->countries->get_base_country() != $billing_country ) || $prefijo ) ) {
 				$prefijo_internacional = apg_sms_dame_prefijo_pais( $billing_country ); //Teléfono de facturación
 			} else if ( ( $envio && $shipping_country && ( WC()->countries->get_base_country() != $shipping_country ) || $prefijo ) ) {
 				$prefijo_internacional = apg_sms_dame_prefijo_pais( $shipping_country ); //Teléfono de envío
@@ -272,7 +272,7 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 			"shipping_method_title", 
         ];
 		
-		if ( !in_array( $variable, $especiales ) ) {
+		if ( ! in_array( $variable, $especiales ) ) {
 			if ( in_array( $variable, $apg_sms ) ) {
 				$mensaje = str_replace( "%" . $variable . "%", is_callable( [ $pedido, 'get_' . $variable ] ) ? $pedido->{'get_' . $variable}() : $pedido->$variable, $mensaje ); //Variables estándar - Objeto
 			} else if ( in_array( $variable, $apg_sms_variables ) ) {
@@ -295,7 +295,7 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 		} else if ( $variable == "order_product" ) {
 			$nombre		= '';
 			$productos	= $pedido->get_items();
-			if ( !isset( $apg_sms_settings[ 'productos' ] ) || $apg_sms_settings[ 'productos' ] != 1 ) {
+			if ( ! isset( $apg_sms_settings[ 'productos' ] ) || $apg_sms_settings[ 'productos' ] != 1 ) {
 				$nombre = $productos[ key( $productos ) ][ 'name' ];
 				if ( strlen( $nombre ) > 10 ) {
 					$nombre = substr( $nombre, 0, 10 ) . "...";
