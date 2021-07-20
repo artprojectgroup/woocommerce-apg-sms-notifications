@@ -315,7 +315,7 @@ function apg_sms_listado_de_proveedores( $listado_de_proveedores ) {
 	
 	foreach ( $listado_de_proveedores as $valor => $proveedor ) {
 		$chequea = ( isset( $apg_sms_settings[ 'servicio' ] ) && $apg_sms_settings[ 'servicio' ] == $valor ) ? ' selected="selected"' : '';
-		echo '<option value="' . $valor . '"' . $chequea . '>' . $proveedor . '</option>' . PHP_EOL;
+		echo '<option value="' . esc_attr( $valor ) . '"' . $chequea . '>' . $proveedor . '</option>' . PHP_EOL;
 	}
 }
 
@@ -336,7 +336,7 @@ function apg_sms_campos_de_proveedores( $listado_de_proveedores, $campos_de_prov
 				';
 				foreach ( $opciones_de_proveedores[$valor_campo] as $valor_opcion => $opcion ) {
 					$chequea = ( isset( $apg_sms_settings[$valor_campo] ) && $apg_sms_settings[$valor_campo] == $valor_opcion ) ? ' selected="selected"' : '';
-					echo '<option value="' . $valor_opcion . '"' . $chequea . '>' . $opcion . '</option>' . PHP_EOL;
+					echo '<option value="' . esc_attr( $valor_opcion ) . '"' . $chequea . '>' . $opcion . '</option>' . PHP_EOL;
 				}
 				echo '          </select></td>
   </tr>
@@ -379,7 +379,7 @@ function apg_sms_campos_de_envio() {
 	foreach ( $campos as $valor => $campo ) {
 		$chequea = ( isset( $apg_sms_settings[ 'campo_envio' ] ) && $apg_sms_settings[ 'campo_envio' ] == $valor ) ? ' selected="selected"' : '';
 		if ( isset( $campo[ 'label' ] ) ) {
-			echo '<option value="' . $valor . '"' . $chequea . '>' . $campo[ 'label' ] . '</option>' . PHP_EOL;
+			echo '<option value="' . esc_attr( $valor ) . '"' . $chequea . '>' . $campo[ 'label' ] . '</option>' . PHP_EOL;
 		}
 	}
 }
@@ -399,7 +399,7 @@ function apg_sms_listado_de_estados( $listado_de_estados ) {
 				}
 			}
 		}
-		echo '<option value="' . $estado . '"' . $chequea . '>' . $nombre_de_estado . '</option>' . PHP_EOL;
+		echo '<option value="' . esc_attr( $estado ) . '"' . $chequea . '>' . $nombre_de_estado . '</option>' . PHP_EOL;
 	}
 }
 
@@ -418,7 +418,7 @@ function apg_sms_listado_de_mensajes( $listado_de_mensajes ) {
 			$chequea	= '';
 		}
 		$texto = ( ! isset( $apg_sms_settings[ 'mensajes' ] ) && $valor == 'todos' && ! $chequeado ) ? ' selected="selected"' : '';
-		echo '<option value="' . $valor . '"' . $chequea . $texto . '>' . $mensaje . '</option>' . PHP_EOL;
+		echo '<option value="' . esc_attr( $valor ) . '"' . $chequea . $texto . '>' . $mensaje . '</option>' . PHP_EOL;
 	}
 }
 
