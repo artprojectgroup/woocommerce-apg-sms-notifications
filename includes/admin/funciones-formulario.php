@@ -2,36 +2,24 @@
 //Igual no deberías poder abrirme
 defined( 'ABSPATH' ) || exit;
 
-global $apg_sms_settings, $wpml_activo;
+global $apg_sms_settings, $wpml_activo, $mensajes;
 
 //Control de tabulación
 $tab    = 1;
 
 //WPML
-if ( $apg_sms_settings ) {
-    $mensajes   = [
-        'mensaje_pedido',
-        'mensaje_fallido',
-        'mensaje_recibido',
-        'mensaje_procesando',
-        'mensaje_completado',
-        'mensaje_devuelto',
-        'mensaje_cancelado',
-        'mensaje_nota'
-    ];
-    
-    if ( function_exists( 'icl_register_string' ) || ! $wpml_activo ) { //Versión anterior a la 3.2
-        foreach( $mensajes as $mensaje ) {
-            if ( isset( $apg_sms_settings[ $mensaje ] ) ) {
-                $$mensaje		= ( $wpml_activo ) ? icl_translate( 'apg_sms', $mensaje, $apg_sms_settings[ $mensaje ] ) : $apg_sms_settings[ $mensaje ];
-            }
+if ( $apg_sms_settings ) {    
+    foreach ( $mensajes as $mensaje ) {
+        if ( function_exists( 'icl_register_string' ) || ! $wpml_activo ) { //Versión anterior a la 3.2
+            $$mensaje		= ( $wpml_activo ) ? icl_translate( 'apg_sms', $mensaje, esc_textarea( $apg_sms_settings[ $mensaje ] ) ) : esc_textarea( $apg_sms_settings[ $mensaje ] );
+        } else if ( $wpml_activo ) { //Versión 3.2 o superior
+            $$mensaje		= apply_filters( 'wpml_translate_single_string', esc_textarea( $apg_sms_settings[ $mensaje ] ), 'apg_sms', $mensaje );
         }
-    } else if ( $wpml_activo ) { //Versión 3.2 o superior
-        foreach( $mensajes as $mensaje ) {
-            if ( isset( $apg_sms_settings[ $mensaje ] ) ) {
-                $$mensaje		= apply_filters( 'wpml_translate_single_string', $apg_sms_settings[ $mensaje ], 'apg_sms', $mensaje );
-            }
-        }
+        echo $$mensaje . " - " .$mensaje . "<br />";
+    }
+} else { //Inicializa variables
+    foreach ( $mensajes as $mensaje ) {
+        $$mensaje   = '';
     }
 }
 

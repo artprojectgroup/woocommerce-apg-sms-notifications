@@ -9,11 +9,11 @@ Requires at least: 3.8
 
 Tested up to: 5.8
 
-Stable tag: 2.24
+Stable tag: 2.24.0.1
 
 WC requires at least: 2.1
 
-WC tested up to: 5.5.1
+WC tested up to: 5.5.2
 
 License: GPLv3
 
@@ -135,6 +135,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.24.0.1
+* Pequeños arreglos.
+
 ### 2.24
 * Corregida una vulnerabilidad reportada.
 
