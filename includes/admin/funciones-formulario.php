@@ -15,7 +15,6 @@ if ( $apg_sms_settings ) {
         } else if ( $wpml_activo ) { //Versión 3.2 o superior
             $$mensaje		= apply_filters( 'wpml_translate_single_string', esc_textarea( $apg_sms_settings[ $mensaje ] ), 'apg_sms', $mensaje );
         }
-        echo $$mensaje . " - " .$mensaje . "<br />";
     }
 } else { //Inicializa variables
     foreach ( $mensajes as $mensaje ) {
