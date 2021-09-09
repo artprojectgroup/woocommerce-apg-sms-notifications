@@ -243,20 +243,6 @@
 			}
 		};
 		control( $( '.servicio' ).val() );
-
-        //Muestra los campos DLT
-		$( '.mensaje_dlt' ).hide();
-		$( '.dlt' ).on( 'change', function () {
-			control_dlt( '.dlt' );
-		} );
-		var control_dlt = function ( capa ) {
-			if ( $( capa ).is( ':checked' ) ) {
-				$( '.mensaje_dlt' ).show();
-			} else {
-				$( '.mensaje_dlt' ).hide();
-			}
-		};
-		control_dlt( '.dlt' );
                             
 		//Cambia los campos en función de los mensajes seleccionados
 		$( '.mensajes' ).on( 'change', function () {
@@ -269,16 +255,16 @@
 
 			var mensajes = new Array();
 			<?php 
-		foreach( $listado_de_mensajes as $indice => $valor ) {
-			echo "mensajes[ '$indice' ] = '$valor';" . PHP_EOL; 
-		}
+            foreach( $listado_de_mensajes as $indice => $valor ) {
+                echo "mensajes[ '$indice' ] = '$valor';" . PHP_EOL; 
+            }
 		?>
 
 			for ( var valor in mensajes ) {
-				$( '.' + valor ).hide();
+				$( '.' + valor + ',.dlt_' + valor ).hide();
 				for ( var valor_capa in capa ) {
 					if ( valor == capa[ valor_capa ] || capa[ valor_capa ] == 'todos' ) {
-						$( '.' + valor ).show();
+						$( '.' + valor + ',.dlt_' + valor ).show();
 					}
 				}
 			}
@@ -334,10 +320,10 @@
 		?>
 
 			for ( var valor in estados ) {
-				$( '.' + valor ).hide();
+				$( '.' + valor + ',.dlt_' + valor ).hide();
 				for ( var valor_capa in capa ) {
 					if ( valor == capa[ valor_capa ] ) {
-						$( '.' + valor ).show();
+						$( '.' + valor + ',.dlt_' + valor ).show();
 					}
 				}
 			}
@@ -347,5 +333,27 @@
 			control_personalizados( $( selected ).val() );
 		} );
 		<?php endif; ?>
-	} );
+
+        //Muestra los campos DLT
+		$( '.mensaje_dlt' ).hide();
+		$( '.dlt' ).on( 'change', function () {
+			control_dlt( '.dlt' );
+		} );
+		var control_dlt = function ( capa ) {
+			if ( $( capa ).is( ':checked' ) ) {
+				$( '.mensaje_dlt' ).show();
+			} else {
+				$( '.mensaje_dlt' ).hide();
+			}
+            $( '.mensajes' ).each( function ( i, selected ) {
+                control_mensajes( $( selected ).val() );
+            } );
+		<?php if ( ! empty( $listado_de_estados ) ) : //Comprueba la existencia de estados personalizados ?>
+            $( '.estados_personalizados' ).each( function ( i, selected ) {
+                control_personalizados( $( selected ).val() );
+            } );
+		<?php endif; ?>
+		};
+		control_dlt( '.dlt' );
+    } );
 </script>

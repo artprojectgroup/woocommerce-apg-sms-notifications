@@ -1,15 +1,15 @@
 <?php
 /*
 Plugin Name: WC - APG SMS Notifications
-Version: 2.24.0.2
+Version: 2.24.1
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: https://artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 5.8
+Tested up to: 5.9
 WC requires at least: 2.1
-WC tested up to: 5.6
+WC tested up to: 5.7
 
 Text Domain: woocommerce-apg-sms-notifications
 Domain Path: /languages
@@ -142,8 +142,8 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		} else {
 			return;
 		}
-        
-		//Permitir que otros plugins impidan que se envíe el SMS
+
+        //Permitir que otros plugins impidan que se envíe el SMS
 		if ( ! apply_filters( 'apg_sms_send_message', true, $pedido ) ) {
 			return;
 		}
@@ -169,7 +169,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			$telefono_propietario = apg_sms_procesa_el_telefono( $pedido, esc_attr( $apg_sms_settings[ 'telefono' ] ), esc_attr( $apg_sms_settings[ 'servicio' ] ), true );	
 		}
 
-		//WPML
+        //WPML
         foreach ( $mensajes as $mensaje ) {
             if ( function_exists( 'icl_register_string' ) || ! $wpml_activo ) { //Versión anterior a la 3.2
                 $$mensaje   = ( $wpml_activo ) ? icl_translate( 'apg_sms', $mensaje, esc_textarea( $apg_sms_settings[ $mensaje ] ) ) : esc_textarea( $apg_sms_settings[ $mensaje ] );
@@ -187,10 +187,10 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			case 'on-hold': //Pedido en espera
 				if ( !! array_intersect( [ "todos", "mensaje_pedido" ], $apg_sms_settings[ 'mensajes' ] ) && isset( $apg_sms_settings[ 'notificacion' ] ) && $apg_sms_settings[ 'notificacion' ] == 1 && ! $notificacion ) {
 					if ( ! is_array( $telefono_propietario ) ) {
-						apg_sms_envia_sms( $apg_sms_settings, $telefono_propietario, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $variables ), $estado ); //Mensaje para el propietario
+						apg_sms_envia_sms( $apg_sms_settings, $telefono_propietario, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $variables ), $estado, true ); //Mensaje para el propietario
 					} else {
 						foreach ( $telefono_propietario as $administrador ) {
-							apg_sms_envia_sms( $apg_sms_settings, $administrador, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $variables ), $estado ); //Mensaje para los propietarios
+							apg_sms_envia_sms( $apg_sms_settings, $administrador, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $variables ), $estado, true ); //Mensaje para los propietarios
 						}
 					}
 				}
@@ -229,10 +229,10 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			case 'processing': //Pedido procesando
 				if ( !! array_intersect( [ "todos", "mensaje_pedido" ], $apg_sms_settings[ 'mensajes' ] ) && isset( $apg_sms_settings[ 'notificacion' ] ) && $apg_sms_settings[ 'notificacion' ] == 1 && $notificacion ) {
 					if ( ! is_array( $telefono_propietario ) ) {
-						apg_sms_envia_sms( $apg_sms_settings, $telefono_propietario, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $variables ), $estado ); //Mensaje para el propietario
+						apg_sms_envia_sms( $apg_sms_settings, $telefono_propietario, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $variables ), $estado, true ); //Mensaje para el propietario
 					} else {
 						foreach ( $telefono_propietario as $administrador ) {
-							apg_sms_envia_sms( $apg_sms_settings, $administrador, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $variables ), $estado ); //Mensaje para los propietarios
+							apg_sms_envia_sms( $apg_sms_settings, $administrador, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $variables ), $estado, true ); //Mensaje para los propietarios
 						}
 					}
 				}

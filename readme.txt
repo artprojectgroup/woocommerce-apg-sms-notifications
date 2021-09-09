@@ -1,12 +1,12 @@
 === WC - APG SMS Notifications ===
 Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
-Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile Spain, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, Adlinks Labs, BulkGate, WooCommerce Sequential Order Numbers Pro, WPML, Altiria, sendSMS.ro, WhatsApp Message By WA Api
+Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, Adlinks Labs, BulkGate, WooCommerce Sequential Order Numbers Pro, WPML, Altiria, sendSMS.ro, WhatsApp Message By WA Api
 Requires at least: 3.8
-Tested up to: 5.8
-Stable tag: 2.24.0.2
+Tested up to: 5.9
+Stable tag: 2.24.1
 WC requires at least: 2.1
-WC tested up to: 5.6
+WC tested up to: 5.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -29,7 +29,7 @@ Add to your WooCommerce store SMS notifications to your customers when order sta
  * [Clockwork](https://www.clockworksms.com/).
  * [Esebun Business (Enterprise & Developers only)](http://www.bz.esebun.com/).
  * [iSMS Malaysia](http://www.isms.com.my/).
- * [LabsMobile Spain](http://www.labsmobile.com/es).
+ * [LabsMobile](https://www.labsmobile.com/es).
  * [MobTexting](https://www.mobtexting.com).
  * [Moplet](https://moplet.com).
  * [Moreify](https://www.moreify.com/).
@@ -128,6 +128,9 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 1. Screenshot of WC - APG SMS Notifications.
 
 == Changelog ==
+= 2.24.1 =
+* Added support for DLT (India) in MSG91. **Update sponsored by [Pawna lake camping](https://pawnacamp.com)**.
+* Small fixes.
 = 2.24.0.2 =
 * Small fixes.
 = 2.24.0.1 =
@@ -436,7 +439,8 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 * Initial version.
 
 == Upgrade Notice ==
-= 2.24.0.2 =
+= 2.24.1 =
+* Added support for DLT (India) in MSG91. **Update sponsored by [Pawna lake camping](https://pawnacamp.com)**.
 * Small fixes.
 
 == Translations ==
