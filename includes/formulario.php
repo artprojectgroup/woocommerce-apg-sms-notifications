@@ -219,7 +219,7 @@
 </div>
 <script>
 	jQuery( document ).ready( function ( $ ) {
-		//Cambia los campos en función del proveedor de servicios SMS
+        //Cambia los campos en función del proveedor de servicios SMS
 		$( '.servicio' ).on( 'change', function () {
 			control( $( this ).val() );
 		} );
@@ -241,12 +241,18 @@
 					$( '.' + valor ).hide();
 				}
 			}
+            
+            if ( $( '.dlt' ).is( ':hidden' ) ) {
+                $( '.dlt' ).prop( "checked", false );
+                $( '.mensaje_dlt' ).hide();
+            }
 		};
 		control( $( '.servicio' ).val() );
                             
 		//Cambia los campos en función de los mensajes seleccionados
 		$( '.mensajes' ).on( 'change', function () {
-			control_mensajes( $( this ).val() );
+			//control_mensajes( $( this ).val() );
+			control_dlt( '.dlt' );
 		} );
 		var control_mensajes = function ( capa ) {
 			if ( capa == '' ) {
@@ -258,27 +264,26 @@
             foreach( $listado_de_mensajes as $indice => $valor ) {
                 echo "mensajes[ '$indice' ] = '$valor';" . PHP_EOL; 
             }
-		?>
+			?>
 
 			for ( var valor in mensajes ) {
 				$( '.' + valor + ',.dlt_' + valor ).hide();
 				for ( var valor_capa in capa ) {
-					if ( valor == capa[ valor_capa ] || capa[ valor_capa ] == 'todos' ) {
-						$( '.' + valor + ',.dlt_' + valor ).show();
+					if ( valor == capa[ valor_capa ] || capa[ valor_capa ] == 'todos'  ) {
+						$( '.' + valor ).show();
+                        if ( $( '.dlt' ).is( ':checked' ) ) {
+                            $( '.dlt_' + valor ).show();
+                        }
 					}
 				}
 			}
 		};
 
-		$( '.mensajes' ).each( function ( i, selected ) {
-			control_mensajes( $( selected ).val() );
-		} );
-
-		if ( typeof chosen !== 'undefined' && $.isFunction( chosen ) ) {
+		if ( typeof chosen !== 'undefined' && typeof chosen === "function" ) {
 			jQuery( "select.chosen_select" ).chosen();
 		}
 
-		//Controla el campo de teléfono del formulario de envío
+        //Controla el campo de teléfono del formulario de envío
 		$( '.campo_envio' ).hide();
 		$( '.envio' ).on( 'change', function () {
 			control_envio( '.envio' );
@@ -309,11 +314,12 @@
 		<?php if ( ! empty( $listado_de_estados ) ) : //Comprueba la existencia de estados personalizados ?>
 		//Cambia los campos en función de los estados personalizados seleccionados
 		$( '.estados_personalizados' ).on( 'change', function () {
-			control_personalizados( $( this ).val() );
+			//control_personalizados( $( this ).val() );
+			control_dlt( '.dlt' );
 		} );
 		var control_personalizados = function ( capa ) {
 			var estados = new Array();
-			<?php 
+		<?php 
 		foreach( $listado_de_estados as $valor ) {
 			echo "estados[ '$valor' ] = '$valor';" . PHP_EOL; 
 		}
@@ -323,19 +329,18 @@
 				$( '.' + valor + ',.dlt_' + valor ).hide();
 				for ( var valor_capa in capa ) {
 					if ( valor == capa[ valor_capa ] ) {
-						$( '.' + valor + ',.dlt_' + valor ).show();
+						$( '.' + valor ).show();
+                        if ( $( '.dlt' ).is( ':checked' ) ) {
+                            $( '.dlt_' + valor ).show();
+                        }
 					}
 				}
 			}
 		};
-
-		$( '.estados_personalizados' ).each( function ( i, selected ) {
-			control_personalizados( $( selected ).val() );
-		} );
 		<?php endif; ?>
 
         //Muestra los campos DLT
-		$( '.mensaje_dlt' ).hide();
+		$( '.mensaje_dlt' ).hide();        
 		$( '.dlt' ).on( 'change', function () {
 			control_dlt( '.dlt' );
 		} );
@@ -343,7 +348,7 @@
 			if ( $( capa ).is( ':checked' ) ) {
 				$( '.mensaje_dlt' ).show();
 			} else {
-				$( '.mensaje_dlt' ).hide();
+                $( '.mensaje_dlt' ).hide();
 			}
             $( '.mensajes' ).each( function ( i, selected ) {
                 control_mensajes( $( selected ).val() );
