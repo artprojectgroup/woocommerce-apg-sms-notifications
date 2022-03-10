@@ -1,15 +1,15 @@
 <?php
 /*
 Plugin Name: WC - APG SMS Notifications
-Version: 2.24.2
+Version: 2.24.3
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: https://artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 5.9
+Tested up to: 6.0
 WC requires at least: 2.1
-WC tested up to: 6.0
+WC tested up to: 6.3
 
 Text Domain: woocommerce-apg-sms-notifications
 Domain Path: /languages
@@ -49,7 +49,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
         'mensaje_cancelado',
         'mensaje_nota',
     ];
-	
+
 	//Actualiza las traducciones de los mensajes SMS
 	function apg_registra_wpml( $apg_sms_settings ) {
 		global $wpml_activo, $mensajes;
@@ -116,7 +116,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 	}
 
 	//Procesa el SMS
-	function apg_sms_procesa_estados( $numero_de_pedido, $notificacion = false ) {
+	function apg_sms_procesa_estados( $numero_de_pedido, $notificacion = false, $temporizador = false ) {
 		global $apg_sms_settings, $wpml_activo, $mensajes;
 		
 		$pedido   = new WC_Order( $numero_de_pedido );
@@ -177,6 +177,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
                 $$mensaje   = apply_filters( 'wpml_translate_single_string', esc_textarea( $apg_sms_settings[ $mensaje ] ), 'apg_sms', $mensaje );
             }
         }
+        unset( $mensaje ); //Evita mensaje vacío con el temporizador
 		
 		//Cargamos los proveedores SMS
 		include_once( 'includes/admin/proveedores.php' );
@@ -185,7 +186,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
         $variables  = esc_textarea( $apg_sms_settings[ 'variables' ] );
 		switch( $estado ) {
 			case 'on-hold': //Pedido en espera
-				if ( !! array_intersect( [ "todos", "mensaje_pedido" ], $apg_sms_settings[ 'mensajes' ] ) && isset( $apg_sms_settings[ 'notificacion' ] ) && $apg_sms_settings[ 'notificacion' ] == 1 && ! $notificacion ) {
+				if ( !! array_intersect( [ "todos", "mensaje_pedido" ], $apg_sms_settings[ 'mensajes' ] ) && isset( $apg_sms_settings[ 'notificacion' ] ) && $apg_sms_settings[ 'notificacion' ] == 1 && ! $notificacion && ! $temporizador ) { //Evita el envío en el temporizador
 					if ( ! is_array( $telefono_propietario ) ) {
 						apg_sms_envia_sms( $apg_sms_settings, $telefono_propietario, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $variables ), $estado, true ); //Mensaje para el propietario
 					} else {
@@ -205,7 +206,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
  						update_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', -1 );
  					} else { //Envío normal
  						$mensaje = apg_sms_procesa_variables( $mensaje_recibido, $pedido, $variables ); //Mensaje para el cliente
- 					}
+                    }
                     
 					//Temporizador para pedidos recibidos
 					if ( isset( $apg_sms_settings[ 'temporizador' ] ) && $apg_sms_settings[ 'temporizador' ] > 0 ) {
@@ -300,11 +301,11 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
  			if ( intval( $retraso_enviado ) == -1 ) { //Solo enviamos si no ha cambiado de estado
  				update_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', 1 );		 			
                 if ( $estado == 'on-hold' ) {
-                    apg_sms_procesa_estados( $numero_de_pedido, false );		 				
+                    apg_sms_procesa_estados( $numero_de_pedido );		 				
                     $retraso_enviado    = get_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', true );
                     if ( intval( $retraso_enviado ) == -1 ) {
                         update_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', 1 );
-                        apg_sms_procesa_estados( $numero_de_pedido, false );
+                        apg_sms_procesa_estados( $numero_de_pedido );
                     }
                 }
             }
@@ -324,7 +325,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 
 		if ( $pedidos ) {
 			foreach ( $pedidos as $pedido ) {
-				apg_sms_procesa_estados( is_callable( [ $pedido, 'get_id' ] ) ? $pedido->get_id() : $pedido->id, false );
+				apg_sms_procesa_estados( is_callable( [ $pedido, 'get_id' ] ) ? $pedido->get_id() : $pedido->id, false, true );
 			}
 		}
 	}
@@ -386,7 +387,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 function apg_sms_requiere_wc() {
 	global $apg_sms;
 		
-	echo '<div class="error fade" id="message"><h3>' . $apg_sms[ 'plugin' ] . '</h3><h4>' . __( "This plugin require WooCommerce active to run!", 'woocommerce-apg-sms-notifications' ) . '</h4></div>';
+	echo '<div class="notice notice-error is-dismissible" id="woocommerce-apg-sms-notifications"><h3>' . $apg_sms[ 'plugin' ] . '</h3><h4>' . __( "This plugin require WooCommerce active to run!", 'woocommerce-apg-sms-notifications' ) . '</h4></div>';
 	deactivate_plugins( DIRECCION_apg_sms );
 }
 
