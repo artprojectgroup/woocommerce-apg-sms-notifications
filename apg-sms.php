@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WC - APG SMS Notifications
-Version: 2.24.3
+Version: 2.24.4
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: https://artprojectgroup.es/
@@ -9,7 +9,7 @@ Author: Art Project Group
 Requires at least: 3.8
 Tested up to: 6.0
 WC requires at least: 2.1
-WC tested up to: 6.3
+WC tested up to: 6.4
 
 Text Domain: woocommerce-apg-sms-notifications
 Domain Path: /languages
@@ -39,15 +39,15 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
     
     //Mensajes
     $mensajes   = [
-        'mensaje_pedido',
-        'mensaje_pendiente',
-        'mensaje_fallido',
-        'mensaje_recibido',
-        'mensaje_procesando',
-        'mensaje_completado',
-        'mensaje_devuelto',
-        'mensaje_cancelado',
-        'mensaje_nota',
+        'propietario'   => 'mensaje_pedido',
+        'pending'       => 'mensaje_pendiente',
+        'failed'        => 'mensaje_fallido',
+        'on-hold'       => 'mensaje_recibido',
+        'processing'    => 'mensaje_procesando',
+        'completed'     => 'mensaje_completado',
+        'refunded'      => 'mensaje_devuelto',
+        'cancelled'     => 'mensaje_cancelado',
+        'nota'          => 'mensaje_nota',
     ];
 
 	//Actualiza las traducciones de los mensajes SMS
@@ -100,12 +100,6 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 	
 		register_setting( 'apg_sms_settings_group', 'apg_sms_settings', 'apg_sms_update' );
 		$apg_sms_settings = get_option( 'apg_sms_settings' );
-
-		if ( isset( $apg_sms_settings[ 'estados_personalizados' ] ) && ! empty( $apg_sms_settings[ 'estados_personalizados' ] ) ) { //Comprueba la existencia de estados personalizados
-			foreach ( $apg_sms_settings[ 'estados_personalizados' ] as $estado ) {
-				add_action( "woocommerce_order_status_{$estado}", 'apg_sms_procesa_estados', 10 );
-			}
-		}
 	}
 	add_action( 'admin_init', 'apg_sms_registra_opciones' );
 	
@@ -116,7 +110,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 	}
 
 	//Procesa el SMS
-	function apg_sms_procesa_estados( $numero_de_pedido, $notificacion = false, $temporizador = false ) {
+	function apg_sms_procesa_estados( $numero_de_pedido, $temporizador = false ) {
 		global $apg_sms_settings, $wpml_activo, $mensajes;
 		
 		$pedido   = new WC_Order( $numero_de_pedido );
@@ -169,11 +163,11 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			$telefono_propietario = apg_sms_procesa_el_telefono( $pedido, esc_attr( $apg_sms_settings[ 'telefono' ] ), esc_attr( $apg_sms_settings[ 'servicio' ] ), true );	
 		}
 
-        //WPML
+        //Genera las variables con los textos personalizados
         foreach ( $mensajes as $mensaje ) {
-            if ( function_exists( 'icl_register_string' ) || ! $wpml_activo ) { //Versión anterior a la 3.2
+            if ( function_exists( 'icl_register_string' ) || ! $wpml_activo ) { //WPML versión anterior a la 3.2 o no instalado
                 $$mensaje   = ( $wpml_activo ) ? icl_translate( 'apg_sms', $mensaje, esc_textarea( $apg_sms_settings[ $mensaje ] ) ) : esc_textarea( $apg_sms_settings[ $mensaje ] );
-            } else if ( $wpml_activo ) { //Versión 3.2 o superior
+            } else if ( $wpml_activo ) { //WPML versión 3.2 o superior
                 $$mensaje   = apply_filters( 'wpml_translate_single_string', esc_textarea( $apg_sms_settings[ $mensaje ] ), 'apg_sms', $mensaje );
             }
         }
@@ -184,88 +178,62 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
         
 		//Envía el SMS
         $variables  = esc_textarea( $apg_sms_settings[ 'variables' ] );
-		switch( $estado ) {
-			case 'on-hold': //Pedido en espera
-				if ( !! array_intersect( [ "todos", "mensaje_pedido" ], $apg_sms_settings[ 'mensajes' ] ) && isset( $apg_sms_settings[ 'notificacion' ] ) && $apg_sms_settings[ 'notificacion' ] == 1 && ! $notificacion && ! $temporizador ) { //Evita el envío en el temporizador
-					if ( ! is_array( $telefono_propietario ) ) {
-						apg_sms_envia_sms( $apg_sms_settings, $telefono_propietario, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $variables ), $estado, true ); //Mensaje para el propietario
-					} else {
-						foreach ( $telefono_propietario as $administrador ) {
-							apg_sms_envia_sms( $apg_sms_settings, $administrador, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $variables ), $estado, true ); //Mensaje para los propietarios
-						}
-					}
-				}
-						
-				if ( !! array_intersect( [ "todos", "mensaje_recibido" ], $apg_sms_settings[ 'mensajes' ] ) ) {
-					//Limpia el temporizador para pedidos recibidos
-					wp_clear_scheduled_hook( 'apg_sms_ejecuta_el_temporizador' );
-
-                    //Retardo para pedidos recibidos
- 					if ( isset( $apg_sms_settings[ 'retardo' ] ) && $apg_sms_settings[ 'retardo' ] > 0 && ( ! intval( get_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', true ) ) == 1 ) ) {
- 						wp_schedule_single_event( time() + ( absint( $apg_sms_settings[ 'retardo' ] ) * 60 ), 'apg_sms_ejecuta_el_retraso', [ $numero_de_pedido ] );
- 						update_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', -1 );
- 					} else { //Envío normal
- 						$mensaje = apg_sms_procesa_variables( $mensaje_recibido, $pedido, $variables ); //Mensaje para el cliente
-                    }
-                    
-					//Temporizador para pedidos recibidos
-					if ( isset( $apg_sms_settings[ 'temporizador' ] ) && $apg_sms_settings[ 'temporizador' ] > 0 ) {
-						wp_schedule_single_event( time() + ( absint( $apg_sms_settings[ 'temporizador' ] ) * 60 * 60 ), 'apg_sms_ejecuta_el_temporizador' );
-					}
-				}
-                
-				break;
-			case 'pending': //Pedido pendiente
-				if ( !! array_intersect( [ "todos", "mensaje_pendiente" ], $apg_sms_settings[ 'mensajes' ] ) ) {
-					$mensaje = apg_sms_procesa_variables( $mensaje_pendiente, $pedido, $variables );
-				}
-                
-				break;
-			case 'failed': //Pedido fallido
-				if ( !! array_intersect( [ "todos", "mensaje_fallido" ], $apg_sms_settings[ 'mensajes' ] ) ) {
-					$mensaje = apg_sms_procesa_variables( $mensaje_fallido, $pedido, $variables );
-				}
-                
-				break;
-			case 'processing': //Pedido procesando
-				if ( !! array_intersect( [ "todos", "mensaje_pedido" ], $apg_sms_settings[ 'mensajes' ] ) && isset( $apg_sms_settings[ 'notificacion' ] ) && $apg_sms_settings[ 'notificacion' ] == 1 && $notificacion ) {
-					if ( ! is_array( $telefono_propietario ) ) {
-						apg_sms_envia_sms( $apg_sms_settings, $telefono_propietario, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $variables ), $estado, true ); //Mensaje para el propietario
-					} else {
-						foreach ( $telefono_propietario as $administrador ) {
-							apg_sms_envia_sms( $apg_sms_settings, $administrador, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $variables ), $estado, true ); //Mensaje para los propietarios
-						}
-					}
-				}
-                
-				if ( !! array_intersect( [ "todos", "mensaje_procesando" ], $apg_sms_settings[ 'mensajes' ] ) ) {
-					$mensaje = apg_sms_procesa_variables( $mensaje_procesando, $pedido, $variables );
-				}
-                
-				break;
-			case 'completed': //Pedido completado
-				if ( !! array_intersect( [ "todos", "mensaje_completado" ], $apg_sms_settings[ 'mensajes' ] ) ) {
-					$mensaje = apg_sms_procesa_variables( $mensaje_completado, $pedido, $variables );
-				}
-                
-				break;
-			case 'refunded': //Pedido devuelto
-				if ( !! array_intersect( [ "todos", "mensaje_devuelto" ], $apg_sms_settings[ 'mensajes' ] ) ) {
-					$mensaje = apg_sms_procesa_variables( $mensaje_devuelto, $pedido, $variables );
-				}
-                
-				break;
-			case 'cancelled': //Pedido cancelado
-				if ( !! array_intersect( [ "todos", "mensaje_cancelado" ], $apg_sms_settings[ 'mensajes' ] ) ) {
-					$mensaje = apg_sms_procesa_variables( $mensaje_cancelado, $pedido, $variables );
-				}
-                
-				break;
-			default: //Pedido con estado personalizado
-				$mensaje = apg_sms_procesa_variables( $apg_sms_settings[ $estado ], $pedido, $variables );
-		}    
         
-		if ( isset( $mensaje ) && ( ! $internacional || ( isset( $apg_sms_settings[ 'internacional' ] ) && $apg_sms_settings[ 'internacional' ] == 1 ) ) && ! $notificacion ) {
+        //Mensaje SMS
+        if ( $estado == 'on-hold' ) { //Pedido en espera
+            //Mensaje para el/los propietarios
+            if ( !! array_intersect( [ "todos", "mensaje_pedido" ], $apg_sms_settings[ 'mensajes' ] ) && isset( $apg_sms_settings[ 'notificacion' ] ) && $apg_sms_settings[ 'notificacion' ] == 1 && ! $temporizador ) { //Evita el envío en el temporizador
+                if ( ! is_array( $telefono_propietario ) ) {
+                    apg_sms_envia_sms( $apg_sms_settings, $telefono_propietario, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $variables ), $estado, true ); //Mensaje para el propietario
+                } else {
+                    foreach ( $telefono_propietario as $administrador ) {
+                        apg_sms_envia_sms( $apg_sms_settings, $administrador, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $variables ), $estado, true ); //Mensaje para los propietarios
+                    }
+                }
+            }
+            //Mensaje para el cliente
+            if ( !! array_intersect( [ "todos", $mensajes[ $estado ] ], $apg_sms_settings[ 'mensajes' ] ) ) {
+                //Limpia el temporizador para pedidos recibidos
+                wp_clear_scheduled_hook( 'apg_sms_ejecuta_el_temporizador' );
+
+                //Retardo para pedidos recibidos
+                if ( isset( $apg_sms_settings[ 'retardo' ] ) && $apg_sms_settings[ 'retardo' ] > 0 && ( ! intval( get_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', true ) ) == 1 ) ) {
+                    wp_schedule_single_event( time() + ( absint( $apg_sms_settings[ 'retardo' ] ) * 60 ), 'apg_sms_ejecuta_el_retraso', [ $numero_de_pedido ] );
+                    update_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', -1 );
+                } else { //Envío normal
+                    $mensaje = apg_sms_procesa_variables( ${ $mensajes[ $estado ] }, $pedido, $variables ); //Mensaje para el cliente
+                }
+
+                //Temporizador para pedidos recibidos
+                if ( isset( $apg_sms_settings[ 'temporizador' ] ) && $apg_sms_settings[ 'temporizador' ] > 0 ) {
+                    wp_schedule_single_event( time() + ( absint( $apg_sms_settings[ 'temporizador' ] ) * 60 * 60 ), 'apg_sms_ejecuta_el_temporizador' );
+                }
+            }            
+        } else if ( $estado == 'processing' ) { //Pedido procesando
+            //Mensaje para el/los propietarios
+            if ( !! array_intersect( [ "todos", "mensaje_pedido" ], $apg_sms_settings[ 'mensajes' ] ) && isset( $apg_sms_settings[ 'notificacion' ] ) && $apg_sms_settings[ 'notificacion' ] == 1 ) {
+                if ( ! is_array( $telefono_propietario ) ) {
+                    apg_sms_envia_sms( $apg_sms_settings, $telefono_propietario, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $variables ), $estado, true ); //Mensaje para el propietario
+                } else {
+                    foreach ( $telefono_propietario as $administrador ) {
+                        apg_sms_envia_sms( $apg_sms_settings, $administrador, apg_sms_procesa_variables( $mensaje_pedido, $pedido, $variables ), $estado, true ); //Mensaje para los propietarios
+                    }
+                }
+            }
+            //Mensaje para el cliente
+            if ( !! array_intersect( [ "todos", $mensajes[ $estado ] ], $apg_sms_settings[ 'mensajes' ] ) ) {
+                $mensaje = apg_sms_procesa_variables( ${ $mensajes[ $estado ] }, $pedido, $variables );
+            }            
+        } else if ( $estado != 'on-hold' && $estado != 'processing' ) { //El resto de estados
+            if ( !! array_intersect( [ "todos", $mensajes[ $estado ] ], $apg_sms_settings[ 'mensajes' ] ) ) {
+                $mensaje = apg_sms_procesa_variables( ${ $mensajes[ $estado ] }, $pedido, $variables );
+            } else {
+                $mensaje = apg_sms_procesa_variables( $apg_sms_settings[ $estado ], $pedido, $variables );            
+            }
+        }
+
+        //Se envía el mensaje SMS si no se ha enviado aún
+		if ( isset( $mensaje ) && ( ! $internacional || ( isset( $apg_sms_settings[ 'internacional' ] ) && $apg_sms_settings[ 'internacional' ] == 1 ) ) ) {
 			if ( ! is_array( $telefono ) ) {
 				apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado ); //Mensaje para el teléfono de facturación
 			} else {
@@ -278,18 +246,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 			}
 		}
 	}
-	add_action( 'woocommerce_order_status_on-hold', 'apg_sms_procesa_estados', 10 ); //Funciona cuando el pedido es marcado como recibido
-	add_action( 'woocommerce_order_status_pending', 'apg_sms_procesa_estados', 10 ); //Funciona cuando el pedido es marcado como pendiente
-	add_action( 'woocommerce_order_status_failed', 'apg_sms_procesa_estados', 10 ); //Funciona cuando el pedido es marcado como fallido
-	add_action( 'woocommerce_order_status_processing', 'apg_sms_procesa_estados', 10 ); //Funciona cuando el pedido es marcado como procesando
-	add_action( 'woocommerce_order_status_completed', 'apg_sms_procesa_estados', 10 ); //Funciona cuando el pedido es marcado como completo
-	add_action( 'woocommerce_order_status_refunded', 'apg_sms_procesa_estados', 10 ); //Funciona cuando el pedido es marcado como devuelto
-	add_action( 'woocommerce_order_status_cancelled', 'apg_sms_procesa_estados', 10 ); //Funciona cuando el pedido es marcado como cancelado
-
-	function apg_sms_notificacion( $pedido ) {
-		apg_sms_procesa_estados( $pedido, true );
-	}
-	add_action( 'woocommerce_order_status_pending_to_processing_notification', 'apg_sms_notificacion', 10 ); //Funciona cuando el pedido es marcado directamente como procesando
+	add_action( 'woocommerce_order_status_changed', 'apg_sms_procesa_estados', 10 ); //Funciona cuando el pedido cambia de estado
 	
     //Retraso
  	function apg_sms_retardo( $numero_de_pedido ) {
@@ -325,7 +282,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 
 		if ( $pedidos ) {
 			foreach ( $pedidos as $pedido ) {
-				apg_sms_procesa_estados( is_callable( [ $pedido, 'get_id' ] ) ? $pedido->get_id() : $pedido->id, false, true );
+				apg_sms_procesa_estados( is_callable( [ $pedido, 'get_id' ] ) ? $pedido->get_id() : $pedido->id, true );
 			}
 		}
 	}
@@ -354,15 +311,16 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		$internacional			= ( $billing_country && ( WC()->countries->get_base_country() != $billing_country ) ) ? true : false;
 		$internacional_envio	= ( $shipping_country && ( WC()->countries->get_base_country() != $shipping_country ) ) ? true : false;
 
-		//WPML
-		if ( function_exists( 'icl_register_string' ) || ! $wpml_activo ) { //Versión anterior a la 3.2
+        //Genera la variable con el texto personalizado
+		if ( function_exists( 'icl_register_string' ) || ! $wpml_activo ) { //WPML versión anterior a la 3.2 o no instalado
 			$mensaje_nota		= ( $wpml_activo ) ? icl_translate( 'apg_sms', 'mensaje_nota', esc_textarea( $apg_sms_settings[ 'mensaje_nota' ] ) ) : esc_textarea( $apg_sms_settings[ 'mensaje_nota' ] );
-		} else if ( $wpml_activo ) { //Versión 3.2 o superior
+		} else if ( $wpml_activo ) { //WPML versión 3.2 o superior
 			$mensaje_nota		= apply_filters( 'wpml_translate_single_string', esc_textarea( $apg_sms_settings[ 'mensaje_nota' ] ), 'apg_sms', 'mensaje_nota' );
 		}
 		
 		//Cargamos los proveedores SMS
-		include_once( 'includes/admin/proveedores.php' );		
+		include_once( 'includes/admin/proveedores.php' );
+        
 		//Envía el SMS
 		if ( ! $internacional || ( isset( $apg_sms_settings[ 'internacional' ] ) && $apg_sms_settings[ 'internacional' ] == 1 ) ) {
             $variables  = esc_textarea( $apg_sms_settings[ 'variables' ] );
