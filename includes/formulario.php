@@ -241,8 +241,8 @@
 					$( '.' + valor ).hide();
 				}
 			}
-            
-            if ( $( '.dlt' ).is( ':hidden' ) ) {
+
+            if ( ! $( '.dlt' ).is( ':checked' ) ) {
                 $( '.dlt' ).prop( "checked", false );
                 $( '.mensaje_dlt' ).hide();
             }
