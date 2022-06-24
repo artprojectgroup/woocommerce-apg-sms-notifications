@@ -3,10 +3,10 @@ Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, Adlinks Labs, BulkGate, WooCommerce Sequential Order Numbers Pro, WPML, Altiria, sendSMS.ro, WhatsApp Message By WA Api
 Requires at least: 3.8
-Tested up to: 6.0
-Stable tag: 2.24.4.1
+Tested up to: 6.1
+Stable tag: 2.25
 WC requires at least: 2.1
-WC tested up to: 6.5.1
+WC tested up to: 6.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -41,6 +41,7 @@ Add to your WooCommerce store SMS notifications to your customers when order sta
  * [Routee](https://www.routee.net).
  * [sendSMS.ro](https://www.sendsms.ro/en/).
  * [SIP Discount](https://www.sipdiscount.com/dashboard).
+ * [SMS.CX (SMS Connexion)](https://sms.cx).
  * [SMS Discount](https://www.smsdiscount.com/dashboard).
  * [SMS Country](http://www.smscountry.com/).
  * [SMS Lane (Transactional SMS only)](http://www.smslane.com).
@@ -128,6 +129,8 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 1. Screenshot of WC - APG SMS Notifications.
 
 == Changelog ==
+= 2.25 =
+* Added support for SMS.CX (SMS Connexion). **Update sponsored by [SMS.CX (SMS Connexion)](https://sms.cx)**.
 = 2.24.4.1 =
 * Small fixes.
 = 2.24.4 =
@@ -447,8 +450,8 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 * Initial version.
 
 == Upgrade Notice ==
-= 2.24.4.1 =
-* Small fixes.
+= 2.25 =
+* Added support for SMS.CX (SMS Connexion). **Update sponsored by [SMS.CX (SMS Connexion)](https://sms.cx)**.
 
 == Translations ==
 * *English*: by [**Art Project Group**](https://artprojectgroup.es/) (default language).

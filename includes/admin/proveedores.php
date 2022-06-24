@@ -270,17 +270,19 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
 			$respuesta					= wp_remote_post( "https://auth.routee.net/oauth/token", $argumentos );
 			$routee						= json_decode( $respuesta[ 'body' ] );
 			
-			$argumentos[ 'headers' ]	= [
-				'Authorization'				=> 'Bearer ' . $routee->access_token,
-				'Content-Type'				=> 'application/json',
-			];
-			$argumentos[ 'body' ]		= json_encode( [
-				'body'						=> $mensaje,
-				'to'						=> $telefono,
-				'from'						=> $apg_sms_settings[ 'identificador_routee' ],
-			] );
-            
-			$respuesta 					= wp_remote_post( "https://connect.routee.net/sms", $argumentos );
+            if ( isset( $routee->access_token ) ) {
+                $argumentos[ 'headers' ]	= [
+                    'Authorization'				=> 'Bearer ' . $routee->access_token,
+                    'Content-Type'				=> 'application/json',
+                ];
+                $argumentos[ 'body' ]		= json_encode( [
+                    'body'						=> $mensaje,
+                    'to'						=> $telefono,
+                    'from'						=> $apg_sms_settings[ 'identificador_routee' ],
+                ] );
+
+                $respuesta 					= wp_remote_post( "https://connect.routee.net/sms", $argumentos );
+            }
             
 			break;
 		case "sendsms":
@@ -308,7 +310,37 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
  			$respuesta					= wp_remote_get( $url );
             
 			break;
-		case "smscountry":
+		case "smscx":
+			$argumentos[ 'headers' ] 	= [
+				'Authorization'				=> 'Basic ' . base64_encode( $apg_sms_settings[ 'usuario_smscx' ] . ":" . $apg_sms_settings[ 'contrasena_smscx' ] ),
+				'Content-Type'				=> 'application/x-www-form-urlencoded',
+			];
+			$argumentos[ 'body' ] 		= [
+				'grant_type'				=> 'client_credentials',
+			];
+            
+			$respuesta					= wp_remote_post( "https://api.sms.cx/oauth/token", $argumentos );
+			$smscx						= json_decode( $respuesta[ 'body' ] );
+            
+            if ( isset( $smscx->access_token ) ) {
+                $pais                       = explode ( ":", get_option( 'woocommerce_default_country' ) );
+
+                $argumentos[ 'headers' ]    = [
+                    'Authorization'				=> 'Bearer ' . $smscx->access_token,
+                    'Content-Type'				=> 'application/json',
+                ];
+                $argumentos[ 'body' ]		= json_encode( [
+                    'text'						=> $mensaje,
+                    'to'						=> $telefono,
+                    'from'						=> $apg_sms_settings[ 'identificador_smscx' ],
+                    'countryIso'                => $pais[ 0 ],
+                ] );
+
+                $respuesta 					= wp_remote_post( "https://api.sms.cx/sms", $argumentos );
+            }
+            
+			break;
+        case "smscountry":
 			$argumentos[ 'body' ]		= [ 
 				'User' 						=> $apg_sms_settings[ 'usuario_smscountry' ],
 				'passwd' 					=> $apg_sms_settings[ 'contrasena_smscountry' ],

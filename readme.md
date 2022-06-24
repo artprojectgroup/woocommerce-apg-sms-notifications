@@ -7,13 +7,13 @@ Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, 
 
 Requires at least: 3.8
 
-Tested up to: 6.0
+Tested up to: 6.1
 
-Stable tag: 2.24.4.1
+Stable tag: 2.25
 
 WC requires at least: 2.1
 
-WC tested up to: 6.5.1
+WC tested up to: 6.7
 
 License: GPLv3
 
@@ -50,6 +50,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * [Routee](https://www.routee.net).
  * [sendSMS.ro](https://www.sendsms.ro/en/).
  * [SIP Discount](https://www.sipdiscount.com/dashboard).
+ * [SMS.CX (SMS Connexion)](https://sms.cx).
  * [SMS Discount](https://www.smsdiscount.com/dashboard).
  * [SMS Country](http://www.smscountry.com/).
  * [SMS Lane (Transactional SMS only)](http://www.smslane.com).
@@ -135,6 +136,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.25
+* Añadido soporte para SMS.CX (SMS Connexion). **Actualización patrocinada por [[SMS.CX (SMS Connexion)](https://sms.cx)**.
+
 ### 2.24.4.1
 * Pequeños arreglos.
 

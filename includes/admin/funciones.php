@@ -24,6 +24,7 @@ function apg_sms_prefijo( $servicio ) {
 		"routee",
 		"sendsms",
 		"sipdiscount",
+		"smscx",
 		"smscountry",
 		"smsdiscount",
 		"smslane",
@@ -180,9 +181,19 @@ function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietari
 				$telefono_procesado = $prefijo_internacional . ltrim( $telefono_procesado, '0' );
 			}
 		}
-		if ( ( $servicio == "moreify" || $servicio == "twilio" ) && strpos( $prefijo[ 1 ], "+" ) === false ) {
+        //Necesitan el símbolo +
+        $simbolo_mas    = [
+            "smscx",
+            "moreify",
+            "twilio"
+        ];
+        //Necesitan 00
+        $doble_cero     = [
+            "isms"
+        ];
+		if ( in_array( $servicio, $simbolo_mas ) && strpos( $telefono_procesado, "+" ) === false ) {
 			$telefono_procesado = "+" . $telefono_procesado;
-		} else if ( $servicio == "isms" && isset( $prefijo_internacional ) ) {
+		} else if ( in_array( $servicio, $doble_cero ) && isset( $prefijo_internacional ) ) {
 			$telefono_procesado = "00" . preg_replace( '/\+/', '', $telefono_procesado );
 		}
 	}
