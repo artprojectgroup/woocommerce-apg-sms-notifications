@@ -137,7 +137,7 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 
 ## Changelog
 ### 2.25
-* Añadido soporte para SMS.CX (SMS Connexion). **Actualización patrocinada por [[SMS.CX (SMS Connexion)](https://sms.cx)**.
+* Añadido soporte para SMS.CX (SMS Connexion). **Actualización patrocinada por [SMS.CX (SMS Connexion)](https://sms.cx)**.
 
 ### 2.24.4.1
 * Pequeños arreglos.
