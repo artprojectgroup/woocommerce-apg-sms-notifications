@@ -110,6 +110,30 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
  			$respuesta					= wp_remote_get( $url );
             
 			break;
+		case "contacta":
+			// $url						= add_query_arg( [
+			// 	'auth'					=> $apg_sms_settings[ 'apikey_contacta' ],
+			// 	'sender'					=> $apg_sms_settings[ 'identificador_contacta' ],
+			// 	'phone'						=> $telefono,
+			// 	'msg'					=> apg_sms_codifica_el_mensaje( $mensaje ),
+			// ], 'https://sms.contacta.mx/api/v2/sms/send' );
+		   
+			// $respuesta					= wp_remote_get( $url );
+
+			$argumentos[ 'headers' ]	= [
+				'Authorization'				=> 'Basic ' . base64_encode($apg_sms_settings[ 'usuario_contacta' ].':'.$apg_sms_settings[ 'apikey_contacta' ]),
+				'Accept'					=> 'application/json',
+				'Content-Type'				=> 'application/json; charset=utf8',
+			];
+			
+			$argumentos[ 'body' ]		= json_encode( [
+				'msg'						=> $mensaje,
+				'phone'						=> $telefono,
+				'sender'					=> $apg_sms_settings[ 'identificador_contacta' ],
+			] );
+
+			$respuesta 					= wp_remote_post( "https://sms.contacta.mx/api/v2/sms/send", $argumentos );
+		   	break;
 		case "esebun":
  			$url						= add_query_arg( [
  				'user'						=> $apg_sms_settings[ 'usuario_esebun' ],

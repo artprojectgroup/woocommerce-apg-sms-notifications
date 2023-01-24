@@ -30,6 +30,7 @@ $listado_de_proveedores = [
         "bulksms"           => "BulkSMS",
         "clickatell"        => "Clickatell",
         "clockwork"         => "Clockwork",
+        "contacta"         => "Contacta",
         "esebun"            => "Esebun Business ( Enterprise & Developers only )",
         "isms"              => "iSMS Malaysia",
         "labsmobile"        => "LabsMobile",
@@ -86,6 +87,11 @@ $campos_de_proveedores      = [
 	],
 	"clockwork" 		=> [ 
 		"identificador_clockwork"         => __( 'key', 'woocommerce-apg-sms-notifications' ),
+	],
+	"contacta" 			=> [ 
+		"usuario_contacta"                 => __( 'username', 'woocommerce-apg-sms-notifications' ),
+		"apikey_contacta"                  => __( 'password', 'woocommerce-apg-sms-notifications' ),
+		"identificador_contacta"           => __( 'Sender ID', 'woocommerce-apg-sms-notifications' ),
 	],
 	"esebun" 			=> [ 
 		"usuario_esebun"                  => __( 'username', 'woocommerce-apg-sms-notifications' ),
