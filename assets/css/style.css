@@ -7,8 +7,7 @@ table.apg-table, .cabecera {
 	max-width: 586px;
 }
 .imagen {
-	border-left: 4px solid #07628c;
-	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+	border-left: 4px solid #d9001d;
 	max-width: 100%;
 	display: block;
 }
@@ -34,14 +33,13 @@ div.informacion .genericon, div.informacion .estrellas .star-rating .star, div.i
 	font-size: 15px;
 }
 div.informacion {
-	background-color: rgba(7,98,140,0.8);
+	background-color: #101254;
 	float: right;
 	padding: 10px;
 	width: 15%;
 	max-width: 220px;
 	text-align: center;
 	border-left: 4px solid #d9001d;
-	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
 	color: #fff;
 }
 div.informacion div.fila {

@@ -14,7 +14,10 @@ $apg_sms = [
 ];
 
 //Carga el idioma
-load_plugin_textdomain( 'woocommerce-apg-sms-notifications', null, dirname( DIRECCION_apg_sms ) . '/languages' );
+function apg_sms_inicia_idioma() {
+    load_plugin_textdomain( 'woocommerce-apg-sms-notifications', null, dirname( DIRECCION_apg_sms ) . '/languages' );
+}
+add_action( 'plugins_loaded', 'apg_sms_inicia_idioma' );
 
 //Carga la configuración del plugin
 $apg_sms_settings = get_option( 'apg_sms_settings' );
