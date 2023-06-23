@@ -1,15 +1,15 @@
 <?php
 /*
 Plugin Name: WC - APG SMS Notifications
-Version: 2.25.0.1
+Version: 2.26
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: https://artprojectgroup.es/
 Author: Art Project Group
 Requires at least: 3.8
-Tested up to: 6.2
+Tested up to: 6.3
 WC requires at least: 2.1
-WC tested up to: 7.4
+WC tested up to: 7.9
 
 Text Domain: woocommerce-apg-sms-notifications
 Domain Path: /languages
@@ -31,7 +31,14 @@ include_once( 'includes/admin/funciones-apg.php' );
 //¿Está activo WooCommerce?
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin( 'woocommerce/woocommerce.php' ) ) {
-	//Cargamos funciones necesarias
+    //Añade compatibilidad con HPOS
+    add_action( 'before_woocommerce_init', function() {
+        if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+            \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+        }
+    } );
+
+    //Cargamos funciones necesarias
 	include_once( 'includes/admin/funciones.php' );
 
 	//Comprobamos si está instalado y activo WPML
@@ -113,7 +120,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 	function apg_sms_procesa_estados( $numero_de_pedido, $temporizador = false ) {
 		global $apg_sms_settings, $wpml_activo, $mensajes;
 		
-		$pedido   = new WC_Order( $numero_de_pedido );
+		$pedido   = wc_get_order( $numero_de_pedido );
 		$estado   = is_callable( [ $pedido, 'get_status' ] ) ? $pedido->get_status() : $pedido->status;
 
 		//Comprobamos si se tiene que enviar el mensaje o no
@@ -146,7 +153,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		$billing_country		= is_callable( [ $pedido, 'get_billing_country' ] ) ? $pedido->get_billing_country() : $pedido->billing_country;
 		$billing_phone			= is_callable( [ $pedido, 'get_billing_phone' ] ) ? $pedido->get_billing_phone() : $pedido->billing_phone;
 		$shipping_country		= is_callable( [ $pedido, 'get_shipping_country' ] ) ? $pedido->get_shipping_country() : $pedido->shipping_country;
-		$campo_envio			= esc_attr( get_post_meta( $numero_de_pedido, $apg_sms_settings[ 'campo_envio' ], true ) );
+		$campo_envio			= esc_attr( $pedido->get_meta( $apg_sms_settings[ 'campo_envio' ], true ) );
 		$telefono				= apg_sms_procesa_el_telefono( $pedido, $billing_phone, esc_attr( $apg_sms_settings[ 'servicio' ] ) );
 		$telefono_envio			= apg_sms_procesa_el_telefono( $pedido, $campo_envio, esc_attr( $apg_sms_settings[ 'servicio' ] ), false, true );
 		$enviar_envio			= ( ! empty( $telefono_envio ) && $telefono != $telefono_envio && isset( $apg_sms_settings[ 'envio' ] ) && $apg_sms_settings[ 'envio' ] == 1 ) ? true : false;
@@ -197,9 +204,10 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
                 wp_clear_scheduled_hook( 'apg_sms_ejecuta_el_temporizador' );
 
                 //Retardo para pedidos recibidos
-                if ( isset( $apg_sms_settings[ 'retardo' ] ) && $apg_sms_settings[ 'retardo' ] > 0 && ( ! intval( get_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', true ) ) == 1 ) ) {
+                if ( isset( $apg_sms_settings[ 'retardo' ] ) && $apg_sms_settings[ 'retardo' ] > 0 && ( ! intval( $pedido->get_meta( 'apg_sms_retardo_enviado', true ) ) == 1 ) ) {
                     wp_schedule_single_event( time() + ( absint( $apg_sms_settings[ 'retardo' ] ) * 60 ), 'apg_sms_ejecuta_el_retraso', [ $numero_de_pedido ] );
-                    update_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', -1 );
+                    $pedido->update_meta_data( 'apg_sms_retardo_enviado', -1 );
+					$pedido->save();
                 } else { //Envío normal
                     $mensaje = apg_sms_procesa_variables( ${ $mensajes[ $estado ] }, $pedido, $variables ); //Mensaje para el cliente
                 }
@@ -253,18 +261,19 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
  		global $apg_sms_settings;
         
  		if ( $pedido = wc_get_order( intval( $numero_de_pedido ) ) ) {
- 			$retraso_enviado    = get_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', true );
+ 			$retraso_enviado    = $pedido->get_meta( 'apg_sms_retardo_enviado', true );
  			$estado             = is_callable( [ $pedido, 'get_status' ] ) ? $pedido->get_status() : $pedido->status;
  			if ( intval( $retraso_enviado ) == -1 ) { //Solo enviamos si no ha cambiado de estado
- 				update_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', 1 );		 			
+ 				$pedido->update_meta_data( 'apg_sms_retardo_enviado', 1 );		 			
                 if ( $estado == 'on-hold' ) {
                     apg_sms_procesa_estados( $numero_de_pedido );		 				
-                    $retraso_enviado    = get_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', true );
+                    $retraso_enviado    = $pedido->get_meta( 'apg_sms_retardo_enviado', true );
                     if ( intval( $retraso_enviado ) == -1 ) {
-                        update_post_meta( $numero_de_pedido, 'apg_sms_retardo_enviado', 1 );
+                        $pedido->update_meta_data( 'apg_sms_retardo_enviado', 1 );
                         apg_sms_procesa_estados( $numero_de_pedido );
                     }
                 }
+				$pedido->save();
             }
         }
     }
@@ -299,12 +308,12 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 	
 		//Pedido
 		$numero_de_pedido		= $datos[ 'order_id' ];
-		$pedido					= new WC_Order( $numero_de_pedido );
+		$pedido					= wc_get_order( $numero_de_pedido );
 		//Recoge datos del formulario de facturación
 		$billing_country		= is_callable( [ $pedido, 'get_billing_country' ] ) ? $pedido->get_billing_country() : $pedido->billing_country;
 		$billing_phone			= is_callable( [ $pedido, 'get_billing_phone' ] ) ? $pedido->get_billing_phone() : $pedido->billing_phone;
 		$shipping_country		= is_callable( [ $pedido, 'get_shipping_country' ] ) ? $pedido->get_shipping_country() : $pedido->shipping_country;	
-		$campo_envio			= get_post_meta( $numero_de_pedido, esc_attr( $apg_sms_settings[ 'campo_envio' ] ), true );
+		$campo_envio			= $pedido->get_meta( esc_attr( $apg_sms_settings[ 'campo_envio' ] ), true );
 		$telefono				= apg_sms_procesa_el_telefono( $pedido, $billing_phone, esc_attr( $apg_sms_settings[ 'servicio' ] ) );
 		$telefono_envio			= apg_sms_procesa_el_telefono( $pedido, $campo_envio, esc_attr( $apg_sms_settings[ 'servicio' ] ), false, true );
 		$enviar_envio			= ( $telefono != $telefono_envio && isset( $apg_sms_settings[ 'envio' ] ) && $apg_sms_settings[ 'envio' ] == 1 ) ? true : false;

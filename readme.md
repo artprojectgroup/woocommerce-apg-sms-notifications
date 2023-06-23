@@ -7,13 +7,13 @@ Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, 
 
 Requires at least: 3.8
 
-Tested up to: 6.2
+Tested up to: 6.3
 
-Stable tag: 2.25.0.1
+Stable tag: 2.26
 
 WC requires at least: 2.1
 
-WC tested up to: 7.4
+WC tested up to: 7.9
 
 License: GPLv3
 
@@ -136,6 +136,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.26
+* Añadida compatibilidad con HPOS.
+
 ### 2.25.0.1
 * Actualización de cabecera.
 * Actualización de hoja de estilo.
