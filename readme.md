@@ -5,15 +5,15 @@ Donate link: https://artprojectgroup.es/tienda/donacion
 
 Tags: Art Project Group, APG, Plugins, WooCommerce, e-Commerce, Commerce, Shop, Virtual shop, SMS, SMS notifications, SMS gateway, VoipStunt, Solutions Infini, Twilio, Twizo, Clickatell, Clockwork, BulkSMS, MobTexting, Moreify, MSG91, mVaayoo, Nexmo, Esebun Business (Enterprise & Developers only), iSMS Malaysia, SMS Lane (Transactional SMS only), SMS Country, LabsMobile, Plivo, VoipBusterPro, VoipBuster, SMS Discount, SIP Discount, Spring Edge, MSGWOW, Routee, Adlinks Labs, BulkGate, WooCommerce Sequential Order Numbers Pro, WPML, Altiria, sendSMS.ro, WhatsApp Message By WA Api
 
-Requires at least: 3.8
+Requires at least: 5.0
 
-Tested up to: 6.3
+Tested up to: 6.5
 
-Stable tag: 2.26
+Stable tag: 2.26.0.1
 
-WC requires at least: 2.1
+WC requires at least: 5.6
 
-WC tested up to: 7.9
+WC tested up to: 8.4
 
 License: GPLv3
 
@@ -80,6 +80,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 * Dispone del filtro *apg_sms_message* para facilitar la personalización de los mensajes SMS desde plugins de terceros.
 * Dispone del filtro *apg_sms_message_return* para facilitar la personalización de los mensajes una vez codificados desde plugins de terceros.
 * Dispone del filtro *apg_sms_send_message* para impedir el envío de los mensajes SMS desde plugins de terceros.
+* Dispone del filtro *apg_sms_normalize_message* para impedir la normalización del mensaje SMS desde plugins de terceros.
 * Dispone de los filtros *apg_sms_phone_process* y *apg_sms_phone_return* para facilitar el procesamiento del número de teléfono desde plugins de terceros.
 * Posibilidad de notificar a múltiples números de teléfono vía filtro *apg_sms_phone_return*.
 * Una vez configurado es totalmente automático.
@@ -136,6 +137,9 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.26.0.1
+* Añadido el filtro *apg_sms_normalize_message*
+
 ### 2.26
 * Añadida compatibilidad con HPOS.
 

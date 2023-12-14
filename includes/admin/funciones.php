@@ -42,6 +42,10 @@ function apg_sms_prefijo( $servicio ) {
 
 //Normalizamos el texto
 function apg_sms_normaliza_mensaje( $mensaje ) {
+    if ( ! apply_filters( 'apg_sms_normalize_message', true, $mensaje ) ) {
+        return $mensaje;
+    }
+    
 	$reemplazo = [ 
 		'Š'			=> 'S', 
 		'š'			=> 's', 
