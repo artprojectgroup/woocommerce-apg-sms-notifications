@@ -9,11 +9,11 @@ Requires at least: 5.0
 
 Tested up to: 6.5
 
-Stable tag: 2.26.0.1
+Stable tag: 2.26.1
 
 WC requires at least: 5.6
 
-WC tested up to: 8.4
+WC tested up to: 8.5.1
 
 License: GPLv3
 
@@ -36,15 +36,11 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * [BulkSMS](http://www.bulksms.com/).
  * [Clickatell](https://www.clickatell.com/).
  * [Clockwork](https://www.clockworksms.com/).
- * [Esebun Business (Enterprise & Developers only)](http://www.bz.esebun.com/).
  * [iSMS Malaysia](http://www.isms.com.my/).
  * [LabsMobile](https://www.labsmobile.com/es).
  * [MobTexting](https://www.mobtexting.com).
  * [Moplet](https://moplet.com).
- * [Moreify](https://www.moreify.com/).
  * [MSG91](https://msg91.com/).
- * [MSGWOW](http://msgwow.com).
- * [mVaayoo](http://www.mvaayoo.com/).
  * [Nexmo](https://www.nexmo.com).
  * [Plivo](https://www.plivo.com/).
  * [Routee](https://www.routee.net).
@@ -61,7 +57,6 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
  * [VoipBuster](https://www.voipbuster.com/dashboard).
  * [VoipBusterPro](https://www.voipbusterpro.com/dashboard).
  * [VoipStunt](https://www.voipstunt.com/dashboard).
- * WhatsApp Message By WA Api.
 * Posibilidad de informar al propietario o propietarios de la tienda sobre nuevos pedidos.
 * Posibilidad de enviar, o no, SMS internacionales.
 * Posibilidad de notificar al número de teléfono de envío, si es distinto del número de teléfono de facturación.
@@ -137,6 +132,10 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+### 2.26.1
+* Pequeños arreglos.
+* Eliminación de proveedores SMS obsoletos.
+
 ### 2.26.0.1
 * Añadido el filtro *apg_sms_normalize_message*
 

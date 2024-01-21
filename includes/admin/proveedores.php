@@ -110,18 +110,6 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
  			$respuesta					= wp_remote_get( $url );
             
 			break;
-		case "esebun":
- 			$url						= add_query_arg( [
- 				'user'						=> $apg_sms_settings[ 'usuario_esebun' ],
- 				'password'					=> $apg_sms_settings[ 'contrasena_esebun' ],
- 				'sender'					=> apg_sms_codifica_el_mensaje( $apg_sms_settings[ 'identificador_esebun' ] ),
- 				'SMSText'					=> apg_sms_codifica_el_mensaje( $mensaje ),
- 				'GSM'						=> preg_replace( '/\+/', '', $telefono ),
- 			], 'http://api.cloud.bz.esebun.com/api/v3/sendsms/plain' );
-            
- 			$respuesta					= wp_remote_get( $url );
-            
-			break;
 		case "isms":
  			$url						= add_query_arg( [
  				'un'						=> $apg_sms_settings[ 'usuario_isms' ],
@@ -177,17 +165,6 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
  			$respuesta					= wp_remote_get( $url );
             
 			break;
-		case "moreify":
- 			$url						= add_query_arg( [
- 				'project'					=> $apg_sms_settings[ 'proyecto_moreify' ],
- 				'password'					=> $apg_sms_settings[ 'identificador_moreify' ],
- 				'phonenumber'				=> $telefono,
- 				'message'					=> apg_sms_codifica_el_mensaje( $mensaje ),
- 			], 'https://members.moreify.com/api/v1/sendSms' );
-            
- 			$respuesta					= wp_remote_get( $url );
-            
-			break;
 		case "msg91":
             $argumentos[ 'body' ]		= [ 
                 'authkey' 					=> $apg_sms_settings[ 'clave_msg91' ],
@@ -202,32 +179,6 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
             }
             
 			$respuesta					= wp_remote_post( "https://api.msg91.com/api/sendhttp.php", $argumentos );
-            
-			break;
-		case "msgwow":
- 			$url						= add_query_arg( [
- 				'authkey'					=> $apg_sms_settings[ 'clave_msgwow' ],
- 				'mobiles'					=> $telefono,
- 				'message'					=> apg_sms_codifica_el_mensaje( $mensaje ),
- 				'sender'					=> $apg_sms_settings[ 'identificador_msgwow' ],
- 				'route'						=> $apg_sms_settings[ 'ruta_msgwow' ],
- 				'country'					=> $apg_sms_settings[ 'servidor_msgwow' ],
- 			], 'http://my.msgwow.com/api/sendhttp.php' );
-            
- 			$respuesta					= wp_remote_get( $url );
-            
-			break;
-		case "mvaayoo":
-			$argumentos[ 'body' ]		= [ 
-				'user' 						=> $apg_sms_settings[ 'usuario_mvaayoo' ] . ":" . $apg_sms_settings[ 'contrasena_mvaayoo' ],
-				'senderID' 					=> $apg_sms_settings[ 'identificador_mvaayoo' ],
-				'receipientno' 				=> $telefono,
-				'msgtxt' 					=> $mensaje,
-				'dcs' 						=> 0,
-				'state' 					=> 4,
-            ];
-            
-			$respuesta					= wp_remote_post( "http://api.mVaayoo.com/mvaayooapi/MessageCompose", $argumentos );
             
 			break;
 		case "nexmo":
@@ -463,18 +414,6 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
 				'to'						=> $telefono,
  				'text'						=> apg_sms_codifica_el_mensaje( $mensaje ),
  			], 'https://www.voipstunt.com/myaccount/sendsms.php' );
-            
- 			$respuesta					= wp_remote_get( $url );
-            
-			break;
-		case "waapi":
- 			$url						= add_query_arg( [
- 				'client_id'					=> $apg_sms_settings[ 'usuario_waapi' ],
- 				'instance'					=> $apg_sms_settings[ 'contrasena_waapi' ],
-				'type'						=> 'text',
-				'number'					=> $telefono,
- 				'message'					=> apg_sms_codifica_el_mensaje( $mensaje ),
- 			], $apg_sms_settings[ 'dominio_waapi' ] . "/api/send.php" );
             
  			$respuesta					= wp_remote_get( $url );
             

@@ -30,15 +30,11 @@ $listado_de_proveedores = [
         "bulksms"           => "BulkSMS",
         "clickatell"        => "Clickatell",
         "clockwork"         => "Clockwork",
-        "esebun"            => "Esebun Business ( Enterprise & Developers only )",
         "isms"              => "iSMS Malaysia",
         "labsmobile"        => "LabsMobile",
         "mobtexting"        => "MobTexting",
         "moplet"            => "Moplet",
-        "moreify"           => "Moreify",
         "msg91"             => "MSG91",
-        "msgwow"            => "MSGWOW",
-        "mvaayoo"           => "mVaayoo",
         "nexmo"             => "Nexmo",
         "plivo"             => "Plivo",
         "routee"            => "Routee",
@@ -55,7 +51,6 @@ $listado_de_proveedores = [
         "voipbuster"        => "VoipBuster",
         "voipbusterpro"     => "VoipBusterPro",
         "voipstunt"         => "VoipStunt",
-        "waapi"             => "WhatsApp Message By WA Api",
 ];
 asort( $listado_de_proveedores, SORT_NATURAL | SORT_FLAG_CASE ); //Ordena alfabeticamente los proveedores
 
@@ -87,11 +82,6 @@ $campos_de_proveedores      = [
 	"clockwork" 		=> [ 
 		"identificador_clockwork"         => __( 'key', 'woocommerce-apg-sms-notifications' ),
 	],
-	"esebun" 			=> [ 
-		"usuario_esebun"                  => __( 'username', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_esebun"               => __( 'password', 'woocommerce-apg-sms-notifications' ),
-		"identificador_esebun"            => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
-	],
 	"isms" 				=> [ 
 		"usuario_isms"                    => __( 'username', 'woocommerce-apg-sms-notifications' ),
 		"contrasena_isms"                 => __( 'password', 'woocommerce-apg-sms-notifications' ),
@@ -113,27 +103,12 @@ $campos_de_proveedores      = [
 		"servidor_moplet"                 => __( 'host', 'woocommerce-apg-sms-notifications' ),
 		"dlt_moplet"                      => __( 'template ID', 'woocommerce-apg-sms-notifications' ),
 	],
-	"moreify" 			=> [ 
-		"proyecto_moreify"                => __( 'project', 'woocommerce-apg-sms-notifications' ),
-		"identificador_moreify"           => __( 'authentication Token', 'woocommerce-apg-sms-notifications' ),
-	],
 	"msg91" 			=> [ 
 		"clave_msg91"                     => __( 'authentication key', 'woocommerce-apg-sms-notifications' ),
 		"identificador_msg91"             => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
 		"ruta_msg91"                      => __( 'route', 'woocommerce-apg-sms-notifications' ),
 		"dlt_msg91"                       => __( 'template ID', 'woocommerce-apg-sms-notifications' ),
     ],
-	"msgwow" 			=> [ 
-		"clave_msgwow"                    => __( 'key', 'woocommerce-apg-sms-notifications' ),
-		"identificador_msgwow"            => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
-		"ruta_msgwow"                     => __( 'route', 'woocommerce-apg-sms-notifications' ),
-		"servidor_msgwow"                 => __( 'host', 'woocommerce-apg-sms-notifications' ),
-	],
-	"mvaayoo" 			=> [ 
-		"usuario_mvaayoo"                 => __( 'username', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_mvaayoo"              => __( 'password', 'woocommerce-apg-sms-notifications' ),
-		"identificador_mvaayoo"           => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
-	],
 	"nexmo" 			=> [ 
 		"clave_nexmo"                     => __( 'key', 'woocommerce-apg-sms-notifications' ),
 		"identificador_nexmo"             => __( 'authentication Token', 'woocommerce-apg-sms-notifications' ),
@@ -207,11 +182,6 @@ $campos_de_proveedores      = [
 		"usuario_voipstunt"               => __( 'username', 'woocommerce-apg-sms-notifications' ),
 		"contrasena_voipstunt"            => __( 'password', 'woocommerce-apg-sms-notifications' ),
 	], 
-	"waapi"             => [
-		"dominio_waapi"                   => __( 'API Domain', 'woocommerce-apg-sms-notifications' ),
-		"usuario_waapi"                   => __( 'client ID', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_waapi"                => __( 'instance ID', 'woocommerce-apg-sms-notifications' ),
-	], 
 ];
 
 //Opciones de campos de selección de los proveedores
@@ -241,15 +211,6 @@ $opciones_de_proveedores        = [
 		1						=> 1, 
 		4						=> 4,
 	],
-	"ruta_msgwow"		=> [
-		1						=> 1, 
-		4						=> 4,
-	],
-	"servidor_msgwow"	=> [
-		"0"						=> __( 'International', 'woocommerce-apg-sms-notifications' ), 
-		"1"						=> __( 'USA', 'woocommerce-apg-sms-notifications' ), 
-		"91"					=> __( 'India', 'woocommerce-apg-sms-notifications' ), 
-	],	
 	"servidor_twizo"	=> [
 		"api-asia-01.twizo.com"	=> __( 'Singapore', 'woocommerce-apg-sms-notifications' ), 
 		"api-eu-01.twizo.com"	=> __( 'Germany', 'woocommerce-apg-sms-notifications' ), 
@@ -286,7 +247,7 @@ foreach ( $listado_de_estados as $clave => $estado ) {
 		$listado_de_estados_temporal[ $estado ] = $nombre_de_estado;
 	}
 }
-$listado_de_estados = $listado_de_estados_temporal;
+$listado_de_estados = array_merge( array_flip( $listado_de_estados ), $listado_de_estados_temporal );
 
 //Listado de mensajes personalizados
 $listado_de_mensajes = [
