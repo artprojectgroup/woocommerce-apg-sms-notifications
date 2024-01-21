@@ -65,6 +65,7 @@ Add to your WooCommerce store SMS notifications to your customers when order sta
 * Has *apg_sms_message* filter to facilitate the customization of SMS messages from third-party plugins.
 * Has *apg_sms_message_return* filter to facilitate the customization of messages once they have been encoded from third-party plugins.
 * Has *apg_sms_send_message* filter to prevent sending the SMS messages from third-party plugins.
+* Has *apg_sms_normalize_message* filter to prevent SMS message normalization from third-party plugins.
 * Has *apg_sms_phone_process* and *apg_sms_phone_return* filters to facilitate the phone number process from third-party plugins.
 * Possibility to notify multiple phone numbers via filter *apg_sms_phone_return*.
 * Once setup is fully automated.
