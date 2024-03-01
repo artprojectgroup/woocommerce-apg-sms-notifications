@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WC - APG SMS Notifications
-Version: 2.26.1
+Version: 2.27
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: https://artprojectgroup.es/
@@ -9,7 +9,7 @@ Author: Art Project Group
 Requires at least: 5.0
 Tested up to: 6.5
 WC requires at least: 5.6
-WC tested up to: 8.5.1
+WC tested up to: 8.7
 
 Text Domain: woocommerce-apg-sms-notifications
 Domain Path: /languages
@@ -122,22 +122,17 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 		
 		$pedido   = wc_get_order( $numero_de_pedido );
 		$estado   = is_callable( [ $pedido, 'get_status' ] ) ? $pedido->get_status() : $pedido->status;
+        
+        //Inicializa el mensaje para un estado personalizado
+        if ( ! isset( $mensajes[ $estado ] ) ) {
+            $mensajes[ $estado ]  = $estado;
+        }
 
 		//Comprobamos si se tiene que enviar el mensaje o no
 		if ( isset( $apg_sms_settings[ 'mensajes' ] ) ) {
-			if ( $estado == 'on-hold' && ! array_intersect( [ "todos", "mensaje_pedido", "mensaje_recibido" ], $apg_sms_settings[ 'mensajes' ] ) ) {
+			if ( ( $estado == 'on-hold' || $estado == 'processing' ) && ! array_intersect( [ "todos", "mensaje_pedido", $mensajes[ $estado ] ], $apg_sms_settings[ 'mensajes' ] ) ) {
 				return;
-			} else if ( $estado == 'pending' && ! array_intersect( [ "todos", "mensaje_pendiente" ], $apg_sms_settings[ 'mensajes' ] ) ) {
-				return;
-			} else if ( $estado == 'failed' && ! array_intersect( [ "todos", "mensaje_fallido" ], $apg_sms_settings[ 'mensajes' ] ) ) {
-				return;
-			} else if ( $estado == 'processing' && ! array_intersect( [ "todos", "mensaje_pedido", "mensaje_procesando" ], $apg_sms_settings[ 'mensajes' ] ) ) {
-				return;
-			} else if ( $estado == 'completed' && ! array_intersect( [ "todos", "mensaje_completado" ], $apg_sms_settings[ 'mensajes' ] ) ) {
-				return;
-			} else if ( $estado == 'refunded' && ! array_intersect( [ "todos", "mensaje_devuelto" ], $apg_sms_settings[ 'mensajes' ] ) ) {
-				return;
-			} else if ( $estado == 'cancelled' && ! array_intersect( [ "todos", "mensaje_cancelado" ], $apg_sms_settings[ 'mensajes' ] ) ) {
+			} else if ( ! array_intersect( [ "todos", $mensajes[ $estado ] ], $apg_sms_settings[ 'mensajes' ] ) ) {
 				return;
 			}
 		} else {
