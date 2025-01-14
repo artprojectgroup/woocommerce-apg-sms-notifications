@@ -266,13 +266,13 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 
 	$numero_de_pedido		= is_callable( [ $pedido, 'get_id' ] ) ? $pedido->get_id() : $pedido->id;
 	$variables_de_pedido	= get_post_custom( $numero_de_pedido ); //WooCommerce 2.1
-	
-	preg_match_all( "/%(.*?)%/", $mensaje, $busqueda );
+
+    preg_match_all( "/%(.*?)%/", $mensaje, $busqueda );
 
 	foreach ( $busqueda[ 1 ] as $variable ) { 
 		$variable = strtolower( $variable );
 
-		if ( !in_array( $variable, $apg_sms ) && !in_array( $variable, $apg_sms_variables ) && !in_array( $variable, $variables_personalizadas ) ) {
+		if ( ! in_array( $variable, $apg_sms ) && ! in_array( $variable, $apg_sms_variables ) && ! in_array( $variable, $variables_personalizadas ) ) {
 			continue;
 		}
 
@@ -602,5 +602,5 @@ function apg_sms_dame_prefijo_pais( $pais = '' ) {
 		'ZW' => '263' 
     ];
 
-	return ( $pais == '' ) ? $paises : ( isset( $paises[ $pais ] ) ? $paises[ $pais ] : '' );
+	return ( $pais == '' ) ? '' : ( isset( $paises[ $pais ] ) ? $paises[ $pais ] : '' );
 }
