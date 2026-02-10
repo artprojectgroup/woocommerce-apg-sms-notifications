@@ -1,8 +1,13 @@
 <?php
-//Igual no deberías poder abrirme
+// Igual no deberías poder abrirme
 defined( 'ABSPATH' ) || exit;
 
-//Comprueba si necesita el prefijo telefónico internacional
+/**
+ * Comprueba si el proveedor necesita prefijo internacional.
+ *
+ * @param string $servicio Identificador del proveedor.
+ * @return bool True si requiere prefijo, false en caso contrario.
+ */
 function apg_sms_prefijo( $servicio ) {
 	$prefijo = [ 
 		"adlinks",
@@ -40,7 +45,12 @@ function apg_sms_prefijo( $servicio ) {
 	return in_array( $servicio, $prefijo );
 }
 
-//Normalizamos el texto
+/**
+ * Normaliza el texto del mensaje eliminando caracteres especiales.
+ *
+ * @param string $mensaje Mensaje original.
+ * @return string Mensaje normalizado.
+ */
 function apg_sms_normaliza_mensaje( $mensaje ) {
     if ( ! apply_filters( 'apg_sms_normalize_message', true, $mensaje ) ) {
         return $mensaje;
@@ -144,40 +154,63 @@ function apg_sms_normaliza_mensaje( $mensaje ) {
 	return $mensaje;
 }
 
-//Codifica el mensaje
+/**
+ * Codifica el mensaje segun el proveedor configurado.
+ *
+ * @param string $mensaje Mensaje original.
+ * @return string Mensaje codificado.
+ */
 function apg_sms_codifica_el_mensaje( $mensaje ) {
-	return apply_filters( 'apg_sms_message_return', urlencode( html_entity_decode( $mensaje, ENT_QUOTES, "UTF-8" ) ), $mensaje);
+	global $apg_sms_settings;
+	
+	$no_urlencode	= [  // Proveedores que NO requieren urlencode
+		'msg91',
+	];
+	$proveedor		= isset( $apg_sms_settings[ 'servicio' ] ) ? $apg_sms_settings[ 'servicio' ] : '';
+	$mensaje_limpio	= html_entity_decode( $mensaje, ENT_QUOTES, "UTF-8" );
+	$mensaje_final	= ( in_array( $proveedor, $no_urlencode ) ) ? $mensaje_limpio : urlencode( $mensaje_limpio );
+
+	return apply_filters( 'apg_sms_message_return', $mensaje_final, $mensaje );
 }
 
-//Procesa el teléfono y le añade, si lo necesita, el prefijo
+/**
+ * Procesa el telefono y anade el prefijo internacional si procede.
+ *
+ * @param WC_Order|object $pedido      Pedido de WooCommerce.
+ * @param string          $telefono    Numero de telefono original.
+ * @param string          $servicio    Identificador del proveedor.
+ * @param bool            $propietario Si es telefono del propietario.
+ * @param bool            $envio       Si es telefono de envio.
+ * @return string Numero procesado.
+ */
 function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietario = false, $envio = false ) {
 	$telefono_procesado = $telefono;
 	
-	if ( empty( $telefono_procesado ) ) { //Control
+	if ( empty( $telefono_procesado ) ) { // Control
 		return apply_filters( 'apg_sms_phone_return', $telefono_procesado, $pedido, $telefono, $servicio, $propietario, $envio );
 	}
 	
-	//Permite que otros plugins impidan que se procese el número de teléfono
+	// Permite que otros plugins impidan que se procese el número de teléfono
 	if ( apply_filters( 'apg_sms_phone_process', true, $pedido, $telefono, $servicio, $propietario, $envio ) ) {
 		$billing_country		= is_callable( [ $pedido, 'get_billing_country' ] ) ? $pedido->get_billing_country() : $pedido->billing_country;
 		$shipping_country		= is_callable( [ $pedido, 'get_shipping_country' ] ) ? $pedido->get_shipping_country() : $pedido->shipping_country;
 		$prefijo				= apg_sms_prefijo( $servicio );
 		$telefono_procesado		= str_replace( [ '+', '-' ], '', filter_var( $telefono, FILTER_SANITIZE_NUMBER_INT ) );
-		if ( substr( $telefono_procesado, 0, 2 ) == '00' ) { //Código propuesto por Marco Almeida (https://wordpress.org/support/topic/problems-sending-to-international-numbers-via-plivo/)
+		if ( substr( $telefono_procesado, 0, 2 ) == '00' ) { // Código propuesto por Marco Almeida (https://wordpress.org/support/topic/problems-sending-to-international-numbers-via-plivo/)
 			$telefono_procesado = substr( $telefono_procesado, 2 );
 		}
 		if ( ! $propietario ) {
 			if ( ( ! $envio && $billing_country && ( WC()->countries->get_base_country() != $billing_country ) || $prefijo ) ) {
-				$prefijo_internacional = apg_sms_dame_prefijo_pais( $billing_country ); //Teléfono de facturación
-			} else if ( ( $envio && $shipping_country && ( WC()->countries->get_base_country() != $shipping_country ) || $prefijo ) ) {
-				$prefijo_internacional = apg_sms_dame_prefijo_pais( $shipping_country ); //Teléfono de envío
+				$prefijo_internacional = apg_sms_dame_prefijo_pais( $billing_country ); // Teléfono de facturación
+			} elseif ( ( $envio && $shipping_country && ( WC()->countries->get_base_country() != $shipping_country ) || $prefijo ) ) {
+				$prefijo_internacional = apg_sms_dame_prefijo_pais( $shipping_country ); // Teléfono de envío
 			}
-		} else if ( $propietario && $prefijo ) {
+		} elseif ( $propietario && $prefijo ) {
 			$prefijo_internacional = apg_sms_dame_prefijo_pais( WC()->countries->get_base_country() );
 		}
 
 		preg_match( "/(\d{1,4})[0-9.\-]+/", $telefono_procesado, $prefijo_telefonico );
-		if ( empty( $prefijo_telefonico ) ) { //Control
+		if ( empty( $prefijo_telefonico ) ) { // Control
 			return;
 		}
 		if ( isset( $prefijo_internacional ) ) {
@@ -185,28 +218,36 @@ function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietari
 				$telefono_procesado = $prefijo_internacional . ltrim( $telefono_procesado, '0' );
 			}
 		}
-        //Necesitan el símbolo +
+        // Necesitan el símbolo +
         $simbolo_mas    = [
             "smscx",
             "moreify",
             "twilio"
         ];
-        //Necesitan 00
+        // Necesitan 00
         $doble_cero     = [
             "isms"
         ];
 		if ( in_array( $servicio, $simbolo_mas ) && strpos( $telefono_procesado, "+" ) === false ) {
 			$telefono_procesado = "+" . $telefono_procesado;
-		} else if ( in_array( $servicio, $doble_cero ) && isset( $prefijo_internacional ) ) {
+		} elseif ( in_array( $servicio, $doble_cero ) && isset( $prefijo_internacional ) ) {
 			$telefono_procesado = "00" . preg_replace( '/\+/', '', $telefono_procesado );
 		}
 	}
 	
-	//Permitir que otros plugins modifiquen el teléfono devuelto
+	// Permitir que otros plugins modifiquen el teléfono devuelto
 	return apply_filters( 'apg_sms_phone_return', $telefono_procesado, $pedido, $telefono, $servicio, $propietario, $envio );
 }
 
-//Procesa las variables
+/**
+ * Procesa variables personalizadas en el mensaje.
+ *
+ * @param string          $mensaje   Mensaje base.
+ * @param WC_Order|object $pedido    Pedido de WooCommerce.
+ * @param string          $variables Variables personalizadas definidas.
+ * @param string          $nota      Nota del cliente.
+ * @return string Mensaje con variables sustituidas.
+ */
 function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) {
 	global $apg_sms_settings;
 
@@ -227,7 +268,7 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 		"order_product",
 		"shipping_method", 
     ];
-	$apg_sms_variables = [ //Hay que añadirles un guión
+	$apg_sms_variables = [ // Hay que añadirles un guión
 		"order_key", 
 		"billing_first_name", 
 		"billing_last_name", 
@@ -265,7 +306,7 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
     ], "\n", $variables ) );
 
 	$numero_de_pedido		= is_callable( [ $pedido, 'get_id' ] ) ? $pedido->get_id() : $pedido->id;
-	$variables_de_pedido	= get_post_custom( $numero_de_pedido ); //WooCommerce 2.1
+	$variables_de_pedido	= get_post_custom( $numero_de_pedido ); // WooCommerce 2.1
 
     preg_match_all( "/%(.*?)%/", $mensaje, $busqueda );
 
@@ -276,7 +317,7 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 			continue;
 		}
 
-		$especiales = [  //Variables especiales (no éstandar y no personalizadas)
+		$especiales = [  // Variables especiales (no éstandar y no personalizadas)
 			"order_date", 
 			"modified_date", 
 			"shop_name", 
@@ -289,25 +330,25 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 		
 		if ( ! in_array( $variable, $especiales ) ) {
 			if ( in_array( $variable, $apg_sms ) ) {
-				$mensaje = str_replace( "%" . $variable . "%", is_callable( [ $pedido, 'get_' . $variable ] ) ? $pedido->{'get_' . $variable}() : $pedido->$variable, $mensaje ); //Variables estándar - Objeto
-			} else if ( in_array( $variable, $apg_sms_variables ) ) {
-				$mensaje = str_replace( "%" . $variable . "%", $variables_de_pedido[ "_" . $variable ][ 0 ], $mensaje ); //Variables estándar - Array
-			} else if ( isset( $variables_de_pedido[ $variable ] ) || in_array( $variable, $variables_personalizadas ) ) {
-				$mensaje = str_replace( "%" . $variable . "%", $variables_de_pedido[ $variable ][ 0 ], $mensaje ); //Variables de pedido y personalizadas
+				$mensaje = str_replace( "%" . $variable . "%", is_callable( [ $pedido, 'get_' . $variable ] ) ? $pedido->{'get_' . $variable}() : $pedido->$variable, $mensaje ); // Variables estándar - Objeto
+			} elseif ( in_array( $variable, $apg_sms_variables ) ) {
+				$mensaje = str_replace( "%" . $variable . "%", $variables_de_pedido[ "_" . $variable ][ 0 ], $mensaje ); // Variables estándar - Array
+			} elseif ( isset( $variables_de_pedido[ $variable ] ) || in_array( $variable, $variables_personalizadas ) ) {
+				$mensaje = str_replace( "%" . $variable . "%", $variables_de_pedido[ $variable ][ 0 ], $mensaje ); // Variables de pedido y personalizadas
 			}
-		} else if ( $variable == "order_date" || $variable == "modified_date" ) {
+		} elseif ( $variable == "order_date" || $variable == "modified_date" ) {
 			$mensaje = str_replace( "%" . $variable . "%", date_i18n( woocommerce_date_format(), strtotime( $pedido->$variable ) ), $mensaje );
-		} else if ( $variable == "shop_name" ) {
+		} elseif ( $variable == "shop_name" ) {
 			$mensaje = str_replace( "%" . $variable . "%", get_bloginfo( 'name' ), $mensaje );
-		} else if ( $variable == "note" ) {
+		} elseif ( $variable == "note" ) {
 			$mensaje = str_replace( "%" . $variable . "%", $nota, $mensaje );
-		} else if ( $variable == "id" ) {
+		} elseif ( $variable == "id" ) {
 			$mensaje = str_replace( "%" . $variable . "%", $pedido->get_order_number(), $mensaje );
-		} else if ( $variable == "order_discount" ) {
+		} elseif ( $variable == "order_discount" ) {
 			$mensaje = str_replace( "%" . $variable . "%", $pedido->get_discount_total(), $mensaje );
-		} else if ( $variable == "shipping_method_title" ) {
+		} elseif ( $variable == "shipping_method_title" ) {
 			$mensaje = str_replace( "%" . $variable . "%", $pedido->get_shipping_method(), $mensaje );
-		} else if ( $variable == "order_product" ) {
+		} elseif ( $variable == "order_product" ) {
 			$nombre		= '';
 			$productos	= $pedido->get_items();
 			if ( ! isset( $apg_sms_settings[ 'productos' ] ) || $apg_sms_settings[ 'productos' ] != 1 ) {
@@ -327,11 +368,16 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 		}
 	}
 	
-	//Permitir que otros plugins modifiquen el mensaje devuelto
+	// Permitir que otros plugins modifiquen el mensaje devuelto
 	return apply_filters( 'apg_sms_message' , $mensaje , $numero_de_pedido );
 }
 
-//Devuelve el código de prefijo del país
+/**
+ * Devuelve el prefijo telefonico internacional del pais.
+ *
+ * @param string $pais Codigo de pais ISO2.
+ * @return string Prefijo telefonico.
+ */
 function apg_sms_dame_prefijo_pais( $pais = '' ) {
 	$paises = [ 
 		'AC' => '247', 

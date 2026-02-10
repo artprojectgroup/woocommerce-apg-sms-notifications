@@ -1,11 +1,20 @@
 <?php
-//Igual no deberías poder abrirme
+// Igual no deberías poder abrirme
 defined( 'ABSPATH' ) || exit;
 
-//Envía el mensaje SMS
+/**
+ * Envia un SMS segun el proveedor configurado.
+ *
+ * @param array<string,mixed> $apg_sms_settings Ajustes del plugin.
+ * @param string              $telefono         Numero de destino.
+ * @param string              $mensaje          Mensaje a enviar.
+ * @param string              $estado           Estado del pedido.
+ * @param bool                $propietario      Si es mensaje al propietario.
+ * @return void
+ */
 function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $propietario = false ) {
-    //Gestiona los estados
-	switch( $estado ) {
+    // Gestiona los estados
+	switch ( $estado ) {
 		case "on-hold":
             $estado    = ( $propietario ) ? "mensaje_pedido" : "mensaje_recibido";
             
@@ -36,7 +45,7 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
             break;
     }
 
-    //Gestiona los proveedores
+    // Gestiona los proveedores
 	switch ( $apg_sms_settings[ 'servicio' ] ) {
 		case "adlinks":
  			$url						= add_query_arg( [
@@ -156,8 +165,8 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
  				'route'						=> $apg_sms_settings[ 'ruta_moplet' ],
  				'country'					=> $apg_sms_settings[ 'servidor_moplet' ],
             ];
-            //DLT
-            if ( $apg_sms_settings[ 'dlt_moplet' ] ) { //Sólo si existe el valor
+            // DLT
+            if ( $apg_sms_settings[ 'dlt_moplet' ] ) { // Sólo si existe el valor
  				$argumentos[ 'DLT_TE_ID' ] = $apg_sms_settings[ 'dlt_' . $estado ];
             }
             $url						= add_query_arg( $argumentos, 'http://sms.moplet.com/api/sendhttp.php' );
@@ -173,8 +182,8 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
                 'sender' 					=> $apg_sms_settings[ 'identificador_msg91' ],
                 'route' 					=> $apg_sms_settings[ 'ruta_msg91' ],
             ];
-            //DLT
-            if ( $apg_sms_settings[ 'dlt_msg91' ] ) { //Sólo si existe el valor
+            // DLT
+            if ( $apg_sms_settings[ 'dlt_msg91' ] ) { // Sólo si existe el valor
  				$argumentos[ 'body' ][ 'DLT_TE_ID' ] = $apg_sms_settings[ 'dlt_' . $estado ];
             }
             
@@ -318,15 +327,15 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
             
 			break;
 		case "smslane":
-			$argumentos[ 'body' ] 		= [ 
+			$argumentos[ 'body' ] 		= json_encode( [ 
 				'ApiKey' 					=> $apg_sms_settings[ 'usuario_smslane' ],
 				'ClientId' 					=> $apg_sms_settings[ 'contrasena_smslane' ],
 				'SenderId' 					=> $apg_sms_settings[ 'sid_smslane' ],
 				'Message'					=> $mensaje,
 				'MobileNumbers'				=> $telefono,
-            ];
+            ] );
             
-			$respuesta 					= wp_remote_post( "https://api.smslane.com/api/v2/SendSMS", $argumentos );
+			$respuesta 					= wp_remote_post( "https://api.smslane.com/api/v3/SendSMS", $argumentos );
             
             break;
 		case "solutions_infini":
@@ -420,14 +429,14 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
 			break;
 	}
 
-    //Envía el correo con el informe
+    // Envía el correo con el informe
 	if ( isset( $apg_sms_settings[ 'debug' ] ) && $apg_sms_settings[ 'debug' ] == "1" && isset( $apg_sms_settings[ 'campo_debug' ] ) ) {
 		$correo	= __( 'Mobile number:', 'woocommerce-apg-sms-notifications' ) . "\r\n" . $telefono . "\r\n\r\n";
 		$correo	.= __( 'Message: ', 'woocommerce-apg-sms-notifications' ) . "\r\n" . $mensaje . "\r\n\r\n"; 
         if ( isset( $argumentos ) ) {
-            $correo	.= __( 'Arguments: ', 'woocommerce-apg-sms-notifications' ) . "\r\n" . print_r( $argumentos, true );
+            $correo	.= __( 'Arguments: ', 'woocommerce-apg-sms-notifications' ) . "\r\n" . wp_json_encode( $argumentos, JSON_PRETTY_PRINT );
         }
-		$correo	.= __( 'Gateway answer: ', 'woocommerce-apg-sms-notifications' ) . "\r\n" . print_r( $respuesta, true );
+		$correo	.= __( 'Gateway answer: ', 'woocommerce-apg-sms-notifications' ) . "\r\n" . wp_json_encode( $respuesta, JSON_PRETTY_PRINT );
 		wp_mail( $apg_sms_settings[ 'campo_debug' ], 'WC - APG SMS Notifications', $correo, 'charset=UTF-8' . "\r\n" ); 
 	}
 }

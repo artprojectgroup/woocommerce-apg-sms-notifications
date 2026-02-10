@@ -3,12 +3,12 @@ Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: SMS notifications, SMS gateway, SMS messages
 Requires at least: 5.0
-Tested up to: 6.8
-Stable tag: 2.27.0.2
+Tested up to: 6.9
+Stable tag: 3.0.0
 WC requires at least: 5.6
-WC tested up to: 9.6
-License: GPLv3
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
+WC tested up to: 10.5.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Add to your WooCommerce store SMS notifications to your customers when order status changed.
 
@@ -89,7 +89,7 @@ Don’t forget to leave us your comment on:
 
 * [WC - APG SMS Notifications](https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-sms-notifications) on Art Project Group.
 * [Art Project Group](https://www.facebook.com/artprojectgroup) on Facebook.
-* [@artprojectgroup](https://twitter.com/artprojectgroup) on Twitter.
+* [@artprojectgroup](https://x.com/artprojectgroup) on X.
 
 = More plugins =
 Remember that you can find more [plugins for WordPress](https://artprojectgroup.es/plugins-para-wordpress) and more [plugins for WooCommerce](https://artprojectgroup.es/plugins-para-woocommerce) on [Art Project Group](https://artprojectgroup.es) and our profile on [WordPress](https://profiles.wordpress.org/artprojectgroup/).
@@ -125,6 +125,10 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 1. Screenshot of WC - APG SMS Notifications.
 
 == Changelog ==
+= 3.0.0 =
+* Security improvement.
+* Full code compliance with WordPress security standards.
+* Small fixes.
 = 2.27.0.2 =
 * Small fixes.
 = 2.27.0.1 =
@@ -463,7 +467,9 @@ If you need help to configuring or installing **WC - APG SMS Notifications**, **
 * Initial version.
 
 == Upgrade Notice ==
-= 2.27.0.2 =
+= 3.0.0 =
+* Security improvement.
+* Full code compliance with WordPress security standards.
 * Small fixes.
 
 == Translations ==
