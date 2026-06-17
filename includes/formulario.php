@@ -49,7 +49,7 @@ global $apg_sms_settings, $apg_sms;
 				<th scope="row" class="titledesc">
 					<label for="apg_sms_settings[telefono]">
 						<?php esc_html_e( 'Your mobile number:', 'woocommerce-apg-sms-notifications' ); ?>
-						<span class="woocommerce-help-tip" data-tip="<?php esc_attr_e( 'The mobile number registered in your SMS gateway account and where you receive the SMS messages. You can add multiple mobile numbers separeted by | character. Example: xxxxxxxxx|yyyyyyyyy', 'woocommerce-apg-sms-notifications' ); ?>"></span> </label>
+						<span class="woocommerce-help-tip" data-tip="<?php esc_attr_e( 'The mobile number registered in your SMS gateway account and where you receive the SMS messages. You can add multiple mobile numbers separated by | character. Example: xxxxxxxxx|yyyyyyyyy', 'woocommerce-apg-sms-notifications' ); ?>"></span> </label>
 				</th>
 				<td class="forminp forminp-number"><input type="text" id="apg_sms_settings[telefono]" name="apg_sms_settings[telefono]" size="50" value="<?php echo ( isset( $apg_sms_settings[ 'telefono' ] ) ) ? esc_attr( $apg_sms_settings[ 'telefono' ] ) : ''; ?>" tabindex="<?php echo esc_attr( $tab++ ); ?>"/>
 				</td>
@@ -58,7 +58,7 @@ global $apg_sms_settings, $apg_sms;
 				<th scope="row" class="titledesc">
 					<label for="apg_sms_settings[notificacion]">
 						<?php esc_html_e( 'New order notification:', 'woocommerce-apg-sms-notifications' ); ?>
-						<span class="woocommerce-help-tip" data-tip="<?php esc_attr_e( " Check if you want to receive a SMS message when there 's a new order", 'woocommerce-apg-sms-notifications' ); ?>"></span> </label> </th>
+						<span class="woocommerce-help-tip" data-tip="<?php esc_attr_e( 'Check if you want to receive an SMS message when there is a new order', 'woocommerce-apg-sms-notifications' ); ?>"></span> </label> </th>
         <td class="forminp forminp-number"><input id="apg_sms_settings[notificacion]" name="apg_sms_settings[notificacion]" type="checkbox" value="1" <?php checked( isset( $apg_sms_settings['notificacion'] ) ? $apg_sms_settings['notificacion'] : '', 1 ); ?> tabindex="<?php echo esc_attr( $tab++ ); ?>" /></td>
       </tr>
       <tr valign="top">
@@ -126,7 +126,7 @@ global $apg_sms_settings, $apg_sms;
 					// translators: %s: Order status label.
 					echo esc_html( sprintf( __( '%s state custom message:', 'woocommerce-apg-sms-notifications' ), $nombre_de_estado_esc ) );
 					// translators: The %%tokens%% below are placeholders the user can add to SMS templates.
-					$variables_ayuda = __( 'You can customize your message. Remember that you can use this variables: %%id%%, %%order_key%%, %%billing_first_name%%, %%billing_last_name%%, %%billing_company%%, %%billing_address_1%%, %%billing_address_2%%, %%billing_city%%, %%billing_postcode%%, %%billing_country%%, %%billing_state%%, %%billing_email%%, %%billing_phone%%, %%shipping_first_name%%, %%shipping_last_name%%, %%shipping_company%%, %%shipping_address_1%%, %%shipping_address_2%%, %%shipping_city%%, %%shipping_postcode%%, %%shipping_country%%, %%shipping_state%%, %%shipping_method%%, %%shipping_method_title%%, %%payment_method%%, %%payment_method_title%%, %%order_discount%%, %%cart_discount%%, %%order_tax%%, %%order_shipping%%, %%order_shipping_tax%%, %%order_total%%, %%status%%, %%prices_include_tax%%, %%tax_display_cart%%, %%display_totals_ex_tax%%, %%display_cart_ex_tax%%, %%order_date%%, %%modified_date%%, %%customer_message%%, %%customer_note%%, %%post_status%%, %%shop_name%%, %%order_product%% and %%note%%.', 'woocommerce-apg-sms-notifications' );
+					$variables_ayuda = __( 'You can customize your message. Remember that you can use these variables: %%id%%, %%order_key%%, %%billing_first_name%%, %%billing_last_name%%, %%billing_company%%, %%billing_address_1%%, %%billing_address_2%%, %%billing_city%%, %%billing_postcode%%, %%billing_country%%, %%billing_state%%, %%billing_email%%, %%billing_phone%%, %%shipping_first_name%%, %%shipping_last_name%%, %%shipping_company%%, %%shipping_address_1%%, %%shipping_address_2%%, %%shipping_city%%, %%shipping_postcode%%, %%shipping_country%%, %%shipping_state%%, %%shipping_method%%, %%shipping_method_title%%, %%payment_method%%, %%payment_method_title%%, %%order_discount%%, %%cart_discount%%, %%order_tax%%, %%order_shipping%%, %%order_shipping_tax%%, %%order_total%%, %%status%%, %%prices_include_tax%%, %%tax_display_cart%%, %%display_totals_ex_tax%%, %%display_cart_ex_tax%%, %%order_date%%, %%modified_date%%, %%customer_message%%, %%customer_note%%, %%post_status%%, %%shop_name%%, %%order_product%% and %%note%%.', 'woocommerce-apg-sms-notifications' );
 					?>
 					<span class="woocommerce-help-tip" data-tip="<?php echo esc_attr( $variables_ayuda ); ?>"></span>
 				</label>
@@ -164,7 +164,7 @@ global $apg_sms_settings, $apg_sms;
 			<tr valign="top">
 				<th scope="row" class="titledesc">
 					<label for="apg_sms_settings[productos]">
-						<?php esc_html_e( 'Send only this messages:', 'woocommerce-apg-sms-notifications' ); ?>
+						<?php esc_html_e( 'Send only these messages:', 'woocommerce-apg-sms-notifications' ); ?>
 						<span class="woocommerce-help-tip" data-tip="<?php esc_attr_e( 'Select what messages do you want to send', 'woocommerce-apg-sms-notifications' ); ?>"></span>
 					</label>
 				</th>

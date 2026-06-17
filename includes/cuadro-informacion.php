@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
 	<div class="fila">
 		<div class="columna">
 			<p>
-				<?php esc_html_e( 'If you enjoyed and find helpful this plugin, please make a donation:', 'woocommerce-apg-sms-notifications' ); ?>
+				<?php esc_html_e( 'If you enjoy this plugin and find it helpful, please make a donation:', 'woocommerce-apg-sms-notifications' ); ?>
 			</p>
 			<p>
 				<a href="<?php echo esc_url( $apg_sms['donacion'] ); ?>" target="_blank" title="<?php esc_attr_e( 'Make a donation by ', 'woocommerce-apg-sms-notifications' ); ?>APG"><span class="genericon genericon-cart"></span></a>
@@ -65,11 +65,11 @@ defined( 'ABSPATH' ) || exit;
 	<div class="fila">
 		<div class="columna">
 			<p>
-				<?php esc_html_e( 'Contact with us:', 'woocommerce-apg-sms-notifications' ); ?>
+				<?php esc_html_e( 'Contact us:', 'woocommerce-apg-sms-notifications' ); ?>
 			</p>
 			<p>
-				<a href="mailto:info@artprojectgroup.es" title="<?php esc_attr_e( 'Contact with us by ', 'woocommerce-apg-sms-notifications' ); ?>e-mail"><span class="genericon genericon-mail"></span></a>
-				<a href="skype:artprojectgroup" title="<?php esc_attr_e( 'Contact with us by ', 'woocommerce-apg-sms-notifications' ); ?>Skype"><span class="genericon genericon-skype"></span></a>
+				<a href="mailto:info@artprojectgroup.es" title="<?php esc_attr_e( 'Contact us by ', 'woocommerce-apg-sms-notifications' ); ?>e-mail"><span class="genericon genericon-mail"></span></a>
+				<a href="skype:artprojectgroup" title="<?php esc_attr_e( 'Contact us by ', 'woocommerce-apg-sms-notifications' ); ?>Skype"><span class="genericon genericon-skype"></span></a>
 			</p>
 		</div>
 		<div class="columna">

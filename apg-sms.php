@@ -2,17 +2,17 @@
 /*
 Plugin Name: WC - APG SMS Notifications
 Requires Plugins: woocommerce
-Version: 3.0.0
+Version: 3.1.0
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: https://artprojectgroup.es/
 Author: Art Project Group
-License: GNU General Public License v2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License: GNU General Public License v3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 5.0
-Tested up to: 6.9
+Tested up to: 7.0
 WC requires at least: 5.6
-WC tested up to: 10.5.0
+WC tested up to: 10.9.0
 
 Text Domain: woocommerce-apg-sms-notifications
 Domain Path: /languages
@@ -33,7 +33,7 @@ define( 'DIRECCION_apg_sms', plugin_basename( __FILE__ ) );
  *
  * @var string
  */
-define( 'VERSION_apg_sms', '3.0.0' );
+define( 'VERSION_apg_sms', '3.1.0' );
 
 // Funciones generales de APG
 include_once( 'includes/admin/funciones-apg.php' );
@@ -410,7 +410,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) || is_network_only_plugin
 function apg_sms_requiere_wc() {
 	global $apg_sms;
 
-	echo '<div class="notice notice-error is-dismissible" id="woocommerce-apg-sms-notifications"><h3>' . esc_html( $apg_sms['plugin'] ) . '</h3><h4>' . esc_html__( 'This plugin require WooCommerce active to run!', 'woocommerce-apg-sms-notifications' ) . '</h4></div>';
+	echo '<div class="notice notice-error is-dismissible" id="woocommerce-apg-sms-notifications"><h3>' . esc_html( $apg_sms['plugin'] ) . '</h3><h4>' . esc_html__( 'This plugin requires WooCommerce to be active to run!', 'woocommerce-apg-sms-notifications' ) . '</h4></div>';
 	deactivate_plugins( DIRECCION_apg_sms );
 }
 

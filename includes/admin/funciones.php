@@ -332,7 +332,22 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 			if ( in_array( $variable, $apg_sms ) ) {
 				$mensaje = str_replace( "%" . $variable . "%", is_callable( [ $pedido, 'get_' . $variable ] ) ? $pedido->{'get_' . $variable}() : $pedido->$variable, $mensaje ); // Variables estándar - Objeto
 			} elseif ( in_array( $variable, $apg_sms_variables ) ) {
-				$mensaje = str_replace( "%" . $variable . "%", $variables_de_pedido[ "_" . $variable ][ 0 ], $mensaje ); // Variables estándar - Array
+				// Getters del objeto pedido (compatibles con HPOS). Algunas variables no siguen el patrón get_{variable}.
+				$mapa_getters	= [
+					"order_total"			=> "get_total",
+					"order_tax"				=> "get_total_tax",
+					"order_shipping"		=> "get_shipping_total",
+					"order_shipping_tax"	=> "get_shipping_tax",
+					"cart_discount"			=> "get_discount_total",
+				];
+				if ( isset( $mapa_getters[ $variable ] ) && is_callable( [ $pedido, $mapa_getters[ $variable ] ] ) ) {
+					$valor = $pedido->{ $mapa_getters[ $variable ] }(); // order_total, order_tax, etc.
+				} elseif ( is_callable( [ $pedido, 'get_' . $variable ] ) ) {
+					$valor = $pedido->{ 'get_' . $variable }(); // billing_*, shipping_*, order_key, payment_method...
+				} else {
+					$valor = isset( $variables_de_pedido[ "_" . $variable ][ 0 ] ) ? $variables_de_pedido[ "_" . $variable ][ 0 ] : ''; // Compatibilidad hacia atrás
+				}
+				$mensaje = str_replace( "%" . $variable . "%", $valor, $mensaje ); // Variables estándar - Objeto / Array
 			} elseif ( isset( $variables_de_pedido[ $variable ] ) || in_array( $variable, $variables_personalizadas ) ) {
 				$mensaje = str_replace( "%" . $variable . "%", $variables_de_pedido[ $variable ][ 0 ], $mensaje ); // Variables de pedido y personalizadas
 			}
