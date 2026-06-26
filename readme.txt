@@ -4,7 +4,7 @@ Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: SMS notifications, SMS gateway, SMS messages
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 3.1.0
+Stable tag: 3.2.0
 WC requires at least: 5.6
 WC tested up to: 10.9.0
 License: GNU General Public License v3 or later
@@ -125,6 +125,15 @@ If you need help configuring or installing **WC - APG SMS Notifications**, **Art
 1. Screenshot of WC - APG SMS Notifications.
 
 == Changelog ==
+= 3.2.0 =
+* Removed discontinued SMS gateway: MobTexting (service no longer available).
+* Migrated rebranded gateways to their current APIs: Clockwork → TextAnywhere, Solutions Infini → Kaleyra, Twizo → Silverstreet. **These gateways now require credentials from the successor provider.**
+* Renamed Nexmo to Vonage (same working endpoint).
+* Fixed sendSMS.ro: the password was not being sent.
+* Fixed SMS Discount: it was sending to the SIP Discount endpoint.
+* Fixed duplicated international dial codes (Dominican Republic, Puerto Rico, Vatican City, etc.).
+* Removed obsolete internal gateway references and code cleanup.
+* Updated translation template (.pot).
 = 3.1.0 =
 * Fixed empty order variables (*order_total*, *order_tax*, *order_shipping*, etc.) when HPOS is enabled.
 * Compatibility with WordPress 7.0 and WooCommerce 10.9.0.
@@ -470,6 +479,8 @@ If you need help configuring or installing **WC - APG SMS Notifications**, **Art
 * Initial version.
 
 == Upgrade Notice ==
+= 3.2.0 =
+* Gateway cleanup and migrations. If you use Clockwork, Solutions Infini, Twizo or MobTexting, please review your SMS gateway settings: the first three now use their successor provider (TextAnywhere, Kaleyra, Silverstreet) and require new credentials; MobTexting has been removed.
 = 3.1.0 =
 * Fixed empty order variables (*order_total*, *order_tax*, etc.) when HPOS is enabled.
 = 3.0.0 =

@@ -29,13 +29,12 @@ $listado_de_proveedores = [
         "bulkgate"          => "BulkGate",
         "bulksms"           => "BulkSMS",
         "clickatell"        => "Clickatell",
-        "clockwork"         => "Clockwork",
+        "clockwork"         => "TextAnywhere (Clockwork)",
         "isms"              => "iSMS Malaysia",
         "labsmobile"        => "LabsMobile",
-        "mobtexting"        => "MobTexting",
         "moplet"            => "Moplet",
         "msg91"             => "MSG91",
-        "nexmo"             => "Nexmo",
+        "nexmo"             => "Vonage (Nexmo)",
         "plivo"             => "Plivo",
         "routee"            => "Routee",
         "sendsms"           => "sendSMS.ro",
@@ -44,10 +43,10 @@ $listado_de_proveedores = [
         "smscountry"        => "SMS Country",
         "smsdiscount"       => "SMS Discount",
         "smslane"           => "SMS Lane ( Transactional SMS only )",
-        "solutions_infini"  => "Solutions Infini",
+        "solutions_infini"  => "Kaleyra (Solutions Infini)",
         "springedge"        => "Spring Edge",
         "twilio"            => "Twilio",
-        "twizo"             => "Twizo",
+        "twizo"             => "Silverstreet (Twizo)",
         "voipbuster"        => "VoipBuster",
         "voipbusterpro"     => "VoipBusterPro",
         "voipstunt"         => "VoipStunt",
@@ -79,8 +78,10 @@ $campos_de_proveedores      = [
 	"clickatell" 		=> [ 
 		"identificador_clickatell"        => __( 'key', 'woocommerce-apg-sms-notifications' ),
 	],
-	"clockwork" 		=> [ 
-		"identificador_clockwork"         => __( 'key', 'woocommerce-apg-sms-notifications' ),
+	"clockwork" 		=> [
+		"usuario_clockwork"               => __( 'client ID', 'woocommerce-apg-sms-notifications' ),
+		"contrasena_clockwork"            => __( 'client password', 'woocommerce-apg-sms-notifications' ),
+		"identificador_clockwork"         => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
 	],
 	"isms" 				=> [ 
 		"usuario_isms"                    => __( 'username', 'woocommerce-apg-sms-notifications' ),
@@ -92,11 +93,7 @@ $campos_de_proveedores      = [
 		"contrasena_labsmobile"           => __( 'password', 'woocommerce-apg-sms-notifications' ),
 		"sid_labsmobile"                  => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
 	],
-	"mobtexting"		=> [ 
-		"clave_mobtexting"                => __( 'key', 'woocommerce-apg-sms-notifications' ),
-		"identificador_mobtexting"        => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
-	],
-	"moplet" 			=> [ 
+	"moplet" 			=> [
 		"clave_moplet"                    => __( 'authentication key', 'woocommerce-apg-sms-notifications' ),
 		"identificador_moplet"            => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
 		"ruta_moplet"                     => __( 'route', 'woocommerce-apg-sms-notifications' ),
@@ -212,8 +209,8 @@ $opciones_de_proveedores        = [
 		4						=> 4,
 	],
 	"servidor_twizo"	=> [
-		"api-asia-01.twizo.com"	=> __( 'Singapore', 'woocommerce-apg-sms-notifications' ), 
-		"api-eu-01.twizo.com"	=> __( 'Germany', 'woocommerce-apg-sms-notifications' ), 
+		"api-asia-01.silverstreet.com"	=> __( 'Singapore', 'woocommerce-apg-sms-notifications' ),
+		"api-eu-01.silverstreet.com"	=> __( 'Germany', 'woocommerce-apg-sms-notifications' ),
 	],
     "unicode_bulkgate"  => [
  		1                       => __( 'Yes', 'woocommerce-apg-sms-notifications' ),

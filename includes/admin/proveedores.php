@@ -109,15 +109,21 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
  			$respuesta					= wp_remote_get( $url );
             
 			break;
-		case "clockwork":
- 			$url						= add_query_arg( [
- 				'key'						=> $apg_sms_settings[ 'identificador_clockwork' ],
- 				'to'						=> $telefono,
- 				'content'					=> apg_sms_normaliza_mensaje( $mensaje ),
- 			], 'https://api.clockworksms.com/http/send.aspx' );
-            
- 			$respuesta					= wp_remote_get( $url );
-            
+		case "clockwork": // Migrado a TextAnywhere (HTTP SendSMSEx) tras el rebrand de Clockwork. Las credenciales son de una cuenta TextAnywhere.
+			$argumentos[ 'body' ]		= [
+				'Client_ID'					=> $apg_sms_settings[ 'usuario_clockwork' ],
+				'Client_Pass'				=> $apg_sms_settings[ 'contrasena_clockwork' ],
+				'Connection'				=> 2, // Enterprise
+				'OType'						=> 1, // Originator alfanumérico
+				'Originator'				=> $apg_sms_settings[ 'identificador_clockwork' ],
+				'DestinationEx'				=> '+' . ltrim( $telefono, '+' ), // Formato internacional con prefijo +
+				'Body'						=> apg_sms_normaliza_mensaje( $mensaje ),
+				'SMS_Type'					=> 0,
+				'Reply_Type'				=> 0, // Sin gestión de respuestas
+			];
+
+ 			$respuesta					= wp_remote_post( "https://ws.textanywhere.net/HTTPRX/SendSMSEx.aspx", $argumentos );
+
 			break;
 		case "isms":
  			$url						= add_query_arg( [
@@ -144,18 +150,6 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
  			$respuesta					= wp_remote_get( $url );
             
 			break;			
-        case "mobtexting":
- 			$url						= add_query_arg( [
- 				'access_token'				=> $apg_sms_settings[ 'clave_mobtexting' ],
- 				'to'						=> $telefono,
- 				'service'					=> 'T',
- 				'sender'					=> $apg_sms_settings[ 'identificador_mobtexting' ],
- 				'message'					=> apg_sms_codifica_el_mensaje( $mensaje ),
- 			], 'https://portal.mobtexting.com/api/v2/sms/send' );
-            
- 			$respuesta					= wp_remote_get( $url );
-            
-			break;
 		case "moplet":
             $argumentos                 = [
  				'authkey'					=> $apg_sms_settings[ 'clave_moplet' ],
@@ -249,7 +243,7 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
             $url						= add_query_arg( [
                 'action'                    => ( $apg_sms_settings[ 'gdpr_sendsms' ] == 1 ) ? 'message_send_gdpr' : 'message_send',
                 'username'					=> $apg_sms_settings[ 'usuario_sendsms' ],
-                'password'					=> urlencode( [ 'contrasena_sendsms' ] ),
+                'password'					=> urlencode( $apg_sms_settings[ 'contrasena_sendsms' ] ),
                 'to'                        => $telefono,
                 'text'                      => apg_sms_codifica_el_mensaje( $mensaje ),
                 'short'                     => ( $apg_sms_settings[ 'short_sendsms' ] == 1 ) ? 'true' : 'false',
@@ -321,7 +315,7 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
  				'from'						=> $apg_sms_settings[ 'telefono' ],
 				'to'						=> $telefono,
  				'text'						=> apg_sms_codifica_el_mensaje( $mensaje ),
- 			], 'https://www.sipdiscount.com/myaccount/sendsms.php' );
+ 			], 'https://www.smsdiscount.com/myaccount/sendsms.php' );
             
  			$respuesta					= wp_remote_get( $url );
             
@@ -338,16 +332,17 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
 			$respuesta 					= wp_remote_post( "https://api.smslane.com/api/v3/SendSMS", $argumentos );
             
             break;
-		case "solutions_infini":
+		case "solutions_infini": // Migrado a Kaleyra (API HTTP v4) tras el rebrand de Solutions Infini. Verificar 'api_key' y host de pod en el panel de Kaleyra.
  			$url						= add_query_arg( [
- 				'workingkey'				=> $apg_sms_settings[ 'clave_solutions_infini' ],
+ 				'api_key'					=> $apg_sms_settings[ 'clave_solutions_infini' ],
+ 				'method'					=> 'sms',
 				'to'						=> $telefono,
  				'sender'					=> $apg_sms_settings[ 'identificador_solutions_infini' ],
  				'message'					=> apg_sms_codifica_el_mensaje( $mensaje ),
- 			], 'https://alerts.sinfini.com/api/web2sms.php' );
-            
+ 			], 'https://api-alerts.kaleyra.com/v4/' );
+
  			$respuesta					= wp_remote_get( $url );
-            
+
 			break;
 		case "springedge":
  			$url						= add_query_arg( [
@@ -362,7 +357,7 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
             
 			break;			
 		case "twilio":
-			$argumentos[ 'header' ]		= "Accept-Charset: utf-8\r\n";
+			$argumentos[ 'headers' ]	= [ 'Accept-Charset' => 'utf-8' ];
 			$argumentos[ 'body' ]		= [ 
 				'To' 						=> $telefono,
 				'From' 						=> $apg_sms_settings[ 'telefono_twilio' ],
@@ -380,7 +375,7 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
 				'tag'						=> 'APG SMS Notifications',
 			] );
 			$argumentos[ 'headers' ]	= [
-				'Authorization'				=> "Basic " . base64_encode( "twizo:" . $apg_sms_settings[ 'clave_twizo' ] ),
+				'Authorization'				=> "Basic " . base64_encode( "silverstreet:" . $apg_sms_settings[ 'clave_twizo' ] ), // Migrado a Silverstreet (antes Twizo). El API key debe ser de Silverstreet.
 				'Accept'					=> 'application/json',
 				'Content-Type'				=> 'application/json; charset=utf8',
 				'Content-Length'			=> strlen( $contenido ),

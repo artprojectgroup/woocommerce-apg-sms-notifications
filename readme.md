@@ -10,7 +10,7 @@ Requires at least: 5.0
 
 Tested up to: 7.0
 
-Stable tag: 3.1.0
+Stable tag: 3.2.0
 
 WC requires at least: 5.6
 
@@ -147,6 +147,17 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+
+### 3.2.0
+
+- Eliminada la pasarela SMS descatalogada: MobTexting (servicio ya no disponible).
+- Migradas las pasarelas renombradas a sus APIs actuales: Clockwork → TextAnywhere, Solutions Infini → Kaleyra, Twizo → Silverstreet. **Estas pasarelas requieren ahora las credenciales del proveedor sucesor.**
+- Renombrada Nexmo como Vonage (mismo endpoint operativo).
+- Corregido sendSMS.ro: no se enviaba la contraseña.
+- Corregido SMS Discount: enviaba al endpoint de SIP Discount.
+- Corregidos prefijos internacionales duplicados (República Dominicana, Puerto Rico, Ciudad del Vaticano, etc.).
+- Eliminadas referencias internas obsoletas y limpieza de código.
+- Actualizada la plantilla de traducción (.pot).
 
 ### 3.1.0
 

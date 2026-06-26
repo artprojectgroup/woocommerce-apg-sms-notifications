@@ -117,3 +117,71 @@ function apg_sms_estilo() {
 	}
 }
 add_action( 'admin_enqueue_scripts', 'apg_sms_estilo' );
+
+/**
+ * Pasarelas migradas o eliminadas en la 3.2.0 que requieren revisar la configuracion.
+ *
+ * @return array<string,string> Mapa servicio => texto del cambio.
+ */
+function apg_sms_proveedores_afectados() {
+	return [
+		'clockwork'        => 'Clockwork &rarr; TextAnywhere',
+		'solutions_infini' => 'Solutions Infini &rarr; Kaleyra',
+		'twizo'            => 'Twizo &rarr; Silverstreet',
+		'mobtexting'       => 'MobTexting',
+	];
+}
+
+/**
+ * Muestra un aviso en el escritorio a quien use una pasarela migrada o eliminada,
+ * para que revise sus credenciales. Solo se muestra si el servicio configurado
+ * esta afectado y no se ha descartado para la version actual.
+ *
+ * @return void
+ */
+function apg_sms_aviso_proveedores() {
+	if ( ! current_user_can( 'manage_woocommerce' ) ) {
+		return;
+	}
+
+	if ( get_option( 'apg_sms_aviso_proveedores' ) === '3.2.0' ) { // Ya descartado el aviso de la migracion 3.2.0
+		return;
+	}
+
+	$apg_sms_settings = get_option( 'apg_sms_settings' );
+	$servicio         = isset( $apg_sms_settings['servicio'] ) ? $apg_sms_settings['servicio'] : '';
+	$afectados        = apg_sms_proveedores_afectados();
+
+	if ( ! isset( $afectados[ $servicio ] ) ) {
+		return;
+	}
+
+	$url_ajustes   = admin_url( 'admin.php?page=apg_sms' );
+	$url_descartar = wp_nonce_url( add_query_arg( 'apg_sms_descartar_aviso', '1' ), 'apg_sms_descartar_aviso' );
+
+	if ( 'mobtexting' === $servicio ) {
+		// translators: %s: URL of the plugin settings page.
+		$mensaje = sprintf( __( '<strong>WC - APG SMS Notifications:</strong> the <strong>MobTexting</strong> gateway has been discontinued by the provider and removed in this version. Please <a href="%s">choose a different SMS gateway</a> to keep sending messages.', 'woocommerce-apg-sms-notifications' ), esc_url( $url_ajustes ) );
+	} else {
+		// translators: 1: gateway change (e.g. "Clockwork → TextAnywhere"), 2: URL of the plugin settings page.
+		$mensaje = sprintf( __( '<strong>WC - APG SMS Notifications:</strong> your SMS gateway has been migrated to its successor (<strong>%1$s</strong>). Please <a href="%2$s">review your gateway settings</a> and enter the new provider credentials so your SMS messages keep working.', 'woocommerce-apg-sms-notifications' ), $afectados[ $servicio ], esc_url( $url_ajustes ) );
+	}
+
+	echo '<div class="notice notice-warning"><p>' . wp_kses_post( $mensaje ) . '</p>';
+	echo '<p><a href="' . esc_url( $url_descartar ) . '" class="button button-secondary">' . esc_html__( 'Dismiss this notice', 'woocommerce-apg-sms-notifications' ) . '</a></p></div>';
+}
+add_action( 'admin_notices', 'apg_sms_aviso_proveedores' );
+
+/**
+ * Procesa el descarte persistente del aviso de pasarelas.
+ *
+ * @return void
+ */
+function apg_sms_descarta_aviso_proveedores() {
+	if ( isset( $_GET['apg_sms_descartar_aviso'] ) && current_user_can( 'manage_woocommerce' ) && check_admin_referer( 'apg_sms_descartar_aviso' ) ) {
+		update_option( 'apg_sms_aviso_proveedores', '3.2.0' );
+		wp_safe_redirect( remove_query_arg( [ 'apg_sms_descartar_aviso', '_wpnonce' ] ) );
+		exit;
+	}
+}
+add_action( 'admin_init', 'apg_sms_descarta_aviso_proveedores' );
