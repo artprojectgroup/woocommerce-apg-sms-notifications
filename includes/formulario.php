@@ -163,7 +163,7 @@ global $apg_sms_settings, $apg_sms;
 			</tr>
 			<tr valign="top">
 				<th scope="row" class="titledesc">
-					<label for="apg_sms_settings[productos]">
+					<label for="apg_sms_settings[mensajes]">
 						<?php esc_html_e( 'Send only these messages:', 'woocommerce-apg-sms-notifications' ); ?>
 						<span class="woocommerce-help-tip" data-tip="<?php esc_attr_e( 'Select what messages do you want to send', 'woocommerce-apg-sms-notifications' ); ?>"></span>
 					</label>
@@ -172,6 +172,7 @@ global $apg_sms_settings, $apg_sms;
 					<select multiple="multiple" class="wc-enhanced-select multiselect mensajes" id="apg_sms_settings[mensajes]" name="apg_sms_settings[mensajes][]" tabindex="<?php echo esc_attr( $tab++ ); ?>">
 						<?php apg_sms_listado_de_mensajes( $listado_de_mensajes ); ?>
 					</select>
+				</td>
 			</tr>
             <?php
             foreach ( $mensajes as $mensaje ) {
@@ -190,7 +191,7 @@ global $apg_sms_settings, $apg_sms;
  				<th scope="row" class="titledesc">
  					<label for="apg_sms_settings[retardo]">
  						<?php esc_html_e( 'Order on-hold delay (minutes)', 'woocommerce-apg-sms-notifications' ); ?>:
-     					<span class="woocommerce-help-tip" data-tip="<?php esc_attr_e( 'Send this message after X minutes, if the order is still on-hold, instead of sending it immediately.', 'woocommerce-apg-sms-notifications' ); ?>"/>
+     					<span class="woocommerce-help-tip" data-tip="<?php esc_attr_e( 'Send this message after X minutes, if the order is still on-hold, instead of sending it immediately.', 'woocommerce-apg-sms-notifications' ); ?>"></span>
  					</label>
  				</th>
  				<td class="forminp forminp-number"><input type="text" id="apg_sms_settings[retardo]" name="apg_sms_settings[retardo]" size="50" value="<?php echo ( isset( $apg_sms_settings[ 'retardo' ] ) ) ? esc_attr( $apg_sms_settings[ 'retardo' ] ) : ''; ?>" tabindex="<?php echo esc_attr( $tab++ ); ?>"/>
@@ -200,7 +201,7 @@ global $apg_sms_settings, $apg_sms;
 				<th scope="row" class="titledesc">
 					<label for="apg_sms_settings[temporizador]">
 						<?php esc_html_e( 'Order on-hold timer (hours)', 'woocommerce-apg-sms-notifications' ); ?>:
-						<span class="woocommerce-help-tip" data-tip="<?php esc_attr_e( 'You can timer this message every X hours. Leave blank to disable.', 'woocommerce-apg-sms-notifications' ); ?>"/>
+						<span class="woocommerce-help-tip" data-tip="<?php esc_attr_e( 'You can timer this message every X hours. Leave blank to disable.', 'woocommerce-apg-sms-notifications' ); ?>"></span>
                     </label>
                 </th>
 				<td class="forminp forminp-number"><input type="text" id="apg_sms_settings[temporizador]" name="apg_sms_settings[temporizador]" size="50" value="<?php echo ( isset( $apg_sms_settings[ 'temporizador' ] ) ) ? esc_attr( $apg_sms_settings[ 'temporizador' ] ) : ''; ?>" tabindex="<?php echo esc_attr( $tab++ ); ?>"/>
@@ -227,8 +228,7 @@ global $apg_sms_settings, $apg_sms;
 						<span class="woocommerce-help-tip" data-tip="<?php esc_attr_e( 'Check if you want to receive debug information from your SMS gateway', 'woocommerce-apg-sms-notifications' ); ?>"></span>
 					</label>
 				</th>
-				<td class="forminp forminp-number"><input id="apg_sms_settings[debug]" name="apg_sms_settings[debug]" type="checkbox" class="debug" value="1" <?php echo ( isset( $apg_sms_settings[ 'debug' ] ) && $apg_sms_settings[ 'debug' ] == "1" ) ? 'checked="checked"' : ''; ?> tabindex="
-					<?php echo esc_attr( $tab++ ); ?>" /></td>
+				<td class="forminp forminp-number"><input id="apg_sms_settings[debug]" name="apg_sms_settings[debug]" type="checkbox" class="debug" value="1" <?php checked( isset( $apg_sms_settings['debug'] ) ? $apg_sms_settings['debug'] : '', 1 ); ?> tabindex="<?php echo esc_attr( $tab++ ); ?>" /></td>
 			</tr>
 			<tr valign="top" class="campo_debug">
 				<th scope="row" class="titledesc">
@@ -242,7 +242,7 @@ global $apg_sms_settings, $apg_sms;
 			</tr>
 		</table>
 		<p class="submit">
-			<input class="button-primary" type="submit" value="<?php esc_html_e( 'Save Changes', 'woocommerce-apg-sms-notifications' ); ?>" name="submit" id="submit" tabindex="<?php echo esc_attr( $tab++ ); ?>"/>
+			<input class="button-primary" type="submit" value="<?php esc_attr_e( 'Save Changes', 'woocommerce-apg-sms-notifications' ); ?>" name="submit" id="submit" tabindex="<?php echo esc_attr( $tab++ ); ?>"/>
 		</p>
 	</form>
 </div>

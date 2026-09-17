@@ -3,6 +3,44 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Oculta las credenciales de un informe de depuracion.
+ *
+ * El informe se envia por correo sin cifrar, asi que las claves, contrasenas y
+ * cabeceras de autorizacion no pueden viajar en claro. Recorre el array en
+ * profundidad y sustituye el valor de todo campo cuyo nombre delate una
+ * credencial, conservando el resto para que el informe siga sirviendo.
+ *
+ * @param mixed $datos Datos del informe.
+ * @return mixed Datos con las credenciales sustituidas.
+ */
+function apg_sms_oculta_credenciales( $datos ) {
+	$sensibles = [ 'pass', 'passwd', 'password', 'contrasena', 'authkey', 'auth_key', 'apikey', 'api_key', 'apisecret', 'api_secret', 'secret', 'token', 'authorization', 'clave', 'client_pass', 'application_token', 'authtoken' ];
+
+	if ( ! is_array( $datos ) ) {
+		return $datos;
+	}
+
+	foreach ( $datos as $clave => $valor ) {
+		if ( is_array( $valor ) ) {
+			$datos[ $clave ] = apg_sms_oculta_credenciales( $valor );
+
+			continue;
+		}
+
+		$normalizada = strtolower( (string) $clave );
+		foreach ( $sensibles as $sensible ) {
+			if ( false !== strpos( $normalizada, $sensible ) ) {
+				$datos[ $clave ] = '***';
+
+				break;
+			}
+		}
+	}
+
+	return $datos;
+}
+
+/**
  * Envia un SMS segun el proveedor configurado.
  *
  * @param array<string,mixed> $apg_sms_settings Ajustes del plugin.
@@ -13,6 +51,8 @@ defined( 'ABSPATH' ) || exit;
  * @return void
  */
 function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $propietario = false ) {
+    $apg_sms_settings   = apg_sms_completa_ajustes( $apg_sms_settings ); // Cada proveedor lee sus propias claves: evita avisos si aun no estan configuradas
+
     // Gestiona los estados
 	switch ( $estado ) {
 		case "on-hold":
@@ -46,6 +86,8 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
     }
 
     // Gestiona los proveedores
+    $respuesta  = null; // Queda a null si el servicio configurado ya no existe
+
 	switch ( $apg_sms_settings[ 'servicio' ] ) {
 		case "adlinks":
  			$url						= add_query_arg( [
@@ -55,7 +97,7 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
  				'sender'					=> $apg_sms_settings[ 'identificador_adlinks' ],
  				'route'						=> $apg_sms_settings[ 'ruta_adlinks' ],
  				'country'					=> 0,
- 			], 'http://adlinks.websmsc.com/api/sendhttp.php' );
+ 			], 'http://adlinks.websmsc.com/api/sendhttp.php' ); // No es HTTPS a proposito: el certificado del host esta caducado desde 2021-01-09 (y es de otro dominio, CN=www.walkover.in), asi que wp_remote_get() lo rechazaria. Comprobado el 2026-09-17.
             
  			$respuesta					= wp_remote_get( $url );
             
@@ -67,7 +109,7 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
  				'passwd'                   => $apg_sms_settings[ 'contrasena_altiria' ],
  				'dest'                     => $telefono,
  				'msg'                      => apg_sms_codifica_el_mensaje( $mensaje ),
- 			], 'http://www.altiria.net/api/http' );
+ 			], 'https://www.altiria.net/api/http' ); // Certificado valido comprobado el 2026-09-17.
             
  			$respuesta					= wp_remote_post( $url );
             
@@ -160,10 +202,10 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
  				'country'					=> $apg_sms_settings[ 'servidor_moplet' ],
             ];
             // DLT
-            if ( $apg_sms_settings[ 'dlt_moplet' ] ) { // Sólo si existe el valor
+            if ( ! empty( $apg_sms_settings[ 'dlt_moplet' ] ) && isset( $apg_sms_settings[ 'dlt_' . $estado ] ) ) { // Sólo si existe el valor
  				$argumentos[ 'DLT_TE_ID' ] = $apg_sms_settings[ 'dlt_' . $estado ];
             }
-            $url						= add_query_arg( $argumentos, 'http://sms.moplet.com/api/sendhttp.php' );
+            $url						= add_query_arg( $argumentos, 'http://sms.moplet.com/api/sendhttp.php' ); // Mismo caso que Adlinks Labs: certificado caducado desde 2021-01-09 y emitido para otro dominio. Comprobado el 2026-09-17.
             
  			$respuesta					= wp_remote_get( $url );
             
@@ -177,7 +219,7 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
                 'route' 					=> $apg_sms_settings[ 'ruta_msg91' ],
             ];
             // DLT
-            if ( $apg_sms_settings[ 'dlt_msg91' ] ) { // Sólo si existe el valor
+            if ( ! empty( $apg_sms_settings[ 'dlt_msg91' ] ) && isset( $apg_sms_settings[ 'dlt_' . $estado ] ) ) { // Sólo si existe el valor
  				$argumentos[ 'body' ][ 'DLT_TE_ID' ] = $apg_sms_settings[ 'dlt_' . $estado ];
             }
             
@@ -209,7 +251,7 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
 				'type'						=> 'sms',
 			] );
             
-			$respuesta					= wp_remote_post( "https://api.plivo.com/v1/Account/" . $apg_sms_settings[ 'usuario_plivo' ] . "/Message/", $argumentos );
+			$respuesta					= wp_remote_post( "https://api.plivo.com/v1/Account/" . rawurlencode( $apg_sms_settings[ 'usuario_plivo' ] ) . "/Message/", $argumentos );
             
 			break;
 		case "routee":
@@ -222,8 +264,8 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
 			];
             
 			$respuesta					= wp_remote_post( "https://auth.routee.net/oauth/token", $argumentos );
-			$routee						= json_decode( $respuesta[ 'body' ] );
-			
+			$routee						= is_wp_error( $respuesta ) ? null : json_decode( wp_remote_retrieve_body( $respuesta ) ); // Un fallo de red devuelve WP_Error, no un array
+
             if ( isset( $routee->access_token ) ) {
                 $argumentos[ 'headers' ]	= [
                     'Authorization'				=> 'Bearer ' . $routee->access_token,
@@ -274,7 +316,7 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
 			];
             
 			$respuesta					= wp_remote_post( "https://api.sms.cx/oauth/token", $argumentos );
-			$smscx						= json_decode( $respuesta[ 'body' ] );
+			$smscx						= is_wp_error( $respuesta ) ? null : json_decode( wp_remote_retrieve_body( $respuesta ) ); // Un fallo de red devuelve WP_Error, no un array
             
             if ( isset( $smscx->access_token ) ) {
                 $pais                       = explode ( ":", get_option( 'woocommerce_default_country' ) );
@@ -357,14 +399,17 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
             
 			break;			
 		case "twilio":
-			$argumentos[ 'headers' ]	= [ 'Accept-Charset' => 'utf-8' ];
+			$argumentos[ 'headers' ]	= [
+				'Accept-Charset'			=> 'utf-8',
+				'Authorization'				=> 'Basic ' . base64_encode( $apg_sms_settings[ 'clave_twilio' ] . ":" . $apg_sms_settings[ 'identificador_twilio' ] ), // Autenticacion en la cabecera y no en la URL: asi el token no acaba en los registros de acceso ni en el historial de peticiones
+			];
 			$argumentos[ 'body' ]		= [ 
 				'To' 						=> $telefono,
 				'From' 						=> $apg_sms_settings[ 'telefono_twilio' ],
 				'Body' 						=> $mensaje,
             ];
             
-			$respuesta					= wp_remote_post( "https://" . $apg_sms_settings[ 'clave_twilio' ] . ":" . $apg_sms_settings[ 'identificador_twilio' ] . "@api.twilio.com/2010-04-01/Accounts/" . $apg_sms_settings[ 'clave_twilio' ] . "/Messages", $argumentos );
+			$respuesta					= wp_remote_post( "https://api.twilio.com/2010-04-01/Accounts/" . rawurlencode( $apg_sms_settings[ 'clave_twilio' ] ) . "/Messages", $argumentos );
             
 			break;
 		case "twizo":
@@ -425,13 +470,14 @@ function apg_sms_envia_sms( $apg_sms_settings, $telefono, $mensaje, $estado, $pr
 	}
 
     // Envía el correo con el informe
-	if ( isset( $apg_sms_settings[ 'debug' ] ) && $apg_sms_settings[ 'debug' ] == "1" && isset( $apg_sms_settings[ 'campo_debug' ] ) ) {
+	$destinatario   = isset( $apg_sms_settings[ 'campo_debug' ] ) ? sanitize_email( $apg_sms_settings[ 'campo_debug' ] ) : '';
+	if ( isset( $apg_sms_settings[ 'debug' ] ) && $apg_sms_settings[ 'debug' ] == "1" && is_email( $destinatario ) ) {
 		$correo	= __( 'Mobile number:', 'woocommerce-apg-sms-notifications' ) . "\r\n" . $telefono . "\r\n\r\n";
 		$correo	.= __( 'Message: ', 'woocommerce-apg-sms-notifications' ) . "\r\n" . $mensaje . "\r\n\r\n"; 
         if ( isset( $argumentos ) ) {
-            $correo	.= __( 'Arguments: ', 'woocommerce-apg-sms-notifications' ) . "\r\n" . wp_json_encode( $argumentos, JSON_PRETTY_PRINT );
+            $correo	.= __( 'Arguments: ', 'woocommerce-apg-sms-notifications' ) . "\r\n" . wp_json_encode( apg_sms_oculta_credenciales( $argumentos ), JSON_PRETTY_PRINT );
         }
-		$correo	.= __( 'Gateway answer: ', 'woocommerce-apg-sms-notifications' ) . "\r\n" . wp_json_encode( $respuesta, JSON_PRETTY_PRINT );
-		wp_mail( $apg_sms_settings[ 'campo_debug' ], 'WC - APG SMS Notifications', $correo, 'charset=UTF-8' . "\r\n" ); 
+		$correo	.= __( 'Gateway answer: ', 'woocommerce-apg-sms-notifications' ) . "\r\n" . wp_json_encode( is_wp_error( $respuesta ) ? $respuesta->get_error_message() : $respuesta, JSON_PRETTY_PRINT );
+		wp_mail( $destinatario, 'WC - APG SMS Notifications', $correo, [ 'Content-Type: text/plain; charset=UTF-8' ] ); 
 	}
 }

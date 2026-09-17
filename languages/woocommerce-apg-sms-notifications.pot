@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC - APG SMS Notifications\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-apg-sms-notifications\n"
-"POT-Creation-Date: 2026-06-26 23:47+0000\n"
+"POT-Creation-Date: 2026-09-17 15:21+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -40,29 +40,29 @@ msgstr ""
 msgid "https://artprojectgroup.es/"
 msgstr ""
 
-#: apg-sms.php:114
+#: apg-sms.php:121
 msgid "APG SMS Notifications"
 msgstr ""
 
-#: apg-sms.php:114
+#: apg-sms.php:121
 msgid "SMS Notifications"
 msgstr ""
 
-#: apg-sms.php:413
+#: apg-sms.php:464
 msgid "This plugin requires WooCommerce to be active to run!"
 msgstr ""
 
 #. translators: %s: URL of the plugin settings page.
-#: includes/admin/funciones-apg.php:164
+#: includes/admin/funciones-apg.php:206
 msgid "<strong>WC - APG SMS Notifications:</strong> the <strong>MobTexting</strong> gateway has been discontinued by the provider and removed in this version. Please <a href=\"%s\">choose a different SMS gateway</a> to keep sending messages."
 msgstr ""
 
 #. translators: 1: gateway change (e.g. "Clockwork → TextAnywhere"), 2: URL of the plugin settings page.
-#: includes/admin/funciones-apg.php:167
+#: includes/admin/funciones-apg.php:212
 msgid "<strong>WC - APG SMS Notifications:</strong> your SMS gateway has been migrated to its successor (<strong>%1$s</strong>). Please <a href=\"%2$s\">review your gateway settings</a> and enter the new provider credentials so your SMS messages keep working."
 msgstr ""
 
-#: includes/admin/funciones-apg.php:171
+#: includes/admin/funciones-apg.php:216
 msgid "Dismiss this notice"
 msgstr ""
 
@@ -81,347 +81,347 @@ msgid "Settings"
 msgstr ""
 
 #. translators: %s: Plugin name.
-#: includes/admin/funciones-apg.php:89
+#: includes/admin/funciones-apg.php:84
 msgid "Unknown rating"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:101
-#: includes/admin/funciones-formulario.php:107
+#: includes/admin/ajustes.php:102
+#: includes/admin/ajustes.php:108
 msgid "template ID"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:114
+#: includes/admin/ajustes.php:115
 msgid "authentication ID"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:120
-#: includes/admin/funciones-formulario.php:135
+#: includes/admin/ajustes.php:121
+#: includes/admin/ajustes.php:136
 msgid "application secret"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:126
+#: includes/admin/ajustes.php:127
 msgid "short URL"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:127
+#: includes/admin/ajustes.php:128
 msgid "unsubscribe link"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:161
+#: includes/admin/ajustes.php:162
 msgid "account Sid"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:191
-#: includes/admin/funciones-formulario.php:198
+#: includes/admin/ajustes.php:203
+#: includes/admin/ajustes.php:210
 msgid "International"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:192
+#: includes/admin/ajustes.php:204
 msgid "UK"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:193
-#: includes/admin/funciones-formulario.php:199
+#: includes/admin/ajustes.php:205
+#: includes/admin/ajustes.php:211
 msgid "USA"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:194
+#: includes/admin/ajustes.php:206
 msgid "South Africa"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:195
+#: includes/admin/ajustes.php:207
 msgid "Spain"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:200
+#: includes/admin/ajustes.php:212
 msgid "India"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:207
+#: includes/admin/ajustes.php:219
 msgid "Default"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:212
+#: includes/admin/ajustes.php:224
 msgid "Singapore"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:213
+#: includes/admin/ajustes.php:225
 msgid "Germany"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:216
+#: includes/admin/ajustes.php:228
 msgid "Yes"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:217
+#: includes/admin/ajustes.php:229
 msgid "No"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:251
+#: includes/admin/ajustes.php:255
 msgid "All messages"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:252
+#: includes/admin/ajustes.php:256
 msgid "Owner custom message"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:253
+#: includes/admin/ajustes.php:257
 msgid "Order pending custom message"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:254
+#: includes/admin/ajustes.php:258
 msgid "Order failed custom message"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:255
+#: includes/admin/ajustes.php:259
 msgid "Order on-hold custom message"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:256
+#: includes/admin/ajustes.php:260
 msgid "Order processing custom message"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:257
+#: includes/admin/ajustes.php:261
 msgid "Order completed custom message"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:258
+#: includes/admin/ajustes.php:262
 msgid "Order refunded custom message"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:259
+#: includes/admin/ajustes.php:263
 msgid "Order cancelled custom message"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:260
+#: includes/admin/ajustes.php:264
 msgid "Notes custom message"
 msgstr ""
 
 #. translators: 1: Field label, 2: Provider name.
-#: includes/admin/funciones-formulario.php:297
+#: includes/admin/funciones-formulario.php:97
 msgid "The %1$s for your account in %2$s"
 msgstr ""
 
 #. translators: %1$s: Order number.
-#: includes/admin/funciones-formulario.php:411
+#: includes/admin/funciones-formulario.php:211
 msgid "Order No. %1$s received on "
 msgstr ""
 
 #. translators: %1$s: Order number.
-#: includes/admin/funciones-formulario.php:413
-#: includes/admin/funciones-formulario.php:415
-#: includes/admin/funciones-formulario.php:419
-#: includes/admin/funciones-formulario.php:421
-#: includes/admin/funciones-formulario.php:423
-#: includes/admin/funciones-formulario.php:425
+#: includes/admin/funciones-formulario.php:213
+#: includes/admin/funciones-formulario.php:215
+#: includes/admin/funciones-formulario.php:219
+#: includes/admin/funciones-formulario.php:221
+#: includes/admin/funciones-formulario.php:223
+#: includes/admin/funciones-formulario.php:225
 msgid "Thank you for shopping with us! Your order No. %1$s is now: "
 msgstr ""
 
 #. translators: 1: Order number, 2: Order date.
-#: includes/admin/funciones-formulario.php:417
+#: includes/admin/funciones-formulario.php:217
 msgid "Your order No. %1$s is received on %2$s. Thank you for shopping with us!"
 msgstr ""
 
 #. translators: %1$s: Order number.
-#: includes/admin/funciones-formulario.php:427
+#: includes/admin/funciones-formulario.php:227
 msgid "A note has just been added to your order No. %1$s: "
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:432
+#: includes/admin/funciones-formulario.php:232
 msgid "Pending"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:433
+#: includes/admin/funciones-formulario.php:233
 msgid "Failed"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:434
+#: includes/admin/funciones-formulario.php:234
 msgid "Processing"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:435
+#: includes/admin/funciones-formulario.php:235
 msgid "Completed"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:436
+#: includes/admin/funciones-formulario.php:236
 msgid "Refunded"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:437
+#: includes/admin/funciones-formulario.php:237
 msgid "Cancelled"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:452
+#: includes/admin/funciones-formulario.php:252
 msgid "Owner custom message template ID"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:453
+#: includes/admin/funciones-formulario.php:253
 msgid "Order pending custom message template ID"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:454
+#: includes/admin/funciones-formulario.php:254
 msgid "Order failed custom message template ID"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:455
+#: includes/admin/funciones-formulario.php:255
 msgid "Order on-hold custom message template ID"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:456
+#: includes/admin/funciones-formulario.php:256
 msgid "Order processing custom message template ID"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:457
+#: includes/admin/funciones-formulario.php:257
 msgid "Order completed custom message template ID"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:458
+#: includes/admin/funciones-formulario.php:258
 msgid "Order refunded custom message template ID"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:459
+#: includes/admin/funciones-formulario.php:259
 msgid "Order cancelled custom message template ID"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:460
+#: includes/admin/funciones-formulario.php:260
 msgid "Notes custom message template ID"
 msgstr ""
 
 #. translators: The %%tokens%% below are placeholders the user can add to SMS templates.
-#: includes/admin/funciones-formulario.php:466
+#: includes/admin/funciones-formulario.php:266
 #: includes/formulario.php:129
 msgid "You can customize your message. Remember that you can use these variables: %%id%%, %%order_key%%, %%billing_first_name%%, %%billing_last_name%%, %%billing_company%%, %%billing_address_1%%, %%billing_address_2%%, %%billing_city%%, %%billing_postcode%%, %%billing_country%%, %%billing_state%%, %%billing_email%%, %%billing_phone%%, %%shipping_first_name%%, %%shipping_last_name%%, %%shipping_company%%, %%shipping_address_1%%, %%shipping_address_2%%, %%shipping_city%%, %%shipping_postcode%%, %%shipping_country%%, %%shipping_state%%, %%shipping_method%%, %%shipping_method_title%%, %%payment_method%%, %%payment_method_title%%, %%order_discount%%, %%cart_discount%%, %%order_tax%%, %%order_shipping%%, %%order_shipping_tax%%, %%order_total%%, %%status%%, %%prices_include_tax%%, %%tax_display_cart%%, %%display_totals_ex_tax%%, %%display_cart_ex_tax%%, %%order_date%%, %%modified_date%%, %%customer_message%%, %%customer_note%%, %%post_status%%, %%shop_name%%, %%order_product%% and %%note%%."
 msgstr ""
 
 #. translators: %s: Custom message label.
-#: includes/admin/funciones-formulario.php:468
-#: includes/admin/funciones-formulario.php:470
+#: includes/admin/funciones-formulario.php:268
+#: includes/admin/funciones-formulario.php:270
 msgid "%s:"
 msgstr ""
 
 #. translators: %s: Custom message label.
 #. translators: %s: Order status label.
-#: includes/admin/funciones-formulario.php:472
+#: includes/admin/funciones-formulario.php:272
 #: includes/formulario.php:144
 msgid "Template ID for %s"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:59
-#: includes/admin/funciones-formulario.php:97
-#: includes/admin/funciones-formulario.php:104
+#: includes/admin/ajustes.php:60
+#: includes/admin/ajustes.php:98
+#: includes/admin/ajustes.php:105
 msgid "authentication key"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:60
-#: includes/admin/funciones-formulario.php:99
-#: includes/admin/funciones-formulario.php:106
+#: includes/admin/ajustes.php:61
+#: includes/admin/ajustes.php:100
+#: includes/admin/ajustes.php:107
 msgid "route"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:61
-#: includes/admin/funciones-formulario.php:70
-#: includes/admin/funciones-formulario.php:84
-#: includes/admin/funciones-formulario.php:94
-#: includes/admin/funciones-formulario.php:98
-#: includes/admin/funciones-formulario.php:105
-#: includes/admin/funciones-formulario.php:116
-#: includes/admin/funciones-formulario.php:121
-#: includes/admin/funciones-formulario.php:136
-#: includes/admin/funciones-formulario.php:141
-#: includes/admin/funciones-formulario.php:150
-#: includes/admin/funciones-formulario.php:154
-#: includes/admin/funciones-formulario.php:158
-#: includes/admin/funciones-formulario.php:167
+#: includes/admin/ajustes.php:62
+#: includes/admin/ajustes.php:71
+#: includes/admin/ajustes.php:85
+#: includes/admin/ajustes.php:95
+#: includes/admin/ajustes.php:99
+#: includes/admin/ajustes.php:106
+#: includes/admin/ajustes.php:117
+#: includes/admin/ajustes.php:122
+#: includes/admin/ajustes.php:137
+#: includes/admin/ajustes.php:142
+#: includes/admin/ajustes.php:151
+#: includes/admin/ajustes.php:155
+#: includes/admin/ajustes.php:159
+#: includes/admin/ajustes.php:168
 msgid "sender ID"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:64
-#: includes/admin/funciones-formulario.php:74
-#: includes/admin/funciones-formulario.php:87
-#: includes/admin/funciones-formulario.php:92
-#: includes/admin/funciones-formulario.php:124
-#: includes/admin/funciones-formulario.php:130
-#: includes/admin/funciones-formulario.php:139
-#: includes/admin/funciones-formulario.php:144
-#: includes/admin/funciones-formulario.php:171
-#: includes/admin/funciones-formulario.php:175
-#: includes/admin/funciones-formulario.php:179
+#: includes/admin/ajustes.php:65
+#: includes/admin/ajustes.php:75
+#: includes/admin/ajustes.php:88
+#: includes/admin/ajustes.php:93
+#: includes/admin/ajustes.php:125
+#: includes/admin/ajustes.php:131
+#: includes/admin/ajustes.php:140
+#: includes/admin/ajustes.php:145
+#: includes/admin/ajustes.php:172
+#: includes/admin/ajustes.php:176
+#: includes/admin/ajustes.php:180
 msgid "username"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:65
-#: includes/admin/funciones-formulario.php:75
-#: includes/admin/funciones-formulario.php:88
-#: includes/admin/funciones-formulario.php:93
-#: includes/admin/funciones-formulario.php:125
-#: includes/admin/funciones-formulario.php:131
-#: includes/admin/funciones-formulario.php:140
-#: includes/admin/funciones-formulario.php:145
-#: includes/admin/funciones-formulario.php:172
-#: includes/admin/funciones-formulario.php:176
-#: includes/admin/funciones-formulario.php:180
+#: includes/admin/ajustes.php:66
+#: includes/admin/ajustes.php:76
+#: includes/admin/ajustes.php:89
+#: includes/admin/ajustes.php:94
+#: includes/admin/ajustes.php:126
+#: includes/admin/ajustes.php:132
+#: includes/admin/ajustes.php:141
+#: includes/admin/ajustes.php:146
+#: includes/admin/ajustes.php:173
+#: includes/admin/ajustes.php:177
+#: includes/admin/ajustes.php:181
 msgid "password"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:68
-#: includes/admin/funciones-formulario.php:119
-#: includes/admin/funciones-formulario.php:134
+#: includes/admin/ajustes.php:69
+#: includes/admin/ajustes.php:120
+#: includes/admin/ajustes.php:135
 msgid "application ID"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:69
-#: includes/admin/funciones-formulario.php:111
-#: includes/admin/funciones-formulario.php:115
-#: includes/admin/funciones-formulario.php:162
+#: includes/admin/ajustes.php:70
+#: includes/admin/ajustes.php:112
+#: includes/admin/ajustes.php:116
+#: includes/admin/ajustes.php:163
 msgid "authentication Token"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:71
+#: includes/admin/ajustes.php:72
 msgid "unicode"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:76
-#: includes/admin/funciones-formulario.php:100
-#: includes/admin/funciones-formulario.php:168
+#: includes/admin/ajustes.php:77
+#: includes/admin/ajustes.php:101
+#: includes/admin/ajustes.php:169
 msgid "host"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:79
-#: includes/admin/funciones-formulario.php:110
-#: includes/admin/funciones-formulario.php:148
-#: includes/admin/funciones-formulario.php:153
-#: includes/admin/funciones-formulario.php:157
-#: includes/admin/funciones-formulario.php:166
+#: includes/admin/ajustes.php:80
+#: includes/admin/ajustes.php:111
+#: includes/admin/ajustes.php:149
+#: includes/admin/ajustes.php:154
+#: includes/admin/ajustes.php:158
+#: includes/admin/ajustes.php:167
 msgid "key"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:82
-#: includes/admin/funciones-formulario.php:149
+#: includes/admin/ajustes.php:83
+#: includes/admin/ajustes.php:150
 msgid "client ID"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:83
+#: includes/admin/ajustes.php:84
 msgid "client password"
 msgstr ""
 
-#: includes/admin/funciones-formulario.php:89
-#: includes/admin/funciones-formulario.php:163
+#: includes/admin/ajustes.php:90
+#: includes/admin/ajustes.php:164
 msgid "mobile number"
 msgstr ""
 
-#: includes/admin/proveedores.php:429
+#: includes/admin/proveedores.php:475
 msgid "Mobile number:"
 msgstr ""
 
-#: includes/admin/proveedores.php:430
+#: includes/admin/proveedores.php:476
 msgid "Message: "
 msgstr ""
 
-#: includes/admin/proveedores.php:432
+#: includes/admin/proveedores.php:478
 msgid "Arguments: "
 msgstr ""
 
-#: includes/admin/proveedores.php:434
+#: includes/admin/proveedores.php:480
 msgid "Gateway answer: "
 msgstr ""
 
@@ -429,8 +429,8 @@ msgstr ""
 msgid "If you enjoy this plugin and find it helpful, please make a donation:"
 msgstr ""
 
-#: includes/cuadro-informacion.php:31
 #: includes/admin/funciones-apg.php:30
+#: includes/cuadro-informacion.php:31
 msgid "Make a donation by "
 msgstr ""
 
@@ -438,12 +438,10 @@ msgstr ""
 msgid "Follow us:"
 msgstr ""
 
+#: includes/admin/funciones-apg.php:32
 #: includes/cuadro-informacion.php:49
 #: includes/cuadro-informacion.php:50
 #: includes/cuadro-informacion.php:51
-#: includes/admin/funciones-apg.php:32
-#: includes/admin/funciones-apg.php:32
-#: includes/admin/funciones-apg.php:32
 msgid "Follow us on "
 msgstr ""
 
@@ -451,8 +449,8 @@ msgstr ""
 msgid "More plugins:"
 msgstr ""
 
-#: includes/cuadro-informacion.php:59
 #: includes/admin/funciones-apg.php:33
+#: includes/cuadro-informacion.php:59
 msgid "More plugins on "
 msgstr ""
 
@@ -460,10 +458,9 @@ msgstr ""
 msgid "Contact us:"
 msgstr ""
 
+#: includes/admin/funciones-apg.php:34
 #: includes/cuadro-informacion.php:71
 #: includes/cuadro-informacion.php:72
-#: includes/admin/funciones-apg.php:34
-#: includes/admin/funciones-apg.php:34
 msgid "Contact us by "
 msgstr ""
 
@@ -471,16 +468,15 @@ msgstr ""
 msgid "Documentation and Support:"
 msgstr ""
 
-#: includes/cuadro-informacion.php:81
 #: includes/admin/funciones-apg.php:58
+#: includes/cuadro-informacion.php:81
 msgid "Support"
 msgstr ""
 
 #. translators: %s is the plugin name.
 #. translators: %s: Plugin name.
+#: includes/admin/funciones-apg.php:83
 #: includes/cuadro-informacion.php:92
-#: includes/admin/funciones-apg.php:89
-#: includes/admin/funciones-apg.php:104
 msgid "Please, rate %s:"
 msgstr ""
 
@@ -522,27 +518,27 @@ msgstr ""
 msgid "APG SMS Notifications Options."
 msgstr ""
 
-#: includes/formulario.php:192
+#: includes/formulario.php:193
 msgid "Order on-hold delay (minutes)"
 msgstr ""
 
-#: includes/formulario.php:193
+#: includes/formulario.php:194
 msgid "Send this message after X minutes, if the order is still on-hold, instead of sending it immediately."
 msgstr ""
 
-#: includes/formulario.php:202
+#: includes/formulario.php:203
 msgid "Order on-hold timer (hours)"
 msgstr ""
 
-#: includes/formulario.php:203
+#: includes/formulario.php:204
 msgid "You can timer this message every X hours. Leave blank to disable."
 msgstr ""
 
-#: includes/formulario.php:226
+#: includes/formulario.php:227
 msgid "Send debug information?:"
 msgstr ""
 
-#: includes/formulario.php:227
+#: includes/formulario.php:228
 msgid "Check if you want to receive debug information from your SMS gateway"
 msgstr ""
 
@@ -618,3 +614,8 @@ msgstr ""
 msgid "Check if you want to send the SMS messages with full order product information"
 msgstr ""
 
+
+
+#: includes/admin/funciones-apg.php:209
+msgid "<strong>WC - APG SMS Notifications:</strong> the <strong>%1$s</strong> gateway is no longer reachable: the provider's API servers do not resolve any more, even though its documentation still lists them. Your SMS messages are not being delivered. Please <a href=\"%2$s\">choose a different SMS gateway</a>."
+msgstr ""

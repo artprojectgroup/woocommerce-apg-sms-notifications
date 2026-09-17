@@ -10,10 +10,12 @@ $tab    = 1;
 // WPML
 if ( $apg_sms_settings ) {    
     foreach ( $mensajes as $mensaje ) {
-        if ( function_exists( 'icl_register_string' ) || ! $wpml_activo ) { // Versión anterior a la 3.2
-            $$mensaje		= ( $wpml_activo ) ? icl_translate( 'apg_sms', $mensaje, esc_textarea( $apg_sms_settings[ $mensaje ] ) ) : esc_textarea( $apg_sms_settings[ $mensaje ] );
+        if ( apg_sms_wpml_cadenas_antiguas() || ! $wpml_activo ) { // API de cadenas de String Translation, o WPML no instalado
+            $texto_guardado	= isset( $apg_sms_settings[ $mensaje ] ) ? $apg_sms_settings[ $mensaje ] : '';
+            $$mensaje		= ( $wpml_activo ) ? icl_translate( 'apg_sms', $mensaje, esc_textarea( $texto_guardado ) ) : esc_textarea( $texto_guardado );
         } elseif ( $wpml_activo ) { // Versión 3.2 o superior
-            $$mensaje		= apply_filters( 'wpml_translate_single_string', esc_textarea( $apg_sms_settings[ $mensaje ] ), 'apg_sms', $mensaje );
+            $texto_guardado	= isset( $apg_sms_settings[ $mensaje ] ) ? $apg_sms_settings[ $mensaje ] : '';
+            $$mensaje		= apply_filters( 'wpml_translate_single_string', esc_textarea( $texto_guardado ), 'apg_sms', $mensaje );
         }
     }
 } else { // Inicializa variables
@@ -23,208 +25,17 @@ if ( $apg_sms_settings ) {
 }
 
 // Listado de proveedores SMS
-$listado_de_proveedores = [ 
-        "adlinks"           => "Adlinks Labs",
-        "altiria"           => "Altiria",
-        "bulkgate"          => "BulkGate",
-        "bulksms"           => "BulkSMS",
-        "clickatell"        => "Clickatell",
-        "clockwork"         => "TextAnywhere (Clockwork)",
-        "isms"              => "iSMS Malaysia",
-        "labsmobile"        => "LabsMobile",
-        "moplet"            => "Moplet",
-        "msg91"             => "MSG91",
-        "nexmo"             => "Vonage (Nexmo)",
-        "plivo"             => "Plivo",
-        "routee"            => "Routee",
-        "sendsms"           => "sendSMS.ro",
-        "sipdiscount"       => "SIP Discount",
-        "smscx"             => "SMS.CX (SMS Connexion)",
-        "smscountry"        => "SMS Country",
-        "smsdiscount"       => "SMS Discount",
-        "smslane"           => "SMS Lane ( Transactional SMS only )",
-        "solutions_infini"  => "Kaleyra (Solutions Infini)",
-        "springedge"        => "Spring Edge",
-        "twilio"            => "Twilio",
-        "twizo"             => "Silverstreet (Twizo)",
-        "voipbuster"        => "VoipBuster",
-        "voipbusterpro"     => "VoipBusterPro",
-        "voipstunt"         => "VoipStunt",
-];
+$listado_de_proveedores = apg_sms_proveedores_disponibles();
 asort( $listado_de_proveedores, SORT_NATURAL | SORT_FLAG_CASE ); // Ordena alfabeticamente los proveedores
 
 // Campos necesarios para cada proveedor
-$campos_de_proveedores      = [
-	"adlinks"			=> [
- 		"usuario_adlinks"                 => __( 'authentication key', 'woocommerce-apg-sms-notifications' ),
- 		"ruta_adlinks"                    => __( 'route', 'woocommerce-apg-sms-notifications' ),
- 		"identificador_adlinks"           => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
- 	],
-	"altiria"			=> [
- 		"usuario_altiria"                 => __( 'username', 'woocommerce-apg-sms-notifications' ),
- 		"contrasena_altiria"              => __( 'password', 'woocommerce-apg-sms-notifications' ),
- 	],
-	"bulkgate"			=> [
- 		"usuario_bulkgate"                => __( 'application ID', 'woocommerce-apg-sms-notifications' ),
- 		"clave_bulkgate"                  => __( 'authentication Token', 'woocommerce-apg-sms-notifications' ),
- 		"identificador_bulkgate"          => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
- 		"unicode_bulkgate"                => __( 'unicode', 'woocommerce-apg-sms-notifications' ),
-    ],
-	"bulksms" 			=> [ 
-		"usuario_bulksms"                 => __( 'username', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_bulksms"              => __( 'password', 'woocommerce-apg-sms-notifications' ),
-		"servidor_bulksms"                => __( 'host', 'woocommerce-apg-sms-notifications' ),
-	],
-	"clickatell" 		=> [ 
-		"identificador_clickatell"        => __( 'key', 'woocommerce-apg-sms-notifications' ),
-	],
-	"clockwork" 		=> [
-		"usuario_clockwork"               => __( 'client ID', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_clockwork"            => __( 'client password', 'woocommerce-apg-sms-notifications' ),
-		"identificador_clockwork"         => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
-	],
-	"isms" 				=> [ 
-		"usuario_isms"                    => __( 'username', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_isms"                 => __( 'password', 'woocommerce-apg-sms-notifications' ),
-		"telefono_isms"                   => __( 'mobile number', 'woocommerce-apg-sms-notifications' ),
-	],
-	"labsmobile"		=> [
-		"usuario_labsmobile"              => __( 'username', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_labsmobile"           => __( 'password', 'woocommerce-apg-sms-notifications' ),
-		"sid_labsmobile"                  => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
-	],
-	"moplet" 			=> [
-		"clave_moplet"                    => __( 'authentication key', 'woocommerce-apg-sms-notifications' ),
-		"identificador_moplet"            => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
-		"ruta_moplet"                     => __( 'route', 'woocommerce-apg-sms-notifications' ),
-		"servidor_moplet"                 => __( 'host', 'woocommerce-apg-sms-notifications' ),
-		"dlt_moplet"                      => __( 'template ID', 'woocommerce-apg-sms-notifications' ),
-	],
-	"msg91" 			=> [ 
-		"clave_msg91"                     => __( 'authentication key', 'woocommerce-apg-sms-notifications' ),
-		"identificador_msg91"             => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
-		"ruta_msg91"                      => __( 'route', 'woocommerce-apg-sms-notifications' ),
-		"dlt_msg91"                       => __( 'template ID', 'woocommerce-apg-sms-notifications' ),
-    ],
-	"nexmo" 			=> [ 
-		"clave_nexmo"                     => __( 'key', 'woocommerce-apg-sms-notifications' ),
-		"identificador_nexmo"             => __( 'authentication Token', 'woocommerce-apg-sms-notifications' ),
-	],
-	"plivo"				=> [
-		"usuario_plivo"                   => __( 'authentication ID', 'woocommerce-apg-sms-notifications' ),
-		"clave_plivo"                     => __( 'authentication Token', 'woocommerce-apg-sms-notifications' ),
-		"identificador_plivo"             => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
-	],
-	"routee"			=> [ 
-		"usuario_routee"                  => __( 'application ID', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_routee"               => __( 'application secret', 'woocommerce-apg-sms-notifications' ),
-		"identificador_routee"            => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
-	], 
-	"sendsms"           => [ 
-		"usuario_sendsms"                 => __( 'username', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_sendsms"              => __( 'password', 'woocommerce-apg-sms-notifications' ),
-		"short_sendsms"                   => __( 'short URL', 'woocommerce-apg-sms-notifications' ),
-		"gdpr_sendsms"                    => __( 'unsubscribe link', 'woocommerce-apg-sms-notifications' ),
-	], 
-	"sipdiscount"		=> [ 
-		"usuario_sipdiscount"             => __( 'username', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_sipdiscount"          => __( 'password', 'woocommerce-apg-sms-notifications' ),
-	], 
-	"smscx"            => [ 
-		"usuario_smscx"                   => __( 'application ID', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_smscx"                => __( 'application secret', 'woocommerce-apg-sms-notifications' ),
-		"identificador_smscx"             => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
-	],
-	"smscountry" 		=> [ 
-		"usuario_smscountry"              => __( 'username', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_smscountry"           => __( 'password', 'woocommerce-apg-sms-notifications' ),
-		"sid_smscountry"                  => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
-	],
-	"smsdiscount"		=> [ 
-		"usuario_smsdiscount"             => __( 'username', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_smsdiscount"          => __( 'password', 'woocommerce-apg-sms-notifications' ),
-	], 
-	"smslane" 			=> [ 
-		"usuario_smslane"                 => __( 'key', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_smslane"              => __( 'client ID', 'woocommerce-apg-sms-notifications' ),
-		"sid_smslane"                     => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
-	],
-	"solutions_infini" 	=> [ 
-		"clave_solutions_infini"          => __( 'key', 'woocommerce-apg-sms-notifications' ),
-		"identificador_solutions_infini"  => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
-	],
-	"springedge" 		=> [ 
-		"clave_springedge"                => __( 'key', 'woocommerce-apg-sms-notifications' ),
-		"identificador_springedge"        => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
-	],
-	"twilio" 			=> [ 
-		"clave_twilio"                    => __( 'account Sid', 'woocommerce-apg-sms-notifications' ),
-		"identificador_twilio"            => __( 'authentication Token', 'woocommerce-apg-sms-notifications' ),
-		"telefono_twilio"                 => __( 'mobile number', 'woocommerce-apg-sms-notifications' ),
-	],
-	"twizo" 			=> [ 
-		"clave_twizo"                     => __( 'key', 'woocommerce-apg-sms-notifications' ),
-		"identificador_twizo"             => __( 'sender ID', 'woocommerce-apg-sms-notifications' ),
-		"servidor_twizo"                  => __( 'host', 'woocommerce-apg-sms-notifications' ),
-	],
-	"voipbuster"		=> [ 
-		"usuario_voipbuster"              => __( 'username', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_voipbuster"           => __( 'password', 'woocommerce-apg-sms-notifications' ),
-	], 
-	"voipbusterpro"		=> [ 
-		"usuario_voipbusterpro"           => __( 'username', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_voipbusterpro"        => __( 'password', 'woocommerce-apg-sms-notifications' ),
-	], 
-	"voipstunt"			=> [ 
-		"usuario_voipstunt"               => __( 'username', 'woocommerce-apg-sms-notifications' ),
-		"contrasena_voipstunt"            => __( 'password', 'woocommerce-apg-sms-notifications' ),
-	], 
-];
+$campos_de_proveedores = apg_sms_campos_de_cada_proveedor();
 
-// Opciones de campos de selección de los proveedores
-$opciones_de_proveedores        = [
-	"ruta_adlinks"		=> [
-		1						=> 1, 
-		4						=> 4,
-	],
-	"servidor_bulksms"	=> [
-		"bulksms.vsms.net"		=> __( 'International', 'woocommerce-apg-sms-notifications' ), 
-		"www.bulksms.co.uk"		=> __( 'UK', 'woocommerce-apg-sms-notifications' ),
-		"usa.bulksms.com"		=> __( 'USA', 'woocommerce-apg-sms-notifications' ),
-		"bulksms.2way.co.za"	=> __( 'South Africa', 'woocommerce-apg-sms-notifications' ),
-		"bulksms.com.es"		=> __( 'Spain', 'woocommerce-apg-sms-notifications' ),
-	],
-	"servidor_moplet"	=> [
-		"0"						=> __( 'International', 'woocommerce-apg-sms-notifications' ), 
-		"1"						=> __( 'USA', 'woocommerce-apg-sms-notifications' ), 
-		"91"					=> __( 'India', 'woocommerce-apg-sms-notifications' ),
-	],	
-	"ruta_moplet"		=> [
-		1						=> 1, 
-		4						=> 4,
-	],
-	"ruta_msg91"		=> [
-		"default"				=> __( 'Default', 'woocommerce-apg-sms-notifications' ), 
-		1						=> 1, 
-		4						=> 4,
-	],
-	"servidor_twizo"	=> [
-		"api-asia-01.silverstreet.com"	=> __( 'Singapore', 'woocommerce-apg-sms-notifications' ),
-		"api-eu-01.silverstreet.com"	=> __( 'Germany', 'woocommerce-apg-sms-notifications' ),
-	],
-    "unicode_bulkgate"  => [
- 		1                       => __( 'Yes', 'woocommerce-apg-sms-notifications' ),
- 		0                       => __( 'No', 'woocommerce-apg-sms-notifications' ),
- 	],
-];
+// Opciones de campos de seleccion de los proveedores
+$opciones_de_proveedores = apg_sms_opciones_de_cada_campo();
 
-// Campos de verificación
-$verificacion_de_proveedores    = [
-    "short_sendsms",
-    "gdpr_sendsms",
-    "dlt_moplet",
-    "dlt_msg91",
-];
+// Campos de verificacion
+$verificacion_de_proveedores = apg_sms_campos_de_verificacion();
 
 // Listado de estados de pedidos
 $listado_de_estados				= wc_get_order_statuses();
@@ -247,18 +58,7 @@ foreach ( $listado_de_estados as $clave => $estado ) {
 $listado_de_estados = array_merge( array_flip( $listado_de_estados ), $listado_de_estados_temporal );
 
 // Listado de mensajes personalizados
-$listado_de_mensajes = [
-	'todos'					=> __( 'All messages', 'woocommerce-apg-sms-notifications' ),
-	'mensaje_pedido'		=> __( 'Owner custom message', 'woocommerce-apg-sms-notifications' ),
-	'mensaje_pendiente'		=> __( 'Order pending custom message', 'woocommerce-apg-sms-notifications' ),
-	'mensaje_fallido'		=> __( 'Order failed custom message', 'woocommerce-apg-sms-notifications' ),
-	'mensaje_recibido'		=> __( 'Order on-hold custom message', 'woocommerce-apg-sms-notifications' ),
-	'mensaje_procesando'	=> __( 'Order processing custom message', 'woocommerce-apg-sms-notifications' ),
-	'mensaje_completado'	=> __( 'Order completed custom message', 'woocommerce-apg-sms-notifications' ),
-	'mensaje_devuelto'		=> __( 'Order refunded custom message', 'woocommerce-apg-sms-notifications' ),
-	'mensaje_cancelado'		=> __( 'Order cancelled custom message', 'woocommerce-apg-sms-notifications' ),
-	'mensaje_nota'			=> __( 'Notes custom message', 'woocommerce-apg-sms-notifications' ),
-];
+$listado_de_mensajes = apg_sms_listado_de_mensajes_disponibles();
 
 /**
  * Pinta el campo select con el listado de proveedores.

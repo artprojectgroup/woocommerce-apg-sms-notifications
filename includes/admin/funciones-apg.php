@@ -70,29 +70,43 @@ add_filter( "plugin_action_links_$plugin", 'apg_sms_enlace_de_ajustes' );
 /**
  * Obtiene informacion del plugin desde WordPress.org y genera el HTML de valoracion.
  *
+ * Solo cachea la valoracion, y solo cuando la API responde correctamente: cachear
+ * la respuesta HTTP entera dejaba un error guardado durante 24 horas.
+ *
  * @param string $nombre Slug del plugin.
  * @return string HTML de la valoracion.
  */
 function apg_sms_plugin( $nombre ) {
 	global $apg_sms;
 
-	$respuesta = get_transient( 'apg_sms_plugin' );
-	if ( false === $respuesta ) {
-		$respuesta = wp_remote_get( 'https://api.wordpress.org/plugins/info/1.2/?action=plugin_information&request[slug]=' . $nombre );
-		set_transient( 'apg_sms_plugin', $respuesta, 24 * HOUR_IN_SECONDS );
-	}
+	// translators: %s: Plugin name.
+	$titulo      = esc_attr( sprintf( __( 'Please, rate %s:', 'woocommerce-apg-sms-notifications' ), $apg_sms['plugin'] ) );
+	$sin_datos   = '<a title="' . $titulo . '" href="' . esc_url( $apg_sms['puntuacion'] ) . '?rate=5#postform" class="estrellas">' . esc_html__( 'Unknown rating', 'woocommerce-apg-sms-notifications' ) . '</a>';
 
-	if ( ! is_wp_error( $respuesta ) ) {
+	$valoracion = get_transient( 'apg_sms_valoracion' );
+	if ( false === $valoracion ) {
+		$respuesta = wp_remote_get( 'https://api.wordpress.org/plugins/info/1.2/?action=plugin_information&request[slug]=' . rawurlencode( $nombre ) );
+
+		if ( is_wp_error( $respuesta ) || 200 !== (int) wp_remote_retrieve_response_code( $respuesta ) ) {
+			return $sin_datos; // Un fallo de la API no se cachea: se reintenta en la siguiente carga.
+		}
+
 		$plugin = json_decode( wp_remote_retrieve_body( $respuesta ) );
-	} else {
-		// translators: %s: Plugin name.
-		return '<a title="' . esc_attr( sprintf( __( 'Please, rate %s:', 'woocommerce-apg-sms-notifications' ), $apg_sms['plugin'] ) ) . '" href="' . esc_url( $apg_sms['puntuacion'] ) . '?rate=5#postform" class="estrellas">' . esc_html__( 'Unknown rating', 'woocommerce-apg-sms-notifications' ) . '</a>';
+		if ( ! is_object( $plugin ) || ! isset( $plugin->rating, $plugin->num_ratings ) ) {
+			return $sin_datos;
+		}
+
+		$valoracion = array(
+			'rating' => $plugin->rating,
+			'number' => $plugin->num_ratings,
+		);
+		set_transient( 'apg_sms_valoracion', $valoracion, 24 * HOUR_IN_SECONDS ); // Solo se guarda la valoracion, no la respuesta HTTP entera.
 	}
 
 	$rating = array(
-		'rating' => $plugin->rating,
+		'rating' => $valoracion['rating'],
 		'type'   => 'percent',
-		'number' => $plugin->num_ratings,
+		'number' => $valoracion['number'],
 	);
 
 	ob_start();
@@ -100,8 +114,7 @@ function apg_sms_plugin( $nombre ) {
 	$estrellas = ob_get_contents();
 	ob_end_clean();
 
-	// translators: %s: Plugin name.
-	return '<a title="' . esc_attr( sprintf( __( 'Please, rate %s:', 'woocommerce-apg-sms-notifications' ), $apg_sms['plugin'] ) ) . '" href="' . esc_url( $apg_sms['puntuacion'] ) . '?rate=5#postform" class="estrellas">' . $estrellas . '</a>';
+	return '<a title="' . $titulo . '" href="' . esc_url( $apg_sms['puntuacion'] ) . '?rate=5#postform" class="estrellas">' . $estrellas . '</a>';
 }
 
 /**
@@ -109,9 +122,9 @@ function apg_sms_plugin( $nombre ) {
  *
  * @return void
  */
-function apg_sms_estilo() {
-	$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
-	if ( false !== strpos( $request_uri, 'apg_sms' ) || false !== strpos( $request_uri, 'plugins.php' ) ) {
+function apg_sms_estilo( $pantalla = '' ) {
+	// La pantalla la da WordPress, en lugar de deducirla de la URL de la peticion.
+	if ( 'woocommerce_page_apg_sms' === $pantalla || 'plugins.php' === $pantalla ) {
 		wp_register_style( 'apg_sms_hoja_de_estilo', plugins_url( 'assets/css/style.css', DIRECCION_apg_sms ), array(), VERSION_apg_sms ); // Carga la hoja de estilo.
 		wp_enqueue_style( 'apg_sms_hoja_de_estilo' ); // Carga la hoja de estilo.
 	}
@@ -119,16 +132,45 @@ function apg_sms_estilo() {
 add_action( 'admin_enqueue_scripts', 'apg_sms_estilo' );
 
 /**
- * Pasarelas migradas o eliminadas en la 3.2.0 que requieren revisar la configuracion.
+ * Version del aviso de pasarelas.
  *
- * @return array<string,string> Mapa servicio => texto del cambio.
+ * El descarte se guarda con esta version, no con la del plugin: al cambiarla, quien
+ * ya habia descartado el aviso anterior vuelve a verlo porque hay novedades que le
+ * afectan. Solo se sube cuando cambia la lista de pasarelas afectadas.
+ *
+ * @return string Version del aviso.
+ */
+function apg_sms_version_del_aviso() {
+	return '3.3.0';
+}
+
+/**
+ * Pasarelas que requieren revisar la configuracion, con el motivo.
+ *
+ * - migrada:      el proveedor cambio de nombre y de API; hacen falta credenciales nuevas.
+ * - descatalogada: el proveedor dejo de ofrecer el servicio y se elimino del plugin.
+ * - sin_servicio: el proveedor sigue documentando su API, pero no responde.
+ *
+ * @return array<string,array<string,string>> Mapa servicio => [ tipo, texto ].
  */
 function apg_sms_proveedores_afectados() {
 	return [
-		'clockwork'        => 'Clockwork &rarr; TextAnywhere',
-		'solutions_infini' => 'Solutions Infini &rarr; Kaleyra',
-		'twizo'            => 'Twizo &rarr; Silverstreet',
-		'mobtexting'       => 'MobTexting',
+		'clockwork'        => [
+			'tipo'  => 'migrada',
+			'texto' => 'Clockwork &rarr; TextAnywhere',
+		],
+		'solutions_infini' => [
+			'tipo'  => 'migrada',
+			'texto' => 'Solutions Infini &rarr; Kaleyra',
+		],
+		'mobtexting'       => [
+			'tipo'  => 'descatalogada',
+			'texto' => 'MobTexting',
+		],
+		'twizo'            => [
+			'tipo'  => 'sin_servicio',
+			'texto' => 'Twizo / Silverstreet',
+		],
 	];
 }
 
@@ -144,7 +186,7 @@ function apg_sms_aviso_proveedores() {
 		return;
 	}
 
-	if ( get_option( 'apg_sms_aviso_proveedores' ) === '3.2.0' ) { // Ya descartado el aviso de la migracion 3.2.0
+	if ( get_option( 'apg_sms_aviso_proveedores' ) === apg_sms_version_del_aviso() ) { // Ya descartado el aviso vigente
 		return;
 	}
 
@@ -159,12 +201,15 @@ function apg_sms_aviso_proveedores() {
 	$url_ajustes   = admin_url( 'admin.php?page=apg_sms' );
 	$url_descartar = wp_nonce_url( add_query_arg( 'apg_sms_descartar_aviso', '1' ), 'apg_sms_descartar_aviso' );
 
-	if ( 'mobtexting' === $servicio ) {
+	if ( 'descatalogada' === $afectados[ $servicio ]['tipo'] ) {
 		// translators: %s: URL of the plugin settings page.
 		$mensaje = sprintf( __( '<strong>WC - APG SMS Notifications:</strong> the <strong>MobTexting</strong> gateway has been discontinued by the provider and removed in this version. Please <a href="%s">choose a different SMS gateway</a> to keep sending messages.', 'woocommerce-apg-sms-notifications' ), esc_url( $url_ajustes ) );
+	} elseif ( 'sin_servicio' === $afectados[ $servicio ]['tipo'] ) {
+		// translators: 1: gateway name (e.g. "Twizo / Silverstreet"), 2: URL of the plugin settings page.
+		$mensaje = sprintf( __( '<strong>WC - APG SMS Notifications:</strong> the <strong>%1$s</strong> gateway is no longer reachable: the provider\'s API servers do not resolve any more, even though its documentation still lists them. Your SMS messages are not being delivered. Please <a href="%2$s">choose a different SMS gateway</a>.', 'woocommerce-apg-sms-notifications' ), $afectados[ $servicio ]['texto'], esc_url( $url_ajustes ) );
 	} else {
 		// translators: 1: gateway change (e.g. "Clockwork → TextAnywhere"), 2: URL of the plugin settings page.
-		$mensaje = sprintf( __( '<strong>WC - APG SMS Notifications:</strong> your SMS gateway has been migrated to its successor (<strong>%1$s</strong>). Please <a href="%2$s">review your gateway settings</a> and enter the new provider credentials so your SMS messages keep working.', 'woocommerce-apg-sms-notifications' ), $afectados[ $servicio ], esc_url( $url_ajustes ) );
+		$mensaje = sprintf( __( '<strong>WC - APG SMS Notifications:</strong> your SMS gateway has been migrated to its successor (<strong>%1$s</strong>). Please <a href="%2$s">review your gateway settings</a> and enter the new provider credentials so your SMS messages keep working.', 'woocommerce-apg-sms-notifications' ), $afectados[ $servicio ]['texto'], esc_url( $url_ajustes ) );
 	}
 
 	echo '<div class="notice notice-warning"><p>' . wp_kses_post( $mensaje ) . '</p>';
@@ -179,7 +224,7 @@ add_action( 'admin_notices', 'apg_sms_aviso_proveedores' );
  */
 function apg_sms_descarta_aviso_proveedores() {
 	if ( isset( $_GET['apg_sms_descartar_aviso'] ) && current_user_can( 'manage_woocommerce' ) && check_admin_referer( 'apg_sms_descartar_aviso' ) ) {
-		update_option( 'apg_sms_aviso_proveedores', '3.2.0' );
+		update_option( 'apg_sms_aviso_proveedores', apg_sms_version_del_aviso() );
 		wp_safe_redirect( remove_query_arg( [ 'apg_sms_descartar_aviso', '_wpnonce' ] ) );
 		exit;
 	}

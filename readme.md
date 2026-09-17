@@ -8,13 +8,15 @@ Tags: SMS notifications, SMS gateway, SMS messages
 
 Requires at least: 5.0
 
-Tested up to: 7.0
+Tested up to: 7.2
 
-Stable tag: 3.2.0
+Requires PHP: 7.4
+
+Stable tag: 3.3.0
 
 WC requires at least: 5.6
 
-WC tested up to: 10.9.1
+WC tested up to: 11.1.0
 
 License: GNU General Public License v3 or later
 
@@ -147,6 +149,19 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+
+### 3.3.0
+
+- Seguridad: los ajustes se validan antes de guardarse, de forma que el servidor de la pasarela ya no puede apuntarse a un host arbitrario.
+- Seguridad: Altiria conecta ya por HTTPS, y Twilio se autentica por cabecera en lugar de por la URL.
+- Seguridad: el correo de depuración ya no incluye las credenciales de la pasarela en claro.
+- Twizo / Silverstreet: los servidores del proveedor ya no existen; un aviso en el escritorio advierte a quien la tenga configurada de que cambie de pasarela.
+- Corregido un error fatal con Routee y SMS.CX cuando la pasarela no respondía.
+- Corregidas las variables personalizadas y las fechas del pedido, que quedaban vacías con HPOS activado.
+- Corregidos varios avisos de PHP con estados personalizados y pasarelas sin configurar.
+- Corregido el guardado de los ajustes para los gestores de tienda.
+- WPML: la detección de WPML ya no depende de una función obsoleta desde la 3.2, de forma que las traducciones de los mensajes siguen funcionando con WPML 5.0.
+- Compatibilidad con WordPress 7.2 y WooCommerce 11.1.0.
 
 ### 3.2.0
 

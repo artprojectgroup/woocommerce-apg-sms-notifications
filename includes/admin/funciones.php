@@ -38,7 +38,7 @@ function apg_sms_prefijo( $servicio ) {
         "waapi",
     ];
 	
-	return in_array( $servicio, $prefijo );
+	return in_array( $servicio, $prefijo, true );
 }
 
 /**
@@ -160,7 +160,7 @@ function apg_sms_codifica_el_mensaje( $mensaje ) {
 	];
 	$proveedor		= isset( $apg_sms_settings[ 'servicio' ] ) ? $apg_sms_settings[ 'servicio' ] : '';
 	$mensaje_limpio	= html_entity_decode( $mensaje, ENT_QUOTES, "UTF-8" );
-	$mensaje_final	= ( in_array( $proveedor, $no_urlencode ) ) ? $mensaje_limpio : urlencode( $mensaje_limpio );
+	$mensaje_final	= ( in_array( $proveedor, $no_urlencode, true ) ) ? $mensaje_limpio : urlencode( $mensaje_limpio );
 
 	return apply_filters( 'apg_sms_message_return', $mensaje_final, $mensaje );
 }
@@ -202,8 +202,8 @@ function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietari
 		}
 
 		preg_match( "/(\d{1,4})[0-9.\-]+/", $telefono_procesado, $prefijo_telefonico );
-		if ( empty( $prefijo_telefonico ) ) { // Control
-			return;
+		if ( empty( $prefijo_telefonico ) ) { // Control: devuelve cadena vacia, nunca null, porque quien llama la compara y la envia
+			return apply_filters( 'apg_sms_phone_return', '', $pedido, $telefono, $servicio, $propietario, $envio );
 		}
 		if ( isset( $prefijo_internacional ) ) {
 			if ( strpos( strval( $prefijo_telefonico[ 1 ] ) , strval( $prefijo_internacional ) ) === false ) {
@@ -220,9 +220,9 @@ function apg_sms_procesa_el_telefono( $pedido, $telefono, $servicio, $propietari
         $doble_cero     = [
             "isms"
         ];
-		if ( in_array( $servicio, $simbolo_mas ) && strpos( $telefono_procesado, "+" ) === false ) {
+		if ( in_array( $servicio, $simbolo_mas, true ) && strpos( $telefono_procesado, "+" ) === false ) {
 			$telefono_procesado = "+" . $telefono_procesado;
-		} elseif ( in_array( $servicio, $doble_cero ) && isset( $prefijo_internacional ) ) {
+		} elseif ( in_array( $servicio, $doble_cero, true ) && isset( $prefijo_internacional ) ) {
 			$telefono_procesado = "00" . preg_replace( '/\+/', '', $telefono_procesado );
 		}
 	}
@@ -298,14 +298,16 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
     ], "\n", $variables ) );
 
 	$numero_de_pedido		= is_callable( [ $pedido, 'get_id' ] ) ? $pedido->get_id() : $pedido->id;
-	$variables_de_pedido	= get_post_custom( $numero_de_pedido ); // WooCommerce 2.1
+	// Con HPOS los pedidos ya no son entradas y get_post_custom() devuelve vacio: las metas
+	// se leen del propio pedido y solo se recurre a get_post_custom() como respaldo.
+	$variables_de_pedido	= is_callable( [ $pedido, 'get_meta_data' ] ) ? [] : (array) get_post_custom( $numero_de_pedido );
 
     preg_match_all( "/%(.*?)%/", $mensaje, $busqueda );
 
 	foreach ( $busqueda[ 1 ] as $variable ) { 
 		$variable = strtolower( $variable );
 
-		if ( ! in_array( $variable, $apg_sms ) && ! in_array( $variable, $apg_sms_variables ) && ! in_array( $variable, $variables_personalizadas ) ) {
+		if ( ! in_array( $variable, $apg_sms, true ) && ! in_array( $variable, $apg_sms_variables, true ) && ! in_array( $variable, $variables_personalizadas, true ) ) {
 			continue;
 		}
 
@@ -320,10 +322,10 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 			"shipping_method_title", 
         ];
 		
-		if ( ! in_array( $variable, $especiales ) ) {
-			if ( in_array( $variable, $apg_sms ) ) {
+		if ( ! in_array( $variable, $especiales, true ) ) {
+			if ( in_array( $variable, $apg_sms, true ) ) {
 				$mensaje = str_replace( "%" . $variable . "%", is_callable( [ $pedido, 'get_' . $variable ] ) ? $pedido->{'get_' . $variable}() : $pedido->$variable, $mensaje ); // Variables estándar - Objeto
-			} elseif ( in_array( $variable, $apg_sms_variables ) ) {
+			} elseif ( in_array( $variable, $apg_sms_variables, true ) ) {
 				// Getters del objeto pedido (compatibles con HPOS). Algunas variables no siguen el patrón get_{variable}.
 				$mapa_getters	= [
 					"order_total"			=> "get_total",
@@ -336,15 +338,30 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 					$valor = $pedido->{ $mapa_getters[ $variable ] }(); // order_total, order_tax, etc.
 				} elseif ( is_callable( [ $pedido, 'get_' . $variable ] ) ) {
 					$valor = $pedido->{ 'get_' . $variable }(); // billing_*, shipping_*, order_key, payment_method...
+				} elseif ( isset( $variables_de_pedido[ "_" . $variable ][ 0 ] ) ) {
+					$valor = $variables_de_pedido[ "_" . $variable ][ 0 ]; // Compatibilidad hacia atrás
+				} elseif ( is_callable( [ $pedido, 'get_meta' ] ) ) {
+					$valor = $pedido->get_meta( "_" . $variable, true ); // Compatibilidad hacia atrás con HPOS
 				} else {
-					$valor = isset( $variables_de_pedido[ "_" . $variable ][ 0 ] ) ? $variables_de_pedido[ "_" . $variable ][ 0 ] : ''; // Compatibilidad hacia atrás
+					$valor = '';
 				}
 				$mensaje = str_replace( "%" . $variable . "%", $valor, $mensaje ); // Variables estándar - Objeto / Array
-			} elseif ( isset( $variables_de_pedido[ $variable ] ) || in_array( $variable, $variables_personalizadas ) ) {
-				$mensaje = str_replace( "%" . $variable . "%", $variables_de_pedido[ $variable ][ 0 ], $mensaje ); // Variables de pedido y personalizadas
+			} elseif ( isset( $variables_de_pedido[ $variable ] ) || in_array( $variable, $variables_personalizadas, true ) ) {
+				if ( isset( $variables_de_pedido[ $variable ][ 0 ] ) ) {
+					$valor = $variables_de_pedido[ $variable ][ 0 ]; // Meta leida de la entrada (instalaciones sin HPOS)
+				} elseif ( is_callable( [ $pedido, 'get_meta' ] ) ) {
+					$valor = $pedido->get_meta( $variable, true ); // Meta del pedido (compatible con HPOS)
+				} else {
+					$valor = '';
+				}
+				$mensaje = str_replace( "%" . $variable . "%", is_scalar( $valor ) ? (string) $valor : '', $mensaje ); // Variables de pedido y personalizadas
 			}
 		} elseif ( $variable == "order_date" || $variable == "modified_date" ) {
-			$mensaje = str_replace( "%" . $variable . "%", date_i18n( woocommerce_date_format(), strtotime( $pedido->$variable ) ), $mensaje );
+			// Con HPOS el pedido ya no es una entrada: las fechas se piden por su getter.
+			$getter	= ( "order_date" === $variable ) ? 'get_date_created' : 'get_date_modified';
+			$fecha	= is_callable( [ $pedido, $getter ] ) ? $pedido->{ $getter }() : null;
+			$marca	= ( $fecha instanceof WC_DateTime ) ? $fecha->getTimestamp() : strtotime( (string) ( isset( $pedido->$variable ) ? $pedido->$variable : '' ) );
+			$mensaje = str_replace( "%" . $variable . "%", $marca ? date_i18n( woocommerce_date_format(), $marca ) : '', $mensaje );
 		} elseif ( $variable == "shop_name" ) {
 			$mensaje = str_replace( "%" . $variable . "%", get_bloginfo( 'name' ), $mensaje );
 		} elseif ( $variable == "note" ) {
@@ -358,7 +375,9 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 		} elseif ( $variable == "order_product" ) {
 			$nombre		= '';
 			$productos	= $pedido->get_items();
-			if ( ! isset( $apg_sms_settings[ 'productos' ] ) || $apg_sms_settings[ 'productos' ] != 1 ) {
+			if ( empty( $productos ) ) { // Pedido sin lineas
+				$nombre = '';
+			} elseif ( ! isset( $apg_sms_settings[ 'productos' ] ) || $apg_sms_settings[ 'productos' ] != 1 ) {
 				$nombre = $productos[ key( $productos ) ][ 'name' ];
 				if ( strlen( $nombre ) > 10 ) {
 					$nombre = substr( $nombre, 0, 10 ) . "...";
@@ -649,5 +668,5 @@ function apg_sms_dame_prefijo_pais( $pais = '' ) {
 		'ZW' => '263' 
     ];
 
-	return ( $pais == '' ) ? '' : ( isset( $paises[ $pais ] ) ? $paises[ $pais ] : '' );
+	return ( '' === $pais ) ? '' : ( isset( $paises[ $pais ] ) ? $paises[ $pais ] : '' );
 }

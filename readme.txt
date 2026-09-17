@@ -3,10 +3,11 @@ Contributors: artprojectgroup
 Donate link: https://artprojectgroup.es/tienda/donacion
 Tags: SMS notifications, SMS gateway, SMS messages
 Requires at least: 5.0
-Tested up to: 7.0
-Stable tag: 3.2.0
+Tested up to: 7.2
+Requires PHP: 7.4
+Stable tag: 3.3.0
 WC requires at least: 5.6
-WC tested up to: 10.9.1
+WC tested up to: 11.1.0
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,6 +126,17 @@ If you need help configuring or installing **WC - APG SMS Notifications**, **Art
 1. Screenshot of WC - APG SMS Notifications.
 
 == Changelog ==
+= 3.3.0 =
+* Security: the settings are now validated before being saved, so the gateway host can no longer be pointed at an arbitrary server.
+* Security: Altiria now connects over HTTPS, and Twilio authenticates through a header instead of the URL.
+* Security: the debug email no longer includes your gateway credentials in clear text.
+* Twizo / Silverstreet: the provider's API servers no longer exist, so a dashboard notice now warns anyone using that gateway to switch to another one.
+* Fixed a fatal error with Routee and SMS.CX when the gateway was unreachable.
+* Fixed custom variables and order dates returning empty with HPOS enabled.
+* Fixed several PHP notices with custom order statuses and unconfigured gateways.
+* Fixed the settings page not saving for shop managers.
+* WPML: detecting WPML no longer relies on a function deprecated since WPML 3.2, so message translations keep working on WPML 5.0.
+* Compatibility with WordPress 7.2 and WooCommerce 11.1.0.
 = 3.2.0 =
 * Removed discontinued SMS gateway: MobTexting (service no longer available).
 * Migrated rebranded gateways to their current APIs: Clockwork → TextAnywhere, Solutions Infini → Kaleyra, Twizo → Silverstreet. **These gateways now require credentials from the successor provider.**
@@ -479,6 +491,9 @@ If you need help configuring or installing **WC - APG SMS Notifications**, **Art
 * Initial version.
 
 == Upgrade Notice ==
+= 3.3.0 =
+* Security release: settings validation, HTTPS for Altiria and credentials removed from the debug email. Recommended for everyone.
+* If you use Twizo / Silverstreet, you must switch gateway: the provider's API servers no longer exist.
 = 3.2.0 =
 * Gateway cleanup and migrations. If you use Clockwork, Solutions Infini, Twizo or MobTexting, please review your SMS gateway settings: the first three now use their successor provider (TextAnywhere, Kaleyra, Silverstreet) and require new credentials; MobTexting has been removed.
 = 3.1.0 =
