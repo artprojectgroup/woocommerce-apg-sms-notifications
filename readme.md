@@ -12,7 +12,7 @@ Tested up to: 7.2
 
 Requires PHP: 7.4
 
-Stable tag: 3.3.0
+Stable tag: 3.4.0
 
 WC requires at least: 5.6
 
@@ -66,6 +66,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 - Posibilidad de enviar, o no, SMS internacionales.
 - Posibilidad de notificar al número de teléfono de envío, si es distinto del número de teléfono de facturación.
 - 100% compatible con [WPML](https://wpml.org/?aid=80296&affiliate_key=m66Ss5ps0xoS).
+- Ayuda contextual en la página de ajustes, que explica cada opción sin salir de la pantalla.
 - Soporte para los estados de pedido personalizados.
 - Soporte para los números de pedido personalizados del plugin [WooCommerce Sequential Order Numbers Pro](http://www.woothemes.com/products/sequential-order-numbers-pro/).
 - Inserta de forma automática el código telefónico internacional, si es necesario, al número de teléfono del cliente.
@@ -92,7 +93,7 @@ Añade a tu tienda WooCommerce notificaciones SMS a tus clientes cuando cambie e
 
 ### Soporte técnico
 
-**Art Project Group** te ofrece [**Soporte técnico**](https://artprojectgroup.es/tienda/ticket-de-soporte) para configurar o instalar ***WC - APG SMS Notifications***.
+**Art Project Group** te ofrece [**Soporte técnico**](https://artprojectgroup.es/tienda/soporte-tecnico) para configurar o instalar ***WC - APG SMS Notifications***.
 
 ### Origen
 
@@ -144,11 +145,15 @@ Por último hay que personalizar, si se desea, los mensajes que se enviarán por
 
 ### Soporte técnico
 
-Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **Art Project Group** te ofrece su servicio de [**Soporte técnico**](https://artprojectgroup.es/tienda/ticket-de-soporte).
+Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **Art Project Group** te ofrece su servicio de [**Soporte técnico**](https://artprojectgroup.es/tienda/soporte-tecnico).
 
 *En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.*
 
 ## Changelog
+
+### 3.4.0
+
+- Ayuda contextual en la página de ajustes, que explica cada opción sin salir de la pantalla.
 
 ### 3.3.0
 
@@ -795,7 +800,7 @@ Si necesitas ayuda para configurar o instalar **WC - APG SMS Notifications**, **
 
 ## Soporte técnico
 
-Dado que **WC - APG SMS Notifications** es totalmente gratuito, **Art Project Group** sólo proporciona el servicio de [**Soporte técnico**](https://artprojectgroup.es/tienda/ticket-de-soporte) previo pago. En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.
+Dado que **WC - APG SMS Notifications** es totalmente gratuito, **Art Project Group** sólo proporciona el servicio de [**Soporte técnico**](https://artprojectgroup.es/tienda/soporte-tecnico) previo pago. En ningún caso **Art Project Group** proporciona ningún tipo de soporte técnico gratuito.
 
 ## Donación
 

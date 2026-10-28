@@ -5,7 +5,7 @@ Tags: SMS notifications, SMS gateway, SMS messages
 Requires at least: 5.0
 Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 3.3.0
+Stable tag: 3.4.0
 WC requires at least: 5.6
 WC tested up to: 11.1.0
 License: GNU General Public License v3 or later
@@ -70,6 +70,7 @@ Add to your WooCommerce store SMS notifications to your customers when the order
 * Has *apg_sms_phone_process* and *apg_sms_phone_return* filters to facilitate the phone number process from third-party plugins.
 * Possibility to notify multiple phone numbers via filter *apg_sms_phone_return*.
 * Once setup is fully automated.
+* Contextual help on the settings page, explaining every setting without leaving the screen.
 
 = Translations =
 * Español ([**Art Project Group**](https://artprojectgroup.es/)).
@@ -77,7 +78,7 @@ Add to your WooCommerce store SMS notifications to your customers when the order
 * French ([**Studios Jurdan**](http://www.jurdan.biz)).
 
 = Technical support =
-**Art Project Group** offers [**Technical support**](https://artprojectgroup.es/tienda/ticket-de-soporte) to configure or install ***WC - APG SMS Notifications***.
+**Art Project Group** offers [**Technical support**](https://artprojectgroup.es/tienda/soporte-tecnico) to configure or install ***WC - APG SMS Notifications***.
 
 = Origin =
 **WC - APG SMS Notifications** was created following a request from [Chirag Vora](https://profiles.wordpress.org/chirag740) to add to WooCommerce the ability to send notifications about the order status through SMS messages.
@@ -118,7 +119,7 @@ You should specify whether you want, or not, to receive SMS notifications for ea
 Finally, if desired, the messages to be sent by SMS must be customized.
 
 = Support =
-If you need help configuring or installing **WC - APG SMS Notifications**, **Art Project Group** offers its [**Technical Support**](https://artprojectgroup.es/tienda/ticket-de-soporte) service.
+If you need help configuring or installing **WC - APG SMS Notifications**, **Art Project Group** offers its [**Technical Support**](https://artprojectgroup.es/tienda/soporte-tecnico) service.
 
 *In any case **Art Project Group** does not provide any kind of free technical support.*
 
@@ -126,6 +127,9 @@ If you need help configuring or installing **WC - APG SMS Notifications**, **Art
 1. Screenshot of WC - APG SMS Notifications.
 
 == Changelog ==
+= 3.4.0 =
+* Contextual help on the settings page, explaining every setting without leaving the screen.
+
 = 3.3.0 =
 * Security: the settings are now validated before being saved, so the gateway host can no longer be pointed at an arbitrary server.
 * Security: Altiria now connects over HTTPS, and Twilio authenticates through a header instead of the URL.
@@ -509,7 +513,7 @@ If you need help configuring or installing **WC - APG SMS Notifications**, **Art
 * *French*: pour ([**Studios Jurdan**](http://www.jurdan.biz)).
 
 == Support ==
-Since **WC - APG SMS Notifications** is totally free, **Art Project Group** only provides paid [**Technical Support**](https://artprojectgroup.es/tienda/ticket-de-soporte) service. In any case **Art Project Group** does not provide any kind of free technical support.
+Since **WC - APG SMS Notifications** is totally free, **Art Project Group** only provides paid [**Technical Support**](https://artprojectgroup.es/tienda/soporte-tecnico) service. In any case **Art Project Group** does not provide any kind of free technical support.
 
 == Donation ==
 Did you like and find useful **WC - APG SMS Notifications** on your website? We would appreciate a [small donation](https://artprojectgroup.es/tienda/donacion) that will help us to continue improving this plugin and create more plugins totally free for the entire WordPress community.

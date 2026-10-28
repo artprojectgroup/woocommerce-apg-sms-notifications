@@ -519,6 +519,7 @@ msgid "APG SMS Notifications Options."
 msgstr ""
 
 #: includes/formulario.php:193
+#: includes/clases/class-apg-sms-help.php:135
 msgid "Order on-hold delay (minutes)"
 msgstr ""
 
@@ -527,6 +528,7 @@ msgid "Send this message after X minutes, if the order is still on-hold, instead
 msgstr ""
 
 #: includes/formulario.php:203
+#: includes/clases/class-apg-sms-help.php:136
 msgid "Order on-hold timer (hours)"
 msgstr ""
 
@@ -614,8 +616,205 @@ msgstr ""
 msgid "Check if you want to send the SMS messages with full order product information"
 msgstr ""
 
-
-
 #: includes/admin/funciones-apg.php:209
 msgid "<strong>WC - APG SMS Notifications:</strong> the <strong>%1$s</strong> gateway is no longer reachable: the provider's API servers do not resolve any more, even though its documentation still lists them. Your SMS messages are not being delivered. Please <a href=\"%2$s\">choose a different SMS gateway</a>."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:58
+msgid "More help"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:59
+msgid "Full documentation"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:101
+msgid "The gateway"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:103
+msgid ""
+"The plugin does not send the messages itself: it hands them to the SMS "
+"gateway you hire, and that gateway charges you for them. Nothing goes out "
+"until this part is filled in."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:104
+msgid "SMS gateway"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:104
+msgid ""
+"which company sends your messages. Pick it and the screen asks for exactly "
+"what that one needs, which is usually a user and a password, or a key. No "
+"two gateways ask for the same thing."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:105
+msgid "Your mobile number"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:105
+msgid ""
+"the number where you want to be told about the shop, the one registered with "
+"your gateway. You can put several, separated by a vertical bar: 600000000|"
+"611111111."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:110
+msgid "Who gets a message"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:112
+msgid ""
+"Whether you are told about the shop, and which of your customer's numbers is "
+"used."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:113
+msgid "New order notification"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:113
+msgid "sends you an SMS the moment an order comes in, to the number above."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:114
+msgid "Send international SMS?"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:114
+msgid ""
+"adds the country prefix to the customer's number so the gateway accepts it. "
+"You need it as soon as you sell outside your own country, and some gateways "
+"need it always."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:115
+msgid "Send SMS to shipping mobile?"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:115
+msgid ""
+"writes to the number on the shipping address as well, and only when it is "
+"not the same as the billing one, so nobody gets the message twice. Useful "
+"for presents and for deliveries to a third party."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:116
+msgid "Shipping mobile field"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:116
+msgid ""
+"which field of the order holds that number. It only matters with the box "
+"above ticked, and the list shows the fields your shop actually has."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:121
+msgid "The messages"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:123
+msgid ""
+"One message per order status, each one written by you. Under every box the "
+"screen lists the variables you can drop into the text, written between "
+"double percent signs, such as the order number, the customer name or the "
+"total."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:124
+msgid "Send only these messages"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:124
+msgid ""
+"which statuses send an SMS at all. Leave a status out and that change goes "
+"by in silence, which is the way to keep the bill down."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:125
+msgid "Custom Order Statuses & Actions"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:125
+msgid ""
+"brings in the statuses your shop has added on top of the WooCommerce ones, "
+"from a carrier plugin or your own workflow, so they can have their own "
+"message too."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:126
+msgid "Custom variables"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:126
+msgid ""
+"your own order fields, one per line and without the percent signs, so you "
+"can use them in the messages like any other variable."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:127
+msgid "order_product variable full details"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:127
+msgid ""
+"makes that variable write the whole order line by line instead of just the "
+"product names. Watch the length: an SMS is paid for in chunks of 160 "
+"characters."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:132
+msgid "Orders on hold"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:134
+msgid ""
+"An order waiting for a bank transfer is the one case where sending the "
+"message straight away is of no use: the customer has not paid yet. These two "
+"settings are only about that status."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:135
+msgid ""
+"waits those minutes before writing, and only writes if the order is still on "
+"hold. An order paid in the meantime never gets the reminder."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:136
+msgid ""
+"repeats the message every so many hours while the order stays on hold. Leave "
+"it empty and it is sent only once."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:141
+msgid "Troubleshooting"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:143
+msgid ""
+"For when a message does not arrive. The answer almost always comes from the "
+"gateway, not from the plugin."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:144
+msgid "Send debug information?"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:144
+msgid ""
+"emails you what the gateway answered to each send, which is where you find "
+"out whether it was refused, whether the number was wrong or whether you have "
+"run out of credit."
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:145
+msgid "email address"
+msgstr ""
+
+#: includes/clases/class-apg-sms-help.php:145
+msgid ""
+"where to send that information. Remember to switch it off once the problem "
+"is solved, or every order writes to you."
 msgstr ""
