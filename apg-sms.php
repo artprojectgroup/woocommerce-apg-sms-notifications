@@ -2,7 +2,7 @@
 /*
 Plugin Name: WC - APG SMS Notifications
 Requires Plugins: woocommerce
-Version: 3.4.0
+Version: 3.5.0
 Plugin URI: https://wordpress.org/plugins/woocommerce-apg-sms-notifications/
 Description: Add to WooCommerce SMS notifications to your clients for order status changes. Also you can receive an SMS message when the shop get a new order and select if you want to send international SMS. The plugin add the international dial code automatically to the client phone number.
 Author URI: https://artprojectgroup.es/
@@ -13,8 +13,7 @@ Requires at least: 5.0
 Requires PHP: 7.4
 Tested up to: 7.2
 WC requires at least: 5.6
-WC tested up to: 11.1.0
-
+WC tested up to: 11.2.1
 Text Domain: woocommerce-apg-sms-notifications
 Domain Path: /languages
 
@@ -34,7 +33,7 @@ define( 'DIRECCION_apg_sms', plugin_basename( __FILE__ ) );
  *
  * @var string
  */
-define( 'VERSION_apg_sms', '3.4.0' );
+define( 'VERSION_apg_sms', '3.5.0' );
 
 // Funciones generales de APG
 include_once( 'includes/admin/funciones-apg.php' );

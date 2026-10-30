@@ -5,9 +5,9 @@ Tags: SMS notifications, SMS gateway, SMS messages
 Requires at least: 5.0
 Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 3.4.0
+Stable tag: 3.5.0
 WC requires at least: 5.6
-WC tested up to: 11.1.0
+WC tested up to: 11.2.1
 License: GNU General Public License v3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -86,6 +86,8 @@ Add to your WooCommerce store SMS notifications to your customers when the order
 = More information =
 On our official website you can learn more about [**WC - APG SMS Notifications**](https://artprojectgroup.es/plugins-para-woocommerce/wc-apg-sms-notifications). 
 
+You can also read the [full documentation](https://artprojectgroup.es/documentacion/wc-apg-notificaciones-sms), with every setting explained one by one.
+
 = Comments =
 Don’t forget to leave us your comment on:
 
@@ -127,6 +129,10 @@ If you need help configuring or installing **WC - APG SMS Notifications**, **Art
 1. Screenshot of WC - APG SMS Notifications.
 
 == Changelog ==
+= 3.5.0 =
+* Fixed the date of the %order_date% and %modified_date% variables, which left a deprecation warning in the log on every message.
+* Compatible with WordPress 7.2 and WooCommerce 11.2.1.
+
 = 3.4.0 =
 * Contextual help on the settings page, explaining every setting without leaving the screen.
 

@@ -361,7 +361,7 @@ function apg_sms_procesa_variables( $mensaje, $pedido, $variables, $nota = '' ) 
 			$getter	= ( "order_date" === $variable ) ? 'get_date_created' : 'get_date_modified';
 			$fecha	= is_callable( [ $pedido, $getter ] ) ? $pedido->{ $getter }() : null;
 			$marca	= ( $fecha instanceof WC_DateTime ) ? $fecha->getTimestamp() : strtotime( (string) ( isset( $pedido->$variable ) ? $pedido->$variable : '' ) );
-			$mensaje = str_replace( "%" . $variable . "%", $marca ? date_i18n( woocommerce_date_format(), $marca ) : '', $mensaje );
+			$mensaje = str_replace( "%" . $variable . "%", $marca ? date_i18n( wc_date_format(), $marca ) : '', $mensaje );
 		} elseif ( $variable == "shop_name" ) {
 			$mensaje = str_replace( "%" . $variable . "%", get_bloginfo( 'name' ), $mensaje );
 		} elseif ( $variable == "note" ) {
